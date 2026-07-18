@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": 1,
+  "catalogVersion": 2,
   "minHostVersionCode": 5221,
-  "releaseTag": "ace-fonts-v1",
-  "expectedFontCount": 8,
+  "releaseTag": "ace-fonts-v2",
+  "expectedFontCount": 37,
   "fonts": [
     {
       "id": "iosevka_slab",
@@ -148,6 +148,500 @@
       "fontPath": "source-code-pro/SourceCodePro-Regular.woff2",
       "noticePaths": [
         "source-code-pro/LICENSE.md"
+      ]
+    },
+    {
+      "id": "anonymous_pro",
+      "displayName": "Anonymous Pro",
+      "family": "Anonymous Pro",
+      "order": 90,
+      "author": "Mark Simonson",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/google/fonts",
+      "upstreamVersion": "1.002",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "anonymous-pro/anonymous-pro.woff2",
+      "noticePaths": [
+        "anonymous-pro/license.txt"
+      ]
+    },
+    {
+      "id": "atkinson_hyperlegible_mono",
+      "displayName": "Atkinson Hyperlegible Mono",
+      "family": "Atkinson Hyperlegible Mono",
+      "order": 100,
+      "author": "Braille Institute; Applied Design Works / Letters from Sweden",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/googlefonts/atkinson-hyperlegible-next-mono",
+      "upstreamVersion": "2.001",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "atkinson-hyperlegible-mono/AtkinsonHyperlegibleMono-Regular.woff2",
+      "noticePaths": [
+        "atkinson-hyperlegible-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "commit_mono",
+      "displayName": "CommitMono",
+      "family": "CommitMono",
+      "order": 110,
+      "author": "Eigil Nikolajsen",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/eigilnikolajsen/commit-mono",
+      "upstreamVersion": "1.143",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "commit-mono/CommitMono-400-Regular.woff2",
+      "noticePaths": [
+        "commit-mono/LICENSE-FONT"
+      ]
+    },
+    {
+      "id": "inconsolata",
+      "displayName": "Inconsolata",
+      "family": "Inconsolata",
+      "order": 120,
+      "author": "Raph Levien / Cyreal; Brenton Simpson / Google",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/cyrealtype/Inconsolata",
+      "upstreamVersion": "3.000",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "inconsolata/Inconsolata-Regular.woff2",
+      "noticePaths": [
+        "inconsolata/OFL.txt"
+      ]
+    },
+    {
+      "id": "maple_mono",
+      "displayName": "Maple Mono",
+      "family": "Maple Mono",
+      "order": 130,
+      "author": "The Maple Mono Project Authors; subframe7536",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/subframe7536/maple-font",
+      "upstreamVersion": "7.900",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "maple-font/MapleMono-Regular.woff2",
+      "noticePaths": [
+        "maple-font/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "maple_mono_cn",
+      "displayName": "Maple Mono CN",
+      "family": "Maple Mono CN",
+      "order": 140,
+      "author": "The Maple Mono Project Authors; subframe7536",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/subframe7536/maple-font",
+      "upstreamVersion": "7.900",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "maple-font-cn/MapleMono-CN-Regular.woff2",
+      "noticePaths": [
+        "maple-font-cn/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "maple_mono_nf",
+      "displayName": "Maple Mono NF",
+      "family": "Maple Mono NF",
+      "order": 150,
+      "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/subframe7536/maple-font",
+      "upstreamVersion": "7.900 / Nerd Fonts 3.4.0",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "maple-font-nf/MapleMono-NF-Regular.woff2",
+      "noticePaths": [
+        "maple-font-nf/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "maple_mono_nf_cn",
+      "displayName": "Maple Mono NF CN",
+      "family": "Maple Mono NF CN",
+      "order": 160,
+      "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/subframe7536/maple-font",
+      "upstreamVersion": "7.900 / Nerd Fonts 3.4.0",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "maple-font-nf-cn/MapleMono-NF-CN-Regular.woff2",
+      "noticePaths": [
+        "maple-font-nf-cn/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "martian_mono",
+      "displayName": "Martian Mono",
+      "family": "Martian Mono",
+      "order": 170,
+      "author": "The Martian Mono Project Authors; Evil Martians / Roman Shamin",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/evilmartians/mono",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "martian-mono/MartianMono-Regular.woff2",
+      "noticePaths": [
+        "martian-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "monaspace_argon",
+      "displayName": "Monaspace Argon",
+      "family": "Monaspace Argon",
+      "order": 180,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-static-argon/MonaspaceArgon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-static-argon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_krypton",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton",
+      "order": 190,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-static-krypton/MonaspaceKrypton-Regular.woff2",
+      "noticePaths": [
+        "monaspace-static-krypton/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_neon",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon",
+      "order": 200,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-static-neon/MonaspaceNeon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-static-neon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_radon",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon",
+      "order": 210,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-static-radon/MonaspaceRadon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-static-radon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_xenon",
+      "displayName": "Monaspace Xenon",
+      "family": "Monaspace Xenon",
+      "order": 220,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-static-xenon/MonaspaceXenon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-static-xenon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_argon_nf",
+      "displayName": "Monaspace Argon NF",
+      "family": "Monaspace Argon NF",
+      "order": 230,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-nerdfonts-argon/MonaspaceArgonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-nerdfonts-argon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_krypton_nf",
+      "displayName": "Monaspace Krypton NF",
+      "family": "Monaspace Krypton NF",
+      "order": 240,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-nerdfonts-krypton/MonaspaceKryptonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-nerdfonts-krypton/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_neon_nf",
+      "displayName": "Monaspace Neon NF",
+      "family": "Monaspace Neon NF",
+      "order": 250,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-nerdfonts-neon/MonaspaceNeonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-nerdfonts-neon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_radon_nf",
+      "displayName": "Monaspace Radon NF",
+      "family": "Monaspace Radon NF",
+      "order": 260,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-nerdfonts-radon/MonaspaceRadonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-nerdfonts-radon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_xenon_nf",
+      "displayName": "Monaspace Xenon NF",
+      "family": "Monaspace Xenon NF",
+      "order": 270,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-nerdfonts-xenon/MonaspaceXenonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-nerdfonts-xenon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_argon_variable",
+      "displayName": "Monaspace Argon Var",
+      "family": "Monaspace Argon Var",
+      "order": 280,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-variable-argon/Monaspace Argon Var.woff2",
+      "noticePaths": [
+        "monaspace-variable-argon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_krypton_variable",
+      "displayName": "Monaspace Krypton Var",
+      "family": "Monaspace Krypton Var",
+      "order": 290,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-variable-krypton/Monaspace Krypton Var.woff2",
+      "noticePaths": [
+        "monaspace-variable-krypton/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_neon_variable",
+      "displayName": "Monaspace Neon Var",
+      "family": "Monaspace Neon Var",
+      "order": 300,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-variable-neon/Monaspace Neon Var.woff2",
+      "noticePaths": [
+        "monaspace-variable-neon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_radon_variable",
+      "displayName": "Monaspace Radon Var",
+      "family": "Monaspace Radon Var",
+      "order": 310,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-variable-radon/Monaspace Radon Var.woff2",
+      "noticePaths": [
+        "monaspace-variable-radon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "monaspace_xenon_variable",
+      "displayName": "Monaspace Xenon Var",
+      "family": "Monaspace Xenon Var",
+      "order": 320,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-variable-xenon/Monaspace Xenon Var.woff2",
+      "noticePaths": [
+        "monaspace-variable-xenon/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "recursive",
+      "displayName": "Recursive",
+      "family": "Recursive",
+      "order": 330,
+      "author": "The Recursive Project Authors; Arrow Type",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/arrowtype/recursive",
+      "upstreamVersion": "1.085",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "recursive/Recursive-Regular.woff2",
+      "noticePaths": [
+        "recursive/OFL.txt",
+        "recursive/TRANSFORM.md"
+      ]
+    },
+    {
+      "id": "red_hat_mono",
+      "displayName": "Red Hat Mono",
+      "family": "Red Hat Mono",
+      "order": 340,
+      "author": "Red Hat; Pentagram / MCKL",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/RedHatOfficial/RedHatFont",
+      "upstreamVersion": "1.030",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "red-hat-mono/RedHatMono-Regular.woff2",
+      "noticePaths": [
+        "red-hat-mono/LICENSE"
+      ]
+    },
+    {
+      "id": "sarasa_term_sc_nerd",
+      "displayName": "Sarasa Term SC Nerd",
+      "family": "Sarasa Term SC Nerd",
+      "order": 350,
+      "author": "laishulu; Renzhi Li (be5invis); Adobe / Google / M+; Nerd Fonts",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/laishulu/Sarasa-Term-SC-Nerd",
+      "upstreamVersion": "2.3.1 (Sarasa 1.0.27 / Nerd Fonts 3.3.0 / Font Patcher 4.16.1)",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "sarasa-term-sc-nerd/SarasaTermSCNerd-Regular.woff2",
+      "noticePaths": [
+        "sarasa-term-sc-nerd/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "ubuntu_sans_mono",
+      "displayName": "Ubuntu Sans Mono",
+      "family": "Ubuntu Sans Mono",
+      "order": 360,
+      "author": "Canonical; Dalton Maag Ltd",
+      "licenseName": "Ubuntu Font Licence 1.0",
+      "licenseSpdx": "Ubuntu-font-1.0",
+      "sourceRepository": "https://github.com/canonical/Ubuntu-Sans-fonts",
+      "upstreamVersion": "1.100",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "ubuntu-sans-mono/UbuntuSansMono-Regular.woff2",
+      "noticePaths": [
+        "ubuntu-sans-mono/LICENCE.txt"
+      ]
+    },
+    {
+      "id": "victor_mono",
+      "displayName": "Victor Mono",
+      "family": "Victor Mono",
+      "order": 370,
+      "author": "Rune Bjørnerås / Victor Mono Project",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/rubjo/victor-mono",
+      "upstreamVersion": "1.560",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "victor-mono/VictorMono-Regular.woff2",
+      "noticePaths": [
+        "victor-mono/LICENSE.txt"
       ]
     }
   ]

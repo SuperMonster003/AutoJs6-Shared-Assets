@@ -30,6 +30,12 @@ Releases before publishing.
 The `main` branch contains the current signed catalog. Branch URLs are mutable,
 so clients trust its detached signature rather than GitHub transport alone.
 
+The Ace catalog wire schema remains v1 (`schemaVersion: 1`). The catalog now
+prepared in this repository has `catalogVersion: 2` and 37 entries: eight reuse
+their immutable `ace-fonts-v1` assets, while 29 point to the prospective
+`ace-fonts-v2` release. Committing a catalog does not publish those v2 assets;
+the reviewed release workflow must complete before clients can download them.
+
 ## Repository layout
 
 ```text
@@ -38,22 +44,26 @@ ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
   catalogs/catalog-v1.json         # current schema-v1 catalog
   catalogs/catalog-v1.sig.json     # detached offline signature
-  catalogs/history/vN/             # prior signed catalogs after v1
+  catalogs/history/vN/             # exact prior catalog/signature snapshots
   keys/catalog-signing-public.pem  # public key only
   schemas/
 tools/ace-font-distribution/
 ```
 
-Generated bundles live under ignored `build/`. Source WOFF2 files are tracked
-normally because the initial set is small; Git LFS is intentionally unnecessary.
+Generated bundles live under ignored `build/`. Canonical source WOFF2 and notice
+files are tracked directly so a clean clone can reproduce releases without an
+AutoJs6 `build/` directory or a legacy `tools/.../sources` snapshot. Git LFS is
+intentionally not used.
 
 ## Publishing
 
 Read [`tools/ace-font-distribution/README.md`](tools/ace-font-distribution/README.md)
 before publishing. In summary: update reviewed sources and the manifest,
-generate the catalog, preserve the previous signed catalog when carrying old
-assets forward, sign offline, commit only the signed catalog/public material,
-and dispatch `publish-ace-fonts.yml` with the exact tag and key ID.
+preserve the exact previous catalog and signature under `catalogs/history/vN/`,
+generate incrementally, sign offline, commit only public material, and dispatch
+`publish-ace-fonts.yml` with the exact tag and key ID. The workflow publishes
+only assets introduced by that catalog; unchanged entries keep their older
+immutable Release URLs.
 
 ## Contributions and licensing
 

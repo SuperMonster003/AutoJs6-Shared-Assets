@@ -15,6 +15,18 @@ from pathlib import Path
 TOOL_DIR = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = TOOL_DIR.parents[1]
 HOST_BOOTSTRAP = REPOSITORY_ROOT / "app/src/main/res/raw/ace_font_catalog_v1.json"
+SHARED_MANIFEST = TOOL_DIR / "font-sources.json"
+SHARED_SOURCE_ROOT = REPOSITORY_ROOT / "ace-fonts/sources"
+SHARED_CATALOG = REPOSITORY_ROOT / "ace-fonts/catalogs/catalog-v1.json"
+SHARED_SIGNATURE = REPOSITORY_ROOT / "ace-fonts/catalogs/catalog-v1.sig.json"
+V1_HISTORY_CATALOG = (
+    REPOSITORY_ROOT / "ace-fonts/catalogs/history/v1/catalog-v1.json"
+)
+V1_HISTORY_SIGNATURE = (
+    REPOSITORY_ROOT / "ace-fonts/catalogs/history/v1/catalog-v1.sig.json"
+)
+SHARED_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
+CATALOG_KEY_ID = "p256-fc433f8ba81333f7"
 sys.path.insert(0, str(TOOL_DIR))
 
 from crypto import (  # noqa: E402
@@ -34,7 +46,11 @@ from distribution import (  # noqa: E402
     write_release,
 )
 from export_sources import export_sources  # noqa: E402
-from prepare_repository import PREPARE_MARKER, prepare_repository  # noqa: E402
+from prepare_repository import (  # noqa: E402
+    GIT_ATTRIBUTES,
+    PREPARE_MARKER,
+    prepare_repository,
+)
 from verify_release import verify_release  # noqa: E402
 
 
@@ -384,6 +400,9 @@ class RepositoryPreparationTest(unittest.TestCase):
         self.assertFalse((destination / "ace-fonts/catalogs/catalog-v1.sig.json").exists())
         self.assertFalse(any(destination.rglob("*.private.pem")))
         self.assertFalse((destination / "tools/ace-font-distribution/sources").exists())
+        attributes = (destination / ".gitattributes").read_text(encoding="utf-8")
+        self.assertIn("* text=auto eol=lf", attributes)
+        self.assertIn("*.woff2 binary", attributes)
         self.assertEqual(read_json(catalog_path)["repository"], "example/shared-assets")
         self.assertIn(
             PREPARE_MARKER,
@@ -402,48 +421,216 @@ class RepositoryPreparationTest(unittest.TestCase):
         self.assertIn("environment: ace-fonts-release", workflow)
         self.assertIn('gh release edit "$RELEASE_TAG" --draft=false', workflow)
 
-    def test_prepares_from_a_tracked_source_snapshot_without_git_history(self) -> None:
-        manifest_path = self.root / "manifest.json"
-        manifest_path.write_bytes(canonical_json_bytes(synthetic_manifest()))
-        tracked_source = (
-            self.repository
-            / "app/src/main/assets/editor/ace-builds-1.4.12/fonts"
-        )
-        destination = self.root / "shared-assets-from-tracked-sources"
-        source_identity, catalog_path = prepare_repository(
-            None,
-            None,
-            destination,
-            manifest_path,
-            repository="example/shared-assets",
-            tracked_source_root=tracked_source,
-        )
-        self.assertTrue(source_identity.startswith("tracked:"))
-        self.assertEqual(
-            (destination / "ace-fonts/sources/test/LICENSE.txt").read_text(
-                encoding="utf-8"
-            ),
-            "committed license\n",
-        )
-        self.assertEqual(read_json(catalog_path)["repository"], "example/shared-assets")
 
-    def test_rejects_unreviewed_files_in_a_tracked_source_snapshot(self) -> None:
-        manifest_path = self.root / "manifest.json"
-        manifest_path.write_bytes(canonical_json_bytes(synthetic_manifest()))
-        tracked_source = (
-            self.repository
-            / "app/src/main/assets/editor/ace-builds-1.4.12/fonts"
+class SharedRepositoryV2IntegrationTest(unittest.TestCase):
+    RETAINED_V1_IDS = {
+        "cascadia_code",
+        "fira_code",
+        "hack",
+        "ibm_plex_mono",
+        "intel_one_mono",
+        "iosevka_slab",
+        "jetbrains_mono",
+        "source_code_pro",
+    }
+    ADDED_V2_IDS = {
+        "anonymous_pro",
+        "atkinson_hyperlegible_mono",
+        "commit_mono",
+        "inconsolata",
+        "maple_mono",
+        "maple_mono_cn",
+        "maple_mono_nf",
+        "maple_mono_nf_cn",
+        "martian_mono",
+        "monaspace_argon",
+        "monaspace_argon_nf",
+        "monaspace_argon_variable",
+        "monaspace_krypton",
+        "monaspace_krypton_nf",
+        "monaspace_krypton_variable",
+        "monaspace_neon",
+        "monaspace_neon_nf",
+        "monaspace_neon_variable",
+        "monaspace_radon",
+        "monaspace_radon_nf",
+        "monaspace_radon_variable",
+        "monaspace_xenon",
+        "monaspace_xenon_nf",
+        "monaspace_xenon_variable",
+        "recursive",
+        "red_hat_mono",
+        "sarasa_term_sc_nerd",
+        "ubuntu_sans_mono",
+        "victor_mono",
+    }
+
+    def test_manifest_pins_the_complete_v2_inventory_and_source_tree(self) -> None:
+        self.assertEqual(
+            (REPOSITORY_ROOT / ".gitattributes").read_text(encoding="utf-8"),
+            GIT_ATTRIBUTES,
         )
-        (tracked_source / "secret.txt").write_text("must not be copied\n", encoding="utf-8")
-        with self.assertRaisesRegex(DistributionError, "unreviewed file"):
-            prepare_repository(
-                None,
-                None,
-                self.root / "shared-assets-with-extra-file",
-                manifest_path,
-                repository="example/shared-assets",
-                tracked_source_root=tracked_source,
+        manifest = read_json(SHARED_MANIFEST)
+        validate_manifest(manifest)
+        self.assertEqual(manifest["schemaVersion"], 1)
+        self.assertEqual(manifest["catalogVersion"], 2)
+        self.assertEqual(manifest["releaseTag"], "ace-fonts-v2")
+        self.assertEqual(manifest["expectedFontCount"], 37)
+        self.assertEqual(len(manifest["fonts"]), 37)
+
+        by_version: dict[int, set[str]] = {}
+        expected_source_files: set[str] = set()
+        for font in manifest["fonts"]:
+            by_version.setdefault(font["artifactVersion"], set()).add(font["id"])
+            self.assertEqual(
+                font["artifactReleaseTag"],
+                f"ace-fonts-v{font['artifactVersion']}",
             )
+            self.assertTrue(font["fontPath"].endswith(".woff2"))
+            expected_source_files.add(font["fontPath"])
+            expected_source_files.update(font["noticePaths"])
+
+        self.assertEqual(by_version, {1: self.RETAINED_V1_IDS, 2: self.ADDED_V2_IDS})
+        actual_source_files = {
+            path.relative_to(SHARED_SOURCE_ROOT).as_posix()
+            for path in SHARED_SOURCE_ROOT.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual_source_files, expected_source_files)
+        source_font_suffixes = {
+            path.suffix.lower()
+            for path in SHARED_SOURCE_ROOT.rglob("*")
+            if path.is_file()
+            and path.suffix.lower() in {".woff2", ".ttf", ".otf"}
+        }
+        self.assertEqual(
+            source_font_suffixes,
+            {".woff2"},
+        )
+
+    def test_v1_history_is_canonical_signed_and_byte_pinned(self) -> None:
+        catalog_bytes = V1_HISTORY_CATALOG.read_bytes()
+        signature_bytes = V1_HISTORY_SIGNATURE.read_bytes()
+        self.assertEqual(
+            hashlib.sha256(catalog_bytes).hexdigest(),
+            "e7840a817447aa7745a48828cb5b8a7debd279fd5df1d05fbec33f679b152440",
+        )
+        self.assertEqual(
+            hashlib.sha256(signature_bytes).hexdigest(),
+            "51ddc6b0982ead4afbfe43d57450cffe1422561ed35cd205590119ef00c12fc3",
+        )
+        history = read_json(V1_HISTORY_CATALOG)
+        validate_catalog(history)
+        self.assertEqual(catalog_bytes, canonical_json_bytes(history))
+        self.assertEqual(history["schemaVersion"], 1)
+        self.assertEqual(history["catalogVersion"], 1)
+        self.assertEqual(history["releaseTag"], "ace-fonts-v1")
+        self.assertEqual(history["repository"], SHARED_REPOSITORY)
+        self.assertEqual(
+            {font["id"] for font in history["fonts"]},
+            self.RETAINED_V1_IDS,
+        )
+        self.assertEqual(
+            {font["artifact"]["version"] for font in history["fonts"]},
+            {1},
+        )
+
+        try:
+            openssl = find_openssl()
+        except DistributionError as error:
+            self.skipTest(str(error))
+        verify_catalog_signature(
+            V1_HISTORY_CATALOG,
+            V1_HISTORY_SIGNATURE,
+            TOOL_DIR / "catalog-v1-signing-public.pem",
+            CATALOG_KEY_ID,
+            openssl_value=openssl,
+        )
+
+    def test_current_catalog_retains_v1_and_adds_exactly_29_v2_fonts(self) -> None:
+        catalog = read_json(SHARED_CATALOG)
+        history = read_json(V1_HISTORY_CATALOG)
+        validate_catalog(catalog, minimum_catalog_version=2)
+        self.assertEqual(catalog["schemaVersion"], 1)
+        self.assertEqual(catalog["catalogVersion"], 2)
+        self.assertEqual(catalog["releaseTag"], "ace-fonts-v2")
+        self.assertEqual(catalog["repository"], SHARED_REPOSITORY)
+        self.assertEqual(catalog["minHostVersionCode"], 5221)
+        self.assertEqual(len(catalog["fonts"]), 37)
+
+        by_version: dict[int, set[str]] = {}
+        for font in catalog["fonts"]:
+            version = font["artifact"]["version"]
+            by_version.setdefault(version, set()).add(font["id"])
+            self.assertIn(
+                f"/releases/download/ace-fonts-v{version}/",
+                font["artifact"]["url"],
+            )
+            for notice in font["license"]["files"]:
+                self.assertIn(
+                    f"/releases/download/ace-fonts-v{version}/",
+                    notice["url"],
+                )
+        self.assertEqual(by_version, {1: self.RETAINED_V1_IDS, 2: self.ADDED_V2_IDS})
+
+        current_by_id = {font["id"]: font for font in catalog["fonts"]}
+        history_by_id = {font["id"]: font for font in history["fonts"]}
+        self.assertEqual(
+            {font_id: current_by_id[font_id] for font_id in self.RETAINED_V1_IDS},
+            history_by_id,
+        )
+        for font_id in self.ADDED_V2_IDS:
+            self.assertNotIn("autoJs6Snapshot", current_by_id[font_id]["source"])
+
+    def test_sources_reproduce_the_checked_in_catalog_and_v2_assets(self) -> None:
+        manifest = read_json(SHARED_MANIFEST)
+        history = read_json(V1_HISTORY_CATALOG)
+        catalog, assets = build_catalog(
+            manifest,
+            SHARED_SOURCE_ROOT,
+            SHARED_REPOSITORY,
+            history,
+        )
+        self.assertEqual(SHARED_CATALOG.read_bytes(), canonical_json_bytes(catalog))
+
+        expected_v2_assets: set[str] = set()
+        retained_v1_assets: set[str] = set()
+        for font in catalog["fonts"]:
+            destination = (
+                expected_v2_assets
+                if font["artifact"]["version"] == 2
+                else retained_v1_assets
+            )
+            destination.add(font["artifact"]["fileName"])
+            destination.update(
+                notice["fileName"] for notice in font["license"]["files"]
+            )
+        self.assertEqual(set(assets), expected_v2_assets)
+        self.assertTrue(set(assets).isdisjoint(retained_v1_assets))
+        self.assertEqual(len(assets), 59)
+
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "release-v2"
+            write_release(catalog, assets, output, overwrite=False)
+            verify_release(catalog, output / "assets")
+            self.assertEqual(
+                (output / "release-assets.txt").read_text(encoding="utf-8").splitlines(),
+                sorted(expected_v2_assets),
+            )
+
+    def test_current_catalog_signature_is_valid(self) -> None:
+        try:
+            openssl = find_openssl()
+        except DistributionError as error:
+            self.skipTest(str(error))
+        envelope = verify_catalog_signature(
+            SHARED_CATALOG,
+            SHARED_SIGNATURE,
+            TOOL_DIR / "catalog-v1-signing-public.pem",
+            CATALOG_KEY_ID,
+            openssl_value=openssl,
+        )
+        self.assertEqual(envelope["catalog"], SHARED_CATALOG.name)
 
 
 class CurrentFontIntegrationTest(unittest.TestCase):

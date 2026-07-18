@@ -1,0 +1,15 @@
+* text=auto eol=lf
+ace-fonts/sources/** whitespace=-trailing-space
+
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.der binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.xz binary

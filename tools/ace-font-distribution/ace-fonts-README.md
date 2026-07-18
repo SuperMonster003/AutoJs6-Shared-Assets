@@ -15,11 +15,18 @@ stable ID, display order, source paths, and two release fields:
 - `artifactVersion`: the release version that introduced the current bytes.
 - `artifactReleaseTag`: exactly `ace-fonts-v<artifactVersion>`.
 
-On catalog v2, an unchanged v1 font keeps both fields at v1 and continues to
-use its immutable v1 URL. A new or changed font uses v2. Generation requires the
-immediately previous catalog and refuses changed bytes or notice files under an
-old artifact version.
+The current wire format is schema v1 (`schemaVersion: 1`); `catalog-v1.json` is
+named for that schema, not the release number. The catalog now prepared here has
+`catalogVersion: 2` and 37 entries. Eight unchanged fonts keep both artifact
+fields at v1 and continue to use immutable v1 URLs; 29 new fonts use v2. The
+signed v1 catalog and signature are preserved byte-for-byte under
+`catalogs/history/v1/` for incremental generation and verification.
 
-See the distribution-kit README for initial publication, offline signing,
+Generation requires the immediately previous catalog and refuses changed font
+or notice bytes under an old artifact version. Only v2 assets are included in
+the v2 upload set. The v2 Release does not exist merely because its sources and
+catalog are committed; it remains unavailable until the reviewed publication
+workflow succeeds.
+
+See the distribution-kit README for offline signing, incremental publication,
 updates, verification, revocation considerations, and recovery procedures.
-

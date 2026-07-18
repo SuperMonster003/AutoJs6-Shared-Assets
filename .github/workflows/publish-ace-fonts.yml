@@ -1,5 +1,3 @@
-# Copy this file to .github/workflows/publish-ace-fonts.yml in
-# SuperMonster003/AutoJs6-Shared-Assets.
 name: Publish immutable Ace font release
 
 on:
@@ -8,7 +6,7 @@ on:
       release_tag:
         description: Signed catalog release tag
         required: true
-        default: ace-fonts-v1
+        default: ace-fonts-v2
       key_id:
         description: Expected offline signing key ID
         required: true
