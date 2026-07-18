@@ -1,0 +1,148 @@
+# Copy this file to .github/workflows/publish-ace-fonts.yml in
+# SuperMonster003/AutoJs6-Shared-Assets.
+name: Publish immutable Ace font release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Signed catalog release tag
+        required: true
+        default: ace-fonts-v1
+      key_id:
+        description: Expected offline signing key ID
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-ace-fonts-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: ace-fonts-release
+    steps:
+      - name: Require the default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]]; then
+            echo "Dispatch this workflow from the default branch ($DEFAULT_BRANCH)." >&2
+            exit 1
+          fi
+
+      - name: Checkout shared-assets repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Run distribution tests
+        run: python -m unittest discover -s tools/ace-font-distribution/tests -v
+
+      - name: Reproduce catalog and current-release assets
+        run: |
+          set -euo pipefail
+          catalog_version=$(python -c \
+            'import json; print(json.load(open("tools/ace-font-distribution/font-sources.json"))["catalogVersion"])')
+          previous_args=()
+          if (( catalog_version > 1 )); then
+            previous_version=$((catalog_version - 1))
+            previous_catalog="ace-fonts/catalogs/history/v${previous_version}/catalog-v1.json"
+            test -f "$previous_catalog"
+            previous_args=(--previous-catalog "$previous_catalog")
+          fi
+          python tools/ace-font-distribution/distribution.py \
+            --source-root ace-fonts/sources \
+            --output build/ace-fonts-current \
+            --repository "$GITHUB_REPOSITORY" \
+            "${previous_args[@]}"
+
+      - name: Match the offline-reviewed catalog and verify it
+        env:
+          EXPECTED_TAG: ${{ inputs.release_tag }}
+          EXPECTED_KEY_ID: ${{ inputs.key_id }}
+        run: |
+          set -euo pipefail
+          catalog_version=$(python -c \
+            'import json; print(json.load(open("ace-fonts/catalogs/catalog-v1.json"))["catalogVersion"])')
+          if (( catalog_version > 1 )); then
+            previous_version=$((catalog_version - 1))
+            python tools/ace-font-distribution/verify_catalog.py \
+              "ace-fonts/catalogs/history/v${previous_version}/catalog-v1.json" \
+              --signature "ace-fonts/catalogs/history/v${previous_version}/catalog-v1.sig.json" \
+              --public-key ace-fonts/keys/catalog-signing-public.pem \
+              --expected-key-id "$EXPECTED_KEY_ID"
+          fi
+          cmp ace-fonts/catalogs/catalog-v1.json build/ace-fonts-current/catalog-v1.json
+          python tools/ace-font-distribution/validate_catalog.py \
+            ace-fonts/catalogs/catalog-v1.json --minimum-catalog-version 1
+          python tools/ace-font-distribution/verify_release.py \
+            ace-fonts/catalogs/catalog-v1.json \
+            --assets-dir build/ace-fonts-current/assets
+          python tools/ace-font-distribution/verify_catalog.py \
+            ace-fonts/catalogs/catalog-v1.json \
+            --signature ace-fonts/catalogs/catalog-v1.sig.json \
+            --public-key ace-fonts/keys/catalog-signing-public.pem \
+            --expected-key-id "$EXPECTED_KEY_ID"
+          python - "$EXPECTED_TAG" "$GITHUB_REPOSITORY" <<'PY'
+          import json, pathlib, sys
+          catalog = json.loads(
+              pathlib.Path("ace-fonts/catalogs/catalog-v1.json").read_text()
+          )
+          if catalog["releaseTag"] != sys.argv[1]:
+              raise SystemExit("workflow release_tag does not match signed catalog")
+          if catalog["repository"] != sys.argv[2]:
+              raise SystemExit("signed catalog repository does not match this repository")
+          PY
+
+      - name: Refuse to mutate an existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG already exists; immutable releases are never overwritten." >&2
+            exit 1
+          fi
+          existing_tag=$(git ls-remote origin "refs/tags/$RELEASE_TAG")
+          if [[ -n "$existing_tag" ]]; then
+            echo "Git tag $RELEASE_TAG already exists; refusing to retarget it." >&2
+            exit 1
+          fi
+
+      - name: Publish current-release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          asset_paths=()
+          while IFS= read -r asset_name; do
+            if [[ -n "$asset_name" ]]; then
+              asset_paths+=("build/ace-fonts-current/assets/$asset_name")
+            fi
+          done < build/ace-fonts-current/release-assets.txt
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            --raw-field ref="refs/tags/$RELEASE_TAG" \
+            --raw-field sha="$GITHUB_SHA" >/dev/null
+          gh release create "$RELEASE_TAG" \
+            --draft \
+            --verify-tag \
+            --latest=false \
+            --title "AutoJs6 Ace fonts ${RELEASE_TAG#ace-fonts-}" \
+            --notes "Signed, content-addressed AutoJs6 Ace font assets." \
+            "${asset_paths[@]}" \
+            ace-fonts/catalogs/catalog-v1.json \
+            ace-fonts/catalogs/catalog-v1.sig.json
+          gh release edit "$RELEASE_TAG" --draft=false

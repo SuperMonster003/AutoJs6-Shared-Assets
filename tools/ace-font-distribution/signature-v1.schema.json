@@ -1,0 +1,30 @@
+{
+  "$id": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/schemas/signature-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "const": "ECDSA_P256_SHA256"
+    },
+    "catalog": {
+      "const": "catalog-v1.json"
+    },
+    "keyId": {
+      "pattern": "^[A-Za-z0-9._-]{1,64}$",
+      "type": "string"
+    },
+    "signature": {
+      "contentEncoding": "base64",
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "algorithm",
+    "catalog",
+    "keyId",
+    "signature"
+  ],
+  "title": "AutoJs6 Ace font catalog detached signature v1",
+  "type": "object"
+}

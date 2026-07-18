@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": 1,
+  "minHostVersionCode": 5221,
+  "releaseTag": "ace-fonts-v1",
+  "expectedFontCount": 8,
+  "fonts": [
+    {
+      "id": "iosevka_slab",
+      "displayName": "Iosevka Slab",
+      "family": "Iosevka Slab",
+      "order": 10,
+      "author": "Renzhi Li (be5invis) / Iosevka Project",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/be5invis/Iosevka",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "iosevka-slab/IosevkaSlab-Regular.woff2",
+      "noticePaths": [
+        "iosevka-slab/LICENSE.md"
+      ]
+    },
+    {
+      "id": "jetbrains_mono",
+      "displayName": "JetBrains Mono",
+      "family": "JetBrains Mono",
+      "order": 20,
+      "author": "JetBrains; Philipp Nurullin / Konstantin Bulenkov",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/JetBrains/JetBrainsMono",
+      "upstreamVersion": "2.304",
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "acf5c10e01af66b9ae5c70d302bd0b8c58104cef",
+      "fontPath": "jetbrains-mono/JetBrainsMono-Regular.woff2",
+      "noticePaths": [
+        "jetbrains-mono/OFL.txt",
+        "jetbrains-mono/AUTHORS.txt"
+      ]
+    },
+    {
+      "id": "fira_code",
+      "displayName": "Fira Code",
+      "family": "Fira Code",
+      "order": 30,
+      "author": "Nikita Prokopov; based on Fira Mono",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/tonsky/FiraCode",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "fira-code/FiraCode-Regular.woff2",
+      "noticePaths": [
+        "fira-code/LICENSE"
+      ]
+    },
+    {
+      "id": "cascadia_code",
+      "displayName": "Cascadia Code",
+      "family": "Cascadia Code",
+      "order": 40,
+      "author": "Microsoft; Aaron Bell / Saja Typeworks",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/microsoft/cascadia-code",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "cascadia-code/CascadiaCode-Regular.woff2",
+      "noticePaths": [
+        "cascadia-code/LICENSE"
+      ]
+    },
+    {
+      "id": "intel_one_mono",
+      "displayName": "Intel One Mono",
+      "family": "Intel One Mono",
+      "order": 50,
+      "author": "Intel; Frere-Jones Type with Intel Brand Team and VMLY&R",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/intel/intel-one-mono",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "intel-one-mono/IntelOneMono-Regular.woff2",
+      "noticePaths": [
+        "intel-one-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "ibm_plex_mono",
+      "displayName": "IBM Plex Mono",
+      "family": "IBM Plex Mono",
+      "order": 60,
+      "author": "IBM BX&D / Mike Abbink / Bold Monday",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/IBM/plex",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "ibm-plex-mono/IBMPlexMono-Regular.woff2",
+      "noticePaths": [
+        "ibm-plex-mono/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "hack",
+      "displayName": "Hack",
+      "family": "Hack",
+      "order": 70,
+      "author": "Source Foundry Authors; Chris Simpkins / David van Gemeren",
+      "licenseName": "MIT + upstream Bitstream Vera / DejaVu notices",
+      "licenseSpdx": "LicenseRef-Hack-MIT-Bitstream-Vera-DejaVu",
+      "sourceRepository": "https://github.com/source-foundry/Hack",
+      "upstreamVersion": null,
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
+      "fontPath": "hack/Hack-Regular.woff2",
+      "noticePaths": [
+        "hack/LICENSE.md"
+      ]
+    },
+    {
+      "id": "source_code_pro",
+      "displayName": "Source Code Pro",
+      "family": "Source Code Pro",
+      "order": 80,
+      "author": "Adobe Originals; Paul D. Hunt / Teo Tuominen",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/adobe-fonts/source-code-pro",
+      "upstreamVersion": "2.042R-u_1.062R-i_1.026Rvf",
+      "artifactVersion": 1,
+      "artifactReleaseTag": "ace-fonts-v1",
+      "autoJs6SourceCommit": "39d445bef23d1951f8174e995969761ab09aa32f",
+      "fontPath": "source-code-pro/SourceCodePro-Regular.woff2",
+      "noticePaths": [
+        "source-code-pro/LICENSE.md"
+      ]
+    }
+  ]
+}

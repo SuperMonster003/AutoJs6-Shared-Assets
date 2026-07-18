@@ -1,0 +1,6 @@
+build/
+__pycache__/
+*.pyc
+*.private.pem
+*.private.der
+.autojs6-shared-assets-prepared
