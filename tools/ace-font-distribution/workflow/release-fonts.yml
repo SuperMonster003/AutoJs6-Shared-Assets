@@ -8,7 +8,7 @@ on:
       release_tag:
         description: Signed catalog release tag
         required: true
-        default: ace-fonts-v2
+        default: ace-fonts-v3
       key_id:
         description: Expected offline signing key ID
         required: true

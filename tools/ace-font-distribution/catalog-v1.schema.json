@@ -120,6 +120,20 @@
           "minLength": 1,
           "type": "string"
         },
+        "features": {
+          "description": "Explicit filter metadata. Absence in historical catalogs is equivalent to an empty array.",
+          "items": {
+            "enum": [
+              "nerd",
+              "variable",
+              "cn"
+            ],
+            "type": "string"
+          },
+          "maxItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
         "id": {
           "not": {
             "enum": [

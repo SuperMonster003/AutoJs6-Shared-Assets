@@ -1,5 +1,5 @@
 {
-  "catalogVersion": 3,
+  "catalogVersion": 2,
   "fonts": [
     {
       "artifact": {
@@ -19,7 +19,6 @@
       "author": "Renzhi Li (be5invis) / Iosevka Project",
       "displayName": "Iosevka Slab",
       "family": "Iosevka Slab",
-      "features": [],
       "id": "iosevka_slab",
       "license": {
         "files": [
@@ -63,7 +62,6 @@
       "author": "JetBrains; Philipp Nurullin / Konstantin Bulenkov",
       "displayName": "JetBrains Mono",
       "family": "JetBrains Mono",
-      "features": [],
       "id": "jetbrains_mono",
       "license": {
         "files": [
@@ -114,7 +112,6 @@
       "author": "Nikita Prokopov; based on Fira Mono",
       "displayName": "Fira Code",
       "family": "Fira Code",
-      "features": [],
       "id": "fira_code",
       "license": {
         "files": [
@@ -158,7 +155,6 @@
       "author": "Microsoft; Aaron Bell / Saja Typeworks",
       "displayName": "Cascadia Code",
       "family": "Cascadia Code",
-      "features": [],
       "id": "cascadia_code",
       "license": {
         "files": [
@@ -202,7 +198,6 @@
       "author": "Intel; Frere-Jones Type with Intel Brand Team and VMLY&R",
       "displayName": "Intel One Mono",
       "family": "Intel One Mono",
-      "features": [],
       "id": "intel_one_mono",
       "license": {
         "files": [
@@ -246,7 +241,6 @@
       "author": "IBM BX&D / Mike Abbink / Bold Monday",
       "displayName": "IBM Plex Mono",
       "family": "IBM Plex Mono",
-      "features": [],
       "id": "ibm_plex_mono",
       "license": {
         "files": [
@@ -290,7 +284,6 @@
       "author": "Source Foundry Authors; Chris Simpkins / David van Gemeren",
       "displayName": "Hack",
       "family": "Hack",
-      "features": [],
       "id": "hack",
       "license": {
         "files": [
@@ -334,7 +327,6 @@
       "author": "Adobe Originals; Paul D. Hunt / Teo Tuominen",
       "displayName": "Source Code Pro",
       "family": "Source Code Pro",
-      "features": [],
       "id": "source_code_pro",
       "license": {
         "files": [
@@ -378,7 +370,6 @@
       "author": "Mark Simonson",
       "displayName": "Anonymous Pro",
       "family": "Anonymous Pro",
-      "features": [],
       "id": "anonymous_pro",
       "license": {
         "files": [
@@ -417,7 +408,6 @@
       "author": "Braille Institute; Applied Design Works / Letters from Sweden",
       "displayName": "Atkinson Hyperlegible Mono",
       "family": "Atkinson Hyperlegible Mono",
-      "features": [],
       "id": "atkinson_hyperlegible_mono",
       "license": {
         "files": [
@@ -456,7 +446,6 @@
       "author": "Eigil Nikolajsen",
       "displayName": "CommitMono",
       "family": "CommitMono",
-      "features": [],
       "id": "commit_mono",
       "license": {
         "files": [
@@ -495,7 +484,6 @@
       "author": "Raph Levien / Cyreal; Brenton Simpson / Google",
       "displayName": "Inconsolata",
       "family": "Inconsolata",
-      "features": [],
       "id": "inconsolata",
       "license": {
         "files": [
@@ -534,7 +522,6 @@
       "author": "The Maple Mono Project Authors; subframe7536",
       "displayName": "Maple Mono",
       "family": "Maple Mono",
-      "features": [],
       "id": "maple_mono",
       "license": {
         "files": [
@@ -573,9 +560,6 @@
       "author": "The Maple Mono Project Authors; subframe7536",
       "displayName": "Maple Mono CN",
       "family": "Maple Mono CN",
-      "features": [
-        "cn"
-      ],
       "id": "maple_mono_cn",
       "license": {
         "files": [
@@ -614,9 +598,6 @@
       "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
       "displayName": "Maple Mono NF",
       "family": "Maple Mono NF",
-      "features": [
-        "nerd"
-      ],
       "id": "maple_mono_nf",
       "license": {
         "files": [
@@ -655,10 +636,6 @@
       "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
       "displayName": "Maple Mono NF CN",
       "family": "Maple Mono NF CN",
-      "features": [
-        "nerd",
-        "cn"
-      ],
       "id": "maple_mono_nf_cn",
       "license": {
         "files": [
@@ -697,7 +674,6 @@
       "author": "The Martian Mono Project Authors; Evil Martians / Roman Shamin",
       "displayName": "Martian Mono",
       "family": "Martian Mono",
-      "features": [],
       "id": "martian_mono",
       "license": {
         "files": [
@@ -736,7 +712,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Argon",
       "family": "Monaspace Argon",
-      "features": [],
       "id": "monaspace_argon",
       "license": {
         "files": [
@@ -775,7 +750,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Krypton",
       "family": "Monaspace Krypton",
-      "features": [],
       "id": "monaspace_krypton",
       "license": {
         "files": [
@@ -814,7 +788,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Neon",
       "family": "Monaspace Neon",
-      "features": [],
       "id": "monaspace_neon",
       "license": {
         "files": [
@@ -853,7 +826,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Radon",
       "family": "Monaspace Radon",
-      "features": [],
       "id": "monaspace_radon",
       "license": {
         "files": [
@@ -892,7 +864,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Xenon",
       "family": "Monaspace Xenon",
-      "features": [],
       "id": "monaspace_xenon",
       "license": {
         "files": [
@@ -931,9 +902,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Argon NF",
       "family": "Monaspace Argon NF",
-      "features": [
-        "nerd"
-      ],
       "id": "monaspace_argon_nf",
       "license": {
         "files": [
@@ -972,9 +940,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Krypton NF",
       "family": "Monaspace Krypton NF",
-      "features": [
-        "nerd"
-      ],
       "id": "monaspace_krypton_nf",
       "license": {
         "files": [
@@ -1013,9 +978,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Neon NF",
       "family": "Monaspace Neon NF",
-      "features": [
-        "nerd"
-      ],
       "id": "monaspace_neon_nf",
       "license": {
         "files": [
@@ -1054,9 +1016,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Radon NF",
       "family": "Monaspace Radon NF",
-      "features": [
-        "nerd"
-      ],
       "id": "monaspace_radon_nf",
       "license": {
         "files": [
@@ -1095,9 +1054,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Xenon NF",
       "family": "Monaspace Xenon NF",
-      "features": [
-        "nerd"
-      ],
       "id": "monaspace_xenon_nf",
       "license": {
         "files": [
@@ -1136,9 +1092,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Argon Var",
       "family": "Monaspace Argon Var",
-      "features": [
-        "variable"
-      ],
       "id": "monaspace_argon_variable",
       "license": {
         "files": [
@@ -1177,9 +1130,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Krypton Var",
       "family": "Monaspace Krypton Var",
-      "features": [
-        "variable"
-      ],
       "id": "monaspace_krypton_variable",
       "license": {
         "files": [
@@ -1218,9 +1168,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Neon Var",
       "family": "Monaspace Neon Var",
-      "features": [
-        "variable"
-      ],
       "id": "monaspace_neon_variable",
       "license": {
         "files": [
@@ -1259,9 +1206,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Radon Var",
       "family": "Monaspace Radon Var",
-      "features": [
-        "variable"
-      ],
       "id": "monaspace_radon_variable",
       "license": {
         "files": [
@@ -1300,9 +1244,6 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Xenon Var",
       "family": "Monaspace Xenon Var",
-      "features": [
-        "variable"
-      ],
       "id": "monaspace_xenon_variable",
       "license": {
         "files": [
@@ -1341,7 +1282,6 @@
       "author": "The Recursive Project Authors; Arrow Type",
       "displayName": "Recursive",
       "family": "Recursive",
-      "features": [],
       "id": "recursive",
       "license": {
         "files": [
@@ -1387,7 +1327,6 @@
       "author": "Red Hat; Pentagram / MCKL",
       "displayName": "Red Hat Mono",
       "family": "Red Hat Mono",
-      "features": [],
       "id": "red_hat_mono",
       "license": {
         "files": [
@@ -1426,10 +1365,6 @@
       "author": "laishulu; Renzhi Li (be5invis); Adobe / Google / M+; Nerd Fonts",
       "displayName": "Sarasa Term SC Nerd",
       "family": "Sarasa Term SC Nerd",
-      "features": [
-        "nerd",
-        "cn"
-      ],
       "id": "sarasa_term_sc_nerd",
       "license": {
         "files": [
@@ -1468,7 +1403,6 @@
       "author": "Canonical; Dalton Maag Ltd",
       "displayName": "Ubuntu Sans Mono",
       "family": "Ubuntu Sans Mono",
-      "features": [],
       "id": "ubuntu_sans_mono",
       "license": {
         "files": [
@@ -1507,7 +1441,6 @@
       "author": "Rune Bjørnerås / Victor Mono Project",
       "displayName": "Victor Mono",
       "family": "Victor Mono",
-      "features": [],
       "id": "victor_mono",
       "license": {
         "files": [
@@ -1530,7 +1463,7 @@
     }
   ],
   "minHostVersionCode": 5221,
-  "releaseTag": "ace-fonts-v3",
+  "releaseTag": "ace-fonts-v2",
   "repository": "SuperMonster003/AutoJs6-Shared-Assets",
   "schemaVersion": 1
 }

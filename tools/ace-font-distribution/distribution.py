@@ -21,6 +21,8 @@ DEFAULT_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
 DEFAULT_MANIFEST = Path(__file__).with_name("font-sources.json")
 OUTPUT_MARKER = ".ace-font-distribution-output"
 RESERVED_FONT_IDS = frozenset({"system_monospace", "iosevka"})
+FONT_FEATURE_VALUES = ("nerd", "variable", "cn")
+FONT_FEATURE_SET = frozenset(FONT_FEATURE_VALUES)
 FONT_ID_PATTERN = re.compile(r"^[a-z][a-z0-9_]{1,63}$")
 REPOSITORY_PATTERN = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 RELEASE_TAG_PATTERN = re.compile(r"^ace-fonts-v([1-9][0-9]*)$")
@@ -136,6 +138,26 @@ def _require_nonempty_string(container: dict[str, Any], key: str, context: str) 
     return value
 
 
+def _validate_font_features(value: Any, context: str) -> list[str]:
+    if not isinstance(value, list):
+        raise DistributionError(f"{context}.features must be an array")
+    if any(
+        not isinstance(feature, str) or feature not in FONT_FEATURE_SET
+        for feature in value
+    ):
+        allowed = ", ".join(FONT_FEATURE_VALUES)
+        raise DistributionError(f"{context}.features values must be one of: {allowed}")
+    if len(value) != len(set(value)):
+        raise DistributionError(f"{context}.features must not contain duplicates")
+    canonical = [feature for feature in FONT_FEATURE_VALUES if feature in value]
+    if value != canonical:
+        raise DistributionError(
+            f"{context}.features must use canonical order: "
+            + ", ".join(FONT_FEATURE_VALUES)
+        )
+    return value
+
+
 def validate_manifest(manifest: dict[str, Any]) -> None:
     for key in ("schemaVersion", "catalogVersion", "minHostVersionCode"):
         value = manifest.get(key)
@@ -190,6 +212,12 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
             "fontPath",
         ):
             _require_nonempty_string(font, key, context)
+        if "features" in font:
+            _validate_font_features(font["features"], context)
+        elif manifest["catalogVersion"] >= 3:
+            raise DistributionError(
+                f"{context}.features is required from catalogVersion 3"
+            )
         if not font["sourceRepository"].startswith("https://github.com/"):
             raise DistributionError(f"{context}.sourceRepository must be an HTTPS GitHub URL")
         upstream_version = font["upstreamVersion"]
@@ -318,33 +346,34 @@ def _prepare_fonts(
                 }
             )
 
-        catalog_fonts.append(
-            {
-                "artifact": {
-                    "fileName": font_asset,
-                    "format": "woff2",
-                    "mimeType": "font/woff2",
-                    "sha256": font_sha,
-                    "size": len(font_content),
-                    "style": "normal",
-                    "url": font_url,
-                    "urls": [font_url],
-                    "version": artifact_version,
-                    "weight": 400,
-                },
-                "author": source["author"],
-                "displayName": source["displayName"],
-                "family": source["family"],
-                "id": font_id,
-                "license": {
-                    "files": license_files,
-                    "name": source["licenseName"],
-                    "spdx": source["licenseSpdx"],
-                },
-                "order": source["order"],
-                "source": _catalog_source(source, manifest),
-            }
-        )
+        catalog_font: dict[str, Any] = {
+            "artifact": {
+                "fileName": font_asset,
+                "format": "woff2",
+                "mimeType": "font/woff2",
+                "sha256": font_sha,
+                "size": len(font_content),
+                "style": "normal",
+                "url": font_url,
+                "urls": [font_url],
+                "version": artifact_version,
+                "weight": 400,
+            },
+            "author": source["author"],
+            "displayName": source["displayName"],
+            "family": source["family"],
+            "id": font_id,
+            "license": {
+                "files": license_files,
+                "name": source["licenseName"],
+                "spdx": source["licenseSpdx"],
+            },
+            "order": source["order"],
+            "source": _catalog_source(source, manifest),
+        }
+        if "features" in source:
+            catalog_font["features"] = source["features"]
+        catalog_fonts.append(catalog_font)
     return catalog_fonts, assets
 
 
@@ -472,6 +501,10 @@ def validate_catalog(catalog: dict[str, Any], minimum_catalog_version: int = 1) 
         seen_ids.add(font_id)
         for key in ("displayName", "family", "author"):
             _require_nonempty_string(font, key, context)
+        features = font.get("features", [])
+        _validate_font_features(features, context)
+        if catalog["catalogVersion"] >= 3 and "features" not in font:
+            raise DistributionError(f"{context}.features is required from catalogVersion 3")
         order = font.get("order")
         if not isinstance(order, int) or isinstance(order, bool) or order < 0:
             raise DistributionError(f"{context}.order must be a non-negative integer")
