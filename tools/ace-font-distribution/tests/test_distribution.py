@@ -793,6 +793,61 @@ class SharedRepositoryV4IntegrationTest(unittest.TestCase):
             {".woff2"},
         )
 
+    def test_manifest_sources_are_already_git_clean_filter_stable(self) -> None:
+        """Keep locally generated release bytes identical to a clean CI checkout."""
+        source_paths: set[str] = set()
+        for manifest_path in (
+            SHARED_MANIFEST,
+            V1_HISTORY_MANIFEST,
+            V2_HISTORY_MANIFEST,
+            V3_HISTORY_MANIFEST,
+        ):
+            for font in read_json(manifest_path)["fonts"]:
+                source_paths.add(font["fontPath"])
+                source_paths.update(font["noticePaths"])
+
+        mismatches: list[str] = []
+        for source_path in sorted(source_paths):
+            repository_path = (
+                SHARED_SOURCE_ROOT / source_path
+            ).relative_to(REPOSITORY_ROOT).as_posix()
+            raw_hash = subprocess.run(
+                [
+                    "git",
+                    "hash-object",
+                    "--no-filters",
+                    "--",
+                    repository_path,
+                ],
+                cwd=REPOSITORY_ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            clean_hash = subprocess.run(
+                [
+                    "git",
+                    "hash-object",
+                    "--filters",
+                    f"--path={repository_path}",
+                    "--",
+                    repository_path,
+                ],
+                cwd=REPOSITORY_ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            if raw_hash != clean_hash:
+                mismatches.append(source_path)
+
+        self.assertEqual(
+            mismatches,
+            [],
+            "manifest source worktree bytes differ from Git clean-filter bytes; "
+            "normalize these files before generating a catalog",
+        )
+
     def test_v4_font_audit_is_sha_bound_and_enforces_feature_coverage(self) -> None:
         manifest = read_json(SHARED_MANIFEST)
         audit = read_json(FONT_AUDIT_V4)
