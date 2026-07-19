@@ -1,5 +1,5 @@
 {
-  "catalogVersion": 3,
+  "catalogVersion": 4,
   "fonts": [
     {
       "artifact": {
@@ -19,8 +19,12 @@
       "author": "Renzhi Li (be5invis) / Iosevka Project",
       "displayName": "Iosevka Slab",
       "family": "Iosevka Slab",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "iosevka_slab",
       "id": "iosevka_slab",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -39,11 +43,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/iosevka-slab/IosevkaSlab-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/be5invis/Iosevka",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -63,8 +69,12 @@
       "author": "JetBrains; Philipp Nurullin / Konstantin Bulenkov",
       "displayName": "JetBrains Mono",
       "family": "JetBrains Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "jetbrains_mono",
       "id": "jetbrains_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -90,11 +100,13 @@
         "autoJs6Snapshot": {
           "commit": "acf5c10e01af66b9ae5c70d302bd0b8c58104cef",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/JetBrains/JetBrainsMono",
         "upstreamVersion": "2.304"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -114,8 +126,12 @@
       "author": "Nikita Prokopov; based on Fira Mono",
       "displayName": "Fira Code",
       "family": "Fira Code",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "fira_code",
       "id": "fira_code",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -134,11 +150,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/fira-code/FiraCode-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/tonsky/FiraCode",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -158,8 +176,12 @@
       "author": "Microsoft; Aaron Bell / Saja Typeworks",
       "displayName": "Cascadia Code",
       "family": "Cascadia Code",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "cascadia_code",
       "id": "cascadia_code",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -178,11 +200,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/cascadia-code/CascadiaCode-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/microsoft/cascadia-code",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -202,8 +226,12 @@
       "author": "Intel; Frere-Jones Type with Intel Brand Team and VMLY&R",
       "displayName": "Intel One Mono",
       "family": "Intel One Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "intel_one_mono",
       "id": "intel_one_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -222,11 +250,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/intel-one-mono/IntelOneMono-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/intel/intel-one-mono",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -246,8 +276,12 @@
       "author": "IBM BX&D / Mike Abbink / Bold Monday",
       "displayName": "IBM Plex Mono",
       "family": "IBM Plex Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "ibm_plex_mono",
       "id": "ibm_plex_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -266,11 +300,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/ibm-plex-mono/IBMPlexMono-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/IBM/plex",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -290,8 +326,12 @@
       "author": "Source Foundry Authors; Chris Simpkins / David van Gemeren",
       "displayName": "Hack",
       "family": "Hack",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "hack",
       "id": "hack",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -310,11 +350,13 @@
         "autoJs6Snapshot": {
           "commit": "bbac850fe6bcf4005cea25d68039e9e50bdd8228",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/hack/Hack-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/source-foundry/Hack",
         "upstreamVersion": null
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -334,8 +376,12 @@
       "author": "Adobe Originals; Paul D. Hunt / Teo Tuominen",
       "displayName": "Source Code Pro",
       "family": "Source Code Pro",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "source_code_pro",
       "id": "source_code_pro",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -354,11 +400,13 @@
         "autoJs6Snapshot": {
           "commit": "39d445bef23d1951f8174e995969761ab09aa32f",
           "path": "app/src/main/assets/editor/ace-builds-1.4.12/fonts/source-code-pro/SourceCodePro-Regular.woff2",
-          "versionCode": 5221
+          "versionCode": 5230
         },
         "repository": "https://github.com/adobe-fonts/source-code-pro",
         "upstreamVersion": "2.042R-u_1.062R-i_1.026Rvf"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -378,8 +426,12 @@
       "author": "Mark Simonson",
       "displayName": "Anonymous Pro",
       "family": "Anonymous Pro",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "anonymous_pro",
       "id": "anonymous_pro",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -397,7 +449,9 @@
       "source": {
         "repository": "https://github.com/google/fonts",
         "upstreamVersion": "1.002"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -417,8 +471,12 @@
       "author": "Braille Institute; Applied Design Works / Letters from Sweden",
       "displayName": "Atkinson Hyperlegible Mono",
       "family": "Atkinson Hyperlegible Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "atkinson_hyperlegible_mono",
       "id": "atkinson_hyperlegible_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -436,7 +494,9 @@
       "source": {
         "repository": "https://github.com/googlefonts/atkinson-hyperlegible-next-mono",
         "upstreamVersion": "2.001"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -456,8 +516,12 @@
       "author": "Eigil Nikolajsen",
       "displayName": "CommitMono",
       "family": "CommitMono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "commit_mono",
       "id": "commit_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -475,7 +539,9 @@
       "source": {
         "repository": "https://github.com/eigilnikolajsen/commit-mono",
         "upstreamVersion": "1.143"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -495,8 +561,12 @@
       "author": "Raph Levien / Cyreal; Brenton Simpson / Google",
       "displayName": "Inconsolata",
       "family": "Inconsolata",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "inconsolata",
       "id": "inconsolata",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -514,7 +584,9 @@
       "source": {
         "repository": "https://github.com/cyrealtype/Inconsolata",
         "upstreamVersion": "3.000"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -534,8 +606,12 @@
       "author": "The Maple Mono Project Authors; subframe7536",
       "displayName": "Maple Mono",
       "family": "Maple Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "maple_mono",
       "id": "maple_mono",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -553,48 +629,9 @@
       "source": {
         "repository": "https://github.com/subframe7536/maple-font",
         "upstreamVersion": "7.900"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "dd57c29b2e2962088690fa716a7423f59b3f618bec74302f6a8f1695136cfea5",
-        "size": 5393128,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2"
-        ],
-        "version": 2,
-        "weight": 400
       },
-      "author": "The Maple Mono Project Authors; subframe7536",
-      "displayName": "Maple Mono CN",
-      "family": "Maple Mono CN",
-      "features": [
-        "cn"
-      ],
-      "id": "maple_mono_cn",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-maple_mono_cn-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "eb2d28d2e565a0757e3d64e34ebb452e75a0cad87c0ab3faf4e08ba7596de902",
-            "size": 4394,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 140,
-      "source": {
-        "repository": "https://github.com/subframe7536/maple-font",
-        "upstreamVersion": "7.900"
-      }
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -612,12 +649,15 @@
         "weight": 400
       },
       "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
-      "displayName": "Maple Mono NF",
+      "displayName": "Maple Mono",
       "family": "Maple Mono NF",
       "features": [
+        "mono",
         "nerd"
       ],
+      "groupId": "maple_mono",
       "id": "maple_mono_nf",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -631,11 +671,60 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 150,
+      "order": 131,
       "source": {
         "repository": "https://github.com/subframe7536/maple-font",
         "upstreamVersion": "7.900 / Nerd Fonts 3.4.0"
-      }
+      },
+      "variantName": "NF",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "dd57c29b2e2962088690fa716a7423f59b3f618bec74302f6a8f1695136cfea5",
+        "size": 5393128,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-dd57c29b.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "The Maple Mono Project Authors; subframe7536",
+      "displayName": "Maple Mono",
+      "family": "Maple Mono CN",
+      "features": [
+        "mono",
+        "cn",
+        "jp"
+      ],
+      "groupId": "maple_mono",
+      "id": "maple_mono_cn",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-maple_mono_cn-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "eb2d28d2e565a0757e3d64e34ebb452e75a0cad87c0ab3faf4e08ba7596de902",
+            "size": 4394,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-maple_mono_cn-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 132,
+      "source": {
+        "repository": "https://github.com/subframe7536/maple-font",
+        "upstreamVersion": "7.900"
+      },
+      "variantName": "CN / SC",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -653,13 +742,17 @@
         "weight": 400
       },
       "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
-      "displayName": "Maple Mono NF CN",
+      "displayName": "Maple Mono",
       "family": "Maple Mono NF CN",
       "features": [
+        "mono",
         "nerd",
-        "cn"
+        "cn",
+        "jp"
       ],
+      "groupId": "maple_mono",
       "id": "maple_mono_nf_cn",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -673,11 +766,13 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 160,
+      "order": 133,
       "source": {
         "repository": "https://github.com/subframe7536/maple-font",
         "upstreamVersion": "7.900 / Nerd Fonts 3.4.0"
-      }
+      },
+      "variantName": "NF · CN / SC",
+      "variantOrder": 3
     },
     {
       "artifact": {
@@ -697,8 +792,12 @@
       "author": "The Martian Mono Project Authors; Evil Martians / Roman Shamin",
       "displayName": "Martian Mono",
       "family": "Martian Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "martian_mono",
       "id": "martian_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -712,11 +811,13 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 170,
+      "order": 140,
       "source": {
         "repository": "https://github.com/evilmartians/mono",
         "upstreamVersion": "1.000"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -736,8 +837,12 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Argon",
       "family": "Monaspace Argon",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "monaspace_argon",
       "id": "monaspace_argon",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -751,11 +856,105 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 180,
+      "order": 150,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "ad0ad84cb65ab56ea82b3098800403aeec1bbc445ba24da0dc87f439b3883db6",
+        "size": 540384,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Argon",
+      "family": "Monaspace Argon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "groupId": "monaspace_argon",
+      "id": "monaspace_argon_variable",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_argon_variable-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 151,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "Var",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "bc608c6978121d0f4b5a3fd85cf5603a17dd70ed324243f9b78d3ec5dc1d783b",
+        "size": 1265552,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Argon",
+      "family": "Monaspace Argon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "groupId": "monaspace_argon",
+      "id": "monaspace_argon_nf",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_argon_nf-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 152,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "NF",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -775,8 +974,12 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Krypton",
       "family": "Monaspace Krypton",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "monaspace_krypton",
       "id": "monaspace_krypton",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -790,11 +993,105 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 190,
+      "order": 160,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "f1357532c080c3f976e35ec1d18a92b423d4261103acb7d2cdccffa03a989fad",
+        "size": 445408,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "groupId": "monaspace_krypton",
+      "id": "monaspace_krypton_variable",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_krypton_variable-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 161,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "Var",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "1d62ee4f7dd920a0f93e1dd00fed43902d029e99c87086893a01177ac83a3e31",
+        "size": 1290720,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "groupId": "monaspace_krypton",
+      "id": "monaspace_krypton_nf",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_krypton_nf-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 162,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "NF",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -814,8 +1111,12 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Neon",
       "family": "Monaspace Neon",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "monaspace_neon",
       "id": "monaspace_neon",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -829,11 +1130,105 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 200,
+      "order": 170,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "6569968f448ae856ab5b57dff1f13b109b220ca8e3f664169e135fcb5c4f0721",
+        "size": 510832,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "groupId": "monaspace_neon",
+      "id": "monaspace_neon_variable",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_neon_variable-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 171,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "Var",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "8063ea45b6997c658035a4d876f996ecfa306c88fd0541d35d533fb1f9400c84",
+        "size": 1260028,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "groupId": "monaspace_neon",
+      "id": "monaspace_neon_nf",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_neon_nf-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 172,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "NF",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -853,8 +1248,12 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Radon",
       "family": "Monaspace Radon",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "monaspace_radon",
       "id": "monaspace_radon",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -868,11 +1267,105 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 210,
+      "order": 180,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "6411b3c2b3e02e3913248184800d6c5a83bb1ccd1472daeb7bfee605c176cb33",
+        "size": 796308,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "groupId": "monaspace_radon",
+      "id": "monaspace_radon_variable",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_radon_variable-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 181,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "Var",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "60b3f1429742aa11bf3e620b9a7fbeb0e4735bbb12f079be2437deb78f981fa5",
+        "size": 1295548,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "groupId": "monaspace_radon",
+      "id": "monaspace_radon_nf",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_radon_nf-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 182,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "NF",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -892,8 +1385,12 @@
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "displayName": "Monaspace Xenon",
       "family": "Monaspace Xenon",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "monaspace_xenon",
       "id": "monaspace_xenon",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -907,380 +1404,13 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 220,
+      "order": 190,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "bc608c6978121d0f4b5a3fd85cf5603a17dd70ed324243f9b78d3ec5dc1d783b",
-        "size": 1265552,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-bc608c69.woff2"
-        ],
-        "version": 2,
-        "weight": 400
       },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Argon NF",
-      "family": "Monaspace Argon NF",
-      "features": [
-        "nerd"
-      ],
-      "id": "monaspace_argon_nf",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_argon_nf-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_nf-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 230,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "1d62ee4f7dd920a0f93e1dd00fed43902d029e99c87086893a01177ac83a3e31",
-        "size": 1290720,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-1d62ee4f.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Krypton NF",
-      "family": "Monaspace Krypton NF",
-      "features": [
-        "nerd"
-      ],
-      "id": "monaspace_krypton_nf",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_krypton_nf-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_nf-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 240,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "8063ea45b6997c658035a4d876f996ecfa306c88fd0541d35d533fb1f9400c84",
-        "size": 1260028,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-8063ea45.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Neon NF",
-      "family": "Monaspace Neon NF",
-      "features": [
-        "nerd"
-      ],
-      "id": "monaspace_neon_nf",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_neon_nf-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_nf-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 250,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "60b3f1429742aa11bf3e620b9a7fbeb0e4735bbb12f079be2437deb78f981fa5",
-        "size": 1295548,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-60b3f142.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Radon NF",
-      "family": "Monaspace Radon NF",
-      "features": [
-        "nerd"
-      ],
-      "id": "monaspace_radon_nf",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_radon_nf-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_nf-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 260,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "cec8c1f1499eae64f6fe713bdcc9eb4d16a74cc9977cd9f13dfee0efe94b46b4",
-        "size": 1313652,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Xenon NF",
-      "family": "Monaspace Xenon NF",
-      "features": [
-        "nerd"
-      ],
-      "id": "monaspace_xenon_nf",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_xenon_nf-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 270,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "ad0ad84cb65ab56ea82b3098800403aeec1bbc445ba24da0dc87f439b3883db6",
-        "size": 540384,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-ad0ad84c.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Argon Var",
-      "family": "Monaspace Argon Var",
-      "features": [
-        "variable"
-      ],
-      "id": "monaspace_argon_variable",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_argon_variable-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_argon_variable-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 280,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "f1357532c080c3f976e35ec1d18a92b423d4261103acb7d2cdccffa03a989fad",
-        "size": 445408,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-f1357532.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Krypton Var",
-      "family": "Monaspace Krypton Var",
-      "features": [
-        "variable"
-      ],
-      "id": "monaspace_krypton_variable",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_krypton_variable-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_krypton_variable-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 290,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "6569968f448ae856ab5b57dff1f13b109b220ca8e3f664169e135fcb5c4f0721",
-        "size": 510832,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-6569968f.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Neon Var",
-      "family": "Monaspace Neon Var",
-      "features": [
-        "variable"
-      ],
-      "id": "monaspace_neon_variable",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_neon_variable-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_neon_variable-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 300,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "6411b3c2b3e02e3913248184800d6c5a83bb1ccd1472daeb7bfee605c176cb33",
-        "size": 796308,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-6411b3c2.woff2"
-        ],
-        "version": 2,
-        "weight": 400
-      },
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Radon Var",
-      "family": "Monaspace Radon Var",
-      "features": [
-        "variable"
-      ],
-      "id": "monaspace_radon_variable",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-monaspace_radon_variable-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
-            "size": 4479,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_radon_variable-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 310,
-      "source": {
-        "repository": "https://github.com/githubnext/monaspace",
-        "upstreamVersion": "1.400"
-      }
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -1298,12 +1428,15 @@
         "weight": 400
       },
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "displayName": "Monaspace Xenon Var",
+      "displayName": "Monaspace Xenon",
       "family": "Monaspace Xenon Var",
       "features": [
+        "mono",
         "variable"
       ],
+      "groupId": "monaspace_xenon",
       "id": "monaspace_xenon_variable",
+      "isDefaultVariant": false,
       "license": {
         "files": [
           {
@@ -1317,11 +1450,59 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 320,
+      "order": 191,
       "source": {
         "repository": "https://github.com/githubnext/monaspace",
         "upstreamVersion": "1.400"
-      }
+      },
+      "variantName": "Var",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "cec8c1f1499eae64f6fe713bdcc9eb4d16a74cc9977cd9f13dfee0efe94b46b4",
+        "size": 1313652,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-cec8c1f1.woff2"
+        ],
+        "version": 2,
+        "weight": 400
+      },
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "displayName": "Monaspace Xenon",
+      "family": "Monaspace Xenon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "groupId": "monaspace_xenon",
+      "id": "monaspace_xenon_nf",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monaspace_xenon_nf-v2-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0e84e5f7dd6f05e74a00f2fb828ca43e489d954f5509ff0fa439ea18c0d35fe9",
+            "size": 4479,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-monaspace_xenon_nf-v2-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 192,
+      "source": {
+        "repository": "https://github.com/githubnext/monaspace",
+        "upstreamVersion": "1.400"
+      },
+      "variantName": "NF",
+      "variantOrder": 2
     },
     {
       "artifact": {
@@ -1341,8 +1522,12 @@
       "author": "The Recursive Project Authors; Arrow Type",
       "displayName": "Recursive",
       "family": "Recursive",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "recursive",
       "id": "recursive",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -1363,11 +1548,13 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 330,
+      "order": 200,
       "source": {
         "repository": "https://github.com/arrowtype/recursive",
         "upstreamVersion": "1.085"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -1387,8 +1574,12 @@
       "author": "Red Hat; Pentagram / MCKL",
       "displayName": "Red Hat Mono",
       "family": "Red Hat Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "red_hat_mono",
       "id": "red_hat_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -1402,53 +1593,13 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 340,
+      "order": 210,
       "source": {
         "repository": "https://github.com/RedHatOfficial/RedHatFont",
         "upstreamVersion": "1.030"
-      }
-    },
-    {
-      "artifact": {
-        "fileName": "autojs6-ace-font-sarasa_term_sc_nerd-v2-db29e32c.woff2",
-        "format": "woff2",
-        "mimeType": "font/woff2",
-        "sha256": "db29e32c750ac2bf0ec236b3e6225088d5ba6cd4a6d6b37dafcbf3ee614d6a90",
-        "size": 6330580,
-        "style": "normal",
-        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-sarasa_term_sc_nerd-v2-db29e32c.woff2",
-        "urls": [
-          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-sarasa_term_sc_nerd-v2-db29e32c.woff2"
-        ],
-        "version": 2,
-        "weight": 400
       },
-      "author": "laishulu; Renzhi Li (be5invis); Adobe / Google / M+; Nerd Fonts",
-      "displayName": "Sarasa Term SC Nerd",
-      "family": "Sarasa Term SC Nerd",
-      "features": [
-        "nerd",
-        "cn"
-      ],
-      "id": "sarasa_term_sc_nerd",
-      "license": {
-        "files": [
-          {
-            "fileName": "autojs6-ace-font-sarasa_term_sc_nerd-v2-LICENSE.txt",
-            "originalName": "LICENSE.txt",
-            "sha256": "5e24aa89c520df12115f37591daf3affe87737da068227f1648ea01d70d70147",
-            "size": 4639,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v2/autojs6-ace-font-sarasa_term_sc_nerd-v2-LICENSE.txt"
-          }
-        ],
-        "name": "SIL Open Font License 1.1",
-        "spdx": "OFL-1.1"
-      },
-      "order": 350,
-      "source": {
-        "repository": "https://github.com/laishulu/Sarasa-Term-SC-Nerd",
-        "upstreamVersion": "2.3.1 (Sarasa 1.0.27 / Nerd Fonts 3.3.0 / Font Patcher 4.16.1)"
-      }
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -1468,8 +1619,12 @@
       "author": "Canonical; Dalton Maag Ltd",
       "displayName": "Ubuntu Sans Mono",
       "family": "Ubuntu Sans Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "ubuntu_sans_mono",
       "id": "ubuntu_sans_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -1483,11 +1638,13 @@
         "name": "Ubuntu Font Licence 1.0",
         "spdx": "Ubuntu-font-1.0"
       },
-      "order": 360,
+      "order": 220,
       "source": {
         "repository": "https://github.com/canonical/Ubuntu-Sans-fonts",
         "upstreamVersion": "1.100"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     },
     {
       "artifact": {
@@ -1507,8 +1664,12 @@
       "author": "Rune Bjørnerås / Victor Mono Project",
       "displayName": "Victor Mono",
       "family": "Victor Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "groupId": "victor_mono",
       "id": "victor_mono",
+      "isDefaultVariant": true,
       "license": {
         "files": [
           {
@@ -1522,15 +1683,1106 @@
         "name": "SIL Open Font License 1.1",
         "spdx": "OFL-1.1"
       },
-      "order": 370,
+      "order": 230,
       "source": {
         "repository": "https://github.com/rubjo/victor-mono",
         "upstreamVersion": "1.560"
-      }
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-zero_x_proto-v4-8fcccc73.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "8fcccc7334a3e4c11d974c162c33a4ca8a1ea7cbca35d1ae0507f30832388ada",
+        "size": 56992,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-zero_x_proto-v4-8fcccc73.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-zero_x_proto-v4-8fcccc73.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "0xType Project Authors",
+      "displayName": "0xProto",
+      "family": "0xProto",
+      "features": [
+        "mono"
+      ],
+      "groupId": "zero_x_proto",
+      "id": "zero_x_proto",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-zero_x_proto-v4-LICENSE",
+            "originalName": "LICENSE",
+            "sha256": "8841e59e78081f4cb6ec51ad5bc698751b85ae14ee24f0f16bc9f9de07e4b90e",
+            "size": 4311,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-zero_x_proto-v4-LICENSE"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 240,
+      "source": {
+        "repository": "https://github.com/0xType/0xProto",
+        "upstreamVersion": "2.502"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-azeret_mono-v4-f0d847a4.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "f0d847a45bbc123cecbb816402d1a7d9bbadcfe5f4e0a522978b9724486c7cf0",
+        "size": 30080,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-azeret_mono-v4-f0d847a4.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-azeret_mono-v4-f0d847a4.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Martin Vácha / Displaay",
+      "displayName": "Azeret Mono",
+      "family": "Azeret Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "azeret_mono",
+      "id": "azeret_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-azeret_mono-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "2a0fd31798d131b38a9fe730a260bc9a1d85452e36cdf79e5fcaf937bf4d9f86",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-azeret_mono-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 250,
+      "source": {
+        "repository": "https://github.com/displaay/Azeret",
+        "upstreamVersion": "1.002"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-departure_mono-v4-5b4fed1d.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "5b4fed1daa90708aa9c6ee1190abca9dc22164a1c1def0020386e46b61038cfb",
+        "size": 22496,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-departure_mono-v4-5b4fed1d.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-departure_mono-v4-5b4fed1d.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Helena Zhang",
+      "displayName": "Departure Mono",
+      "family": "Departure Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "departure_mono",
+      "id": "departure_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-departure_mono-v4-LICENSE",
+            "originalName": "LICENSE",
+            "sha256": "b65e42750f3cb65437a97f4dfd781c58f199259949db2341012be60e32500e83",
+            "size": 4357,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-departure_mono-v4-LICENSE"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 260,
+      "source": {
+        "repository": "https://github.com/rektdeckard/departure-mono",
+        "upstreamVersion": "1.500"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-fantasque_sans_mono-v4-bf76840c.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "bf76840c0666dc55dc2b6fb024304943997ffb77a2b86846a995eb74bc1f3d25",
+        "size": 67924,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fantasque_sans_mono-v4-bf76840c.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fantasque_sans_mono-v4-bf76840c.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Jany Belluz",
+      "displayName": "Fantasque Sans Mono",
+      "family": "Fantasque Sans Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "fantasque_sans_mono",
+      "id": "fantasque_sans_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-fantasque_sans_mono-v4-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "847988f40bfc79f3c3260167ff952f1fd7abe7e428ca616e110a2ea82c71f0a9",
+            "size": 4364,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fantasque_sans_mono-v4-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 270,
+      "source": {
+        "repository": "https://github.com/belluzj/fantasque-sans",
+        "upstreamVersion": "1.8.0"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-fragment_mono-v4-f8d6f30e.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "f8d6f30ef3340d7c955500e20cb6452565e5e8ed4225c5ffa5a6fd697660f888",
+        "size": 56316,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fragment_mono-v4-f8d6f30e.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fragment_mono-v4-f8d6f30e.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Wei Huang",
+      "displayName": "Fragment Mono",
+      "family": "Fragment Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "fragment_mono",
+      "id": "fragment_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-fragment_mono-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "26ddc9e68d9b59f546bf9cbb8b217954752771620590aa9a137b54fa4baf0218",
+            "size": 4405,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-fragment_mono-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 280,
+      "source": {
+        "repository": "https://github.com/weiweihuanghuang/fragment-mono",
+        "upstreamVersion": "1.021"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist-v4-d8bce822.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "d8bce822db092746889bcf3f57350b41f53708b025458fe7af30729ec4ce0df2",
+        "size": 45244,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist-v4-d8bce822.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist-v4-d8bce822.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Basement Studio; Andrés Briganti; Guido Ferreyra; Mateo Zaragoza",
+      "displayName": "Geist",
+      "family": "Geist",
+      "features": [],
+      "groupId": "geist",
+      "id": "geist",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 290,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.800"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_mono-v4-e4507fb4.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "e4507fb4fb5f832fbbb6c06aea4206274ba3083007f23fa8cbc0e87a10acf95b",
+        "size": 50356,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_mono-v4-e4507fb4.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_mono-v4-e4507fb4.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Basement Studio; Andrés Briganti; Guido Ferreyra; Mateo Zaragoza",
+      "displayName": "Geist Mono",
+      "family": "Geist Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "geist_mono",
+      "id": "geist_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_mono-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_mono-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 300,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.700"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_pixel_line-v4-5dfb755f.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "5dfb755f0b23f4f5a369063564ca08fb551c9357bc51e0adcd5fc4eb293129e4",
+        "size": 18120,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_line-v4-5dfb755f.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_line-v4-5dfb755f.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Line",
+      "features": [],
+      "groupId": "geist_pixel",
+      "id": "geist_pixel_line",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_pixel_line-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_line-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 310,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Line",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_pixel_circle-v4-eb52582a.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "eb52582a433e572688338d51b894852bef0bd9f18a296616d779051a225f904d",
+        "size": 28044,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_circle-v4-eb52582a.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_circle-v4-eb52582a.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Circle",
+      "features": [],
+      "groupId": "geist_pixel",
+      "id": "geist_pixel_circle",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_pixel_circle-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_circle-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 311,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Circle",
+      "variantOrder": 1
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_pixel_grid-v4-09dc3ba5.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "09dc3ba58829d5fa7d501114eb36c43f880c0e960788cce1cc643ade5f5ad76d",
+        "size": 28368,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_grid-v4-09dc3ba5.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_grid-v4-09dc3ba5.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Grid",
+      "features": [],
+      "groupId": "geist_pixel",
+      "id": "geist_pixel_grid",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_pixel_grid-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_grid-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 312,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Grid",
+      "variantOrder": 2
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_pixel_square-v4-80887afe.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "80887afede26bc861e92dbfbb17a775d769e46e7c84f336b1c9f17959f60606d",
+        "size": 28540,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_square-v4-80887afe.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_square-v4-80887afe.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Square",
+      "features": [],
+      "groupId": "geist_pixel",
+      "id": "geist_pixel_square",
+      "isDefaultVariant": false,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_pixel_square-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_square-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 313,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Square",
+      "variantOrder": 3
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-geist_pixel_triangle-v4-48abafa5.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "48abafa5c36610ac61f60bedeab4fc5c553095d2e67d3d8cc3c632cfacd1cb59",
+        "size": 28760,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_triangle-v4-48abafa5.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_triangle-v4-48abafa5.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Triangle",
+      "features": [],
+      "groupId": "geist_pixel",
+      "id": "geist_pixel_triangle",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-geist_pixel_triangle-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+            "size": 4383,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-geist_pixel_triangle-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 314,
+      "source": {
+        "repository": "https://github.com/vercel/geist-font",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Triangle",
+      "variantOrder": 4
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-go_mono-v4-024ad794.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "024ad7946415a4b4d0b91facd8b0a153e0f1707d2d6dc0a72de924bad4ae7f0c",
+        "size": 55016,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-go_mono-v4-024ad794.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-go_mono-v4-024ad794.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Bigelow & Holmes Inc.; Go Authors",
+      "displayName": "Go Mono",
+      "family": "Go Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "go_mono",
+      "id": "go_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-go_mono-v4-README",
+            "originalName": "README",
+            "sha256": "dc588a7ba9130043b67c2380cc03cc6644ed3557f6d5e8589b96acba1c64e343",
+            "size": 1913,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-go_mono-v4-README"
+          }
+        ],
+        "name": "BSD 3-Clause License",
+        "spdx": "BSD-3-Clause"
+      },
+      "order": 320,
+      "source": {
+        "repository": "https://github.com/golang/image",
+        "upstreamVersion": "2.010"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-julia_mono-v4-cd371c92.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "cd371c92e94978a6888b71e89a4b57f443604ad63595150511ceb7d5c354b857",
+        "size": 1042116,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-julia_mono-v4-cd371c92.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-julia_mono-v4-cd371c92.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Cormullion / JuliaMono Project Authors",
+      "displayName": "JuliaMono",
+      "family": "JuliaMono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "julia_mono",
+      "id": "julia_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-julia_mono-v4-LICENSE",
+            "originalName": "LICENSE",
+            "sha256": "d27b85137453d4eb0893eee45bdc6eb79a661693680856f3f7df8bc77dfe902f",
+            "size": 4374,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-julia_mono-v4-LICENSE"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 330,
+      "source": {
+        "repository": "https://github.com/cormullion/juliamono",
+        "upstreamVersion": "0.63.2"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-m_plus_1-v4-73e50457.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "73e50457aec6c7718375a5f31512bc5b09a1126ea8470d2fa005b3d508aefbce",
+        "size": 706596,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1-v4-73e50457.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1-v4-73e50457.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "displayName": "M PLUS 1",
+      "family": "M PLUS 1",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_1",
+      "id": "m_plus_1",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-m_plus_1-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "04971e3fcee60b247395150d93b3616f6a0b092572332c96187b472976553abc",
+            "size": 4387,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 340,
+      "source": {
+        "repository": "https://github.com/coz-m/MPLUS_FONTS",
+        "upstreamVersion": "1.100"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-m_plus_1_code-v4-bdf016c0.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "bdf016c03c974d610c0588a4665c5b6cb527d3b85b93b8fd5458863dd734809a",
+        "size": 695564,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1_code-v4-bdf016c0.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1_code-v4-bdf016c0.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "displayName": "M PLUS 1 Code",
+      "family": "M PLUS 1 Code",
+      "features": [
+        "mono",
+        "jp"
+      ],
+      "groupId": "m_plus_1_code",
+      "id": "m_plus_1_code",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-m_plus_1_code-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "04971e3fcee60b247395150d93b3616f6a0b092572332c96187b472976553abc",
+            "size": 4387,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_1_code-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 350,
+      "source": {
+        "repository": "https://github.com/coz-m/MPLUS_FONTS",
+        "upstreamVersion": "1.100"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-m_plus_2-v4-9239008d.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "9239008d0e430a76711b9d448d146961a2544acf63bb9644d4bb6e1c5b0033f7",
+        "size": 707512,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_2-v4-9239008d.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_2-v4-9239008d.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "displayName": "M PLUS 2",
+      "family": "M PLUS 2",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_2",
+      "id": "m_plus_2",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-m_plus_2-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "04971e3fcee60b247395150d93b3616f6a0b092572332c96187b472976553abc",
+            "size": 4387,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_2-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 360,
+      "source": {
+        "repository": "https://github.com/coz-m/MPLUS_FONTS",
+        "upstreamVersion": "1.100"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-m_plus_u-v4-0cf6ae7e.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "0cf6ae7e86a0e41c1cd9e5550258a1495a9935e9f42485ca562d224b7e3a58a9",
+        "size": 708428,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_u-v4-0cf6ae7e.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_u-v4-0cf6ae7e.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "displayName": "M PLUS U",
+      "family": "M PLUS U",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_u",
+      "id": "m_plus_u",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-m_plus_u-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "04971e3fcee60b247395150d93b3616f6a0b092572332c96187b472976553abc",
+            "size": 4387,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-m_plus_u-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 370,
+      "source": {
+        "repository": "https://github.com/coz-m/MPLUS_FONTS",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-monoid-v4-ff616c2c.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "ff616c2c180ad330f436a3fa7cb8e1c6985a43b20c63b801b6835885a16aae0f",
+        "size": 24944,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-monoid-v4-ff616c2c.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-monoid-v4-ff616c2c.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Andreas Larsen and contributors",
+      "displayName": "Monoid",
+      "family": "Monoid",
+      "features": [
+        "mono"
+      ],
+      "groupId": "monoid",
+      "id": "monoid",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-monoid-v4-Licenses.md",
+            "originalName": "Licenses.md",
+            "sha256": "061021331c33d5b83a7089d77427da3706344f79f6402667662059fbcee0df67",
+            "size": 5523,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-monoid-v4-Licenses.md"
+          }
+        ],
+        "name": "MIT License or SIL Open Font License 1.1",
+        "spdx": "MIT OR OFL-1.1"
+      },
+      "order": 380,
+      "source": {
+        "repository": "https://github.com/larsenwork/monoid",
+        "upstreamVersion": "0.61"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-noto_sans_mono-v4-fdbe0e38.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "fdbe0e382dc5480619da4d39bd57b4e62130a00ea2604e530638906b7ff49f01",
+        "size": 123432,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-noto_sans_mono-v4-fdbe0e38.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-noto_sans_mono-v4-fdbe0e38.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Google; Monotype; Noto Project Authors",
+      "displayName": "Noto Sans Mono",
+      "family": "Noto Sans Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "noto_sans_mono",
+      "id": "noto_sans_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-noto_sans_mono-v4-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb",
+            "size": 4377,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-noto_sans_mono-v4-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 390,
+      "source": {
+        "repository": "https://github.com/notofonts/noto-fonts",
+        "upstreamVersion": "2.003"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-sarasa_mono_sc_nerd-v4-1bd490fd.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "1bd490fd111fff38bac3b19793c8ad09effbfcc9d8d8ff22e8acabefe9fd2ec7",
+        "size": 9370340,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_sc_nerd-v4-1bd490fd.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_sc_nerd-v4-1bd490fd.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Renzhi Li (be5invis); Inter Project; Adobe; Google; Nerd Fonts; jonz94",
+      "displayName": "Sarasa Mono SC Nerd",
+      "family": "Sarasa Mono SC Nerd Font",
+      "features": [
+        "mono",
+        "nerd",
+        "cn",
+        "jp"
+      ],
+      "groupId": "sarasa_mono_sc_nerd",
+      "id": "sarasa_mono_sc_nerd",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-sarasa_mono_sc_nerd-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "32c932e0dbae4f6e6386964bbc2d04178707665a05ca65cf636241af13d50a53",
+            "size": 4702,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_sc_nerd-v4-OFL.txt"
+          },
+          {
+            "fileName": "autojs6-ace-font-sarasa_mono_sc_nerd-v4-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "7577169017465f4e41437387fdd7380bd789eea482ac0fc7ba87aa78000f2784",
+            "size": 1058,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_sc_nerd-v4-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 400,
+      "source": {
+        "repository": "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts",
+        "upstreamVersion": "1.0.35-0 (Nerd Fonts 3.4.0)"
+      },
+      "variantName": "NF · CN / SC",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-a6c57fa9.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "a6c57fa96e3493c4e3e4c8e6dda8ca692c1653939449bc427833063858e9a8db",
+        "size": 9420296,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-a6c57fa9.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-a6c57fa9.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Renzhi Li (be5invis); Inter Project; Adobe; Google; Nerd Fonts; jonz94",
+      "displayName": "Sarasa Mono Slab SC Nerd",
+      "family": "Sarasa Mono Slab SC Nerd Font",
+      "features": [
+        "mono",
+        "nerd",
+        "cn",
+        "jp"
+      ],
+      "groupId": "sarasa_mono_slab_sc_nerd",
+      "id": "sarasa_mono_slab_sc_nerd",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "32c932e0dbae4f6e6386964bbc2d04178707665a05ca65cf636241af13d50a53",
+            "size": 4702,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-OFL.txt"
+          },
+          {
+            "fileName": "autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-LICENSE.txt",
+            "originalName": "LICENSE.txt",
+            "sha256": "7577169017465f4e41437387fdd7380bd789eea482ac0fc7ba87aa78000f2784",
+            "size": 1058,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sarasa_mono_slab_sc_nerd-v4-LICENSE.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 410,
+      "source": {
+        "repository": "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts",
+        "upstreamVersion": "1.0.35-0 (Nerd Fonts 3.4.0)"
+      },
+      "variantName": "NF · CN / SC",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-sometype_mono-v4-6b6b5219.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "6b6b52196b721b3b3a8cf733bd1f2595d11b391aad1895ba11714995573ea06d",
+        "size": 29656,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sometype_mono-v4-6b6b5219.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sometype_mono-v4-6b6b5219.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Ryoichi Tsunekawa / Dharma Type",
+      "displayName": "Sometype Mono",
+      "family": "Sometype Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "sometype_mono",
+      "id": "sometype_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-sometype_mono-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "01d5bef6d64692b8f86f49d13ed259875423c1657870ad0f1650ba649f1ab58a",
+            "size": 4398,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-sometype_mono-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 420,
+      "source": {
+        "repository": "https://github.com/dharmatype/Sometype-Mono",
+        "upstreamVersion": "1.000"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
+    },
+    {
+      "artifact": {
+        "fileName": "autojs6-ace-font-space_mono-v4-a3281287.woff2",
+        "format": "woff2",
+        "mimeType": "font/woff2",
+        "sha256": "a3281287939a152ec1485709aff1a77515b4f0d657a24fcda3a5a439aa39adb2",
+        "size": 34932,
+        "style": "normal",
+        "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-space_mono-v4-a3281287.woff2",
+        "urls": [
+          "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-space_mono-v4-a3281287.woff2"
+        ],
+        "version": 4,
+        "weight": 400
+      },
+      "author": "Colophon Foundry; Benjamin Critton",
+      "displayName": "Space Mono",
+      "family": "Space Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "space_mono",
+      "id": "space_mono",
+      "isDefaultVariant": true,
+      "license": {
+        "files": [
+          {
+            "fileName": "autojs6-ace-font-space_mono-v4-OFL.txt",
+            "originalName": "OFL.txt",
+            "sha256": "8e4ee42b2553e1e01504e61cb0d46d148cd8c9e5eacaa3622a7df2d4f2955b9f",
+            "size": 4392,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/ace-fonts-v4/autojs6-ace-font-space_mono-v4-OFL.txt"
+          }
+        ],
+        "name": "SIL Open Font License 1.1",
+        "spdx": "OFL-1.1"
+      },
+      "order": 430,
+      "source": {
+        "repository": "https://github.com/googlefonts/spacemono",
+        "upstreamVersion": "1.003"
+      },
+      "variantName": "Regular",
+      "variantOrder": 0
     }
   ],
-  "minHostVersionCode": 5221,
-  "releaseTag": "ace-fonts-v3",
+  "minHostVersionCode": 5230,
+  "releaseTag": "ace-fonts-v4",
   "repository": "SuperMonster003/AutoJs6-Shared-Assets",
   "schemaVersion": 1
 }
