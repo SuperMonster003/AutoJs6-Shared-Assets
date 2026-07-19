@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": 3,
-  "minHostVersionCode": 5221,
-  "releaseTag": "ace-fonts-v3",
-  "expectedFontCount": 37,
+  "catalogVersion": 4,
+  "minHostVersionCode": 5230,
+  "releaseTag": "ace-fonts-v4",
+  "expectedFontCount": 60,
   "fonts": [
     {
       "id": "iosevka_slab",
       "displayName": "Iosevka Slab",
       "family": "Iosevka Slab",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 10,
       "author": "Renzhi Li (be5invis) / Iosevka Project",
       "licenseName": "SIL Open Font License 1.1",
@@ -22,13 +24,19 @@
       "fontPath": "iosevka-slab/IosevkaSlab-Regular.woff2",
       "noticePaths": [
         "iosevka-slab/LICENSE.md"
-      ]
+      ],
+      "groupId": "iosevka_slab",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "jetbrains_mono",
       "displayName": "JetBrains Mono",
       "family": "JetBrains Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 20,
       "author": "JetBrains; Philipp Nurullin / Konstantin Bulenkov",
       "licenseName": "SIL Open Font License 1.1",
@@ -42,13 +50,19 @@
       "noticePaths": [
         "jetbrains-mono/OFL.txt",
         "jetbrains-mono/AUTHORS.txt"
-      ]
+      ],
+      "groupId": "jetbrains_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "fira_code",
       "displayName": "Fira Code",
       "family": "Fira Code",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 30,
       "author": "Nikita Prokopov; based on Fira Mono",
       "licenseName": "SIL Open Font License 1.1",
@@ -61,13 +75,19 @@
       "fontPath": "fira-code/FiraCode-Regular.woff2",
       "noticePaths": [
         "fira-code/LICENSE"
-      ]
+      ],
+      "groupId": "fira_code",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "cascadia_code",
       "displayName": "Cascadia Code",
       "family": "Cascadia Code",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 40,
       "author": "Microsoft; Aaron Bell / Saja Typeworks",
       "licenseName": "SIL Open Font License 1.1",
@@ -80,13 +100,19 @@
       "fontPath": "cascadia-code/CascadiaCode-Regular.woff2",
       "noticePaths": [
         "cascadia-code/LICENSE"
-      ]
+      ],
+      "groupId": "cascadia_code",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "intel_one_mono",
       "displayName": "Intel One Mono",
       "family": "Intel One Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 50,
       "author": "Intel; Frere-Jones Type with Intel Brand Team and VMLY&R",
       "licenseName": "SIL Open Font License 1.1",
@@ -99,13 +125,19 @@
       "fontPath": "intel-one-mono/IntelOneMono-Regular.woff2",
       "noticePaths": [
         "intel-one-mono/OFL.txt"
-      ]
+      ],
+      "groupId": "intel_one_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "ibm_plex_mono",
       "displayName": "IBM Plex Mono",
       "family": "IBM Plex Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 60,
       "author": "IBM BX&D / Mike Abbink / Bold Monday",
       "licenseName": "SIL Open Font License 1.1",
@@ -118,13 +150,19 @@
       "fontPath": "ibm-plex-mono/IBMPlexMono-Regular.woff2",
       "noticePaths": [
         "ibm-plex-mono/LICENSE.txt"
-      ]
+      ],
+      "groupId": "ibm_plex_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "hack",
       "displayName": "Hack",
       "family": "Hack",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 70,
       "author": "Source Foundry Authors; Chris Simpkins / David van Gemeren",
       "licenseName": "MIT + upstream Bitstream Vera / DejaVu notices",
@@ -137,13 +175,19 @@
       "fontPath": "hack/Hack-Regular.woff2",
       "noticePaths": [
         "hack/LICENSE.md"
-      ]
+      ],
+      "groupId": "hack",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "source_code_pro",
       "displayName": "Source Code Pro",
       "family": "Source Code Pro",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 80,
       "author": "Adobe Originals; Paul D. Hunt / Teo Tuominen",
       "licenseName": "SIL Open Font License 1.1",
@@ -156,13 +200,19 @@
       "fontPath": "source-code-pro/SourceCodePro-Regular.woff2",
       "noticePaths": [
         "source-code-pro/LICENSE.md"
-      ]
+      ],
+      "groupId": "source_code_pro",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "anonymous_pro",
       "displayName": "Anonymous Pro",
       "family": "Anonymous Pro",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 90,
       "author": "Mark Simonson",
       "licenseName": "SIL Open Font License 1.1",
@@ -174,13 +224,19 @@
       "fontPath": "anonymous-pro/anonymous-pro.woff2",
       "noticePaths": [
         "anonymous-pro/license.txt"
-      ]
+      ],
+      "groupId": "anonymous_pro",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "atkinson_hyperlegible_mono",
       "displayName": "Atkinson Hyperlegible Mono",
       "family": "Atkinson Hyperlegible Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 100,
       "author": "Braille Institute; Applied Design Works / Letters from Sweden",
       "licenseName": "SIL Open Font License 1.1",
@@ -192,13 +248,19 @@
       "fontPath": "atkinson-hyperlegible-mono/AtkinsonHyperlegibleMono-Regular.woff2",
       "noticePaths": [
         "atkinson-hyperlegible-mono/OFL.txt"
-      ]
+      ],
+      "groupId": "atkinson_hyperlegible_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "commit_mono",
       "displayName": "CommitMono",
       "family": "CommitMono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 110,
       "author": "Eigil Nikolajsen",
       "licenseName": "SIL Open Font License 1.1",
@@ -210,13 +272,19 @@
       "fontPath": "commit-mono/CommitMono-400-Regular.woff2",
       "noticePaths": [
         "commit-mono/LICENSE-FONT"
-      ]
+      ],
+      "groupId": "commit_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "inconsolata",
       "displayName": "Inconsolata",
       "family": "Inconsolata",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 120,
       "author": "Raph Levien / Cyreal; Brenton Simpson / Google",
       "licenseName": "SIL Open Font License 1.1",
@@ -228,13 +296,19 @@
       "fontPath": "inconsolata/Inconsolata-Regular.woff2",
       "noticePaths": [
         "inconsolata/OFL.txt"
-      ]
+      ],
+      "groupId": "inconsolata",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "maple_mono",
       "displayName": "Maple Mono",
       "family": "Maple Mono",
-      "features": [],
+      "features": [
+        "mono"
+      ],
       "order": 130,
       "author": "The Maple Mono Project Authors; subframe7536",
       "licenseName": "SIL Open Font License 1.1",
@@ -246,16 +320,47 @@
       "fontPath": "maple-font/MapleMono-Regular.woff2",
       "noticePaths": [
         "maple-font/LICENSE.txt"
-      ]
+      ],
+      "groupId": "maple_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "maple_mono_nf",
+      "displayName": "Maple Mono",
+      "family": "Maple Mono NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 131,
+      "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/subframe7536/maple-font",
+      "upstreamVersion": "7.900 / Nerd Fonts 3.4.0",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "maple-font/MapleMono-NF-Regular.woff2",
+      "noticePaths": [
+        "maple-font/LICENSE.txt"
+      ],
+      "groupId": "maple_mono",
+      "variantName": "NF",
+      "variantOrder": 1,
+      "isDefaultVariant": false
     },
     {
       "id": "maple_mono_cn",
-      "displayName": "Maple Mono CN",
+      "displayName": "Maple Mono",
       "family": "Maple Mono CN",
       "features": [
-        "cn"
+        "mono",
+        "cn",
+        "jp"
       ],
-      "order": 140,
+      "order": 132,
       "author": "The Maple Mono Project Authors; subframe7536",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -263,40 +368,26 @@
       "upstreamVersion": "7.900",
       "artifactVersion": 2,
       "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "maple-font-cn/MapleMono-CN-Regular.woff2",
+      "fontPath": "maple-font/MapleMono-CN-Regular.woff2",
       "noticePaths": [
-        "maple-font-cn/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "maple_mono_nf",
-      "displayName": "Maple Mono NF",
-      "family": "Maple Mono NF",
-      "features": [
-        "nerd"
+        "maple-font/LICENSE.txt"
       ],
-      "order": 150,
-      "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/subframe7536/maple-font",
-      "upstreamVersion": "7.900 / Nerd Fonts 3.4.0",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "maple-font-nf/MapleMono-NF-Regular.woff2",
-      "noticePaths": [
-        "maple-font-nf/LICENSE.txt"
-      ]
+      "groupId": "maple_mono",
+      "variantName": "CN / SC",
+      "variantOrder": 2,
+      "isDefaultVariant": false
     },
     {
       "id": "maple_mono_nf_cn",
-      "displayName": "Maple Mono NF CN",
+      "displayName": "Maple Mono",
       "family": "Maple Mono NF CN",
       "features": [
+        "mono",
         "nerd",
-        "cn"
+        "cn",
+        "jp"
       ],
-      "order": 160,
+      "order": 133,
       "author": "The Maple Mono Project Authors; subframe7536; Nerd Fonts",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -304,17 +395,23 @@
       "upstreamVersion": "7.900 / Nerd Fonts 3.4.0",
       "artifactVersion": 2,
       "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "maple-font-nf-cn/MapleMono-NF-CN-Regular.woff2",
+      "fontPath": "maple-font/MapleMono-NF-CN-Regular.woff2",
       "noticePaths": [
-        "maple-font-nf-cn/LICENSE.txt"
-      ]
+        "maple-font/LICENSE.txt"
+      ],
+      "groupId": "maple_mono",
+      "variantName": "NF · CN / SC",
+      "variantOrder": 3,
+      "isDefaultVariant": true
     },
     {
       "id": "martian_mono",
       "displayName": "Martian Mono",
       "family": "Martian Mono",
-      "features": [],
-      "order": 170,
+      "features": [
+        "mono"
+      ],
+      "order": 140,
       "author": "The Martian Mono Project Authors; Evil Martians / Roman Shamin",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -325,13 +422,241 @@
       "fontPath": "martian-mono/MartianMono-Regular.woff2",
       "noticePaths": [
         "martian-mono/OFL.txt"
-      ]
+      ],
+      "groupId": "martian_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "monaspace_argon",
       "displayName": "Monaspace Argon",
       "family": "Monaspace Argon",
-      "features": [],
+      "features": [
+        "mono"
+      ],
+      "order": 150,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-argon/MonaspaceArgon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-argon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_argon",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_argon_variable",
+      "displayName": "Monaspace Argon",
+      "family": "Monaspace Argon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "order": 151,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-argon/Monaspace Argon Var.woff2",
+      "noticePaths": [
+        "monaspace-argon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_argon",
+      "variantName": "Var",
+      "variantOrder": 1,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_argon_nf",
+      "displayName": "Monaspace Argon",
+      "family": "Monaspace Argon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 152,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-argon/MonaspaceArgonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-argon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_argon",
+      "variantName": "NF",
+      "variantOrder": 2,
+      "isDefaultVariant": true
+    },
+    {
+      "id": "monaspace_krypton",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton",
+      "features": [
+        "mono"
+      ],
+      "order": 160,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-krypton/MonaspaceKrypton-Regular.woff2",
+      "noticePaths": [
+        "monaspace-krypton/LICENSE.txt"
+      ],
+      "groupId": "monaspace_krypton",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_krypton_variable",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "order": 161,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-krypton/Monaspace Krypton Var.woff2",
+      "noticePaths": [
+        "monaspace-krypton/LICENSE.txt"
+      ],
+      "groupId": "monaspace_krypton",
+      "variantName": "Var",
+      "variantOrder": 1,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_krypton_nf",
+      "displayName": "Monaspace Krypton",
+      "family": "Monaspace Krypton NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 162,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-krypton/MonaspaceKryptonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-krypton/LICENSE.txt"
+      ],
+      "groupId": "monaspace_krypton",
+      "variantName": "NF",
+      "variantOrder": 2,
+      "isDefaultVariant": true
+    },
+    {
+      "id": "monaspace_neon",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon",
+      "features": [
+        "mono"
+      ],
+      "order": 170,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-neon/MonaspaceNeon-Regular.woff2",
+      "noticePaths": [
+        "monaspace-neon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_neon",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_neon_variable",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "order": 171,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-neon/Monaspace Neon Var.woff2",
+      "noticePaths": [
+        "monaspace-neon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_neon",
+      "variantName": "Var",
+      "variantOrder": 1,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_neon_nf",
+      "displayName": "Monaspace Neon",
+      "family": "Monaspace Neon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 172,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-neon/MonaspaceNeonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-neon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_neon",
+      "variantName": "NF",
+      "variantOrder": 2,
+      "isDefaultVariant": true
+    },
+    {
+      "id": "monaspace_radon",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon",
+      "features": [
+        "mono"
+      ],
       "order": 180,
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "licenseName": "SIL Open Font License 1.1",
@@ -340,16 +665,72 @@
       "upstreamVersion": "1.400",
       "artifactVersion": 2,
       "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-static-argon/MonaspaceArgon-Regular.woff2",
+      "fontPath": "monaspace-radon/MonaspaceRadon-Regular.woff2",
       "noticePaths": [
-        "monaspace-static-argon/LICENSE.txt"
-      ]
+        "monaspace-radon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_radon",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
     },
     {
-      "id": "monaspace_krypton",
-      "displayName": "Monaspace Krypton",
-      "family": "Monaspace Krypton",
-      "features": [],
+      "id": "monaspace_radon_variable",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon Var",
+      "features": [
+        "mono",
+        "variable"
+      ],
+      "order": 181,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-radon/Monaspace Radon Var.woff2",
+      "noticePaths": [
+        "monaspace-radon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_radon",
+      "variantName": "Var",
+      "variantOrder": 1,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_radon_nf",
+      "displayName": "Monaspace Radon",
+      "family": "Monaspace Radon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 182,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-radon/MonaspaceRadonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-radon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_radon",
+      "variantName": "NF",
+      "variantOrder": 2,
+      "isDefaultVariant": true
+    },
+    {
+      "id": "monaspace_xenon",
+      "displayName": "Monaspace Xenon",
+      "family": "Monaspace Xenon",
+      "features": [
+        "mono"
+      ],
       "order": 190,
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "licenseName": "SIL Open Font License 1.1",
@@ -358,253 +739,24 @@
       "upstreamVersion": "1.400",
       "artifactVersion": 2,
       "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-static-krypton/MonaspaceKrypton-Regular.woff2",
+      "fontPath": "monaspace-xenon/MonaspaceXenon-Regular.woff2",
       "noticePaths": [
-        "monaspace-static-krypton/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_neon",
-      "displayName": "Monaspace Neon",
-      "family": "Monaspace Neon",
-      "features": [],
-      "order": 200,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-static-neon/MonaspaceNeon-Regular.woff2",
-      "noticePaths": [
-        "monaspace-static-neon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_radon",
-      "displayName": "Monaspace Radon",
-      "family": "Monaspace Radon",
-      "features": [],
-      "order": 210,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-static-radon/MonaspaceRadon-Regular.woff2",
-      "noticePaths": [
-        "monaspace-static-radon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_xenon",
-      "displayName": "Monaspace Xenon",
-      "family": "Monaspace Xenon",
-      "features": [],
-      "order": 220,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-static-xenon/MonaspaceXenon-Regular.woff2",
-      "noticePaths": [
-        "monaspace-static-xenon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_argon_nf",
-      "displayName": "Monaspace Argon NF",
-      "family": "Monaspace Argon NF",
-      "features": [
-        "nerd"
+        "monaspace-xenon/LICENSE.txt"
       ],
-      "order": 230,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-nerdfonts-argon/MonaspaceArgonNF-Regular.woff2",
-      "noticePaths": [
-        "monaspace-nerdfonts-argon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_krypton_nf",
-      "displayName": "Monaspace Krypton NF",
-      "family": "Monaspace Krypton NF",
-      "features": [
-        "nerd"
-      ],
-      "order": 240,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-nerdfonts-krypton/MonaspaceKryptonNF-Regular.woff2",
-      "noticePaths": [
-        "monaspace-nerdfonts-krypton/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_neon_nf",
-      "displayName": "Monaspace Neon NF",
-      "family": "Monaspace Neon NF",
-      "features": [
-        "nerd"
-      ],
-      "order": 250,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-nerdfonts-neon/MonaspaceNeonNF-Regular.woff2",
-      "noticePaths": [
-        "monaspace-nerdfonts-neon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_radon_nf",
-      "displayName": "Monaspace Radon NF",
-      "family": "Monaspace Radon NF",
-      "features": [
-        "nerd"
-      ],
-      "order": 260,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-nerdfonts-radon/MonaspaceRadonNF-Regular.woff2",
-      "noticePaths": [
-        "monaspace-nerdfonts-radon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_xenon_nf",
-      "displayName": "Monaspace Xenon NF",
-      "family": "Monaspace Xenon NF",
-      "features": [
-        "nerd"
-      ],
-      "order": 270,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-nerdfonts-xenon/MonaspaceXenonNF-Regular.woff2",
-      "noticePaths": [
-        "monaspace-nerdfonts-xenon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_argon_variable",
-      "displayName": "Monaspace Argon Var",
-      "family": "Monaspace Argon Var",
-      "features": [
-        "variable"
-      ],
-      "order": 280,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-variable-argon/Monaspace Argon Var.woff2",
-      "noticePaths": [
-        "monaspace-variable-argon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_krypton_variable",
-      "displayName": "Monaspace Krypton Var",
-      "family": "Monaspace Krypton Var",
-      "features": [
-        "variable"
-      ],
-      "order": 290,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-variable-krypton/Monaspace Krypton Var.woff2",
-      "noticePaths": [
-        "monaspace-variable-krypton/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_neon_variable",
-      "displayName": "Monaspace Neon Var",
-      "family": "Monaspace Neon Var",
-      "features": [
-        "variable"
-      ],
-      "order": 300,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-variable-neon/Monaspace Neon Var.woff2",
-      "noticePaths": [
-        "monaspace-variable-neon/LICENSE.txt"
-      ]
-    },
-    {
-      "id": "monaspace_radon_variable",
-      "displayName": "Monaspace Radon Var",
-      "family": "Monaspace Radon Var",
-      "features": [
-        "variable"
-      ],
-      "order": 310,
-      "author": "GitHub Next; Riley Cran / Lettermatic Team",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/githubnext/monaspace",
-      "upstreamVersion": "1.400",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-variable-radon/Monaspace Radon Var.woff2",
-      "noticePaths": [
-        "monaspace-variable-radon/LICENSE.txt"
-      ]
+      "groupId": "monaspace_xenon",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": false
     },
     {
       "id": "monaspace_xenon_variable",
-      "displayName": "Monaspace Xenon Var",
+      "displayName": "Monaspace Xenon",
       "family": "Monaspace Xenon Var",
       "features": [
+        "mono",
         "variable"
       ],
-      "order": 320,
+      "order": 191,
       "author": "GitHub Next; Riley Cran / Lettermatic Team",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -612,17 +764,48 @@
       "upstreamVersion": "1.400",
       "artifactVersion": 2,
       "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "monaspace-variable-xenon/Monaspace Xenon Var.woff2",
+      "fontPath": "monaspace-xenon/Monaspace Xenon Var.woff2",
       "noticePaths": [
-        "monaspace-variable-xenon/LICENSE.txt"
-      ]
+        "monaspace-xenon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_xenon",
+      "variantName": "Var",
+      "variantOrder": 1,
+      "isDefaultVariant": false
+    },
+    {
+      "id": "monaspace_xenon_nf",
+      "displayName": "Monaspace Xenon",
+      "family": "Monaspace Xenon NF",
+      "features": [
+        "mono",
+        "nerd"
+      ],
+      "order": 192,
+      "author": "GitHub Next; Riley Cran / Lettermatic Team",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/githubnext/monaspace",
+      "upstreamVersion": "1.400",
+      "artifactVersion": 2,
+      "artifactReleaseTag": "ace-fonts-v2",
+      "fontPath": "monaspace-xenon/MonaspaceXenonNF-Regular.woff2",
+      "noticePaths": [
+        "monaspace-xenon/LICENSE.txt"
+      ],
+      "groupId": "monaspace_xenon",
+      "variantName": "NF",
+      "variantOrder": 2,
+      "isDefaultVariant": true
     },
     {
       "id": "recursive",
       "displayName": "Recursive",
       "family": "Recursive",
-      "features": [],
-      "order": 330,
+      "features": [
+        "mono"
+      ],
+      "order": 200,
       "author": "The Recursive Project Authors; Arrow Type",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -634,14 +817,20 @@
       "noticePaths": [
         "recursive/OFL.txt",
         "recursive/TRANSFORM.md"
-      ]
+      ],
+      "groupId": "recursive",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "red_hat_mono",
       "displayName": "Red Hat Mono",
       "family": "Red Hat Mono",
-      "features": [],
-      "order": 340,
+      "features": [
+        "mono"
+      ],
+      "order": 210,
       "author": "Red Hat; Pentagram / MCKL",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -652,35 +841,20 @@
       "fontPath": "red-hat-mono/RedHatMono-Regular.woff2",
       "noticePaths": [
         "red-hat-mono/LICENSE"
-      ]
-    },
-    {
-      "id": "sarasa_term_sc_nerd",
-      "displayName": "Sarasa Term SC Nerd",
-      "family": "Sarasa Term SC Nerd",
-      "features": [
-        "nerd",
-        "cn"
       ],
-      "order": 350,
-      "author": "laishulu; Renzhi Li (be5invis); Adobe / Google / M+; Nerd Fonts",
-      "licenseName": "SIL Open Font License 1.1",
-      "licenseSpdx": "OFL-1.1",
-      "sourceRepository": "https://github.com/laishulu/Sarasa-Term-SC-Nerd",
-      "upstreamVersion": "2.3.1 (Sarasa 1.0.27 / Nerd Fonts 3.3.0 / Font Patcher 4.16.1)",
-      "artifactVersion": 2,
-      "artifactReleaseTag": "ace-fonts-v2",
-      "fontPath": "sarasa-term-sc-nerd/SarasaTermSCNerd-Regular.woff2",
-      "noticePaths": [
-        "sarasa-term-sc-nerd/LICENSE.txt"
-      ]
+      "groupId": "red_hat_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "ubuntu_sans_mono",
       "displayName": "Ubuntu Sans Mono",
       "family": "Ubuntu Sans Mono",
-      "features": [],
-      "order": 360,
+      "features": [
+        "mono"
+      ],
+      "order": 220,
       "author": "Canonical; Dalton Maag Ltd",
       "licenseName": "Ubuntu Font Licence 1.0",
       "licenseSpdx": "Ubuntu-font-1.0",
@@ -691,14 +865,20 @@
       "fontPath": "ubuntu-sans-mono/UbuntuSansMono-Regular.woff2",
       "noticePaths": [
         "ubuntu-sans-mono/LICENCE.txt"
-      ]
+      ],
+      "groupId": "ubuntu_sans_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
     },
     {
       "id": "victor_mono",
       "displayName": "Victor Mono",
       "family": "Victor Mono",
-      "features": [],
-      "order": 370,
+      "features": [
+        "mono"
+      ],
+      "order": 230,
       "author": "Rune Bjørnerås / Victor Mono Project",
       "licenseName": "SIL Open Font License 1.1",
       "licenseSpdx": "OFL-1.1",
@@ -709,6 +889,583 @@
       "fontPath": "victor-mono/VictorMono-Regular.woff2",
       "noticePaths": [
         "victor-mono/LICENSE.txt"
+      ],
+      "groupId": "victor_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true
+    },
+    {
+      "id": "zero_x_proto",
+      "displayName": "0xProto",
+      "family": "0xProto",
+      "features": [
+        "mono"
+      ],
+      "groupId": "zero_x_proto",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 240,
+      "author": "0xType Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/0xType/0xProto",
+      "upstreamVersion": "2.502",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "0x-proto/0xProto-Regular.woff2",
+      "noticePaths": [
+        "0x-proto/LICENSE"
+      ]
+    },
+    {
+      "id": "azeret_mono",
+      "displayName": "Azeret Mono",
+      "family": "Azeret Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "azeret_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 250,
+      "author": "Martin Vácha / Displaay",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/displaay/Azeret",
+      "upstreamVersion": "1.002",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "azeret-mono/AzeretMono-Regular.woff2",
+      "noticePaths": [
+        "azeret-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "departure_mono",
+      "displayName": "Departure Mono",
+      "family": "Departure Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "departure_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 260,
+      "author": "Helena Zhang",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/rektdeckard/departure-mono",
+      "upstreamVersion": "1.500",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "departure-mono/DepartureMono-Regular.woff2",
+      "noticePaths": [
+        "departure-mono/LICENSE"
+      ]
+    },
+    {
+      "id": "fantasque_sans_mono",
+      "displayName": "Fantasque Sans Mono",
+      "family": "Fantasque Sans Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "fantasque_sans_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 270,
+      "author": "Jany Belluz",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/belluzj/fantasque-sans",
+      "upstreamVersion": "1.8.0",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "fantasque-sans-mono/FantasqueSansMono-Regular.woff2",
+      "noticePaths": [
+        "fantasque-sans-mono/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "fragment_mono",
+      "displayName": "Fragment Mono",
+      "family": "Fragment Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "fragment_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 280,
+      "author": "Wei Huang",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/weiweihuanghuang/fragment-mono",
+      "upstreamVersion": "1.021",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "fragment-mono/FragmentMono-Regular.woff2",
+      "noticePaths": [
+        "fragment-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist",
+      "displayName": "Geist",
+      "family": "Geist",
+      "features": [],
+      "groupId": "geist",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 290,
+      "author": "Vercel; Basement Studio; Andrés Briganti; Guido Ferreyra; Mateo Zaragoza",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.800",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist/Geist-Regular.woff2",
+      "noticePaths": [
+        "geist/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_mono",
+      "displayName": "Geist Mono",
+      "family": "Geist Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "geist_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 300,
+      "author": "Vercel; Basement Studio; Andrés Briganti; Guido Ferreyra; Mateo Zaragoza",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.700",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-mono/GeistMono-Regular.woff2",
+      "noticePaths": [
+        "geist-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_pixel_line",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Line",
+      "features": [],
+      "groupId": "geist_pixel",
+      "variantName": "Line",
+      "variantOrder": 0,
+      "isDefaultVariant": false,
+      "order": 310,
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-pixel/GeistPixel-Line.woff2",
+      "noticePaths": [
+        "geist-pixel/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_pixel_circle",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Circle",
+      "features": [],
+      "groupId": "geist_pixel",
+      "variantName": "Circle",
+      "variantOrder": 1,
+      "isDefaultVariant": false,
+      "order": 311,
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-pixel/GeistPixel-Circle.woff2",
+      "noticePaths": [
+        "geist-pixel/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_pixel_grid",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Grid",
+      "features": [],
+      "groupId": "geist_pixel",
+      "variantName": "Grid",
+      "variantOrder": 2,
+      "isDefaultVariant": false,
+      "order": 312,
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-pixel/GeistPixel-Grid.woff2",
+      "noticePaths": [
+        "geist-pixel/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_pixel_square",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Square",
+      "features": [],
+      "groupId": "geist_pixel",
+      "variantName": "Square",
+      "variantOrder": 3,
+      "isDefaultVariant": false,
+      "order": 313,
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-pixel/GeistPixel-Square.woff2",
+      "noticePaths": [
+        "geist-pixel/OFL.txt"
+      ]
+    },
+    {
+      "id": "geist_pixel_triangle",
+      "displayName": "Geist Pixel",
+      "family": "Geist Pixel Triangle",
+      "features": [],
+      "groupId": "geist_pixel",
+      "variantName": "Triangle",
+      "variantOrder": 4,
+      "isDefaultVariant": true,
+      "order": 314,
+      "author": "Vercel; Andrés Briganti; Guido Ferreyra",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/vercel/geist-font",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "geist-pixel/GeistPixel-Triangle.woff2",
+      "noticePaths": [
+        "geist-pixel/OFL.txt"
+      ]
+    },
+    {
+      "id": "go_mono",
+      "displayName": "Go Mono",
+      "family": "Go Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "go_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 320,
+      "author": "Bigelow & Holmes Inc.; Go Authors",
+      "licenseName": "BSD 3-Clause License",
+      "licenseSpdx": "BSD-3-Clause",
+      "sourceRepository": "https://github.com/golang/image",
+      "upstreamVersion": "2.010",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "go-mono/Go-Mono.woff2",
+      "noticePaths": [
+        "go-mono/README"
+      ]
+    },
+    {
+      "id": "julia_mono",
+      "displayName": "JuliaMono",
+      "family": "JuliaMono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "julia_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 330,
+      "author": "Cormullion / JuliaMono Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/cormullion/juliamono",
+      "upstreamVersion": "0.63.2",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "julia-mono/JuliaMono-Regular.woff2",
+      "noticePaths": [
+        "julia-mono/LICENSE"
+      ]
+    },
+    {
+      "id": "m_plus_1",
+      "displayName": "M PLUS 1",
+      "family": "M PLUS 1",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_1",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 340,
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/coz-m/MPLUS_FONTS",
+      "upstreamVersion": "1.100",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "m-plus-1/MPLUS1-Regular.woff2",
+      "noticePaths": [
+        "m-plus-1/OFL.txt"
+      ]
+    },
+    {
+      "id": "m_plus_1_code",
+      "displayName": "M PLUS 1 Code",
+      "family": "M PLUS 1 Code",
+      "features": [
+        "mono",
+        "jp"
+      ],
+      "groupId": "m_plus_1_code",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 350,
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/coz-m/MPLUS_FONTS",
+      "upstreamVersion": "1.100",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "m-plus-1-code/MPLUS1Code-Regular.woff2",
+      "noticePaths": [
+        "m-plus-1-code/OFL.txt"
+      ]
+    },
+    {
+      "id": "m_plus_2",
+      "displayName": "M PLUS 2",
+      "family": "M PLUS 2",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_2",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 360,
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/coz-m/MPLUS_FONTS",
+      "upstreamVersion": "1.100",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "m-plus-2/MPLUS2-Regular.woff2",
+      "noticePaths": [
+        "m-plus-2/OFL.txt"
+      ]
+    },
+    {
+      "id": "m_plus_u",
+      "displayName": "M PLUS U",
+      "family": "M PLUS U",
+      "features": [
+        "jp"
+      ],
+      "groupId": "m_plus_u",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 370,
+      "author": "Coji Morishita / M+ FONTS Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/coz-m/MPLUS_FONTS",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "m-plus-u/MPLUSU-Regular.woff2",
+      "noticePaths": [
+        "m-plus-u/OFL.txt"
+      ]
+    },
+    {
+      "id": "monoid",
+      "displayName": "Monoid",
+      "family": "Monoid",
+      "features": [
+        "mono"
+      ],
+      "groupId": "monoid",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 380,
+      "author": "Andreas Larsen and contributors",
+      "licenseName": "MIT License or SIL Open Font License 1.1",
+      "licenseSpdx": "MIT OR OFL-1.1",
+      "sourceRepository": "https://github.com/larsenwork/monoid",
+      "upstreamVersion": "0.61",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "monoid/Monoid-Regular.woff2",
+      "noticePaths": [
+        "monoid/Licenses.md"
+      ]
+    },
+    {
+      "id": "noto_sans_mono",
+      "displayName": "Noto Sans Mono",
+      "family": "Noto Sans Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "noto_sans_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 390,
+      "author": "Google; Monotype; Noto Project Authors",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/notofonts/noto-fonts",
+      "upstreamVersion": "2.003",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "noto-sans-mono/NotoSansMono-Regular.woff2",
+      "noticePaths": [
+        "noto-sans-mono/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "sarasa_mono_sc_nerd",
+      "displayName": "Sarasa Mono SC Nerd",
+      "family": "Sarasa Mono SC Nerd Font",
+      "features": [
+        "mono",
+        "nerd",
+        "cn",
+        "jp"
+      ],
+      "groupId": "sarasa_mono_sc_nerd",
+      "variantName": "NF · CN / SC",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 400,
+      "author": "Renzhi Li (be5invis); Inter Project; Adobe; Google; Nerd Fonts; jonz94",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts",
+      "upstreamVersion": "1.0.35-0 (Nerd Fonts 3.4.0)",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "sarasa-mono/sarasa-mono-sc-regular-nerd-font.woff2",
+      "noticePaths": [
+        "sarasa-mono/OFL.txt",
+        "sarasa-mono/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "sarasa_mono_slab_sc_nerd",
+      "displayName": "Sarasa Mono Slab SC Nerd",
+      "family": "Sarasa Mono Slab SC Nerd Font",
+      "features": [
+        "mono",
+        "nerd",
+        "cn",
+        "jp"
+      ],
+      "groupId": "sarasa_mono_slab_sc_nerd",
+      "variantName": "NF · CN / SC",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 410,
+      "author": "Renzhi Li (be5invis); Inter Project; Adobe; Google; Nerd Fonts; jonz94",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/jonz94/Sarasa-Gothic-Nerd-Fonts",
+      "upstreamVersion": "1.0.35-0 (Nerd Fonts 3.4.0)",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "sarasa-mono-slab/sarasa-mono-slab-sc-regular-nerd-font.woff2",
+      "noticePaths": [
+        "sarasa-mono-slab/OFL.txt",
+        "sarasa-mono-slab/LICENSE.txt"
+      ]
+    },
+    {
+      "id": "sometype_mono",
+      "displayName": "Sometype Mono",
+      "family": "Sometype Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "sometype_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 420,
+      "author": "Ryoichi Tsunekawa / Dharma Type",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/dharmatype/Sometype-Mono",
+      "upstreamVersion": "1.000",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "sometype-mono/SometypeMono-Regular.woff2",
+      "noticePaths": [
+        "sometype-mono/OFL.txt"
+      ]
+    },
+    {
+      "id": "space_mono",
+      "displayName": "Space Mono",
+      "family": "Space Mono",
+      "features": [
+        "mono"
+      ],
+      "groupId": "space_mono",
+      "variantName": "Regular",
+      "variantOrder": 0,
+      "isDefaultVariant": true,
+      "order": 430,
+      "author": "Colophon Foundry; Benjamin Critton",
+      "licenseName": "SIL Open Font License 1.1",
+      "licenseSpdx": "OFL-1.1",
+      "sourceRepository": "https://github.com/googlefonts/spacemono",
+      "upstreamVersion": "1.003",
+      "artifactVersion": 4,
+      "artifactReleaseTag": "ace-fonts-v4",
+      "fontPath": "space-mono/SpaceMono-Regular.woff2",
+      "noticePaths": [
+        "space-mono/OFL.txt"
       ]
     }
   ]

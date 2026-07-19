@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import base64
 import hashlib
+import importlib.util
 import json
 import struct
 import subprocess
@@ -34,6 +35,22 @@ V2_HISTORY_CATALOG = (
 V2_HISTORY_SIGNATURE = (
     REPOSITORY_ROOT / "ace-fonts/catalogs/history/v2/catalog-v1.sig.json"
 )
+V2_HISTORY_MANIFEST = (
+    REPOSITORY_ROOT / "ace-fonts/manifests/history/v2/font-sources.json"
+)
+V3_HISTORY_CATALOG = (
+    REPOSITORY_ROOT / "ace-fonts/catalogs/history/v3/catalog-v1.json"
+)
+V3_HISTORY_SIGNATURE = (
+    REPOSITORY_ROOT / "ace-fonts/catalogs/history/v3/catalog-v1.sig.json"
+)
+V3_HISTORY_MANIFEST = (
+    REPOSITORY_ROOT / "ace-fonts/manifests/history/v3/font-sources.json"
+)
+PENDING_V4_CATALOG = (
+    REPOSITORY_ROOT / "ace-fonts/catalogs/pending/v4/catalog-v1.json"
+)
+FONT_AUDIT_V4 = REPOSITORY_ROOT / "ace-fonts/audits/font-audit-v4.json"
 SHARED_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
 CATALOG_KEY_ID = "p256-fc433f8ba81333f7"
 sys.path.insert(0, str(TOOL_DIR))
@@ -55,6 +72,7 @@ from distribution import (  # noqa: E402
     write_release,
 )
 from export_sources import export_sources  # noqa: E402
+from font_audit import EXPECTED_CRITERIA, validate_font_audit  # noqa: E402
 from prepare_repository import (  # noqa: E402
     GIT_ATTRIBUTES,
     PREPARE_MARKER,
@@ -170,7 +188,13 @@ class ManifestValidationTest(unittest.TestCase):
 
     def test_accepts_explicit_font_features(self) -> None:
         manifest = synthetic_manifest()
-        manifest["fonts"][0]["features"] = ["nerd", "variable", "cn"]
+        manifest["fonts"][0]["features"] = [
+            "mono",
+            "nerd",
+            "variable",
+            "cn",
+            "jp",
+        ]
         validate_manifest(manifest)
 
     def test_accepts_missing_font_features_before_catalog_v3(self) -> None:
@@ -204,8 +228,60 @@ class ManifestValidationTest(unittest.TestCase):
         with self.assertRaisesRegex(DistributionError, "duplicates"):
             validate_manifest(manifest)
 
-        manifest["fonts"][0]["features"] = ["cn", "nerd"]
+        manifest["fonts"][0]["features"] = ["jp", "mono"]
         with self.assertRaisesRegex(DistributionError, "canonical order"):
+            validate_manifest(manifest)
+
+    def test_catalog_v4_requires_complete_variant_metadata(self) -> None:
+        manifest = synthetic_manifest()
+        manifest["catalogVersion"] = 4
+        manifest["releaseTag"] = "ace-fonts-v4"
+        manifest["fonts"][0]["artifactVersion"] = 4
+        manifest["fonts"][0]["artifactReleaseTag"] = "ace-fonts-v4"
+        with self.assertRaisesRegex(DistributionError, "variant metadata"):
+            validate_manifest(manifest)
+
+        manifest["fonts"][0].update(
+            {
+                "groupId": "test_mono",
+                "variantName": "Regular",
+                "variantOrder": 0,
+                "isDefaultVariant": True,
+            }
+        )
+        validate_manifest(manifest)
+
+    def test_rejects_invalid_variant_group(self) -> None:
+        manifest = synthetic_manifest()
+        manifest["catalogVersion"] = 4
+        manifest["releaseTag"] = "ace-fonts-v4"
+        first = manifest["fonts"][0]
+        first.update(
+            {
+                "artifactVersion": 4,
+                "artifactReleaseTag": "ace-fonts-v4",
+                "groupId": "test_mono",
+                "variantName": "Regular",
+                "variantOrder": 0,
+                "isDefaultVariant": True,
+            }
+        )
+        second = copy.deepcopy(first)
+        second.update(
+            {
+                "id": "test_mono_nf",
+                "order": 20,
+                "variantName": "NF",
+                "variantOrder": 1,
+            }
+        )
+        manifest["fonts"].append(second)
+        manifest["expectedFontCount"] = 2
+        with self.assertRaisesRegex(DistributionError, "exactly one default"):
+            validate_manifest(manifest)
+
+        second["isDefaultVariant"] = False
+        with self.assertRaisesRegex(DistributionError, "highest variantOrder"):
             validate_manifest(manifest)
 
     def test_rejects_source_path_escape(self) -> None:
@@ -505,10 +581,11 @@ class RepositoryPreparationTest(unittest.TestCase):
         self.assertIn("persist-credentials: false", workflow)
         self.assertIn("environment: ace-fonts-release", workflow)
         self.assertIn('gh release edit "$RELEASE_TAG" --draft=false', workflow)
-        self.assertIn("default: ace-fonts-v3", workflow)
+        self.assertIn("default: ace-fonts-v4", workflow)
+        self.assertIn("validate_font_audit.py", workflow)
 
 
-class SharedRepositoryV3IntegrationTest(unittest.TestCase):
+class SharedRepositoryV4IntegrationTest(unittest.TestCase):
     RETAINED_V1_IDS = {
         "cascadia_code",
         "fira_code",
@@ -550,24 +627,85 @@ class SharedRepositoryV3IntegrationTest(unittest.TestCase):
         "ubuntu_sans_mono",
         "victor_mono",
     }
-    FEATURES_BY_ID = {
-        "maple_mono_cn": ["cn"],
-        "maple_mono_nf": ["nerd"],
-        "maple_mono_nf_cn": ["nerd", "cn"],
-        "monaspace_argon_nf": ["nerd"],
-        "monaspace_krypton_nf": ["nerd"],
-        "monaspace_neon_nf": ["nerd"],
-        "monaspace_radon_nf": ["nerd"],
-        "monaspace_xenon_nf": ["nerd"],
-        "monaspace_argon_variable": ["variable"],
-        "monaspace_krypton_variable": ["variable"],
-        "monaspace_neon_variable": ["variable"],
-        "monaspace_radon_variable": ["variable"],
-        "monaspace_xenon_variable": ["variable"],
-        "sarasa_term_sc_nerd": ["nerd", "cn"],
+    ADDED_V4_IDS = {
+        "azeret_mono",
+        "departure_mono",
+        "fantasque_sans_mono",
+        "fragment_mono",
+        "geist",
+        "geist_mono",
+        "geist_pixel_circle",
+        "geist_pixel_grid",
+        "geist_pixel_line",
+        "geist_pixel_square",
+        "geist_pixel_triangle",
+        "go_mono",
+        "julia_mono",
+        "m_plus_1",
+        "m_plus_1_code",
+        "m_plus_2",
+        "m_plus_u",
+        "monoid",
+        "noto_sans_mono",
+        "sarasa_mono_sc_nerd",
+        "sarasa_mono_slab_sc_nerd",
+        "sometype_mono",
+        "space_mono",
+        "zero_x_proto",
+    }
+    REMOVED_V2_IDS = {"sarasa_term_sc_nerd"}
+    NERD_IDS = {
+        "maple_mono_nf",
+        "maple_mono_nf_cn",
+        "monaspace_argon_nf",
+        "monaspace_krypton_nf",
+        "monaspace_neon_nf",
+        "monaspace_radon_nf",
+        "monaspace_xenon_nf",
+        "sarasa_mono_sc_nerd",
+        "sarasa_mono_slab_sc_nerd",
+    }
+    VARIABLE_IDS = {
+        "monaspace_argon_variable",
+        "monaspace_krypton_variable",
+        "monaspace_neon_variable",
+        "monaspace_radon_variable",
+        "monaspace_xenon_variable",
+    }
+    CN_IDS = {
+        "maple_mono_cn",
+        "maple_mono_nf_cn",
+        "sarasa_mono_sc_nerd",
+        "sarasa_mono_slab_sc_nerd",
+    }
+    JP_IDS = CN_IDS | {"m_plus_1", "m_plus_1_code", "m_plus_2", "m_plus_u"}
+    OTHER_IDS = {
+        "geist",
+        "geist_pixel_circle",
+        "geist_pixel_grid",
+        "geist_pixel_line",
+        "geist_pixel_square",
+        "geist_pixel_triangle",
     }
 
-    def test_manifest_pins_the_complete_v3_inventory_and_source_tree(self) -> None:
+    @classmethod
+    def expected_features(cls, font_id: str) -> list[str]:
+        all_ids = (
+            cls.RETAINED_V1_IDS
+            | (cls.ADDED_V2_IDS - cls.REMOVED_V2_IDS)
+            | cls.ADDED_V4_IDS
+        )
+        mono_ids = all_ids - cls.OTHER_IDS - {"m_plus_1", "m_plus_2", "m_plus_u"}
+        feature_sets = (
+            ("mono", mono_ids),
+            ("nerd", cls.NERD_IDS),
+            ("variable", cls.VARIABLE_IDS),
+            ("cn", cls.CN_IDS),
+            ("jp", cls.JP_IDS),
+        )
+        return [feature for feature, ids in feature_sets if font_id in ids]
+
+    def test_manifest_pins_the_complete_v4_inventory_and_source_tree(self) -> None:
         self.assertEqual(
             (REPOSITORY_ROOT / ".gitattributes").read_text(encoding="utf-8"),
             GIT_ATTRIBUTES,
@@ -575,10 +713,11 @@ class SharedRepositoryV3IntegrationTest(unittest.TestCase):
         manifest = read_json(SHARED_MANIFEST)
         validate_manifest(manifest)
         self.assertEqual(manifest["schemaVersion"], 1)
-        self.assertEqual(manifest["catalogVersion"], 3)
-        self.assertEqual(manifest["releaseTag"], "ace-fonts-v3")
-        self.assertEqual(manifest["expectedFontCount"], 37)
-        self.assertEqual(len(manifest["fonts"]), 37)
+        self.assertEqual(manifest["catalogVersion"], 4)
+        self.assertEqual(manifest["releaseTag"], "ace-fonts-v4")
+        self.assertEqual(manifest["minHostVersionCode"], 5230)
+        self.assertEqual(manifest["expectedFontCount"], 60)
+        self.assertEqual(len(manifest["fonts"]), 60)
 
         by_version: dict[int, set[str]] = {}
         expected_source_files: set[str] = set()
@@ -593,16 +732,56 @@ class SharedRepositoryV3IntegrationTest(unittest.TestCase):
             expected_source_files.update(font["noticePaths"])
             self.assertEqual(
                 font["features"],
-                self.FEATURES_BY_ID.get(font["id"], []),
+                self.expected_features(font["id"]),
             )
+            self.assertIn("groupId", font)
+            self.assertTrue(font["variantName"])
+            self.assertGreaterEqual(font["variantOrder"], 0)
+            self.assertIsInstance(font["isDefaultVariant"], bool)
 
-        self.assertEqual(by_version, {1: self.RETAINED_V1_IDS, 2: self.ADDED_V2_IDS})
+        self.assertEqual(
+            by_version,
+            {
+                1: self.RETAINED_V1_IDS,
+                2: self.ADDED_V2_IDS - self.REMOVED_V2_IDS,
+                4: self.ADDED_V4_IDS,
+            },
+        )
+        self.assertNotIn("sarasa_term_sc_nerd", {font["id"] for font in manifest["fonts"]})
+        groups: dict[str, list[dict]] = {}
+        for font in manifest["fonts"]:
+            groups.setdefault(font["groupId"], []).append(font)
+        self.assertEqual(len(groups), 43)
+        for variants in groups.values():
+            self.assertEqual(sum(font["isDefaultVariant"] for font in variants), 1)
+            default = next(font for font in variants if font["isDefaultVariant"])
+            self.assertEqual(
+                default["variantOrder"],
+                max(font["variantOrder"] for font in variants),
+            )
+        geist_pixel = sorted(groups["geist_pixel"], key=lambda font: font["variantOrder"])
+        self.assertEqual(
+            [font["variantName"] for font in geist_pixel],
+            ["Line", "Circle", "Grid", "Square", "Triangle"],
+        )
+        self.assertEqual(
+            next(font for font in geist_pixel if font["isDefaultVariant"])["variantName"],
+            "Triangle",
+        )
         actual_source_files = {
             path.relative_to(SHARED_SOURCE_ROOT).as_posix()
             for path in SHARED_SOURCE_ROOT.rglob("*")
             if path.is_file()
         }
-        self.assertEqual(actual_source_files, expected_source_files)
+        retired_source_files = {
+            "retired/sarasa-term-sc-nerd/LICENSE.txt",
+            "retired/sarasa-term-sc-nerd/SarasaTermSCNerd-Regular.woff2",
+        }
+        self.assertEqual(
+            actual_source_files,
+            expected_source_files | retired_source_files,
+        )
+        self.assertTrue(expected_source_files.isdisjoint(retired_source_files))
         source_font_suffixes = {
             path.suffix.lower()
             for path in SHARED_SOURCE_ROOT.rglob("*")
@@ -613,6 +792,60 @@ class SharedRepositoryV3IntegrationTest(unittest.TestCase):
             source_font_suffixes,
             {".woff2"},
         )
+
+    def test_v4_font_audit_is_sha_bound_and_enforces_feature_coverage(self) -> None:
+        manifest = read_json(SHARED_MANIFEST)
+        audit = read_json(FONT_AUDIT_V4)
+        validate_font_audit(manifest, audit, SHARED_SOURCE_ROOT)
+        self.assertEqual(audit["catalogVersion"], 4)
+        self.assertEqual(audit["criteria"], EXPECTED_CRITERIA)
+        self.assertEqual(len(audit["fonts"]), 60)
+
+        evidence_by_id = {font["id"]: font for font in audit["fonts"]}
+        for font_id in self.CN_IDS:
+            evidence = evidence_by_id[font_id]
+            self.assertGreaterEqual(evidence["cjkUnifiedCount"], 6000)
+            self.assertEqual(evidence["cnProbeCoverage"], 7)
+        for font_id in self.JP_IDS:
+            evidence = evidence_by_id[font_id]
+            self.assertGreaterEqual(evidence["cjkUnifiedCount"], 2000)
+            self.assertGreaterEqual(evidence["hiraganaCount"], 80)
+            self.assertGreaterEqual(evidence["katakanaCount"], 80)
+            self.assertEqual(evidence["jpProbeCoverage"], 5)
+
+        self.assertEqual(
+            evidence_by_id["monaspace_krypton_nf"]["typographicFamilyNames"],
+            ["Monaspace Krypton NF"],
+        )
+        self.assertEqual(
+            evidence_by_id["monaspace_neon_nf"]["typographicFamilyNames"],
+            ["Monaspace Neon NF"],
+        )
+        self.assertNotEqual(
+            evidence_by_id["monaspace_krypton_nf"]["legacyFamilyNames"],
+            evidence_by_id["monaspace_krypton_nf"]["typographicFamilyNames"],
+        )
+        self.assertNotEqual(
+            evidence_by_id["monaspace_neon_nf"]["legacyFamilyNames"],
+            evidence_by_id["monaspace_neon_nf"]["typographicFamilyNames"],
+        )
+
+        tampered = copy.deepcopy(audit)
+        next(
+            font for font in tampered["fonts"] if font["id"] == "maple_mono_cn"
+        )["cnProbeCoverage"] = 6
+        with self.assertRaisesRegex(DistributionError, "every cn probe"):
+            validate_font_audit(manifest, tampered, SHARED_SOURCE_ROOT)
+
+    @unittest.skipUnless(
+        importlib.util.find_spec("fontTools") is not None,
+        "optional fontTools audit dependency is not installed",
+    )
+    def test_fonttools_auditor_reproduces_the_reviewed_report(self) -> None:
+        from audit_font_metadata import build_font_audit
+
+        generated = build_font_audit(read_json(SHARED_MANIFEST), SHARED_SOURCE_ROOT)
+        self.assertEqual(FONT_AUDIT_V4.read_bytes(), canonical_json_bytes(generated))
 
     def test_v1_history_is_canonical_signed_and_byte_pinned(self) -> None:
         catalog_bytes = V1_HISTORY_CATALOG.read_bytes()
@@ -711,63 +944,118 @@ class SharedRepositoryV3IntegrationTest(unittest.TestCase):
             openssl_value=openssl,
         )
 
-    def test_current_catalog_v3_adds_only_explicit_filter_metadata(self) -> None:
-        catalog = read_json(SHARED_CATALOG)
-        history = read_json(V2_HISTORY_CATALOG)
-        validate_catalog(catalog, minimum_catalog_version=3)
-        self.assertEqual(catalog["schemaVersion"], 1)
-        self.assertEqual(catalog["catalogVersion"], 3)
-        self.assertEqual(catalog["releaseTag"], "ace-fonts-v3")
-        self.assertEqual(catalog["repository"], SHARED_REPOSITORY)
-        self.assertEqual(catalog["minHostVersionCode"], 5221)
-        self.assertEqual(len(catalog["fonts"]), 37)
+    def test_v2_recovery_manifest_reproduces_the_signed_catalog(self) -> None:
+        manifest_bytes = V2_HISTORY_MANIFEST.read_bytes()
+        self.assertEqual(
+            hashlib.sha256(manifest_bytes).hexdigest(),
+            "ed4f7b261ee42c9736712b907d3af8adf2dd022affef4f45ae00c38ffa0659e8",
+        )
+        manifest = read_json(V2_HISTORY_MANIFEST)
+        validate_manifest(manifest)
+        catalog, assets = build_catalog(
+            manifest,
+            SHARED_SOURCE_ROOT,
+            SHARED_REPOSITORY,
+            read_json(V1_HISTORY_CATALOG),
+        )
+        self.assertEqual(V2_HISTORY_CATALOG.read_bytes(), canonical_json_bytes(catalog))
+        self.assertEqual(len(assets), 59)
 
-        by_version: dict[int, set[str]] = {}
-        for font in catalog["fonts"]:
-            version = font["artifact"]["version"]
-            by_version.setdefault(version, set()).add(font["id"])
-            self.assertIn(
-                f"/releases/download/ace-fonts-v{version}/",
-                font["artifact"]["url"],
-            )
-            for notice in font["license"]["files"]:
-                self.assertIn(
-                    f"/releases/download/ace-fonts-v{version}/",
-                    notice["url"],
-                )
-        self.assertEqual(by_version, {1: self.RETAINED_V1_IDS, 2: self.ADDED_V2_IDS})
+    def test_v3_history_is_canonical_signed_and_byte_pinned(self) -> None:
+        catalog_bytes = V3_HISTORY_CATALOG.read_bytes()
+        signature_bytes = V3_HISTORY_SIGNATURE.read_bytes()
+        manifest_bytes = V3_HISTORY_MANIFEST.read_bytes()
+        self.assertEqual(
+            hashlib.sha256(catalog_bytes).hexdigest(),
+            "66b9a95a86b94a638dedbd9ef515b9a6d9a10b2d2f6bd7ecfcbea5367a99d469",
+        )
+        self.assertEqual(
+            hashlib.sha256(signature_bytes).hexdigest(),
+            "d9df550dab55ec57bba38648b8571fbe7c00f1e553e235fc00b62bcde7047507",
+        )
+        self.assertEqual(
+            hashlib.sha256(manifest_bytes).hexdigest(),
+            "0ff8c58999095b69626a02fa7e36d3cceae1264dd967385f29ed0aa2892f089d",
+        )
+        history = read_json(V3_HISTORY_CATALOG)
+        validate_catalog(history, minimum_catalog_version=3)
+        self.assertEqual(catalog_bytes, canonical_json_bytes(history))
+        self.assertEqual(history["catalogVersion"], 3)
+        self.assertEqual(history["releaseTag"], "ace-fonts-v3")
+        self.assertEqual(len(history["fonts"]), 37)
 
-        current_by_id = {font["id"]: font for font in catalog["fonts"]}
-        history_by_id = {font["id"]: font for font in history["fonts"]}
-        self.assertEqual(set(current_by_id), set(history_by_id))
-        for font_id, current in current_by_id.items():
+        try:
+            openssl = find_openssl()
+        except DistributionError as error:
+            self.skipTest(str(error))
+        verify_catalog_signature(
+            V3_HISTORY_CATALOG,
+            V3_HISTORY_SIGNATURE,
+            TOOL_DIR / "catalog-v1-signing-public.pem",
+            CATALOG_KEY_ID,
+            openssl_value=openssl,
+        )
+
+    def test_v3_recovery_manifest_reproduces_the_signed_catalog(self) -> None:
+        manifest = read_json(V3_HISTORY_MANIFEST)
+        validate_manifest(manifest)
+        catalog, assets = build_catalog(
+            manifest,
+            SHARED_SOURCE_ROOT,
+            SHARED_REPOSITORY,
+            read_json(V2_HISTORY_CATALOG),
+        )
+        self.assertEqual(V3_HISTORY_CATALOG.read_bytes(), canonical_json_bytes(catalog))
+        self.assertEqual(assets, {})
+
+    def test_published_catalog_is_in_a_valid_v4_transition_state(self) -> None:
+        current_bytes = SHARED_CATALOG.read_bytes()
+        if current_bytes == V3_HISTORY_CATALOG.read_bytes():
             self.assertEqual(
-                current["features"],
-                self.FEATURES_BY_ID.get(font_id, []),
+                SHARED_SIGNATURE.read_bytes(),
+                V3_HISTORY_SIGNATURE.read_bytes(),
             )
-            without_features = dict(current)
-            del without_features["features"]
-            self.assertEqual(without_features, history_by_id[font_id])
+        else:
+            self.assertEqual(current_bytes, PENDING_V4_CATALOG.read_bytes())
+            current = read_json(SHARED_CATALOG)
+            self.assertEqual(current["catalogVersion"], 4)
+            self.assertEqual(current["releaseTag"], "ace-fonts-v4")
 
-    def test_sources_reproduce_the_checked_in_catalog_without_v3_font_assets(self) -> None:
+    def test_sources_reproduce_the_pending_v4_catalog_and_assets(self) -> None:
         manifest = read_json(SHARED_MANIFEST)
-        history = read_json(V2_HISTORY_CATALOG)
+        history = read_json(V3_HISTORY_CATALOG)
         catalog, assets = build_catalog(
             manifest,
             SHARED_SOURCE_ROOT,
             SHARED_REPOSITORY,
             history,
         )
-        self.assertEqual(SHARED_CATALOG.read_bytes(), canonical_json_bytes(catalog))
-        self.assertEqual(assets, {})
+        self.assertEqual(PENDING_V4_CATALOG.read_bytes(), canonical_json_bytes(catalog))
+        self.assertEqual(catalog["catalogVersion"], 4)
+        self.assertEqual(catalog["minHostVersionCode"], 5230)
+        self.assertEqual(len(catalog["fonts"]), 60)
+        self.assertEqual(len({font["groupId"] for font in catalog["fonts"]}), 43)
+        self.assertEqual(len(assets), 50)
+        self.assertEqual(sum(name.endswith(".woff2") for name in assets), 24)
+        history_by_id = {font["id"]: font for font in history["fonts"]}
+        for font in catalog["fonts"]:
+            if font["artifact"]["version"] < 4:
+                previous = history_by_id[font["id"]]
+                self.assertEqual(font["artifact"], previous["artifact"])
+                self.assertEqual(font["license"]["files"], previous["license"]["files"])
+        self.assertNotIn("sarasa_term_sc_nerd", {font["id"] for font in catalog["fonts"]})
 
         with tempfile.TemporaryDirectory() as temporary:
-            output = Path(temporary) / "release-v3"
+            output = Path(temporary) / "release-v4"
             write_release(catalog, assets, output, overwrite=False)
             verify_release(catalog, output / "assets")
             self.assertEqual(
-                (output / "release-assets.txt").read_text(encoding="utf-8"),
-                "",
+                len(
+                    (output / "release-assets.txt")
+                    .read_text(encoding="utf-8")
+                    .splitlines()
+                ),
+                50,
             )
 
     def test_current_catalog_signature_is_valid(self) -> None:
@@ -895,10 +1183,13 @@ class CurrentFontIntegrationTest(unittest.TestCase):
         features = schema["$defs"]["font"]["properties"]["features"]
         self.assertEqual(
             features["items"]["enum"],
-            ["nerd", "variable", "cn"],
+            ["mono", "nerd", "variable", "cn", "jp"],
         )
         self.assertTrue(features["uniqueItems"])
         self.assertNotIn("features", schema["$defs"]["font"]["required"])
+        variant_properties = schema["$defs"]["font"]["properties"]
+        for key in ("groupId", "variantName", "variantOrder", "isDefaultVariant"):
+            self.assertIn(key, variant_properties)
         signature_schema = json.loads(
             (TOOL_DIR / "signature-v1.schema.json").read_text(encoding="utf-8")
         )

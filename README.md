@@ -30,12 +30,18 @@ Releases before publishing.
 The `main` branch contains the current signed catalog. Branch URLs are mutable,
 so clients trust its detached signature rather than GitHub transport alone.
 
-The Ace catalog wire schema remains v1 (`schemaVersion: 1`). The current signed
-catalog has `catalogVersion: 3` and 37 entries. Eight retain their immutable
-`ace-fonts-v1` artifacts and 29 retain their `ace-fonts-v2` artifacts; v3 changes
-only signed catalog metadata and republishes no font or notice bytes. Every v3
-entry explicitly carries a `features` array whose values are limited to `nerd`,
-`variable`, and `cn`, so clients never infer filter behavior from font names.
+The Ace catalog wire schema remains v1 (`schemaVersion: 1`). The published,
+signed catalog remains v3 while the reviewed unsigned v4 candidate lives at
+`catalogs/pending/v4/catalog-v1.json`. V4 contains 60 artifact entries grouped
+into 43 visible font families: eight retain immutable v1 artifacts, 28 retain
+v2 artifacts, and 24 are introduced by v4. It drops the incorrect Sarasa Term
+SC Nerd entry and adds the reviewed Sarasa Mono replacements.
+
+V4 entries carry explicit `mono`, `nerd`, `variable`, `cn`, and `jp` feature
+metadata plus stable group/variant metadata. An empty feature array is the
+`other` category. A SHA-bound cmap audit records the evidence behind CN, JP,
+Nerd, and variable classifications without requiring release CI to install a
+font parser.
 
 ## Repository layout
 
@@ -43,9 +49,12 @@ entry explicitly carries a `features` array whose values are limited to `nerd`,
 .github/workflows/publish-ace-fonts.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
+    retired/                       # historical bytes excluded from current catalog
   catalogs/catalog-v1.json         # current schema-v1 catalog
   catalogs/catalog-v1.sig.json     # detached offline signature
   catalogs/history/vN/             # exact prior catalog/signature snapshots
+  catalogs/pending/vN/             # reviewed catalog awaiting offline signature
+  audits/font-audit-vN.json         # SHA-bound cmap/metadata evidence
   manifests/history/vN/            # frozen source manifests for recovery
   keys/catalog-signing-public.pem  # public key only
   schemas/
@@ -62,7 +71,8 @@ intentionally not used.
 Read [`tools/ace-font-distribution/README.md`](tools/ace-font-distribution/README.md)
 before publishing. In summary: update reviewed sources and the manifest,
 preserve the exact previous catalog and signature under `catalogs/history/vN/`,
-generate incrementally, sign offline, commit only public material, and dispatch
+generate incrementally, review the pending catalog and audit, sign offline,
+promote the exact signed bytes to `catalogs/catalog-v1.json`, and dispatch
 `publish-ace-fonts.yml` with the exact tag and key ID. The workflow publishes
 only assets introduced by that catalog; unchanged entries keep their older
 immutable Release URLs.

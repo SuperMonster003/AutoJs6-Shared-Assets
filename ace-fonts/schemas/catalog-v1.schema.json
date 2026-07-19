@@ -124,15 +124,27 @@
           "description": "Explicit filter metadata. Absence in historical catalogs is equivalent to an empty array.",
           "items": {
             "enum": [
+              "mono",
               "nerd",
               "variable",
-              "cn"
+              "cn",
+              "jp"
             ],
             "type": "string"
           },
-          "maxItems": 3,
+          "maxItems": 5,
           "type": "array",
           "uniqueItems": true
+        },
+        "groupId": {
+          "not": {
+            "enum": [
+              "system_monospace",
+              "iosevka"
+            ]
+          },
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "type": "string"
         },
         "id": {
           "not": {
@@ -151,8 +163,19 @@
           "minimum": 0,
           "type": "integer"
         },
+        "isDefaultVariant": {
+          "type": "boolean"
+        },
         "source": {
           "$ref": "#/$defs/source"
+        },
+        "variantName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "variantOrder": {
+          "minimum": 0,
+          "type": "integer"
         }
       },
       "required": [

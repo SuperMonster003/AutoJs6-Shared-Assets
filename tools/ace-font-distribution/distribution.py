@@ -21,8 +21,14 @@ DEFAULT_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
 DEFAULT_MANIFEST = Path(__file__).with_name("font-sources.json")
 OUTPUT_MARKER = ".ace-font-distribution-output"
 RESERVED_FONT_IDS = frozenset({"system_monospace", "iosevka"})
-FONT_FEATURE_VALUES = ("nerd", "variable", "cn")
+FONT_FEATURE_VALUES = ("mono", "nerd", "variable", "cn", "jp")
 FONT_FEATURE_SET = frozenset(FONT_FEATURE_VALUES)
+FONT_VARIANT_FIELDS = (
+    "groupId",
+    "variantName",
+    "variantOrder",
+    "isDefaultVariant",
+)
 FONT_ID_PATTERN = re.compile(r"^[a-z][a-z0-9_]{1,63}$")
 REPOSITORY_PATTERN = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 RELEASE_TAG_PATTERN = re.compile(r"^ace-fonts-v([1-9][0-9]*)$")
@@ -158,6 +164,85 @@ def _validate_font_features(value: Any, context: str) -> list[str]:
     return value
 
 
+def _validate_variant_metadata(
+    font: dict[str, Any], context: str, *, required: bool
+) -> None:
+    present = [key in font for key in FONT_VARIANT_FIELDS]
+    if required and not all(present):
+        missing = [
+            key for key, is_present in zip(FONT_VARIANT_FIELDS, present) if not is_present
+        ]
+        raise DistributionError(
+            f"{context} is missing variant metadata: {', '.join(missing)}"
+        )
+    if any(present) and not all(present):
+        raise DistributionError(
+            f"{context} must declare all variant metadata fields together"
+        )
+    if not any(present):
+        return
+
+    group_id = _require_nonempty_string(font, "groupId", context)
+    if not FONT_ID_PATTERN.fullmatch(group_id) or group_id in RESERVED_FONT_IDS:
+        raise DistributionError(f"{context}.groupId is invalid or reserved: {group_id}")
+    _require_nonempty_string(font, "variantName", context)
+    variant_order = font.get("variantOrder")
+    if (
+        not isinstance(variant_order, int)
+        or isinstance(variant_order, bool)
+        or variant_order < 0
+    ):
+        raise DistributionError(f"{context}.variantOrder must be a non-negative integer")
+    if not isinstance(font.get("isDefaultVariant"), bool):
+        raise DistributionError(f"{context}.isDefaultVariant must be a boolean")
+
+
+def _validate_variant_groups(
+    fonts: list[dict[str, Any]], context: str, *, required: bool
+) -> None:
+    if not required and not any("groupId" in font for font in fonts):
+        return
+
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for index, font in enumerate(fonts):
+        item_context = f"{context}[{index}]"
+        _validate_variant_metadata(font, item_context, required=required)
+        if "groupId" in font:
+            groups.setdefault(font["groupId"], []).append(font)
+
+    for group_id, variants in groups.items():
+        display_names = {font["displayName"] for font in variants}
+        if len(display_names) != 1:
+            raise DistributionError(
+                f"{context} group {group_id} must use one displayName"
+            )
+        variant_names = [font["variantName"].casefold() for font in variants]
+        if len(variant_names) != len(set(variant_names)):
+            raise DistributionError(
+                f"{context} group {group_id} has duplicate variantName values"
+            )
+        variant_orders = [font["variantOrder"] for font in variants]
+        if len(variant_orders) != len(set(variant_orders)):
+            raise DistributionError(
+                f"{context} group {group_id} has duplicate variantOrder values"
+            )
+        defaults = [font for font in variants if font["isDefaultVariant"]]
+        if len(defaults) != 1:
+            raise DistributionError(
+                f"{context} group {group_id} must have exactly one default variant"
+            )
+        if defaults[0]["variantOrder"] != max(variant_orders):
+            raise DistributionError(
+                f"{context} group {group_id} default must have the highest variantOrder"
+            )
+        ordered_variants = sorted(variants, key=lambda font: font["variantOrder"])
+        orders = [font["order"] for font in ordered_variants]
+        if orders != sorted(orders):
+            raise DistributionError(
+                f"{context} group {group_id} order must follow variantOrder"
+            )
+
+
 def validate_manifest(manifest: dict[str, Any]) -> None:
     for key in ("schemaVersion", "catalogVersion", "minHostVersionCode"):
         value = manifest.get(key)
@@ -267,6 +352,12 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         if any(not isinstance(item, str) or not item.strip() for item in notices):
             raise DistributionError(f"{context}.noticePaths contains an invalid path")
 
+    _validate_variant_groups(
+        fonts,
+        "manifest.fonts",
+        required=manifest["catalogVersion"] >= 4,
+    )
+
 
 def _source_file(source_root: Path, relative: str, context: str) -> Path:
     candidate = (source_root / relative).resolve()
@@ -373,6 +464,9 @@ def _prepare_fonts(
         }
         if "features" in source:
             catalog_font["features"] = source["features"]
+        for key in FONT_VARIANT_FIELDS:
+            if key in source:
+                catalog_font[key] = source[key]
         catalog_fonts.append(catalog_font)
     return catalog_fonts, assets
 
@@ -614,6 +708,12 @@ def validate_catalog(catalog: dict[str, Any], minimum_catalog_version: int = 1) 
                 raise DistributionError(
                     f"{context}.source snapshot versionCode is inconsistent"
                 )
+
+    _validate_variant_groups(
+        fonts,
+        "catalog.fonts",
+        required=catalog["catalogVersion"] >= 4,
+    )
 
 
 def write_release(

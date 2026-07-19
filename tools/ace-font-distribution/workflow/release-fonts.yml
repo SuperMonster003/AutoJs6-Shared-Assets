@@ -8,7 +8,7 @@ on:
       release_tag:
         description: Signed catalog release tag
         required: true
-        default: ace-fonts-v3
+        default: ace-fonts-v4
       key_id:
         description: Expected offline signing key ID
         required: true
@@ -48,6 +48,18 @@ jobs:
 
       - name: Run distribution tests
         run: python -m unittest discover -s tools/ace-font-distribution/tests -v
+
+      - name: Validate SHA-bound font coverage audit
+        run: |
+          set -euo pipefail
+          catalog_version=$(python -c \
+            'import json; print(json.load(open("tools/ace-font-distribution/font-sources.json"))["catalogVersion"])')
+          if (( catalog_version >= 4 )); then
+            python tools/ace-font-distribution/validate_font_audit.py \
+              "ace-fonts/audits/font-audit-v${catalog_version}.json" \
+              --manifest tools/ace-font-distribution/font-sources.json \
+              --source-root ace-fonts/sources
+          fi
 
       - name: Reproduce catalog and current-release assets
         run: |

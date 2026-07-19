@@ -30,12 +30,11 @@ Releases before publishing.
 The `main` branch contains the current signed catalog. Branch URLs are mutable,
 so clients trust its detached signature rather than GitHub transport alone.
 
-The Ace catalog wire schema remains v1 (`schemaVersion: 1`). The current signed
-catalog has `catalogVersion: 3` and 37 entries. Eight retain their immutable
-`ace-fonts-v1` artifacts and 29 retain their `ace-fonts-v2` artifacts; v3 changes
-only signed catalog metadata and republishes no font or notice bytes. Every v3
-entry explicitly carries a `features` array whose values are limited to `nerd`,
-`variable`, and `cn`, so clients never infer filter behavior from font names.
+The Ace catalog wire schema remains v1 (`schemaVersion: 1`) while
+`catalogVersion` advances independently. Current manifests declare explicit
+`mono`, `nerd`, `variable`, `cn`, and `jp` features. Catalog v4 and later also
+declare stable font-group and variant metadata; an empty feature array is the
+client-side `other` category.
 
 ## Repository layout
 
@@ -46,6 +45,8 @@ ace-fonts/
   catalogs/catalog-v1.json         # current schema-v1 catalog
   catalogs/catalog-v1.sig.json     # detached offline signature
   catalogs/history/vN/             # exact prior catalog/signature snapshots
+  catalogs/pending/vN/             # reviewed catalog awaiting offline signature
+  audits/font-audit-vN.json         # SHA-bound cmap/metadata evidence
   manifests/history/vN/            # frozen source manifests for recovery
   keys/catalog-signing-public.pem  # public key only
   schemas/

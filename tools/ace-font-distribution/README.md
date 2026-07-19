@@ -2,13 +2,14 @@
 
 This kit prepares and publishes the `ace-fonts` namespace in
 `SuperMonster003/AutoJs6-Shared-Assets`. AutoJs6 downloads signed catalog
-entries from immutable GitHub Release Assets. Regular Iosevka remains bundled;
-the manifest contains 37 optional downloads. Eight retain their v1 artifacts,
-29 retain their v2 artifacts, and catalog v3 adds explicit filter metadata
-without republishing any font or notice bytes.
+entries from immutable GitHub Release Assets. Regular Iosevka remains bundled.
+The v4 manifest contains 60 artifact variants in 43 visible groups: eight retain
+v1 artifacts, 28 retain v2 artifacts, and 24 introduce v4 artifacts.
 
-The scripts use the Python standard library. OpenSSL performs ECDSA P-256
-signing/verification and is discovered from PATH or Git for Windows.
+Release generation and validation use the Python standard library. OpenSSL
+performs ECDSA P-256 signing/verification and is discovered from PATH or Git for
+Windows. Only the optional cmap audit generator requires `fonttools[woff]`;
+release CI validates its SHA-bound report without importing fontTools.
 
 ## What is durable
 
@@ -50,8 +51,14 @@ python tools/ace-font-distribution/export_sources.py `
 
 The frozen manifest has `catalogVersion: 1`, exactly eight entries, and omits
 the later `features` field. The tools interpret that historical omission as an
-empty array and reproduce signed catalog v1 byte-for-byte. A current 37-entry
-v3 manifest cannot be exported from the old AutoJs6 commit.
+empty array and reproduce signed catalog v1 byte-for-byte. The current 60-entry
+v4 manifest cannot be exported from the old AutoJs6 commit.
+
+Path-adapted recovery manifests for v2 and v3 are stored under
+`ace-fonts/manifests/history/v2/` and `v3/`. They reference the consolidated
+Maple/Monaspace directories and the retired Sarasa Term source, yet reproduce
+the signed historical catalogs byte-for-byte. `sources/retired/` is never part
+of the current manifest, audit, catalog, or v4 release asset list.
 
 `prepare_repository.py` can create a disposable standalone recovery tree from
 the same exact commit. It has no implicit local source snapshot:
@@ -81,7 +88,7 @@ python tools/ace-font-distribution/distribution.py `
   --source-root ace-fonts/sources `
   --output build/ace-fonts-current `
   --repository SuperMonster003/AutoJs6-Shared-Assets `
-  --previous-catalog ace-fonts/catalogs/history/v2/catalog-v1.json
+  --previous-catalog ace-fonts/catalogs/history/v3/catalog-v1.json
 
 python tools/ace-font-distribution/verify_release.py `
   build/ace-fonts-current/catalog-v1.json `
@@ -90,15 +97,15 @@ python tools/ace-font-distribution/verify_release.py `
 
 `catalog-v1.json` denotes wire schema v1 (`schemaVersion: 1`); its internal
 `catalogVersion` advances independently. The current manifest has
-`catalogVersion: 3`, `releaseTag: ace-fonts-v3`, and 37 fonts. The output also
-contains an identical `bootstrap-catalog-v1.json` and `release-assets.txt`.
-Because v3 changes metadata only, its `assets/` directory and asset list are
-empty.
+`catalogVersion: 4`, `releaseTag: ace-fonts-v4`, and 60 artifact entries in 43
+groups. The output also contains an identical `bootstrap-catalog-v1.json` and
+`release-assets.txt`. V4 emits 50 assets: 24 WOFF2 files and 26 notices.
 
 Generation checks paths, IDs, ordering, WOFF2 structure, sizes, hashes, source
-notices, immutable URL construction, explicit font features, and reserved IDs
-(`system_monospace` and bundled `iosevka`). Feature arrays use canonical order
-and accept only `nerd`, `variable`, and `cn`. Historical v1/v2 manifests may
+notices, immutable URL construction, explicit font features, variant-group
+invariants, and reserved IDs (`system_monospace` and bundled `iosevka`). Feature
+arrays use canonical order and accept `mono`, `nerd`, `variable`, `cn`, and
+`jp`. Historical v1/v2 manifests may
 omit this field and retain their original catalog byte format; manifests from
 catalog v3 onward must declare it explicitly. Asset tags are `ace-fonts-vN`;
 names begin `autojs6-ace-font-`.
@@ -113,9 +120,9 @@ example:
 "artifactReleaseTag": "ace-fonts-v1"
 ```
 
-For catalog v3, the global `catalogVersion` is `3` and the `releaseTag` is
-`ace-fonts-v3`. Its eight original fonts remain on artifact v1 and the other 29
-remain on artifact v2. The exact signed v1 and v2 catalogs/signatures are
+For catalog v4, the global `catalogVersion` is `4` and the `releaseTag` is
+`ace-fonts-v4`. Eight entries remain on artifact v1, 28 remain on artifact v2,
+and 24 use artifact v4. The exact signed v1, v2, and v3 catalogs/signatures are
 preserved at:
 
 ```text
@@ -123,6 +130,10 @@ ace-fonts/catalogs/history/v1/catalog-v1.json
 ace-fonts/catalogs/history/v1/catalog-v1.sig.json
 ace-fonts/catalogs/history/v2/catalog-v1.json
 ace-fonts/catalogs/history/v2/catalog-v1.sig.json
+ace-fonts/catalogs/history/v3/catalog-v1.json
+ace-fonts/catalogs/history/v3/catalog-v1.sig.json
+ace-fonts/manifests/history/v2/font-sources.json
+ace-fonts/manifests/history/v3/font-sources.json
 ```
 
 Then generate with:
@@ -132,21 +143,42 @@ python tools/ace-font-distribution/distribution.py `
   --source-root ace-fonts/sources `
   --output build/ace-fonts-current `
   --repository SuperMonster003/AutoJs6-Shared-Assets `
-  --previous-catalog ace-fonts/catalogs/history/v2/catalog-v1.json
+  --previous-catalog ace-fonts/catalogs/history/v3/catalog-v1.json
 ```
 
 The generator compares carried artifacts and notice files byte-for-byte through
-their catalog metadata. It refuses a changed source under an old release. A
-metadata-only catalog such as v3 therefore emits no font/notice assets. Metadata
-such as display name, order, and `features` may change without republishing
+their catalog metadata. It refuses a changed source under an old release.
+Metadata such as display name, order, `features`, and variant grouping may
+change without republishing
 bytes. `autoJs6SourceCommit` is optional for fonts that never lived in AutoJs6
 Assets.
 
-Every current manifest entry explicitly contains `features`, including `[]` for
-an untagged font. Use `nerd` only for a Nerd Fonts-patched face, `variable` only
-when the distributed WOFF2 contains OpenType variation axes, and `cn` only when
-the face contains useful Chinese/CJK glyph coverage. Clients consume this field
-directly and must not infer it from IDs, display names, or family names.
+Every current manifest entry explicitly contains `features`. Use `mono` for
+monospaced or dual-width coding faces, `nerd` only for a Nerd Fonts-patched
+face, `variable` only when OpenType variation axes exist, and `cn`/`jp` only
+when the reviewed cmap thresholds pass. `[]` is the client-side `other`
+category. `groupId`, `variantName`, `variantOrder`, and `isDefaultVariant`
+describe same-family alternatives; each group has exactly one highest-order
+default. Clients consume this metadata directly and never infer it from names.
+
+Regenerate and validate the SHA-bound cmap audit with:
+
+```powershell
+py -3.12 -m pip install -r tools/ace-font-distribution/requirements-audit.txt
+py -3.12 tools/ace-font-distribution/audit_font_metadata.py `
+  --manifest tools/ace-font-distribution/font-sources.json `
+  --source-root ace-fonts/sources `
+  --output ace-fonts/audits/font-audit-v4.json --check
+python tools/ace-font-distribution/validate_font_audit.py `
+  ace-fonts/audits/font-audit-v4.json `
+  --manifest tools/ace-font-distribution/font-sources.json `
+  --source-root ace-fonts/sources
+```
+
+CN requires all seven reviewed Simplified Chinese probes and at least 6,000
+unified CJK codepoints. JP requires all five reviewed Japanese probes, at least
+2,000 CJK codepoints, 80 Hiragana, and 80 Katakana codepoints. Unmarked fonts
+are not reverse-inferred.
 
 To add a font: review redistribution rights; add the WOFF2 and complete notices
 under `ace-fonts/sources/<id>/`; add a unique lower_snake_case manifest entry;
@@ -170,8 +202,10 @@ python tools/ace-font-distribution/generate_keys.py `
   --public-key-der build/keys/catalog-signing-public.spki.der
 ```
 
-After reviewing `build/ace-fonts-current/catalog-v1.json`, copy its exact bytes
-to `ace-fonts/catalogs/catalog-v1.json`, sign those bytes, and verify:
+The reviewed unsigned candidate is
+`ace-fonts/catalogs/pending/v4/catalog-v1.json` and must equal the generated
+catalog byte-for-byte. Copy those exact bytes to
+`ace-fonts/catalogs/catalog-v1.json`, sign them, and verify:
 
 ```powershell
 python tools/ace-font-distribution/sign_catalog.py `
@@ -201,8 +235,8 @@ bytes. Repository/tag/URL changes alter those bytes and require re-signing.
    `ace-fonts-release` GitHub Environment; when available, add a
    required reviewer for the publication job.
 5. Dispatch `.github/workflows/publish-ace-fonts.yml` with the exact catalog tag
-   (`ace-fonts-v3`) and expected key ID, from the default branch. This is the
-   operation that publishes v3; preparing or pushing the files alone does not.
+   (`ace-fonts-v4`) and expected key ID, from the default branch. This is the
+   operation that publishes v4; preparing or pushing the files alone does not.
 6. CI regenerates the catalog/current assets, compares exact catalog bytes,
    verifies the current and previous signatures, rejects an existing release or
    tag, atomically creates the tag on the verified workflow commit, and uploads
@@ -214,7 +248,7 @@ Never use `latest`, branch URLs for binary artifacts, mutable upstream assets,
 or replacement uploads. A new catalog always has a monotonically increasing
 version.
 
-The repository already exists. After the reviewed v3 commit is on `main`, and
+The repository already exists. After the reviewed, signed v4 commit is on `main`, and
 only when publication is intended, dispatch the release workflow with the exact
 catalog tag:
 
@@ -222,10 +256,10 @@ catalog tag:
 gh auth status
 Set-Location ../AutoJs6-Shared-Assets
 gh workflow run publish-ace-fonts.yml `
-  -f release_tag=ace-fonts-v3 `
+  -f release_tag=ace-fonts-v4 `
   -f key_id=p256-fc433f8ba81333f7
 gh run watch
-gh release verify ace-fonts-v3
+gh release verify ace-fonts-v4
 ```
 
 These commands require an authenticated GitHub CLI. The repository remains
