@@ -1,0 +1,8 @@
+{
+  "format": 1,
+  "summary": {
+    "en": "Controlled-fixture test model for catalog and release-workflow validation. Not a production model.",
+    "zh-CN": "受控界面训练的目录与发布流程测试模型, 不用于正式模型分发"
+  },
+  "releasedAt": "2026-10-03T00:00:00Z"
+}

@@ -10,6 +10,8 @@ signing private keys.
 
 - [`ace-fonts/`](ace-fonts/README.md): optional WOFF2 fonts for the AutoJs6 Ace
   editor. Regular Iosevka remains bundled in AutoJs6 and is not distributed here.
+- [`codegen-models/`](codegen-models/README.md): independently versioned local
+  layout-code-generation rankers, with their own signed catalog and release tags.
 - Additional asset families must use their own directory, manifest, release-tag
   prefix, workflow, integrity policy, and signing key where appropriate.
 
@@ -47,6 +49,7 @@ font parser.
 
 ```text
 .github/workflows/publish-ace-fonts.yml
+.github/workflows/publish-codegen-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +62,13 @@ ace-fonts/
   keys/catalog-signing-public.pem  # public key only
   schemas/
 tools/ace-font-distribution/
+codegen-models/
+  sources/<modelId>/<versionCode>/ # reviewed package, model card, dataset manifest
+  catalogs/history/vN/             # exact earlier model catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/                           # model-specific public key after maintainer setup
+  schemas/                        # catalog, signature and model-manifest schemas
+tools/codegen-model-distribution/
 ```
 
 Generated bundles live under ignored `build/`. Canonical source WOFF2 and notice
@@ -85,3 +95,10 @@ reviewed WOFF2 Normal 400 artifact. This repository does not claim ownership of
 third-party fonts; copyright and license details accompany each release.
 
 Never submit executable content, secrets, private keys, or an unreviewed binary.
+
+Model distribution has its own setup and release prerequisites; see
+[`tools/codegen-model-distribution/README.md`](tools/codegen-model-distribution/README.md).
+The current tiny model source is a reviewed test artifact for a fork/private
+workflow run. It is not eligible for the production model catalog. Official
+model signing material and production-quality model gates are separate from the
+existing Ace font setup.
