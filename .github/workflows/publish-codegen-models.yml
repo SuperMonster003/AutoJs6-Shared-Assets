@@ -1,0 +1,196 @@
+name: Publish immutable code-generation model release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release tag in the offline-signed model catalog
+        required: true
+        default: codegen-models-v1
+      key_id:
+        description: Expected offline model signing key ID
+        required: true
+      allow_test_models:
+        description: Allow only tiny-test to bypass the production gate in a separate test repository
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-codegen-models-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: codegen-models-release
+    env:
+      GH_HOST: github.com
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      EXPECTED_KEY_ID: ${{ inputs.key_id }}
+      ALLOW_TEST_MODELS: ${{ inputs.allow_test_models && '1' || '0' }}
+    steps:
+      - name: Require the default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]]; then
+            echo "Dispatch from the repository's default branch." >&2
+            exit 1
+          fi
+
+      - name: Checkout shared-assets repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Run model distribution tests
+        run: python -m unittest discover -s tools/codegen-model-distribution/tests -v
+
+      - name: Require and validate the offline-signed release inputs
+        id: catalog
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, pathlib, sys
+          sys.path.insert(0, "tools/codegen-model-distribution")
+          from verify_release import distribution
+          root = pathlib.Path("codegen-models")
+          for relative in ("catalogs/catalog-v1.json", "catalogs/catalog-v1.sig.json", "keys/catalog-signing-public.pem"):
+              if not (root / relative).is_file():
+                  raise SystemExit("Missing offline-reviewed signing input: " + relative + "; nothing will be published")
+          catalog = distribution.read_json(root / "catalogs/catalog-v1.json")
+          allow_test = os.environ["ALLOW_TEST_MODELS"] == "1"
+          repository = os.environ["GITHUB_REPOSITORY"]
+          if allow_test and repository.casefold() == "supermonster003/autojs6-shared-assets":
+              raise SystemExit("Test models require a separate repository")
+          distribution.validate_catalog(catalog, expected_repository=repository, allow_test_models=allow_test)
+          if catalog["releaseTag"] != os.environ["RELEASE_TAG"]:
+              raise SystemExit("Dispatch release_tag differs from the signed catalog")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write("version=" + str(catalog["catalogVersion"]) + "\n")
+              output.write("generated_at=" + catalog["generatedAt"] + "\n")
+              output.write("empty_bootstrap=" + ("1" if not catalog["models"] else "0") + "\n")
+          PY
+
+      - name: Verify current and historical catalog signatures
+        env:
+          CATALOG_VERSION: ${{ steps.catalog.outputs.version }}
+        run: |
+          set -euo pipefail
+          test_args=()
+          if [[ "$ALLOW_TEST_MODELS" == "1" ]]; then test_args=(--allow-test-models); fi
+          python tools/codegen-model-distribution/verify_catalog.py \
+            codegen-models/catalogs/catalog-v1.json \
+            --signature codegen-models/catalogs/catalog-v1.sig.json \
+            --public-key codegen-models/keys/catalog-signing-public.pem \
+            --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
+            --minimum-catalog-version "$CATALOG_VERSION" "${test_args[@]}"
+          for (( version=1; version<CATALOG_VERSION; version++ )); do
+            history="codegen-models/catalogs/history/v${version}"
+            python tools/codegen-model-distribution/verify_catalog.py \
+              "$history/catalog-v1.json" --signature "$history/catalog-v1.sig.json" \
+              --public-key codegen-models/keys/catalog-signing-public.pem \
+              --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
+              --minimum-catalog-version "$version" "${test_args[@]}"
+            python - "$history/catalog-v1.json" "$version" <<'PY'
+          import json, pathlib, sys
+          catalog = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          if catalog["catalogVersion"] != int(sys.argv[2]):
+              raise SystemExit("History path and signed catalog version differ")
+          PY
+            previous_history_args=()
+            if (( version > 1 )); then
+              previous_history_args=(--previous-catalog "codegen-models/catalogs/history/v$((version - 1))/catalog-v1.json")
+            fi
+            python tools/codegen-model-distribution/validate_catalog.py "$history/catalog-v1.json" \
+              --expected-repository "$GITHUB_REPOSITORY" "${previous_history_args[@]}" "${test_args[@]}"
+          done
+
+      - name: Reproduce the reviewed catalog and current-release model assets
+        env:
+          CATALOG_VERSION: ${{ steps.catalog.outputs.version }}
+          CATALOG_GENERATED_AT: ${{ steps.catalog.outputs.generated_at }}
+          EMPTY_BOOTSTRAP: ${{ steps.catalog.outputs.empty_bootstrap }}
+        run: |
+          set -euo pipefail
+          previous_args=()
+          test_args=()
+          bootstrap_args=()
+          if [[ "$ALLOW_TEST_MODELS" == "1" ]]; then test_args=(--allow-test-models); fi
+          if [[ "$EMPTY_BOOTSTRAP" == "1" ]]; then bootstrap_args=(--empty-bootstrap); fi
+          if (( CATALOG_VERSION > 1 )); then
+            previous_version=$((CATALOG_VERSION - 1))
+            previous_args=(--previous-catalog "codegen-models/catalogs/history/v${previous_version}/catalog-v1.json")
+          fi
+          python tools/codegen-model-distribution/prepare_catalog.py \
+            --source-root codegen-models/sources --output build/codegen-models-current \
+            --repository "$GITHUB_REPOSITORY" --catalog-version "$CATALOG_VERSION" \
+            --generated-at "$CATALOG_GENERATED_AT" "${previous_args[@]}" "${test_args[@]}" "${bootstrap_args[@]}"
+          cmp codegen-models/catalogs/catalog-v1.json build/codegen-models-current/catalog-v1.json
+          pending="codegen-models/catalogs/pending/v${CATALOG_VERSION}"
+          if [[ -f "$pending/catalog-v1.json" ]]; then
+            cmp "$pending/catalog-v1.json" codegen-models/catalogs/catalog-v1.json
+          fi
+          if [[ -f "$pending/catalog-v1.sig.json" ]]; then
+            cmp "$pending/catalog-v1.sig.json" codegen-models/catalogs/catalog-v1.sig.json
+          fi
+          python tools/codegen-model-distribution/verify_release.py \
+            codegen-models/catalogs/catalog-v1.json --assets-dir build/codegen-models-current/assets \
+            --asset-list build/codegen-models-current/release-assets.txt \
+            --expected-repository "$GITHUB_REPOSITORY" "${test_args[@]}"
+
+      - name: Confirm authenticated absence of both the release and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python tools/codegen-model-distribution/verify_release.py --check-absent \
+            --repository "$GITHUB_REPOSITORY" --release-tag "$RELEASE_TAG"
+
+      - name: Create a new tag, upload to a draft release, and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          asset_paths=()
+          test_release_args=()
+          if [[ "$ALLOW_TEST_MODELS" == "1" ]]; then test_release_args=(--prerelease); fi
+          while IFS= read -r name; do
+            if [[ -n "$name" ]]; then asset_paths+=("build/codegen-models-current/assets/$name"); fi
+          done < build/codegen-models-current/release-assets.txt
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            --raw-field ref="refs/tags/$RELEASE_TAG" --raw-field sha="$GITHUB_SHA" >/dev/null
+          gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --draft --verify-tag --latest=false "${test_release_args[@]}" \
+            --title "AutoJs6 code-generation models $RELEASE_TAG" \
+            --notes "Offline-signed, content-addressed AutoJs6 code-generation ranking models." \
+            "${asset_paths[@]}" codegen-models/catalogs/catalog-v1.json codegen-models/catalogs/catalog-v1.sig.json
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+
+      - name: Download every published asset and verify exact reviewed bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          downloaded=$(mktemp -d)
+          test_args=()
+          if [[ "$ALLOW_TEST_MODELS" == "1" ]]; then test_args=(--allow-test-models); fi
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$downloaded"
+          python tools/codegen-model-distribution/verify_release.py \
+            codegen-models/catalogs/catalog-v1.json --assets-dir "$downloaded" \
+            --downloaded-release --signature codegen-models/catalogs/catalog-v1.sig.json \
+            --expected-repository "$GITHUB_REPOSITORY" "${test_args[@]}"
+          python tools/codegen-model-distribution/verify_catalog.py "$downloaded/catalog-v1.json" \
+            --signature "$downloaded/catalog-v1.sig.json" --public-key codegen-models/keys/catalog-signing-public.pem \
+            --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" "${test_args[@]}"
