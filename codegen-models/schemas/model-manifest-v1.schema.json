@@ -1,0 +1,326 @@
+{
+  "$defs": {
+    "displayName": {
+      "additionalProperties": false,
+      "maxProperties": 64,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "en"
+      ],
+      "type": "object"
+    },
+    "metric": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "regret": {
+                "type": "number"
+              },
+              "ruleTop1Survival": {
+                "type": "number"
+              },
+              "top1Survival": {
+                "type": "number"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "groups": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "regret": {
+                "type": "null"
+              },
+              "ruleTop1Survival": {
+                "type": "null"
+              },
+              "top1Survival": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "groups": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "regret": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ruleTop1Survival": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "top1Survival": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "groups",
+        "top1Survival",
+        "ruleTop1Survival",
+        "regret"
+      ],
+      "type": "object"
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "realTest": {
+          "$ref": "#/$defs/metric"
+        },
+        "test": {
+          "$ref": "#/$defs/metric"
+        }
+      },
+      "required": [
+        "test",
+        "realTest"
+      ],
+      "type": "object"
+    },
+    "modelId": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$",
+      "type": "string"
+    },
+    "namesHash": {
+      "pattern": "^[0-9a-f]{16}$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "summary": {
+      "additionalProperties": false,
+      "maxProperties": 64,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "en"
+      ],
+      "type": "object"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?(?:Z|[+-](?:(?:0[0-9]|1[0-7]):[0-5][0-9]|18:00))(?![\\s\\S])",
+      "type": "string"
+    }
+  },
+  "$id": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/schemas/model-manifest-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "const": "catboost-oblivious"
+    },
+    "dataset": {
+      "additionalProperties": false,
+      "properties": {
+        "createdAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "datasetId": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        },
+        "groups": {
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "datasetId",
+        "groups",
+        "createdAt"
+      ],
+      "type": "object"
+    },
+    "displayName": {
+      "$ref": "#/$defs/displayName"
+    },
+    "featureNamesHash": {
+      "$ref": "#/$defs/namesHash"
+    },
+    "featureSchemaVersion": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "format": {
+      "const": 1
+    },
+    "kind": {
+      "const": "ranker"
+    },
+    "license": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+      "type": "string"
+    },
+    "metrics": {
+      "$ref": "#/$defs/metrics"
+    },
+    "minHostVersionCode": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "model": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "maximum": 8,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "features": {
+          "maximum": 65535,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "file": {
+          "const": "model.bin"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "size": {
+          "maximum": 4395040,
+          "minimum": 32,
+          "type": "integer"
+        },
+        "trees": {
+          "maximum": 4096,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "size",
+        "sha256",
+        "trees",
+        "depth",
+        "features"
+      ],
+      "type": "object"
+    },
+    "modelId": {
+      "$ref": "#/$defs/modelId"
+    },
+    "publisher": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+      "type": "string"
+    },
+    "training": {
+      "additionalProperties": false,
+      "properties": {
+        "catboostVersion": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        },
+        "hostCommit": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "pythonVersion": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        },
+        "trainedAt": {
+          "$ref": "#/$defs/timestamp"
+        }
+      },
+      "required": [
+        "catboostVersion",
+        "pythonVersion",
+        "hostCommit",
+        "trainedAt"
+      ],
+      "type": "object"
+    },
+    "versionCode": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "versionName": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "format",
+    "modelId",
+    "displayName",
+    "versionCode",
+    "versionName",
+    "kind",
+    "algorithm",
+    "featureSchemaVersion",
+    "featureNamesHash",
+    "model",
+    "dataset",
+    "metrics",
+    "training",
+    "minHostVersionCode",
+    "license",
+    "publisher"
+  ],
+  "title": "AutoJs6 numeric code-generation model package manifest v1",
+  "type": "object"
+}
