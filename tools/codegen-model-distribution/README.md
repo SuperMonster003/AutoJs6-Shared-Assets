@@ -162,5 +162,13 @@ staged the bootstrap, rejected appended-byte tampering, and verified copied rele
 and signatures. It performed no network publication. The maintainer subsequently supplied
 the production public key and signed empty bootstrap. Both OpenSSL and the host Kotlin
 verifier accepted the signature, and the verified two-file resource pair was installed
-locally in the host for P5.5. The real test-repository workflow run URL remains outstanding
-for P5.4; no dispatch or publication is claimed by these local checks.
+locally in the host for P5.5.
+
+On 2026-10-04 (Asia/Shanghai), the maintainer completed
+[workflow run 37138706446](https://github.com/SuperMonster003/AutoJs6-Codegen-Distribution-Test/actions/runs/37138706446)
+with all 63 CI tests and the final release readback passing. The
+[test release](https://github.com/SuperMonster003/AutoJs6-Codegen-Distribution-Test/releases/tag/codegen-models-v1)
+was independently downloaded and verified on the desktop. Anonymous catalog and package
+downloads matched the reviewed bytes; a read-only preflight correctly refused the existing
+release. P5.4's remote E2 evidence is complete. Production publication remains a separate
+P8.3 maintainer operation after the model passes its evaluation gate.

@@ -75,3 +75,16 @@ for verification. No signing private key is given to CI.
 
 Read [the distribution tools guide](../tools/codegen-model-distribution/README.md) for
 commands, bootstrap preparation and the local acceptance procedure.
+
+## Test release acceptance (2026-10-04)
+
+The maintainer completed [workflow run 37138706446](https://github.com/SuperMonster003/AutoJs6-Codegen-Distribution-Test/actions/runs/37138706446)
+on test commit `8a0ae0128913f40b7fca306c76efc7c6209ac477`. All 63 CI tests, signature checks,
+catalog reproduction and the final published-asset readback passed. The resulting
+[codegen-models-v1 test release](https://github.com/SuperMonster003/AutoJs6-Codegen-Distribution-Test/releases/tag/codegen-models-v1)
+contains the 23,633-byte tiny package, catalog and signature. An independent desktop download
+verified the same bytes, and anonymous HTTPS requests to the public catalog/package URLs
+also matched. Read-only preflight now refuses the existing release as required.
+
+This establishes P5.4's remote workflow evidence. Production trust remains with the separate
+maintainer key above; the first production model/current catalog still belongs to P8.3.
