@@ -7,8 +7,10 @@ uses the runner's `gh` CLI. Run commands from this repository's root.
 
 Signing and workflow dispatch are maintainer operations. The workflow receives a public
 key and already signed bytes; it never receives the private key. The pending production v1
-catalog currently contains no models and is **unsigned**. No production signing key or
-signed current catalog is claimed by this implementation.
+catalog contains no models and has now been signed by the maintainer for APK-only bootstrap
+use. The model public key ID is `p256-f1a540e052cf0865`; the complete SPKI fingerprint is in
+`codegen-models/README.md`. The bootstrap is not promoted to a remote current catalog or
+Release, so the first official model still uses `codegen-models-v1`.
 
 ## Source inputs and catalog policy
 
@@ -157,5 +159,8 @@ ordering. Tests create private keys in temporary directories and remove them aft
 On 2026-10-03, 63 tests passed. An additional local CLI round trip prepared the checked-in
 tiny source twice with identical catalog bytes, signed with a disposable key, verified and
 staged the bootstrap, rejected appended-byte tampering, and verified copied release assets
-and signatures. It performed no network publication. Formal public key/signatures and the
-fork/private workflow run URL are still maintainer inputs; P5.4/P5.5 are not claimed complete.
+and signatures. It performed no network publication. The maintainer subsequently supplied
+the production public key and signed empty bootstrap. Both OpenSSL and the host Kotlin
+verifier accepted the signature, and the verified two-file resource pair was installed
+locally in the host for P5.5. The real test-repository workflow run URL remains outstanding
+for P5.4; no dispatch or publication is claimed by these local checks.

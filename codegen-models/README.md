@@ -26,9 +26,15 @@ schemas/
 ```
 
 The first implementation includes schemas/tools and the reviewed
-`autojs6.codegen.tiny-test/1` source. Production public-key and signed-current-catalog files
-are intentionally absent until the maintainer supplies the new model signing material.
-Pending catalogs are not promoted to trusted current catalogs without verification.
+`autojs6.codegen.tiny-test/1` source. The maintainer supplied the model signing public key:
+
+- Key ID: `p256-f1a540e052cf0865`.
+- SPKI DER SHA-256: `f1a540e052cf086520619e429cd3e3240fa3f8a4b8fca46e3531358906a67de3`.
+
+The empty pending v1 catalog has been signed for the host's offline bootstrap. It is not
+promoted to a remote current catalog or Release; `codegen-models-v1` remains reserved for
+the first approved production model. Pending catalogs require signature verification
+before use, and test repository keys never establish production trust.
 
 The tiny package is the controlled-only six-tree model accepted by AutoJs6 P4. Its package
 license is MPL-2.0, copied from the host repository. It exists for reproducible tool tests
