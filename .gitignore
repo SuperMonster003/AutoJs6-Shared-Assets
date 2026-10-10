@@ -5,3 +5,7 @@ __pycache__/
 *.private.pem
 *.private.der
 .autojs6-shared-assets-prepared
+
+# Local agent instruction files stay out of the repository.
+AGENTS.md
+CLAUDE.md
