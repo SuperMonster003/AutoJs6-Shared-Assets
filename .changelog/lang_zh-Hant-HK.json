@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "提示",
+    "feature": "新增",
+    "fix": "修復",
+    "improvement": "優化",
+    "dependency": "依賴",
+    "compatibility": "兼容",
+    "completion": "完善",
+    "error": "異常",
+    "metrics": "指標",
+    "update": "更新",
+    "replacement": "替換",
+    "management": "管理",
+    "precision": "精確",
+    "simplification": "精簡",
+    "constraint": "約束",
+    "adjustment": "調整"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "通過 JSON 文案源與共享模板生成十語言 README 和更新日誌, 並在 CI 中執行只讀檢查"
+        }
+      ]
+    }
+  }
+}

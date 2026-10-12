@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "ملاحظة",
+    "feature": "ميزة",
+    "fix": "إصلاح",
+    "improvement": "تحسين",
+    "dependency": "اعتماد",
+    "compatibility": "توافق",
+    "completion": "استكمال",
+    "error": "خطأ",
+    "metrics": "مقاييس",
+    "update": "تحديث",
+    "replacement": "استبدال",
+    "management": "إدارة",
+    "precision": "دقة",
+    "simplification": "تبسيط",
+    "constraint": "قيد",
+    "adjustment": "تعديل"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "توليد README وسجل التغييرات بعشر لغات من JSON وقوالب مشتركة مع تحقق دون كتابة في CI"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "안내",
+    "feature": "기능",
+    "fix": "수정",
+    "improvement": "개선",
+    "dependency": "의존성",
+    "compatibility": "호환성",
+    "completion": "보완",
+    "error": "오류",
+    "metrics": "지표",
+    "update": "업데이트",
+    "replacement": "교체",
+    "management": "관리",
+    "precision": "정확도",
+    "simplification": "간소화",
+    "constraint": "제약",
+    "adjustment": "조정"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "JSON 원본과 공통 템플릿으로 10개 언어의 README 및 변경 기록을 생성하고 CI에서 읽기 전용 검사 수행"
+        }
+      ]
+    }
+  }
+}

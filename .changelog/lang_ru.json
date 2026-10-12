@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "Примечание",
+    "feature": "Функция",
+    "fix": "Исправление",
+    "improvement": "Улучшение",
+    "dependency": "Зависимость",
+    "compatibility": "Совместимость",
+    "completion": "Дополнение",
+    "error": "Ошибка",
+    "metrics": "Метрики",
+    "update": "Обновление",
+    "replacement": "Замена",
+    "management": "Управление",
+    "precision": "Точность",
+    "simplification": "Упрощение",
+    "constraint": "Ограничение",
+    "adjustment": "Корректировка"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "README и журнал на десяти языках создаются из JSON и общих шаблонов, с проверкой без записи в CI"
+        }
+      ]
+    }
+  }
+}

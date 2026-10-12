@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "Hint",
+    "feature": "Feature",
+    "fix": "Fix",
+    "improvement": "Improvement",
+    "dependency": "Dependency",
+    "compatibility": "Compatibility",
+    "completion": "Completion",
+    "error": "Error",
+    "metrics": "Metrics",
+    "update": "Update",
+    "replacement": "Replacement",
+    "management": "Management",
+    "precision": "Precision",
+    "simplification": "Simplification",
+    "constraint": "Constraint",
+    "adjustment": "Adjustment"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "Ten-language README and changelog generated from JSON sources and shared templates, with read-only checks in CI"
+        }
+      ]
+    }
+  }
+}

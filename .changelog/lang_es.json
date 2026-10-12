@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "Nota",
+    "feature": "Función",
+    "fix": "Corrección",
+    "improvement": "Mejora",
+    "dependency": "Dependencia",
+    "compatibility": "Compatibilidad",
+    "completion": "Ampliación",
+    "error": "Error",
+    "metrics": "Métricas",
+    "update": "Actualización",
+    "replacement": "Reemplazo",
+    "management": "Gestión",
+    "precision": "Precisión",
+    "simplification": "Simplificación",
+    "constraint": "Restricción",
+    "adjustment": "Ajuste"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "README y registro en diez idiomas generados desde JSON y plantillas compartidas, con comprobación sin escritura en CI"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "ヒント",
+    "feature": "機能",
+    "fix": "修正",
+    "improvement": "改善",
+    "dependency": "依存関係",
+    "compatibility": "互換性",
+    "completion": "補完",
+    "error": "エラー",
+    "metrics": "指標",
+    "update": "更新",
+    "replacement": "置換",
+    "management": "管理",
+    "precision": "精度",
+    "simplification": "簡素化",
+    "constraint": "制約",
+    "adjustment": "調整"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "JSON 原稿と共通テンプレートから 10 言語の README と変更履歴を生成し, CI で書き込みなしの検証を実行"
+        }
+      ]
+    }
+  }
+}

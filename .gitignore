@@ -1,5 +1,6 @@
 .idea/
 build/
+.bak/
 __pycache__/
 *.pyc
 *.private.pem

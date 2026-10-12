@@ -1,0 +1,31 @@
+{
+  "labels": {
+    "hint": "Note",
+    "feature": "Fonctionnalité",
+    "fix": "Correction",
+    "improvement": "Amélioration",
+    "dependency": "Dépendance",
+    "compatibility": "Compatibilité",
+    "completion": "Complément",
+    "error": "Erreur",
+    "metrics": "Mesures",
+    "update": "Mise à jour",
+    "replacement": "Remplacement",
+    "management": "Gestion",
+    "precision": "Précision",
+    "simplification": "Simplification",
+    "constraint": "Contrainte",
+    "adjustment": "Ajustement"
+  },
+  "$data": {
+    "2026-10-12": {
+      "released_date": "2026/10/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "README et journal en dix langues générés depuis JSON et des modèles communs, avec vérification sans écriture en CI"
+        }
+      ]
+    }
+  }
+}
