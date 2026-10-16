@@ -16,52 +16,53 @@
     }
   ],
   "catalogVersion": 1,
+  "decisions": [
+    "2026-10-16: asr.zipformer-streaming.zh.2025-06-30.int8 stays in the catalog but is upstream-only (mirror null): no license is declared for the weights and the original repository is gated, so the maintainer does not redistribute them.",
+    "2026-10-16: asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8 (official FunAudioLLM export, FunASR Model Open Source License Agreement 1.1, commercial use permitted, punctuation supported) replaces asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8 (WenetSpeech-Yue fine-tune, CC BY-NC 4.0) in the unsigned pending v1 catalog."
+  ],
   "format": 1,
   "models": [
     {
       "bundledComponents": [],
-      "commercialUse": false,
-      "conclusion": "The fine-tuning corpus WenetSpeech-Yue is licensed CC BY-NC 4.0. The FunASR model license also requires attribution and keeping the model name.",
-      "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8",
-      "noticeKey": "speech_model_license_non_commercial",
-      "openQuestions": [
-        "The official SenseVoice export sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17 (FunASR license only, punctuation supported) may suit the default offline recognizer better; decision D10 fixed the 2025-09-09 export, so a change needs the maintainer."
+      "commercialUse": true,
+      "conclusion": "The weights are published under the FunASR Model Open Source License Agreement 1.1, which permits use, copying, modification and sharing, including commercial use, as long as the source, the author information and the model names are retained. The publisher names no training dataset with a commercial restriction.",
+      "decisions": [
+        "2026-10-16: by maintainer decision this official export replaces asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8 (Cantonese fine-tune on WenetSpeech-Yue, CC BY-NC 4.0, no punctuation) in the pending v1 catalog. The pending catalog was unsigned, so the earlier source directory was removed instead of being revoked."
       ],
-      "spdx": "LicenseRef-FunASR-Model-License-1.1 AND Apache-2.0",
+      "distribution": "mirror",
+      "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "LicenseRef-FunASR-Model-License-1.1",
       "trainingData": [
         {
           "commercialRestriction": "undisclosed",
           "evidence": [
-            "https://huggingface.co/FunAudioLLM/SenseVoiceSmall"
+            "https://huggingface.co/FunAudioLLM/SenseVoiceSmall",
+            "https://github.com/FunAudioLLM/SenseVoice"
           ],
           "license": "undisclosed",
-          "name": "SenseVoiceSmall base training data (more than 400,000 hours)"
-        },
-        {
-          "commercialRestriction": true,
-          "evidence": [
-            "https://huggingface.co/datasets/ASLP-lab/WenetSpeech-Yue"
-          ],
-          "license": "CC-BY-NC-4.0",
-          "name": "WenetSpeech-Yue (about 21,800 h of Cantonese, fine-tuning)"
+          "name": "SenseVoiceSmall training data (more than 400,000 hours)"
         }
       ],
       "versionCode": 1,
       "weights": {
         "evidence": [
-          "https://huggingface.co/ASLP-lab/WSYue-ASR",
           "https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE",
+          "https://huggingface.co/FunAudioLLM/SenseVoiceSmall",
           "https://github.com/FunAudioLLM/SenseVoice",
-          "https://k2-fsa.github.io/sherpa/onnx/sense-voice/pretrained.html"
+          "https://k2-fsa.github.io/sherpa/onnx/sense-voice/pretrained.html",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models"
         ],
-        "license": "FunASR Model Open Source License Agreement 1.1 (covers derivatives of SenseVoiceSmall); fine-tune repository declares Apache-2.0",
-        "publisher": "ASLP-lab (fine-tune of FunAudioLLM SenseVoiceSmall)"
+        "license": "FunASR Model Open Source License Agreement 1.1 (attribution and model-name retention; commercial use permitted)",
+        "publisher": "FunAudioLLM / Alibaba (SenseVoiceSmall); int8 ONNX export by k2-fsa (2024-07-17)"
       }
     },
     {
       "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "Weights are published under Apache-2.0 (sherpa-onnx model card and the README inside the archive) and LibriSpeech permits commercial use with attribution.",
+      "distribution": "mirror",
       "modelId": "asr.zipformer-streaming.en.2023-06-26.int8",
       "noticeKey": "speech_model_license_commercial",
       "openQuestions": [],
@@ -91,6 +92,7 @@
       "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "Weights are published under Apache-2.0 and no named training dataset restricts commercial use.",
+      "distribution": "mirror",
       "modelId": "asr.zipformer-streaming.zh-en.2023-02-20.int8",
       "noticeKey": "speech_model_license_commercial",
       "openQuestions": [],
@@ -120,11 +122,13 @@
       "bundledComponents": [],
       "commercialUse": false,
       "conclusion": "Several named training corpora are licensed for non-commercial use only, and no license is declared for the weights.",
+      "decisions": [
+        "2026-10-16: the maintainer decided not to mirror this version. The weights carry no declared license and the original Hugging Face repository is gated, so the catalog records mirror as null and lists only the sherpa-onnx release asset; AutoJs6-Shared-Assets redistributes nothing. The license conclusion (commercialUse false) is unchanged."
+      ],
+      "distribution": "upstream-only",
       "modelId": "asr.zipformer-streaming.zh.2025-06-30.int8",
       "noticeKey": "speech_model_license_non_commercial",
-      "openQuestions": [
-        "The upstream Hugging Face repository is gated with access conditions and declares no license; the maintainer should confirm that mirroring the sherpa-onnx release asset is acceptable before signing."
-      ],
+      "openQuestions": [],
       "spdx": "LicenseRef-NoLicenseDeclared",
       "trainingData": [
         {
@@ -174,6 +178,7 @@
       "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "Weights are published under Apache License 2.0 on ModelScope and no named training dataset restricts commercial use.",
+      "distribution": "mirror",
       "modelId": "kws.zipformer.zh-en.2025-12-20",
       "noticeKey": "speech_model_license_commercial",
       "openQuestions": [
@@ -215,6 +220,7 @@
       ],
       "commercialUse": true,
       "conclusion": "Apache-2.0 weights with permissively granted data. The bundled espeak-ng-data is GPL-3.0-or-later, which allows commercial use under its copyleft terms.",
+      "distribution": "mirror",
       "modelId": "tts.kokoro.multi-lang.v1_1",
       "noticeKey": "speech_model_license_commercial",
       "openQuestions": [],
@@ -242,6 +248,7 @@
       "bundledComponents": [],
       "commercialUse": false,
       "conclusion": "The acoustic model is trained only on the Data-Baker corpus, which its owner releases for non-commercial use only (decision D11).",
+      "distribution": "mirror",
       "modelId": "tts.matcha.icefall.zh-baker",
       "noticeKey": "speech_model_license_non_commercial",
       "openQuestions": [],
@@ -280,6 +287,7 @@
       "bundledComponents": [],
       "commercialUse": "unknown",
       "conclusion": "Training data is Apache-2.0, but no license is declared for the weights (the Hugging Face model repository was not publicly accessible on 2026-10-16).",
+      "distribution": "mirror",
       "modelId": "tts.vits.icefall.zh-aishell3",
       "noticeKey": "speech_model_license_unknown",
       "openQuestions": [
@@ -310,6 +318,7 @@
       "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "MIT weights; the publisher states that MeloTTS is free for commercial and non-commercial use.",
+      "distribution": "mirror",
       "modelId": "tts.vits.melo.zh-en",
       "noticeKey": "speech_model_license_commercial",
       "openQuestions": [],
@@ -349,6 +358,7 @@
       ],
       "commercialUse": false,
       "conclusion": "The training data is licensed for research purposes only and excludes commercial voice synthesis products.",
+      "distribution": "mirror",
       "modelId": "tts.vits.piper.en-us-lessac-medium",
       "noticeKey": "speech_model_license_non_commercial",
       "openQuestions": [
@@ -382,9 +392,13 @@
       "true": "The weights carry a declared license that permits commercial use and no named training dataset restricts commercial use. Undisclosed training data alone does not downgrade the result.",
       "unknown": "Otherwise, in particular when no license is declared for the weights. The plugin shows the same pre-download notice as for false (decision D11)."
     },
+    "distribution": {
+      "mirror": "The reviewed members are repacked into a content-addressed archive on the speech-models-vN release; the upstream asset is the fallback.",
+      "upstream-only": "No archive is published (catalog mirror null); clients install the listed files from the pinned sherpa-onnx release asset and verify them file by file. Used when the maintainer decides not to redistribute weights."
+    },
     "licenseRefs": {
       "LicenseRef-FunASR-Model-License-1.1": "FunASR Model Open Source License Agreement 1.1 (https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE).",
-      "LicenseRef-NoLicenseDeclared": "The upstream publisher declares no license for these weights; the mirror redistributes the exact public sherpa-onnx release asset."
+      "LicenseRef-NoLicenseDeclared": "The upstream publisher declares no license for these weights. The catalog either mirrors the exact public sherpa-onnx release asset or, when the maintainer decides not to redistribute, lists it as upstream-only."
     },
     "noticeKeys": {
       "speech_model_license_commercial": "commercialUse true; attribution per the listed licenses.",

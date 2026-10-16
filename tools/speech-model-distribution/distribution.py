@@ -2,7 +2,9 @@
 
 Python 3.12 standard library only. Model binaries are never stored in Git: every source
 records the upstream sherpa-onnx release assets, their SHA-256 digests and the members
-that are repacked into one deterministic USTAR archive per model version.
+that are repacked into one deterministic USTAR archive per model version. A version whose
+source sets mirror to false is upstream-only: it keeps files[] and upstream[] but has no
+archive, and the catalog records mirror as null for it.
 """
 
 from __future__ import annotations
@@ -75,7 +77,7 @@ MODEL_TYPES = {
 }
 
 SOURCE_REQUIRED = ("format", "modelId", "versionCode", "kind", "modelType", "displayName", "summary", "recommended",
-                   "languages", "sampleRate", "releasedAt", "license", "runtime", "upstream", "archive", "files")
+                   "languages", "sampleRate", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")
 FLAG_FIELDS = ("deprecated", "revoked")
 SOURCE_OPTIONAL = ("speakers",) + FLAG_FIELDS
 CATALOG_FIELDS = ("schemaVersion", "catalogVersion", "releaseTag", "generatedAt", "repository", "models")
@@ -527,24 +529,28 @@ def validate_source(value, *, require_measured=True):
     language_map(value["summary"], "summary", 1024)
     boolean(value["recommended"], "recommended")
     timestamp(value["releasedAt"], "releasedAt")
-    if (value["archive"] is None) != (value["files"] is None):
+    mirrored = boolean(value["mirror"], "mirror")
+    if not mirrored and value["archive"] is not None:
+        raise DistributionError("archive must be null when mirror is false (upstream-only version)")
+    if mirrored and (value["archive"] is None) != (value["files"] is None):
         raise DistributionError("archive and files must both be measured or both be null")
-    if value["archive"] is not None:
+    if value["files"] is not None:
         by_path, directories = validate_files(value["files"])
         mapping = validate_upstream(value["upstream"], by_path)
-        fields(value["archive"], ARCHIVE_FIELDS, name="archive")
-        if value["archive"]["format"] != "tar":
-            raise DistributionError("archive.format must be tar")
-        integer(value["archive"]["size"], "archive size", 1, MAX_ARCHIVE_BYTES)
-        sha256_text(value["archive"]["sha256"], "archive sha256")
-        if value["archive"]["size"] != archive_size(item["size"] for item in value["files"]):
-            raise DistributionError("archive.size differs from the canonical size of its files")
+        if mirrored:
+            fields(value["archive"], ARCHIVE_FIELDS, name="archive")
+            if value["archive"]["format"] != "tar":
+                raise DistributionError("archive.format must be tar")
+            integer(value["archive"]["size"], "archive size", 1, MAX_ARCHIVE_BYTES)
+            sha256_text(value["archive"]["sha256"], "archive sha256")
+            if value["archive"]["size"] != archive_size(item["size"] for item in value["files"]):
+                raise DistributionError("archive.size differs from the canonical size of its files")
         for target, (index, member) in mapping.items():
             if member is None and (by_path[target]["size"], by_path[target]["sha256"]) != (
                     value["upstream"][index]["size"], value["upstream"][index]["sha256"]):
                 raise DistributionError("A raw upstream file differs from its installed file record")
     elif require_measured:
-        raise DistributionError("source.json has no measured archive; run prepare_sources.py --update-sources")
+        raise DistributionError("source.json has no measured files; run prepare_sources.py --update-sources")
     else:
         mapping = validate_upstream(value["upstream"])
         by_path = dict.fromkeys(mapping)
@@ -577,6 +583,16 @@ def _validate_catalog_version(item, model, repository, catalog_version, generate
     _common_version(item, model["kind"], by_path, directories)
     if timestamp(item["releasedAt"], "releasedAt") > generated:
         raise DistributionError("releasedAt cannot be later than the catalog generatedAt")
+    if item["mirror"] is None:
+        # Upstream-only version: no release archive; files[] are installed from upstream[] alone.
+        prefix = f"https://github.com/{repository}/tree/"
+        url = item["sourceUrl"]
+        tag = url[len(prefix):].split("/", 1)[0] if isinstance(url, str) and url.startswith(prefix) else ""
+        if not RELEASE_TAG_PATTERN.fullmatch(tag) or url != source_url(repository, tag, model["modelId"], code):
+            raise DistributionError("sourceUrl of an upstream-only version must name its source directory at a release tag")
+        if _release_number(tag) > catalog_version:
+            raise DistributionError("sourceUrl cannot use a later release than the catalog")
+        return code, None
     mirror = fields(item["mirror"], MIRROR_FIELDS, name="mirror")
     if mirror["format"] != "tar":
         raise DistributionError("mirror.format must be tar")
@@ -639,9 +655,10 @@ def validate_catalog(catalog, minimum_catalog_version=1, *, previous_catalog=Non
         codes, eligible = [], []
         for item in model["versions"]:
             code, artifact = _validate_catalog_version(item, model, repository, version, generated)
-            if artifact in artifacts:
-                raise DistributionError("Duplicate mirror archive")
-            artifacts.add(artifact)
+            if artifact is not None:
+                if artifact in artifacts:
+                    raise DistributionError("Duplicate mirror archive")
+                artifacts.add(artifact)
             codes.append(code)
             if not item.get("deprecated", False) and not item.get("revoked", False):
                 eligible.append(code)
@@ -740,7 +757,11 @@ def load_sources(source_root, *, require_measured=True):
 
 
 def catalog_version_entry(source, repository, release_tag):
-    file_name = archive_file_name(source["modelId"], source["versionCode"], source["archive"]["sha256"])
+    mirror = None
+    if source["mirror"]:
+        file_name = archive_file_name(source["modelId"], source["versionCode"], source["archive"]["sha256"])
+        mirror = {"fileName": file_name, "format": "tar", "size": source["archive"]["size"],
+                  "sha256": source["archive"]["sha256"], "url": release_url(repository, release_tag, file_name)}
     entry = {
         "versionCode": source["versionCode"],
         "modelType": source["modelType"],
@@ -750,8 +771,7 @@ def catalog_version_entry(source, repository, release_tag):
         "license": deepcopy(source["license"]),
         "runtime": deepcopy(source["runtime"]),
         "sourceUrl": source_url(repository, release_tag, source["modelId"], source["versionCode"]),
-        "mirror": {"fileName": file_name, "format": "tar", "size": source["archive"]["size"],
-                   "sha256": source["archive"]["sha256"], "url": release_url(repository, release_tag, file_name)},
+        "mirror": mirror,
         "upstream": deepcopy(source["upstream"]),
         "files": deepcopy(source["files"]),
     }
@@ -764,7 +784,8 @@ def catalog_version_entry(source, repository, release_tag):
 def _without_release_location(version):
     value = _immutable(version)
     value.pop("sourceUrl", None)
-    value["mirror"] = {key: item for key, item in value["mirror"].items() if key != "url"}
+    if value["mirror"] is not None:
+        value["mirror"] = {key: item for key, item in value["mirror"].items() if key != "url"}
     return value
 
 
@@ -795,7 +816,7 @@ def build_catalog(source_root, repository, catalog_version, generated_at, *, pre
                 if flag in source:
                     carried[flag] = source[flag]
             entry = carried
-        else:
+        elif entry["mirror"] is not None:
             new_assets.append(entry["mirror"]["fileName"])
         model = models.setdefault(source["modelId"], {"modelId": source["modelId"], "kind": source["kind"], "versions": []})
         model["versions"].append(entry)
@@ -816,11 +837,22 @@ def build_catalog(source_root, repository, catalog_version, generated_at, *, pre
 
 
 def expected_release_assets(catalog, *, all_artifacts=False):
-    """Map archive file names to (model, version) for the catalog's own release, or for every release."""
+    """Map archive file names to (model, version) for the catalog's own release, or for every release.
+
+    Upstream-only versions (mirror null) have no archive and are never listed.
+    """
     result = {}
     for model in catalog["models"]:
         for version in model["versions"]:
             mirror = version["mirror"]
+            if mirror is None:
+                continue
             if all_artifacts or mirror["url"].split("/")[-2] == catalog["releaseTag"]:
                 result[mirror["fileName"]] = (model, version)
     return result
+
+
+def upstream_only_versions(catalog):
+    """Return [(modelId, versionCode)] of the versions that are installed from upstream[] alone."""
+    return [(model["modelId"], version["versionCode"]) for model in catalog["models"] for version in model["versions"]
+            if version["mirror"] is None]

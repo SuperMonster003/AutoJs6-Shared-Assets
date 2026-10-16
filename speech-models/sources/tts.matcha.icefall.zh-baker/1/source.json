@@ -60,6 +60,7 @@
     "noticeKey": "speech_model_license_non_commercial",
     "spdx": "LicenseRef-NoLicenseDeclared AND MIT"
   },
+  "mirror": true,
   "modelId": "tts.matcha.icefall.zh-baker",
   "modelType": "matcha",
   "recommended": false,

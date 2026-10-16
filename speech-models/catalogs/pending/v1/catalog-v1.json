@@ -1,32 +1,37 @@
 {
   "catalogVersion": 1,
-  "generatedAt": "2026-10-16T03:30:00Z",
+  "generatedAt": "2026-10-16T05:30:00Z",
   "models": [
     {
       "displayName": {
-        "en": "SenseVoice Small, Cantonese fine-tune (int8)",
-        "zh-CN": "SenseVoice Small 粤语微调版 (int8)"
+        "en": "SenseVoice Small, multilingual (int8)",
+        "zh-CN": "SenseVoice Small 多语言 (int8)"
       },
       "kind": "asr",
-      "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8",
+      "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8",
       "recommended": false,
       "recommendedVersionCode": 1,
       "summary": {
-        "en": "Offline recognizer for Mandarin, Cantonese, English, Japanese and Korean, run on segments cut by voice activity detection. Fine-tuned on WenetSpeech-Yue (CC BY-NC 4.0).",
-        "zh-CN": "离线识别普通话, 粤语, 英语, 日语与韩语, 配合语音活动检测切段使用. 在 WenetSpeech-Yue (CC BY-NC 4.0) 上微调."
+        "en": "Offline recognizer for Mandarin, Cantonese, English, Japanese and Korean with punctuation, run on segments cut by voice activity detection. Official FunAudioLLM SenseVoiceSmall export; commercial use is permitted with attribution.",
+        "zh-CN": "离线识别普通话, 粤语, 英语, 日语与韩语, 输出带标点, 配合语音活动检测切段使用. FunAudioLLM 官方 SenseVoiceSmall 导出, 注明出处后可商用."
       },
       "versions": [
         {
           "files": [
             {
+              "path": "LICENSE",
+              "sha256": "221c6df10b0931a5629adad671ea48fb7747e034c414b6d2bfa275bc3dd4ea17",
+              "size": 71
+            },
+            {
               "path": "README.md",
-              "sha256": "721841358d4faa38b0a674bdfc7d5d3cfdf0fafd314aea5dd3280eb09d1af828",
-              "size": 131
+              "sha256": "763991a00edaea534ab36bf1b7cf89e61e911666dcfabbba71f91f9f7c593a63",
+              "size": 104
             },
             {
               "path": "model.int8.onnx",
-              "sha256": "12ca1a2ae7ecf3e0019ef2822307ee0b5cadc9196569e379b4c4026f8205276d",
-              "size": 237115547
+              "sha256": "c71f0ce00bec95b07744e116345e33d8cbbe08cef896382cf907bf4b51a2cd51",
+              "size": 239233841
             },
             {
               "path": "tokens.txt",
@@ -42,16 +47,16 @@
             "yue"
           ],
           "license": {
-            "commercialUse": false,
-            "noticeKey": "speech_model_license_non_commercial",
-            "spdx": "LicenseRef-FunASR-Model-License-1.1 AND Apache-2.0"
+            "commercialUse": true,
+            "noticeKey": "speech_model_license_commercial",
+            "spdx": "LicenseRef-FunASR-Model-License-1.1"
           },
           "mirror": {
-            "fileName": "autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8-v1-db888b6d.tar",
+            "fileName": "autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8-v1-7d9de5b7.tar",
             "format": "tar",
-            "sha256": "db888b6d7233b048b332f26fe86f2d44cfd1c62f3c1a75df71eb99f7c993f4f8",
-            "size": 237434880,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v1/autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8-v1-db888b6d.tar"
+            "sha256": "7d9de5b77708d26f08bdd4fcf29d58a2654608eeab1f3ea1fea3bbeef52f19e5",
+            "size": 239554048,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v1/autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8-v1-7d9de5b7.tar"
           },
           "modelType": "sense-voice",
           "releasedAt": "2026-10-16T00:00:00Z",
@@ -63,18 +68,19 @@
             "minSherpaOnnx": "1.13.8"
           },
           "sampleRate": 16000,
-          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v1/speech-models/sources/asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8/1",
+          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v1/speech-models/sources/asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8/1",
           "upstream": [
             {
               "format": "tar.bz2",
               "members": {
-                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2025-09-09/README.md": "README.md",
-                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2025-09-09/model.int8.onnx": "model.int8.onnx",
-                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2025-09-09/tokens.txt": "tokens.txt"
+                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17/LICENSE": "LICENSE",
+                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17/README.md": "README.md",
+                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17/model.int8.onnx": "model.int8.onnx",
+                "sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17/tokens.txt": "tokens.txt"
               },
-              "sha256": "7305f7905bfcf77fa0b39388a313f3da35c68d971661a65475b56fb2162c8e63",
-              "size": 165783878,
-              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2025-09-09.tar.bz2"
+              "sha256": "7d1efa2138a65b0b488df37f8b89e3d91a60676e416f515b952358d83dfd347e",
+              "size": 163002883,
+              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17.tar.bz2"
             }
           ],
           "versionCode": 1
@@ -325,13 +331,7 @@
             "noticeKey": "speech_model_license_non_commercial",
             "spdx": "LicenseRef-NoLicenseDeclared"
           },
-          "mirror": {
-            "fileName": "autojs6-speech-asr.zipformer-streaming.zh.2025-06-30.int8-v1-62ed0dbd.tar",
-            "format": "tar",
-            "sha256": "62ed0dbde124a6546b5252c18a5dfa18c2dad9620c30555f0d5f6be04be4019a",
-            "size": 167366656,
-            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v1/autojs6-speech-asr.zipformer-streaming.zh.2025-06-30.int8-v1-62ed0dbd.tar"
-          },
+          "mirror": null,
           "modelType": "online-transducer",
           "releasedAt": "2026-10-16T00:00:00Z",
           "runtime": {

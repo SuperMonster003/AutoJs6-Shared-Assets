@@ -611,11 +611,30 @@
     },
     {
       "$ref": "#/$defs/speakersByKind"
+    },
+    {
+      "if": {
+        "properties": {
+          "mirror": {
+            "const": false
+          }
+        },
+        "required": [
+          "mirror"
+        ]
+      },
+      "then": {
+        "properties": {
+          "archive": {
+            "type": "null"
+          }
+        }
+      }
     }
   ],
   "properties": {
     "archive": {
-      "description": "Measured mirror archive; null only before prepare_sources.py --update-sources.",
+      "description": "Measured mirror archive; null before prepare_sources.py --update-sources and always null when mirror is false.",
       "oneOf": [
         {
           "type": "null"
@@ -672,6 +691,10 @@
     "license": {
       "$ref": "#/$defs/license"
     },
+    "mirror": {
+      "description": "true: the repacked archive is published on the speech-models-vN release (archive and files are measured together). false: upstream-only version; archive stays null, files are still measured and must be covered exactly by upstream.",
+      "type": "boolean"
+    },
     "modelId": {
       "$ref": "#/$defs/modelId"
     },
@@ -722,6 +745,7 @@
     "releasedAt",
     "license",
     "runtime",
+    "mirror",
     "upstream",
     "archive",
     "files"

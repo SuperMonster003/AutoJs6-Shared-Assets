@@ -148,7 +148,11 @@ def _stage_members(archive_path, members, blobs, records):
 
 
 def repack(source, cache_dir, output_dir, *, offline=False, fetch=download):
-    """Build the content-addressed archive; return (path, files, archive record)."""
+    """Measure the installed files and build the content-addressed archive; return (path, files, archive record).
+
+    For an upstream-only source (mirror false) the selected members are still staged and measured,
+    so files[] stays verifiable, but no archive is written and (None, files, None) is returned.
+    """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix=".work-", dir=output_dir))
@@ -164,6 +168,8 @@ def repack(source, cache_dir, output_dir, *, offline=False, fetch=download):
                 records[part["path"]] = (path, part["size"], part["sha256"])
         files = [{"path": path, "size": records[path][1], "sha256": records[path][2]} for path in sorted(records)]
         distribution.validate_files(files)
+        if not source["mirror"]:
+            return None, files, None
         entries = [(item["path"], item["size"], (lambda blob=records[item["path"]][0]: blob.open("rb"))) for item in files]
         temporary = work / "archive.tar"
         with temporary.open("wb") as stream:
@@ -188,12 +194,16 @@ def repack(source, cache_dir, output_dir, *, offline=False, fetch=download):
 
 
 def prepare(sources, cache_dir, output_dir, *, update_sources=False, offline=False, fetch=download, log=print):
-    """Repack every (folder, source); return [(source, archive path)] after checking or recording measurements."""
+    """Repack every (folder, source); return [(source, archive path)] after checking or recording measurements.
+
+    The archive path is None for upstream-only sources; their files[] are measured and compared all the same.
+    """
     result = []
     for folder, source in sources:
         label = f"{source['modelId']}/{source['versionCode']}"
         path, files, archive = repack(source, cache_dir, output_dir, offline=offline, fetch=fetch)
         measured = {"archive": archive, "files": files}
+        installed = sum(item["size"] for item in files)
         if (source["archive"], source["files"]) != (archive, files):
             if not update_sources:
                 raise DistributionError(f"{label}: rebuilt archive or files differ from source.json; nothing was recorded")
@@ -201,7 +211,12 @@ def prepare(sources, cache_dir, output_dir, *, update_sources=False, offline=Fal
             distribution.validate_source(updated)
             (Path(folder) / "source.json").write_bytes(distribution.canonical_json_bytes(updated))
             source = updated
-            log(f"{label}: recorded {archive['size']} bytes, sha256 {archive['sha256']}")
+            if archive is None:
+                log(f"{label}: recorded {len(files)} upstream-only files ({installed} bytes), no mirror archive")
+            else:
+                log(f"{label}: recorded {archive['size']} bytes, sha256 {archive['sha256']}")
+        elif archive is None:
+            log(f"{label}: verified {len(files)} upstream-only files ({installed} bytes), no mirror archive")
         else:
             log(f"{label}: reproduced {path.name} ({archive['size']} bytes)")
         result.append((source, path))

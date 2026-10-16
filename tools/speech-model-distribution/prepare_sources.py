@@ -3,7 +3,8 @@
 
 Without --update-sources every rebuilt archive and file list must equal source.json, which makes
 the step a reproducibility check. With --update-sources the measured archive and file records
-are written back (use it only when adding or reviewing a new model version).
+are written back (use it only when adding or reviewing a new model version). Upstream-only
+sources (mirror false) get their files[] measured but no archive; --catalog never selects them.
 """
 
 import argparse
@@ -72,8 +73,10 @@ def main(argv=None):
     except (distribution.DistributionError, OSError) as error:
         print("error: " + str(error), file=sys.stderr)
         return 2
-    total = sum(path.stat().st_size for _source, path in result)
-    print(f"Prepared {len(result)} speech model archives ({total} bytes) in {args.output_dir}")
+    archives = [path for _source, path in result if path is not None]
+    total = sum(path.stat().st_size for path in archives)
+    print(f"Prepared {len(archives)} speech model archives ({total} bytes) in {args.output_dir}; "
+          f"{len(result) - len(archives)} upstream-only versions verified without an archive")
     return 0
 
 

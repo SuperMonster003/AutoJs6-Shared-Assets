@@ -25,6 +25,7 @@ class CatalogTest(unittest.TestCase):
         self.sources, self.cache = self.root / "sources", self.root / "cache"
         self.tts = support.tts_fixture(self.sources, self.cache)
         support.asr_fixture(self.sources, self.cache)
+        support.upstream_only_fixture(self.sources, self.cache)
         support.measure(self.sources, self.cache, self.root / "assets")
 
     def build(self, name, version=1, previous=None, generated=support.TIME1):
@@ -46,6 +47,12 @@ class CatalogTest(unittest.TestCase):
         names = (first / "release-assets.txt").read_text(encoding="utf-8").splitlines()
         self.assertEqual(2, len(names))
         self.assertTrue(all(name.startswith("autojs6-speech-") and name.endswith(".tar") for name in names))
+        self.assertFalse(any(support.UPSTREAM_ONLY_ID in name for name in names))
+        catalog = distribution.read_json(first / "catalog-v1.json")
+        self.assertEqual(3, len(catalog["models"]))
+        self.assertEqual([(support.UPSTREAM_ONLY_ID, 1)], distribution.upstream_only_versions(catalog))
+        preparation = distribution.read_json(first / "preparation.json")
+        self.assertEqual((2, 1), (preparation["releaseAssetCount"], preparation["upstreamOnlyVersions"]))
         before = (first / "catalog-v1.json").read_bytes()
         self.assertEqual(2, self.build("pending")[0])
         self.assertEqual(before, (first / "catalog-v1.json").read_bytes())
@@ -63,6 +70,9 @@ class CatalogTest(unittest.TestCase):
         self.assertIn("/speech-models-v2/", tts["versions"][1]["mirror"]["url"])
         self.assertEqual(2, tts["recommendedVersionCode"])
         self.assertEqual([tts["versions"][1]["mirror"]["fileName"]], (v2 / "release-assets.txt").read_text(encoding="utf-8").splitlines())
+        carried = next(model for model in catalog["models"] if model["modelId"] == support.UPSTREAM_ONLY_ID)["versions"][0]
+        self.assertIsNone(carried["mirror"])
+        self.assertIn("/tree/speech-models-v1/", carried["sourceUrl"])
         self.assertEqual(2, self.build("skip", 3, v1 / "catalog-v1.json", support.TIME2)[0])
         self.assertEqual(2, self.build("no-previous", 2)[0])
 
@@ -75,6 +85,11 @@ class CatalogTest(unittest.TestCase):
         with self.assertRaisesRegex(DistributionError, "immutable"):
             distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=previous)
         value["license"]["commercialUse"] = True
+        archive, value["mirror"], value["archive"] = value["archive"], False, None
+        (self.tts / "source.json").write_bytes(distribution.canonical_json_bytes(value))
+        with self.assertRaisesRegex(DistributionError, "immutable"):
+            distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=previous)
+        value["mirror"], value["archive"] = True, archive
         value["revoked"] = True
         (self.tts / "source.json").write_bytes(distribution.canonical_json_bytes(value))
         catalog, assets = distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=previous)

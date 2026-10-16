@@ -1,8 +1,10 @@
 License status of asr.zipformer-streaming.zh.2025-06-30.int8
 
-The upstream publisher has not declared a license for these model weights. The k2-fsa / sherpa-onnx
-project distributes them publicly from its GitHub release, and AutoJs6-Shared-Assets mirrors that exact
-release asset without modification of the selected files.
+The upstream publisher has not declared a license for these model weights, and the original Hugging Face
+repository is gated. The k2-fsa / sherpa-onnx project distributes a converted copy publicly from its GitHub
+release. On 2026-10-16 the maintainer of AutoJs6-Shared-Assets decided not to mirror this version: the
+catalog records it as upstream only (mirror null) and points clients at the sherpa-onnx release asset, so
+the maintainer does not redistribute the weights.
 
 Training data: the icefall multi_zh-hans recipe names THCHS-30, AISHELL-1/2/4, ST-CMDS, Primewords,
 aidatatang_200zh, MagicData, AliMeeting, WenetSpeech and KeSpeech. MagicData (CC BY-NC-ND 4.0),

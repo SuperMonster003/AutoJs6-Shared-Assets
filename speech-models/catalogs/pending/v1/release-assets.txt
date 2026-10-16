@@ -1,7 +1,6 @@
-autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8-v1-db888b6d.tar
+autojs6-speech-asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8-v1-7d9de5b7.tar
 autojs6-speech-asr.zipformer-streaming.en.2023-06-26.int8-v1-2fdadd2e.tar
 autojs6-speech-asr.zipformer-streaming.zh-en.2023-02-20.int8-v1-7e3371aa.tar
-autojs6-speech-asr.zipformer-streaming.zh.2025-06-30.int8-v1-62ed0dbd.tar
 autojs6-speech-kws.zipformer.zh-en.2025-12-20-v1-23b8757d.tar
 autojs6-speech-tts.kokoro.multi-lang.v1_1-v1-d4fe9d04.tar
 autojs6-speech-tts.matcha.icefall.zh-baker-v1-c80533d3.tar

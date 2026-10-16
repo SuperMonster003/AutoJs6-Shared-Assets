@@ -32,6 +32,7 @@ class ReleaseVerificationTest(unittest.TestCase):
         sources, cache = self.root / "sources", self.root / "cache"
         support.tts_fixture(sources, cache)
         support.asr_fixture(sources, cache)
+        support.upstream_only_fixture(sources, cache)
         self.assets = self.root / "assets"
         support.measure(sources, cache, self.assets)
         self.catalog, self.names = distribution.build_catalog(sources, REPOSITORY, 1, support.TIME1)
@@ -50,6 +51,20 @@ class ReleaseVerificationTest(unittest.TestCase):
             listing.write_text(entries, encoding="utf-8")
             with self.subTest(entries=entries), self.assertRaisesRegex(DistributionError, "release-assets.txt"):
                 self.verify(asset_list=listing)
+
+    def test_upstream_only_versions_are_never_release_assets(self):
+        self.assertEqual([(support.UPSTREAM_ONLY_ID, 1)], distribution.upstream_only_versions(self.catalog))
+        self.assertEqual(2, self.verify()["archives"])
+        self.assertEqual(2, self.verify(all_artifacts=True)["archives"])
+        self.assertEqual(2, len(list(self.assets.iterdir())))
+        listing = self.root / "release-assets.txt"
+        listing.write_text("".join(name + "\n" for name in self.names + [f"autojs6-speech-{support.UPSTREAM_ONLY_ID}-v1-00000000.tar"]),
+                           encoding="utf-8")
+        with self.assertRaisesRegex(DistributionError, "release-assets.txt"):
+            self.verify(asset_list=listing)
+        (self.assets / f"autojs6-speech-{support.UPSTREAM_ONLY_ID}-v1-00000000.tar").write_bytes(b"\0" * 1024)
+        with self.assertRaisesRegex(DistributionError, "Unexpected"):
+            self.verify()
 
     def test_missing_unexpected_nested_resized_and_altered_archives_fail(self):
         target = self.assets / self.names[0]

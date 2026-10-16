@@ -626,38 +626,46 @@
           "$ref": "#/$defs/license"
         },
         "mirror": {
-          "additionalProperties": false,
-          "properties": {
-            "fileName": {
-              "pattern": "^autojs6-speech-(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}-v[1-9][0-9]*-[0-9a-f]{8}\\.tar$",
-              "type": "string"
+          "description": "Content-addressed release archive of this repository, or null for an upstream-only version: no archive is published and clients install files[] from upstream[] alone (the maintainer decided not to redistribute the weights).",
+          "oneOf": [
+            {
+              "type": "null"
             },
-            "format": {
-              "const": "tar"
-            },
-            "sha256": {
-              "$ref": "#/$defs/sha256"
-            },
-            "size": {
-              "description": "Equals the canonical USTAR size: sum of 512 + size rounded up to 512 per file, plus 1024.",
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer"
-            },
-            "url": {
-              "maxLength": 2048,
-              "pattern": "^https://github\\.com/[^/]+/[^/]+/releases/download/speech-models-v[1-9][0-9]*/autojs6-speech-(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}-v[1-9][0-9]*-[0-9a-f]{8}\\.tar$",
-              "type": "string"
+            {
+              "additionalProperties": false,
+              "properties": {
+                "fileName": {
+                  "pattern": "^autojs6-speech-(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}-v[1-9][0-9]*-[0-9a-f]{8}\\.tar$",
+                  "type": "string"
+                },
+                "format": {
+                  "const": "tar"
+                },
+                "sha256": {
+                  "$ref": "#/$defs/sha256"
+                },
+                "size": {
+                  "description": "Equals the canonical USTAR size: sum of 512 + size rounded up to 512 per file, plus 1024.",
+                  "maximum": 2147483647,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "url": {
+                  "maxLength": 2048,
+                  "pattern": "^https://github\\.com/[^/]+/[^/]+/releases/download/speech-models-v[1-9][0-9]*/autojs6-speech-(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}-v[1-9][0-9]*-[0-9a-f]{8}\\.tar$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "fileName",
+                "format",
+                "size",
+                "sha256",
+                "url"
+              ],
+              "type": "object"
             }
-          },
-          "required": [
-            "fileName",
-            "format",
-            "size",
-            "sha256",
-            "url"
-          ],
-          "type": "object"
+          ]
         },
         "modelType": {
           "$ref": "#/$defs/modelType"

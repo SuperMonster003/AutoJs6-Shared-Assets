@@ -23,6 +23,7 @@ class ValidationTest(unittest.TestCase):
         cls.sources, cache = root / "sources", root / "cache"
         support.tts_fixture(cls.sources, cache)
         support.asr_fixture(cls.sources, cache)
+        support.upstream_only_fixture(cls.sources, cache)
         support.measure(cls.sources, cache, root / "assets")
         cls.catalog, cls.new_assets = distribution.build_catalog(cls.sources, support.REPOSITORY, 1, support.TIME1)
 
@@ -35,6 +36,9 @@ class ValidationTest(unittest.TestCase):
 
     def tts_version(self, catalog):
         return next(model for model in catalog["models"] if model["kind"] == "tts")["versions"][0]
+
+    def upstream_only_version(self, catalog):
+        return next(model for model in catalog["models"] if model["modelId"] == support.UPSTREAM_ONLY_ID)["versions"][0]
 
     def assert_source_invalid(self, change, pattern=None):
         value = self.source()
@@ -120,6 +124,64 @@ class ValidationTest(unittest.TestCase):
         unmeasured = self.source()
         unmeasured.update(archive=None, files=None)
         distribution.validate_source(unmeasured, require_measured=False)
+
+    def test_upstream_only_sources_measure_files_but_carry_no_archive(self):
+        value = self.source(support.UPSTREAM_ONLY_ID)
+        self.assertFalse(value["mirror"])
+        self.assertIsNone(value["archive"])
+        self.assertEqual(["README.md", "model.int8.onnx", "tokens.txt"], [item["path"] for item in value["files"]])
+        distribution.validate_source(value)
+        unmeasured = deepcopy(value)
+        unmeasured["files"] = None
+        distribution.validate_source(unmeasured, require_measured=False)
+
+        def invalid(change, pattern):
+            changed = deepcopy(value)
+            change(changed)
+            with self.assertRaisesRegex(DistributionError, pattern):
+                distribution.validate_source(changed)
+
+        invalid(lambda item: item.update(archive=self.source()["archive"]), "archive must be null")
+        invalid(lambda item: item.pop("mirror"), "missing")
+        invalid(lambda item: item.update(mirror="no"), "mirror must be a boolean")
+        invalid(lambda item: item.update(mirror=None), "mirror must be a boolean")
+        invalid(lambda item: item.update(files=None), "measured")
+        invalid(lambda item: item["upstream"][0]["members"].popitem(), "exactly")
+        invalid(lambda item: item["files"].reverse(), "ascending")
+        mirrored = self.source()
+        mirrored.update(mirror=False, archive=None)
+        with self.assertRaisesRegex(DistributionError, "archive must be null"):
+            distribution.validate_source(dict(mirrored, archive=self.source()["archive"]))
+        distribution.validate_source(mirrored)
+
+    def test_upstream_only_catalog_versions_have_null_mirror_and_no_release_asset(self):
+        version = self.upstream_only_version(self.catalog)
+        self.assertIsNone(version["mirror"])
+        self.assertTrue(version["sourceUrl"].endswith("/tree/speech-models-v1/speech-models/sources/" + support.UPSTREAM_ONLY_ID + "/1"))
+        self.assertEqual([(support.UPSTREAM_ONLY_ID, 1)], distribution.upstream_only_versions(self.catalog))
+        self.assertFalse(any(support.UPSTREAM_ONLY_ID in name for name in self.new_assets))
+        self.assertFalse(any(support.UPSTREAM_ONLY_ID in name for name in distribution.expected_release_assets(self.catalog, all_artifacts=True)))
+        distribution.validate_catalog(self.catalog, expected_repository=support.REPOSITORY)
+
+        def upstream_only(change):
+            return lambda catalog: change(self.upstream_only_version(catalog))
+
+        self.assert_catalog_invalid(upstream_only(lambda item: item.update(sourceUrl=item["sourceUrl"].replace("-v1/", "-v2/"))), "later release")
+        self.assert_catalog_invalid(upstream_only(lambda item: item.update(sourceUrl=item["sourceUrl"].replace("/1", "/2"))), "sourceUrl")
+        self.assert_catalog_invalid(upstream_only(lambda item: item.update(sourceUrl="https://example.com/sources")), "sourceUrl")
+        self.assert_catalog_invalid(upstream_only(lambda item: item.update(sourceUrl=None)), "sourceUrl")
+        self.assert_catalog_invalid(upstream_only(lambda item: item.update(mirror={"fileName": "x.tar"})), "mirror")
+        self.assert_catalog_invalid(upstream_only(lambda item: item.pop("mirror")), "missing")
+        self.assert_catalog_invalid(upstream_only(lambda item: item["upstream"][0]["members"].popitem()), "exactly")
+        self.assert_catalog_invalid(upstream_only(lambda item: item["files"].append(dict(item["files"][-1], path="zz.bin"))), "exactly")
+        # Any version may be upstream-only when its source says so, but a published mirror cannot disappear later.
+        structural = deepcopy(self.catalog)
+        self.tts_version(structural)["mirror"] = None
+        distribution.validate_catalog(structural)
+        current = deepcopy(structural)
+        current.update(catalogVersion=2, releaseTag="speech-models-v2", generatedAt=support.TIME2)
+        with self.assertRaisesRegex(DistributionError, "Historical"):
+            distribution.validate_catalog(current, previous_catalog=self.catalog)
 
     def test_file_lists_reject_case_collisions_and_file_directory_conflicts(self):
         entry = {"size": 1, "sha256": "0" * 64}

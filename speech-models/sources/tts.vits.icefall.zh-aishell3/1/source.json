@@ -60,6 +60,7 @@
     "noticeKey": "speech_model_license_unknown",
     "spdx": "LicenseRef-NoLicenseDeclared"
   },
+  "mirror": true,
   "modelId": "tts.vits.icefall.zh-aishell3",
   "modelType": "vits",
   "recommended": true,

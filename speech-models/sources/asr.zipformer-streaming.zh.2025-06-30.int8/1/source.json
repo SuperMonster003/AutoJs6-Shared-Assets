@@ -1,9 +1,5 @@
 {
-  "archive": {
-    "format": "tar",
-    "sha256": "62ed0dbde124a6546b5252c18a5dfa18c2dad9620c30555f0d5f6be04be4019a",
-    "size": 167366656
-  },
+  "archive": null,
   "displayName": {
     "en": "Streaming Zipformer, Chinese (int8, 2025)",
     "zh-CN": "流式 Zipformer 中文 (int8, 2025)"
@@ -45,6 +41,7 @@
     "noticeKey": "speech_model_license_non_commercial",
     "spdx": "LicenseRef-NoLicenseDeclared"
   },
+  "mirror": false,
   "modelId": "asr.zipformer-streaming.zh.2025-06-30.int8",
   "modelType": "online-transducer",
   "recommended": false,

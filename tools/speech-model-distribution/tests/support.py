@@ -76,13 +76,14 @@ def write_raw(cache, tag, asset, content, path):
     return {"url": f"{BASE}/{tag}/{asset}", "size": len(content), "sha256": hashlib.sha256(content).hexdigest(), "format": "file", "path": path}
 
 
-def source_value(model_id, upstream, config, *, kind="tts", model_type="vits", speakers=2, code=1, **extra):
+def source_value(model_id, upstream, config, *, kind="tts", model_type="vits", speakers=2, code=1, mirror=True, **extra):
     value = {"format": 1, "modelId": model_id, "versionCode": code, "kind": kind, "modelType": model_type,
              "displayName": {"en": "Unit fixture", "zh-CN": "Unit fixture (zh-CN)"},
              "summary": {"en": "Synthetic offline unit test", "zh-CN": "Synthetic unit test (zh-CN)"},
              "recommended": False, "languages": ["zh", "en"], "sampleRate": 16000, "releasedAt": TIME1,
              "license": {"spdx": "Apache-2.0", "commercialUse": True, "noticeKey": "speech_model_license_commercial"},
-             "runtime": {"minSherpaOnnx": "1.13.8", "config": config}, "upstream": upstream, "archive": None, "files": None}
+             "runtime": {"minSherpaOnnx": "1.13.8", "config": config}, "mirror": mirror, "upstream": upstream,
+             "archive": None, "files": None}
     if kind == "tts":
         value["speakers"] = speakers
     value.update(extra)
@@ -113,6 +114,20 @@ def asr_fixture(sources, cache, model_id="asr.online.unit-test"):
     config = {"encoder": "encoder.int8.onnx", "decoder": "decoder.onnx", "joiner": "joiner.int8.onnx", "tokens": "tokens.txt",
               "modelType": "zipformer2"}
     return write_source(sources, source_value(model_id, [part, raw], config, kind="asr", model_type="online-transducer"))
+
+
+UPSTREAM_ONLY_ID = "asr.sense-voice.unit-test"
+
+
+def upstream_only_fixture(sources, cache, model_id=UPSTREAM_ONLY_ID):
+    """An upstream-only source (mirror false): files are measured, but no archive is ever built."""
+    members = {"model.int8.onnx": b"sense-voice" * 40, "tokens.txt": b"<blk> 0\n", "README.md": b"# upstream only\n"}
+    part = write_upstream(cache, "asr-models", model_id + ".tar.bz2", model_id, members, extra={"test_wavs/zh.wav": b"RIFF"})
+    config = {"model": "model.int8.onnx", "tokens": "tokens.txt"}
+    value = source_value(model_id, [part], config, kind="asr", model_type="sense-voice", mirror=False,
+                         license={"spdx": "LicenseRef-NoLicenseDeclared", "commercialUse": False,
+                                  "noticeKey": "speech_model_license_non_commercial"})
+    return write_source(sources, value)
 
 
 def measure(sources, cache, output):

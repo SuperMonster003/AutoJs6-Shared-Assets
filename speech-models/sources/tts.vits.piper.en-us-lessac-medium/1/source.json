@@ -1815,6 +1815,7 @@
     "noticeKey": "speech_model_license_non_commercial",
     "spdx": "MIT AND GPL-3.0-or-later"
   },
+  "mirror": true,
   "modelId": "tts.vits.piper.en-us-lessac-medium",
   "modelType": "vits",
   "recommended": false,

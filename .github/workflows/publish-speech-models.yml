@@ -130,6 +130,8 @@ jobs:
           fi
 
       - name: Rebuild the new mirror archives from pinned upstream assets
+        # Upstream-only versions (mirror null in the catalog) have no archive: they are neither rebuilt
+        # here nor uploaded below, because release-assets.txt lists only versions with a mirror record.
         run: |
           set -euo pipefail
           python tools/speech-model-distribution/prepare_sources.py \

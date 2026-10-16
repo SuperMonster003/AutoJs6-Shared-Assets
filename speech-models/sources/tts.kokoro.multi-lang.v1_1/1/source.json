@@ -1846,6 +1846,7 @@
     "noticeKey": "speech_model_license_commercial",
     "spdx": "Apache-2.0 AND GPL-3.0-or-later"
   },
+  "mirror": true,
   "modelId": "tts.kokoro.multi-lang.v1_1",
   "modelType": "kokoro",
   "recommended": false,

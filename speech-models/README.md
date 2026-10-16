@@ -5,7 +5,9 @@ spotting and text-to-speech) for the AutoJs6 plugin 3-Macaw Speech
 (`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phase P2, decisions D9, D24 and D25). The plugin
 bundles the sherpa-onnx runtime and the silero VAD model; every other model is downloaded on demand
 from an immutable `speech-models-vN` GitHub Release of this repository, with the upstream sherpa-onnx
-release asset as a fallback. Both paths end with the same file-level SHA-256 checks.
+release asset as a fallback. Both paths end with the same file-level SHA-256 checks. A version can also
+be upstream-only (`mirror` is null): the maintainer decided not to redistribute its weights, so no
+archive is published and clients install it from the pinned sherpa-onnx asset alone.
 
 The family has its own directory, catalog schemas, tools (`tools/speech-model-distribution/`),
 workflow (`.github/workflows/publish-speech-models.yml`), release-tag prefix and ECDSA P-256 signing
@@ -19,7 +21,9 @@ GitHub 100 MB file limit, and this repository deliberately avoids Git LFS. There
 
 - `source.json`: catalog metadata, the pinned upstream release assets (URL, size, SHA-256), the
   archive members that are kept and their installed paths, the sherpa-onnx file roles, the license
-  summary, and the measured mirror archive and installed-file digests.
+  summary, whether the version is mirrored (`mirror`), and the measured mirror archive and
+  installed-file digests (`archive` stays null for an upstream-only version; `files` is measured
+  either way).
 - `MODEL_CARD.md`: origin, training data, what was repacked or omitted, and known limits.
 - `LICENSE` and `LICENSE-*`: the license texts for the weights and bundled components, or a notice
   when the publisher declares no license.
@@ -71,7 +75,9 @@ Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.` or `tts.`)
 - `languages`, `sampleRate`, and `speakers` for TTS models.
 - `license`: `spdx` (license IDs or `LicenseRef-*`), `commercialUse` (`true`, `false` or `"unknown"`)
   and `noticeKey`, the plugin string shown before download (decision D11).
-- `mirror`: the content-addressed Release archive (`fileName`, `format`, `size`, `sha256`, `url`).
+- `mirror`: the content-addressed Release archive (`fileName`, `format`, `size`, `sha256`, `url`), or
+  `null` for an upstream-only version. Such a version has no Release archive at all: clients skip the
+  mirror path and install from `upstream[]`, which must still cover exactly `files[]`.
 - `upstream[]`: the sherpa-onnx release assets, each a `tar.bz2` with a `members` map from archive
   member to installed path, or a single `file`. Together they install exactly `files[]`.
 - `files[]`: installed path, size and SHA-256 of every file, the final verification basis.
@@ -89,22 +95,36 @@ Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.` or `tts.`)
   and only toward true; `recommendedVersionCode` is the newest active version or null.
 - New versions of a model use a higher `versionCode`. Unchanged versions keep their original Release
   URL, so each release uploads only the archives it introduces (`release-assets.txt`).
+- `mirror` is part of the immutable version: a published version can neither gain nor lose its
+  archive. Upstream-only versions (`mirror` null) never appear in `release-assets.txt`; the rebuild
+  and release checks skip them, while `prepare_sources.py` still measures their `files[]` from the
+  upstream members so that the upstream install stays verifiable.
 - Clients verify the detached signature over the exact catalog bytes, refuse catalog rollback, then
-  check archive size and SHA-256 before unpacking and every installed file afterwards.
+  check archive size and SHA-256 before unpacking and every installed file afterwards. For an
+  upstream-only version they check the upstream asset's size and SHA-256 instead, then the files.
 
 ## Current state
 
-`catalogs/pending/v1/` holds the reviewed, unsigned v1 candidate generated on 2026-10-16 from the ten
-sources below (appendix A of the plugin roadmap). It is not signed or promoted yet, and no
+`catalogs/pending/v1/` holds the reviewed, unsigned v1 candidate regenerated on 2026-10-16 from the
+ten sources below (appendix A of the plugin roadmap). It is not signed or promoted yet, and no
 `speech-models-v1` Release exists. Archive sizes are measured, and a second offline rebuild
-reproduced all ten archives byte for byte.
+reproduced all nine archives byte for byte. Two maintainer decisions of 2026-10-16 shaped this
+candidate:
+
+- The Chinese streaming model of 2025 stays in the catalog but is upstream-only (`mirror` null):
+  no license is declared for its weights and the original repository is gated, so this repository
+  does not redistribute it.
+- The SenseVoice entry is the official FunAudioLLM export of 2024-07-17 (FunASR Model Open Source
+  License Agreement 1.1, commercial use permitted, punctuation supported). It replaced the Cantonese
+  fine-tune export `asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8` (WenetSpeech-Yue, CC BY-NC 4.0);
+  the pending catalog was unsigned, so that source directory was removed rather than revoked.
 
 | Model ID | Archive | License expression | commercialUse |
 | --- | ---: | --- | --- |
-| `asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8` | 237.4 MB | `LicenseRef-FunASR-Model-License-1.1 AND Apache-2.0` | false |
+| `asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8` | 239.6 MB | `LicenseRef-FunASR-Model-License-1.1` | true |
 | `asr.zipformer-streaming.en.2023-06-26.int8` | 70.3 MB | `Apache-2.0` | true |
 | `asr.zipformer-streaming.zh-en.2023-02-20.int8` | 199.1 MB | `Apache-2.0` | true |
-| `asr.zipformer-streaming.zh.2025-06-30.int8` | 167.4 MB | `LicenseRef-NoLicenseDeclared` | false |
+| `asr.zipformer-streaming.zh.2025-06-30.int8` | upstream only (167.4 MB installed) | `LicenseRef-NoLicenseDeclared` | false |
 | `kws.zipformer.zh-en.2025-12-20` | 8.8 MB | `Apache-2.0` | true |
 | `tts.kokoro.multi-lang.v1_1` | 406.0 MB | `Apache-2.0 AND GPL-3.0-or-later` | true |
 | `tts.matcha.icefall.zh-baker` | 81.0 MB | `LicenseRef-NoLicenseDeclared AND MIT` | false |
@@ -112,8 +132,9 @@ reproduced all ten archives byte for byte.
 | `tts.vits.melo.zh-en` | 177.4 MB | `MIT` | true |
 | `tts.vits.piper.en-us-lessac-medium` | 81.4 MB | `MIT AND GPL-3.0-or-later` | false |
 
-The ten archives total 1,461,609,984 bytes. `GPL-3.0-or-later` covers the compiled eSpeak NG data
-used by Kokoro and Piper for phonemization.
+The nine archives total 1,296,362,496 bytes (`release-assets.txt`); the upstream-only version adds
+no Release asset. `GPL-3.0-or-later` covers the compiled eSpeak NG data used by Kokoro and Piper for
+phonemization.
 
 ## Signing key
 
@@ -172,12 +193,14 @@ refuses a private key inside any Git working tree and a catalog that fails valid
    ```
 
    The workflow runs the tool tests, verifies the signature and history, rebuilds the catalog from the
-   sources and compares bytes, re-downloads the pinned upstream assets and rebuilds the ten archives,
-   confirms that neither the tag nor the Release exists, publishes the archives with the catalog and
-   signature, then downloads everything again and verifies it. It never overwrites an existing tag or
-   Release; a failure after tag creation needs manual inspection.
+   sources and compares bytes, re-downloads the pinned upstream assets and rebuilds the nine archives
+   named in `release-assets.txt` (upstream-only versions are skipped), confirms that neither the tag
+   nor the Release exists, publishes the archives with the catalog and signature, then downloads
+   everything again and verifies it. It never overwrites an existing tag or Release; a failure after
+   tag creation needs manual inspection.
 
-6. Record the Release URL, the archive count (10), the total size and the key ID in the plugin roadmap
-   (P2.5), and copy the exact signed catalog, signature and public key into the plugin (P2.4).
+6. Record the Release URL, the archive count (9, plus 1 upstream-only version), the total size and the
+   key ID in the plugin roadmap (P2.5), and copy the exact signed catalog, signature and public key
+   into the plugin (P2.4).
 
 Tool details, adding a model version and local checks: [tools README](../tools/speech-model-distribution/README.md).

@@ -46,6 +46,7 @@
     "noticeKey": "speech_model_license_commercial",
     "spdx": "Apache-2.0"
   },
+  "mirror": true,
   "modelId": "kws.zipformer.zh-en.2025-12-20",
   "modelType": "kws-transducer",
   "recommended": true,

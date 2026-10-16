@@ -68,6 +68,39 @@ class PreparationTest(unittest.TestCase):
         self.assertEqual(first, again[0][1])
         self.assertEqual([], [path.name for path in (self.root / "first").iterdir() if path.name.startswith(".work-")])
 
+    def test_upstream_only_sources_are_measured_but_never_archived(self):
+        folder = support.upstream_only_fixture(self.sources, self.cache)
+        [(source, path)] = support.measure(self.sources, self.cache, self.root / "assets")
+        self.assertIsNone(path)
+        recorded = support.read_source(folder)
+        self.assertFalse(recorded["mirror"])
+        self.assertIsNone(recorded["archive"])
+        self.assertEqual(["README.md", "model.int8.onnx", "tokens.txt"], [item["path"] for item in recorded["files"]])
+        self.assertEqual(hashlib.sha256(b"sense-voice" * 40).hexdigest(), recorded["files"][1]["sha256"])
+        self.assertEqual([], list((self.root / "assets").iterdir()))
+        loaded = distribution.load_sources(self.sources)
+        messages = []
+        [(_source, again)] = preparation.prepare(loaded, self.cache, self.root / "assets", offline=True, log=messages.append)
+        self.assertIsNone(again)
+        self.assertIn("no mirror archive", messages[0])
+        recorded["files"][1]["sha256"] = "0" * 64
+        (folder / "source.json").write_bytes(distribution.canonical_json_bytes(recorded))
+        with self.assertRaisesRegex(DistributionError, "differ from source.json"):
+            preparation.prepare(distribution.load_sources(self.sources), self.cache, self.root / "assets", offline=True, log=lambda _m: None)
+        recorded["files"][1]["sha256"] = source["files"][1]["sha256"]
+        (folder / "source.json").write_bytes(distribution.canonical_json_bytes(recorded))
+        catalog, assets = distribution.build_catalog(self.sources, support.REPOSITORY, 1, support.TIME1)
+        self.assertEqual([], assets)
+        catalog_path = self.root / "catalog-v1.json"
+        catalog_path.write_bytes(distribution.canonical_json_bytes(catalog))
+        release = self.root / "release"
+        self.assertEqual(0, prepare_sources.main(["--source-root", str(self.sources), "--cache-dir", str(self.cache), "--offline",
+                                                  "--output-dir", str(release), "--catalog", str(catalog_path)]))
+        self.assertFalse(release.exists())
+        self.assertEqual(0, prepare_sources.main(["--source-root", str(self.sources), "--cache-dir", str(self.cache), "--offline",
+                                                  "--output-dir", str(release)]))
+        self.assertEqual([], [path.name for path in release.iterdir()] if release.exists() else [])
+
     def test_raw_upstream_files_are_installed_unchanged(self):
         folder = support.asr_fixture(self.sources, self.cache)
         support.measure(self.sources, self.cache, self.root / "assets")

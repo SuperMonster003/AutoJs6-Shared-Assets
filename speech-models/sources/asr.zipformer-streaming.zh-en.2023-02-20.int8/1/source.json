@@ -51,6 +51,7 @@
     "noticeKey": "speech_model_license_commercial",
     "spdx": "Apache-2.0"
   },
+  "mirror": true,
   "modelId": "asr.zipformer-streaming.zh-en.2023-02-20.int8",
   "modelType": "online-transducer",
   "recommended": true,

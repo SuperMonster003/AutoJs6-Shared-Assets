@@ -7,7 +7,7 @@ signing and publication steps are in [the family README](../../speech-models/REA
 
 | Script | Purpose |
 | --- | --- |
-| `prepare_sources.py` | Download the pinned upstream sherpa-onnx assets into `build/`, verify them, repack the archives and compare or record the measured digests. |
+| `prepare_sources.py` | Download the pinned upstream sherpa-onnx assets into `build/`, verify them, repack the archives and compare or record the measured digests. Upstream-only sources (`mirror` false) are measured but not archived. |
 | `build_catalog.py` | Build an unsigned catalog from the sources (no network), plus `release-assets.txt` and `preparation.json`. |
 | `verify_catalog.py` | Validate schema rules, canonical bytes, history and immutability, optionally the rebuild from sources and the detached signature. |
 | `sign_catalog.py` | Maintainer-only offline signing with the speech key. |
@@ -37,6 +37,12 @@ the run into a reproducibility check. `--catalog <catalog>` limits the run to th
 catalog's own release introduces (used by the workflow); `--model <modelId>/<versionCode>` selects
 single versions.
 
+A source with `"mirror": false` is upstream-only: the maintainer decided not to redistribute its
+weights. Its selected members are still staged and measured so that `files[]` is recorded and
+re-checked, but no archive is written, `archive` stays null, the catalog records `mirror` as null,
+and `release-assets.txt`, `--catalog` runs and `verify_release.py` leave it out. Clients install such a
+version from `upstream[]` alone.
+
 ## Adding or changing a model version
 
 A published `(modelId, versionCode)` is immutable. A different member selection, a new upstream
@@ -44,7 +50,8 @@ asset or a replaced upstream file requires a new `versionCode`.
 
 1. Create `speech-models/sources/<modelId>/<versionCode>/` with `source.json` (format in
    [model-source-v1.schema.json](../../speech-models/schemas/model-source-v1.schema.json)), `MODEL_CARD.md`
-   and the license files. Set `archive` and `files` to null.
+   and the license files. Set `archive` and `files` to null, and `mirror` to true unless the maintainer
+   decided not to redistribute the weights (then `mirror` is false and `archive` stays null for good).
 2. Measure and record the archive and installed files:
 
    ```powershell
@@ -82,9 +89,12 @@ the remote preflight, the workflow contract and the checked-in v1 data.
 
 ## Measured v1 preparation (2026-10-16)
 
-The eleven pinned upstream assets (1,857,832,275 bytes) were downloaded once into the ignored cache.
-`prepare_sources.py --update-sources --offline` then built the ten archives in about 8.5 minutes on
-the maintainer's Windows workstation, and a second `prepare_sources.py --offline` run into a new output
-directory reproduced all ten archives with identical SHA-256 digests. `verify_release.py` accepted
-the reproduced set against the pending v1 catalog and its `release-assets.txt`. No network
+The eleven pinned upstream assets of the current sources (1,855,051,280 bytes) were downloaded once
+into the ignored cache; the SenseVoice 2024-07-17 asset was added on 2026-10-16 when it replaced the
+2025-09-09 export, and its GitHub API digest matched the measured SHA-256.
+`prepare_sources.py --update-sources --offline` built the archives in about 8.5 minutes on the
+maintainer's Windows workstation, and a second `prepare_sources.py --offline` run into a new output
+directory reproduced all nine archives with identical SHA-256 digests while re-measuring the
+upstream-only Chinese streaming model (five files, 167,361,237 bytes, no archive). `verify_release.py`
+accepted the reproduced set against the pending v1 catalog and its `release-assets.txt`. No network
 publication took place.

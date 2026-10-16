@@ -43,6 +43,7 @@ def write_output(output, catalog, new_assets, distribution):
             "generatedAt": catalog["generatedAt"], "models": len(catalog["models"]),
             "releaseAssetCount": len(new_assets),
             "releaseAssetBytes": sum(version["mirror"]["size"] for _model, version in assets.values()),
+            "upstreamOnlyVersions": len(distribution.upstream_only_versions(catalog)),
             "unsigned": True,
         }))
         (temporary / distribution.OUTPUT_MARKER).write_text("Unsigned speech model catalog staging.\n", encoding="utf-8", newline="\n")
@@ -70,8 +71,8 @@ def main(argv=None):
     except (distribution.DistributionError, OSError) as error:
         print("error: " + str(error), file=sys.stderr)
         return 2
-    print(f"Prepared unsigned speech catalog v{catalog['catalogVersion']} with {len(catalog['models'])} models "
-          f"and {len(new_assets)} new release archives")
+    print(f"Prepared unsigned speech catalog v{catalog['catalogVersion']} with {len(catalog['models'])} models, "
+          f"{len(new_assets)} new release archives and {len(distribution.upstream_only_versions(catalog))} upstream-only versions")
     return 0
 
 

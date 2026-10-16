@@ -19,6 +19,8 @@ FAMILY = ROOT / "speech-models"
 PENDING = FAMILY / "catalogs/pending/v1"
 NOTICE_FOR = {True: "speech_model_license_commercial", False: "speech_model_license_non_commercial",
               "unknown": "speech_model_license_unknown"}
+UPSTREAM_ONLY = "asr.zipformer-streaming.zh.2025-06-30.int8"
+SENSE_VOICE = "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8"
 
 
 def schema(name):
@@ -42,7 +44,16 @@ class CheckedInDataTest(unittest.TestCase):
                 self.assertNotIn("test_wavs", " ".join(paths))
                 self.assertEqual("1.13.8", source["runtime"]["minSherpaOnnx"])
                 self.assertEqual(NOTICE_FOR[source["license"]["commercialUse"]], source["license"]["noticeKey"])
+                self.assertEqual(source["mirror"], source["archive"] is not None)
                 self.assertEqual(distribution.canonical_json_bytes(source), (folder / "source.json").read_bytes())
+        self.assertEqual([UPSTREAM_ONLY], [source["modelId"] for _folder, source in self.sources if not source["mirror"]])
+        by_id = {source["modelId"]: source for _folder, source in self.sources}
+        self.assertNotIn("asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8", by_id)
+        self.assertIs(True, by_id[SENSE_VOICE]["license"]["commercialUse"])
+        self.assertEqual("LicenseRef-FunASR-Model-License-1.1", by_id[SENSE_VOICE]["license"]["spdx"])
+        self.assertEqual(["LICENSE", "README.md", "model.int8.onnx", "tokens.txt"], [item["path"] for item in by_id[SENSE_VOICE]["files"]])
+        self.assertIn("FunASR Model Open Source License Agreement",
+                      (FAMILY / "sources" / SENSE_VOICE / "1/LICENSE").read_text(encoding="utf-8"))
 
     def test_pending_catalog_is_canonical_and_reproduced_from_sources(self):
         data = (PENDING / "catalog-v1.json").read_bytes()
@@ -51,9 +62,16 @@ class CheckedInDataTest(unittest.TestCase):
         rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.catalog["repository"], 1, self.catalog["generatedAt"])
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
         self.assertEqual(assets, (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines())
+        self.assertEqual(9, len(assets))
+        self.assertEqual(10, len(self.catalog["models"]))
+        self.assertEqual([(UPSTREAM_ONLY, 1)], distribution.upstream_only_versions(self.catalog))
+        self.assertFalse(any(UPSTREAM_ONLY in name for name in assets))
+        self.assertTrue(any(SENSE_VOICE in name for name in assets))
         preparation = distribution.read_json(PENDING / "preparation.json")
         self.assertEqual(len(assets), preparation["releaseAssetCount"])
-        self.assertEqual(sum(version["mirror"]["size"] for model in self.catalog["models"] for version in model["versions"]),
+        self.assertEqual(1, preparation["upstreamOnlyVersions"])
+        self.assertEqual(sum(version["mirror"]["size"] for model in self.catalog["models"] for version in model["versions"]
+                             if version["mirror"] is not None),
                          preparation["releaseAssetBytes"])
         self.assertTrue(preparation["unsigned"])
 
@@ -76,6 +94,12 @@ class CheckedInDataTest(unittest.TestCase):
                     self.assertTrue(restricted, "false requires a named restricted dataset")
         self.assertEqual(set(NOTICE_FOR.values()), set(audit["policy"]["noticeKeys"]))
         self.assertIs(False, by_id["tts.matcha.icefall.zh-baker"]["commercialUse"])
+        self.assertIs(True, by_id[SENSE_VOICE]["commercialUse"])
+        self.assertEqual("upstream-only", by_id[UPSTREAM_ONLY]["distribution"])
+        self.assertEqual([], by_id[UPSTREAM_ONLY]["openQuestions"])
+        self.assertEqual({"mirror"}, {entry["distribution"] for key, entry in by_id.items() if key != UPSTREAM_ONLY})
+        self.assertEqual({"mirror", "upstream-only"}, set(audit["policy"]["distribution"]))
+        self.assertEqual(2, len(audit["decisions"]))
 
     def test_schemas_follow_the_validator(self):
         catalog = schema("catalog-v1.schema.json")
@@ -85,9 +109,15 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(list(distribution.MODEL_FIELDS), model["required"])
         self.assertEqual(list(distribution.VERSION_REQUIRED), version["required"])
         self.assertEqual(set(distribution.VERSION_REQUIRED + distribution.VERSION_OPTIONAL), set(version["properties"]))
+        mirror = version["properties"]["mirror"]["oneOf"]
+        self.assertEqual({"type": "null"}, mirror[0])
+        self.assertEqual(list(distribution.MIRROR_FIELDS), mirror[1]["required"])
         source = schema("model-source-v1.schema.json")
         self.assertEqual(list(distribution.SOURCE_REQUIRED), source["required"])
         self.assertEqual(set(distribution.SOURCE_REQUIRED + distribution.SOURCE_OPTIONAL), set(source["properties"]))
+        self.assertEqual("boolean", source["properties"]["mirror"]["type"])
+        self.assertIn({"if": {"properties": {"mirror": {"const": False}}, "required": ["mirror"]},
+                       "then": {"properties": {"archive": {"type": "null"}}}}, source["allOf"])
         for document in (catalog, source):
             self.assertEqual(list(distribution.MODEL_TYPES), document["$defs"]["modelType"]["enum"])
             rules = {rule["if"]["properties"]["modelType"]["const"]: rule["then"]["properties"]["runtime"]["properties"]["config"]
