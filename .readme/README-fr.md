@@ -21,6 +21,7 @@ Ce dépôt est la source de distribution vérifiée des ressources AutoJs6 volum
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): polices WOFF2 facultatives pour l'éditeur Ace d'AutoJs6. Iosevka Regular reste intégré à AutoJs6 et n'est pas distribué ici.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): modèles locaux de classement pour la génération de code d'interface, versionnés indépendamment avec leurs propres catalogues signés et étiquettes de publication.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): modèles vocaux sherpa-onnx (reconnaissance, détection de mots-clés et synthèse) téléchargés à la demande par le plugin 3-Macaw Speech. Seuls les manifestes de sources et les textes de licence sont versionnés; les archives sont reproduites à partir de ressources amont épinglées, avec leurs propres catalogues signés et étiquettes de publication.
 - Chaque nouvelle famille de ressources doit avoir son répertoire, manifeste, préfixe d'étiquette, workflow, politique d'intégrité et, si nécessaire, sa clé de signature.
 
 Les ressources nécessaires à la compilation ou à l'affichage de l'application installée (logo principal ou CSS intégré) restent normalement dans le dépôt AutoJs6. Ce dépôt partagé accueille les ressources publiées/téléchargées séparément ou communes à plusieurs projets. Le CSS distant est du contenu actif et ne doit jamais être ajouté à `ace-fonts`; attribuez-lui un espace de noms distinct et une politique de signature/vérification plus stricte.
@@ -40,6 +41,7 @@ Les entrées v4 portent les caractéristiques explicites `mono`, `nerd`, `variab
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 Les paquets générés sont dans `build/`, ignoré par Git. Les WOFF2 sources de référence et notices sont suivis directement: un clone neuf reproduit les publications sans répertoire AutoJs6 `build/` ni ancien instantané `tools/.../sources`. Git LFS n'est volontairement pas utilisé.
@@ -75,7 +85,15 @@ Ne soumettez jamais de contenu exécutable, de secrets, de clés privées ni de 
 
 La distribution des modèles a ses propres prérequis de configuration et de publication; voir [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). Le modèle tiny actuel est un artefact de test vérifié destiné à une exécution sur fork ou dépôt privé. Il n'est pas admissible au catalogue de production. Les éléments de signature officiels et les contrôles de qualité des modèles de production sont distincts de la configuration Ace existante.
 
+Les étapes de signature et de publication des modèles vocaux figurent dans [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), et les outils sont décrits dans [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). Les binaires des modèles ne sont pas versionnés; le workflow de publication vérifie et reproduit chaque archive à partir des ressources sherpa-onnx amont épinglées. La licence de chaque modèle et son usage commercial sont consignés dans l'audit de licences.
+
 ## Journal des modifications
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `Fonctionnalité` Ajout des manifestes de sources, de l'audit de licences et des outils de publication de la nouvelle famille speech-models, d'où le plugin 3-Macaw Speech télécharge à la demande des modèles hors ligne de reconnaissance vocale, de mot d'éveil et de synthèse vocale
 
 ### 2026-10-12
 

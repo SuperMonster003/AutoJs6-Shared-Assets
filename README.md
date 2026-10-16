@@ -21,6 +21,7 @@
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): AutoJs6 Ace 编辑器的可选 WOFF2 字体. 常规 Iosevka 仍随 AutoJs6 内置, 不在此分发.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): 独立版本管理的本地布局代码生成排序模型, 使用各自的签名目录与发行标签.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech 插件按需下载的 sherpa-onnx 语音模型 (识别, 唤醒词与合成). 仓库只保存来源清单与许可文本, 模型归档由固定的上游发行资源复现, 使用独立的签名目录与发行标签.
 - 新增资源类别必须使用独立的目录, 清单, 发行标签前缀, 工作流, 完整性策略, 并在需要时使用独立签名密钥.
 
 构建或显示已安装应用所需的资源 (如主要标志或内置 CSS) 通常保留在 AutoJs6 源码仓库. 本共享仓库用于独立发行/下载或跨项目资源. 远程 CSS 是活动内容, 不得加入 `ace-fonts`; 应为其分配独立命名空间及更严格的签名/审核策略.
@@ -40,6 +41,7 @@ V4 条目带有明确的 `mono`, `nerd`, `variable`, `cn`, `jp` 特性元数据�
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 生成的包保存在已忽略的 `build/` 下. 标准来源 WOFF2 与声明文件直接纳入版本控制, 因此全新克隆无需 AutoJs6 的 `build/` 目录或旧的 `tools/.../sources` 快照即可复现发行. 本项目有意不使用 Git LFS.
@@ -75,7 +85,15 @@ tools/codegen-model-distribution/
 
 模型分发有独立的设置与发布前提, 参阅 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). 当前 tiny 模型来源是供 fork/私有工作流验收使用的已审核测试产物, 不可进入生产模型目录. 官方模型签名材料与生产质量模型门禁独立于现有 Ace 字体设置.
 
+语音模型的签名与发布步骤见 [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), 工具说明见 [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). 模型二进制不纳入版本控制; 发布工作流从固定的 sherpa-onnx 上游资源校验并复现每个归档. 每个模型的许可与可否商用记录在许可审核文件中.
+
 ## 更新日志
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `新增` 新增语音模型类别 speech-models 的来源清单, 许可审核与发布工具, 供 3-Macaw Speech 插件按需下载离线语音识别, 唤醒词与语音合成模型
 
 ### 2026-10-12
 

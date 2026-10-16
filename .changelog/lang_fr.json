@@ -18,6 +18,15 @@
     "adjustment": "Ajustement"
   },
   "$data": {
+    "2026-10-16": {
+      "released_date": "2026/10/16",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "Ajout des manifestes de sources, de l'audit de licences et des outils de publication de la nouvelle famille speech-models, d'où le plugin 3-Macaw Speech télécharge à la demande des modèles hors ligne de reconnaissance vocale, de mot d'éveil et de synthèse vocale"
+        }
+      ]
+    },
     "2026-10-12": {
       "released_date": "2026/10/12",
       "entries": [

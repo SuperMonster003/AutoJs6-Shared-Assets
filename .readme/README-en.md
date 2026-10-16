@@ -21,6 +21,7 @@ This repository is the reviewed distribution source for large or independently r
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): optional WOFF2 fonts for the AutoJs6 Ace editor. Regular Iosevka remains bundled in AutoJs6 and is not distributed here.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): independently versioned local layout-code-generation rankers, with their own signed catalog and release tags.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): sherpa-onnx speech models (recognition, keyword spotting and synthesis) downloaded on demand by the 3-Macaw Speech plugin. Only source manifests and license texts are versioned; archives are reproduced from pinned upstream release assets, with their own signed catalog and release tags.
 - Additional asset families must use their own directory, manifest, release-tag prefix, workflow, integrity policy, and signing key where appropriate.
 
 Assets required to build or render the installed app (for example its primary logo or bundled CSS) normally stay in the AutoJs6 source repository. This shared repository is for independently released/downloaded or cross-project assets. Remote CSS is active content, so it must never be added to `ace-fonts`; give it a separate namespace and a stricter signing/review policy.
@@ -40,6 +41,7 @@ V4 entries carry explicit `mono`, `nerd`, `variable`, `cn`, and `jp` feature met
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 Generated bundles live under ignored `build/`. Canonical source WOFF2 and notice files are tracked directly so a clean clone can reproduce releases without an AutoJs6 `build/` directory or a legacy `tools/.../sources` snapshot. Git LFS is intentionally not used.
@@ -75,7 +85,15 @@ Never submit executable content, secrets, private keys, or an unreviewed binary.
 
 Model distribution has its own setup and release prerequisites; see [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). The current tiny model source is a reviewed test artifact for a fork/private workflow run. It is not eligible for the production model catalog. Official model signing material and production-quality model gates are separate from the existing Ace font setup.
 
+Speech model signing and publication steps are in [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), and the tools are described in [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). Model binaries are not versioned; the release workflow verifies and reproduces every archive from pinned sherpa-onnx upstream assets. Each model's license and commercial-use status is recorded in the license audit.
+
 ## Changelog
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `Feature` Added source manifests, a license audit and release tools for the new speech-models family, from which the 3-Macaw Speech plugin downloads offline speech recognition, wake word and speech synthesis models on demand
 
 ### 2026-10-12
 

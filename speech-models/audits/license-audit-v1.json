@@ -1,0 +1,396 @@
+{
+  "auditedAt": "2026-10-16",
+  "bundledWithPlugin": [
+    {
+      "commercialUse": true,
+      "evidence": [
+        "https://github.com/snakers4/silero-vad/blob/v5.0/files/silero_vad.onnx",
+        "https://github.com/snakers4/silero-vad/blob/master/LICENSE"
+      ],
+      "file": "silero_vad_v5.onnx",
+      "license": "MIT",
+      "name": "silero VAD v5",
+      "note": "Bundled in the plugin APK (assets/vad) and therefore not part of the download catalog. Byte-identical to sherpa-onnx asr-models/silero_vad_v5.onnx and silero-vad v5.0 files/silero_vad.onnx.",
+      "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+      "size": 2313101
+    }
+  ],
+  "catalogVersion": 1,
+  "format": 1,
+  "models": [
+    {
+      "bundledComponents": [],
+      "commercialUse": false,
+      "conclusion": "The fine-tuning corpus WenetSpeech-Yue is licensed CC BY-NC 4.0. The FunASR model license also requires attribution and keeping the model name.",
+      "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8",
+      "noticeKey": "speech_model_license_non_commercial",
+      "openQuestions": [
+        "The official SenseVoice export sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17 (FunASR license only, punctuation supported) may suit the default offline recognizer better; decision D10 fixed the 2025-09-09 export, so a change needs the maintainer."
+      ],
+      "spdx": "LicenseRef-FunASR-Model-License-1.1 AND Apache-2.0",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://huggingface.co/FunAudioLLM/SenseVoiceSmall"
+          ],
+          "license": "undisclosed",
+          "name": "SenseVoiceSmall base training data (more than 400,000 hours)"
+        },
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://huggingface.co/datasets/ASLP-lab/WenetSpeech-Yue"
+          ],
+          "license": "CC-BY-NC-4.0",
+          "name": "WenetSpeech-Yue (about 21,800 h of Cantonese, fine-tuning)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/ASLP-lab/WSYue-ASR",
+          "https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE",
+          "https://github.com/FunAudioLLM/SenseVoice",
+          "https://k2-fsa.github.io/sherpa/onnx/sense-voice/pretrained.html"
+        ],
+        "license": "FunASR Model Open Source License Agreement 1.1 (covers derivatives of SenseVoiceSmall); fine-tune repository declares Apache-2.0",
+        "publisher": "ASLP-lab (fine-tune of FunAudioLLM SenseVoiceSmall)"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": true,
+      "conclusion": "Weights are published under Apache-2.0 (sherpa-onnx model card and the README inside the archive) and LibriSpeech permits commercial use with attribution.",
+      "modelId": "asr.zipformer-streaming.en.2023-06-26.int8",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "Apache-2.0",
+      "trainingData": [
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://www.openslr.org/12/"
+          ],
+          "license": "CC-BY-4.0",
+          "name": "LibriSpeech (960 h)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-en-2023-06-26",
+          "https://huggingface.co/Zengwei/icefall-asr-librispeech-streaming-zipformer-2023-05-17",
+          "https://github.com/k2-fsa/icefall/pull/1058"
+        ],
+        "license": "Apache-2.0",
+        "publisher": "Zengwei / k2-fsa (icefall)"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": true,
+      "conclusion": "Weights are published under Apache-2.0 and no named training dataset restricts commercial use.",
+      "modelId": "asr.zipformer-streaming.zh-en.2023-02-20.int8",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "Apache-2.0",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://huggingface.co/pfluo/k2fsa-zipformer-chinese-english-mixed"
+          ],
+          "license": "undisclosed",
+          "name": "Internal dataset of tens of thousands of hours (12k_hour subset named in the training configuration)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/pfluo/k2fsa-zipformer-chinese-english-mixed",
+          "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-bilingual-zh-en-2023-02-20",
+          "https://k2-fsa.github.io/sherpa/onnx/pretrained_models/online-transducer/zipformer-transducer-models.html"
+        ],
+        "license": "Apache-2.0",
+        "publisher": "pfluo / k2-fsa (icefall)"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": false,
+      "conclusion": "Several named training corpora are licensed for non-commercial use only, and no license is declared for the weights.",
+      "modelId": "asr.zipformer-streaming.zh.2025-06-30.int8",
+      "noticeKey": "speech_model_license_non_commercial",
+      "openQuestions": [
+        "The upstream Hugging Face repository is gated with access conditions and declares no license; the maintainer should confirm that mirroring the sherpa-onnx release asset is acceptable before signing."
+      ],
+      "spdx": "LicenseRef-NoLicenseDeclared",
+      "trainingData": [
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://www.openslr.org/68/"
+          ],
+          "license": "CC-BY-NC-ND-4.0",
+          "name": "MagicData Mandarin Chinese Read Speech Corpus (755 h)"
+        },
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://github.com/tzyll/KeSpeech/blob/main/dataset_license.md"
+          ],
+          "license": "KeSpeech dataset license (non-commercial, no distribution)",
+          "name": "KeSpeech (1,542 h)"
+        },
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://wenet-e2e.github.io/WenetSpeech/"
+          ],
+          "license": "WenetSpeech terms (non-commercial use)",
+          "name": "WenetSpeech (10,000 h)"
+        },
+        {
+          "commercialRestriction": "unknown",
+          "evidence": [
+            "https://github.com/k2-fsa/icefall/blob/master/egs/multi_zh-hans/ASR/README.md"
+          ],
+          "license": "various, see the recipe",
+          "name": "THCHS-30, AISHELL-1, AISHELL-2, AISHELL-4, ST-CMDS, Primewords, aidatatang_200zh, AliMeeting"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/yuekai/icefall-asr-multi-zh-hans-zipformer-large",
+          "https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30"
+        ],
+        "license": "none declared",
+        "publisher": "yuekai (icefall multi_zh-hans recipe), converted by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": true,
+      "conclusion": "Weights are published under Apache License 2.0 on ModelScope and no named training dataset restricts commercial use.",
+      "modelId": "kws.zipformer.zh-en.2025-12-20",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [
+        "en.phone is the English phone lexicon shipped in the upstream archive; its source dictionary is not documented."
+      ],
+      "spdx": "Apache-2.0",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://modelscope.cn/models/pkufool/icefall-kws-zipformer-zh-en-3M-2025-12-20"
+          ],
+          "license": "undisclosed",
+          "name": "Not disclosed by the publisher"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://modelscope.cn/models/pkufool/icefall-kws-zipformer-zh-en-3M-2025-12-20",
+          "https://k2-fsa.github.io/sherpa/onnx/kws/pretrained_models/index.html"
+        ],
+        "license": "Apache-2.0",
+        "publisher": "pkufool / k2-fsa (icefall)"
+      }
+    },
+    {
+      "bundledComponents": [
+        {
+          "evidence": [
+            "https://github.com/csukuangfj/espeak-ng/tree/ed530aa113046142eb5115cf2fc9157854d0ffe1",
+            "https://github.com/k2-fsa/sherpa-onnx/blob/v1.13.8/cmake/espeak-ng-for-piper.cmake",
+            "https://github.com/espeak-ng/espeak-ng/blob/master/COPYING"
+          ],
+          "license": "GPL-3.0-or-later",
+          "name": "espeak-ng-data",
+          "note": "Compiled eSpeak NG phoneme data used for phonemization. Corresponding source: the eSpeak NG fork pinned by sherpa-onnx 1.13.8 (cmake/espeak-ng-for-piper.cmake, commit ed530aa113046142eb5115cf2fc9157854d0ffe1). The GPL text ships as LICENSE-espeak-ng-data."
+        }
+      ],
+      "commercialUse": true,
+      "conclusion": "Apache-2.0 weights with permissively granted data. The bundled espeak-ng-data is GPL-3.0-or-later, which allows commercial use under its copyleft terms.",
+      "modelId": "tts.kokoro.multi-lang.v1_1",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "Apache-2.0 AND GPL-3.0-or-later",
+      "trainingData": [
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh"
+          ],
+          "license": "permissive grant per publisher",
+          "name": "Chinese recordings granted by LongMaoData and about 3 hours of crowdsourced synthetic English"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh"
+        ],
+        "license": "Apache-2.0",
+        "publisher": "hexgrad (Kokoro-82M v1.1-zh)"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": false,
+      "conclusion": "The acoustic model is trained only on the Data-Baker corpus, which its owner releases for non-commercial use only (decision D11).",
+      "modelId": "tts.matcha.icefall.zh-baker",
+      "noticeKey": "speech_model_license_non_commercial",
+      "openQuestions": [],
+      "spdx": "LicenseRef-NoLicenseDeclared AND MIT",
+      "trainingData": [
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://www.data-baker.com/open_source.html"
+          ],
+          "license": "non-commercial use only",
+          "name": "Data-Baker Chinese Standard Mandarin Speech Corpus (about 12 h, one female speaker)"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://keithito.com/LJ-Speech-Dataset/"
+          ],
+          "license": "public domain",
+          "name": "LJ Speech (vocoder)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/csukuangfj/icefall-tts-baker-matcha-zh-2024-12-27",
+          "https://github.com/k2-fsa/icefall/tree/master/egs/baker_zh/TTS",
+          "https://github.com/jik876/hifi-gan",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/vocoder-models"
+        ],
+        "license": "acoustic model: none declared; vocoder: MIT",
+        "publisher": "k2-fsa (icefall baker_zh Matcha-TTS recipe); vocoder jik876 HiFi-GAN generator_v2"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": "unknown",
+      "conclusion": "Training data is Apache-2.0, but no license is declared for the weights (the Hugging Face model repository was not publicly accessible on 2026-10-16).",
+      "modelId": "tts.vits.icefall.zh-aishell3",
+      "noticeKey": "speech_model_license_unknown",
+      "openQuestions": [
+        "Ask k2-fsa to declare a license for the icefall AISHELL-3 VITS weights; commercialUse can become true once a permissive license is declared, which needs a new versionCode."
+      ],
+      "spdx": "LicenseRef-NoLicenseDeclared",
+      "trainingData": [
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://www.openslr.org/93/"
+          ],
+          "license": "Apache-2.0",
+          "name": "AISHELL-3 (about 85 h, 218 speakers)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html",
+          "https://github.com/k2-fsa/icefall/tree/master/egs/aishell3/TTS"
+        ],
+        "license": "none declared",
+        "publisher": "k2-fsa (icefall VITS recipe)"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": true,
+      "conclusion": "MIT weights; the publisher states that MeloTTS is free for commercial and non-commercial use.",
+      "modelId": "tts.vits.melo.zh-en",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "MIT",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://github.com/myshell-ai/MeloTTS"
+          ],
+          "license": "undisclosed",
+          "name": "Not disclosed by MyShell.ai"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/myshell-ai/MeloTTS-Chinese",
+          "https://github.com/myshell-ai/MeloTTS"
+        ],
+        "license": "MIT",
+        "publisher": "MyShell.ai (MeloTTS)"
+      }
+    },
+    {
+      "bundledComponents": [
+        {
+          "evidence": [
+            "https://github.com/csukuangfj/espeak-ng/tree/ed530aa113046142eb5115cf2fc9157854d0ffe1",
+            "https://github.com/k2-fsa/sherpa-onnx/blob/v1.13.8/cmake/espeak-ng-for-piper.cmake",
+            "https://github.com/espeak-ng/espeak-ng/blob/master/COPYING"
+          ],
+          "license": "GPL-3.0-or-later",
+          "name": "espeak-ng-data",
+          "note": "Compiled eSpeak NG phoneme data used for phonemization. Corresponding source: the eSpeak NG fork pinned by sherpa-onnx 1.13.8 (cmake/espeak-ng-for-piper.cmake, commit ed530aa113046142eb5115cf2fc9157854d0ffe1). The GPL text ships as LICENSE-espeak-ng-data."
+        }
+      ],
+      "commercialUse": false,
+      "conclusion": "The training data is licensed for research purposes only and excludes commercial voice synthesis products.",
+      "modelId": "tts.vits.piper.en-us-lessac-medium",
+      "noticeKey": "speech_model_license_non_commercial",
+      "openQuestions": [
+        "Other Piper US English voices trained on public-domain data (for example ljspeech) would allow commercial use if a commercial English voice is needed later."
+      ],
+      "spdx": "MIT AND GPL-3.0-or-later",
+      "trainingData": [
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html"
+          ],
+          "license": "Lessac Technologies research licence",
+          "name": "Lessac Blizzard 2013"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/rhasspy/piper-voices",
+          "https://github.com/rhasspy/piper/blob/master/LICENSE.md"
+        ],
+        "license": "MIT",
+        "publisher": "Michael Hansen / rhasspy (Piper)"
+      }
+    }
+  ],
+  "policy": {
+    "commercialUse": {
+      "false": "The publisher, or the terms of a training dataset that the publisher names, limits use to non-commercial or research purposes. This takes precedence over the other rules.",
+      "true": "The weights carry a declared license that permits commercial use and no named training dataset restricts commercial use. Undisclosed training data alone does not downgrade the result.",
+      "unknown": "Otherwise, in particular when no license is declared for the weights. The plugin shows the same pre-download notice as for false (decision D11)."
+    },
+    "licenseRefs": {
+      "LicenseRef-FunASR-Model-License-1.1": "FunASR Model Open Source License Agreement 1.1 (https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE).",
+      "LicenseRef-NoLicenseDeclared": "The upstream publisher declares no license for these weights; the mirror redistributes the exact public sherpa-onnx release asset."
+    },
+    "noticeKeys": {
+      "speech_model_license_commercial": "commercialUse true; attribution per the listed licenses.",
+      "speech_model_license_non_commercial": "commercialUse false; scripts must pass acceptLicense: true.",
+      "speech_model_license_unknown": "commercialUse unknown; scripts must pass acceptLicense: true."
+    }
+  },
+  "scope": "Engineering license review of the speech-models-v1 candidates for 3-Macaw Speech (roadmap P2.2, decisions D10 and D11). It records public evidence and is not legal advice; the maintainer confirms it before signing (P2.5)."
+}

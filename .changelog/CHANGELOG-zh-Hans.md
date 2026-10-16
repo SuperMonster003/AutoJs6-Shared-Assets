@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-10-16
+
+###### 2026/10/16
+
+* `新增` 新增语音模型类别 speech-models 的来源清单, 许可审核与发布工具, 供 3-Macaw Speech 插件按需下载离线语音识别, 唤醒词与语音合成模型
+
 # 2026-10-12
 
 ###### 2026/10/12

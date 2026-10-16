@@ -18,6 +18,15 @@
     "adjustment": "調整"
   },
   "$data": {
+    "2026-10-16": {
+      "released_date": "2026/10/16",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新增語音模型類別 speech-models 的來源清單, 授權稽核與釋出工具, 供 3-Macaw Speech 外掛程式按需下載離線語音辨識, 喚醒詞與語音合成模型"
+        }
+      ]
+    },
     "2026-10-12": {
       "released_date": "2026/10/12",
       "entries": [

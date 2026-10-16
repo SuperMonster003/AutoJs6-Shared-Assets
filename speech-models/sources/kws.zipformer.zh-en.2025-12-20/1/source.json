@@ -1,0 +1,87 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "23b8757dba02f020e4284765442959ea5463266b7ee69861dbca85640722cc6f",
+    "size": 8783360
+  },
+  "displayName": {
+    "en": "Keyword spotter, Chinese and English (3M)",
+    "zh-CN": "唤醒词检测 中英文 (3M)"
+  },
+  "files": [
+    {
+      "path": "decoder-epoch-13-avg-2-chunk-16-left-64.onnx",
+      "sha256": "63a22dd60f40fff082ac3e09afa507f6787da36df76ded2fbe145fa233e22c21",
+      "size": 759829
+    },
+    {
+      "path": "en.phone",
+      "sha256": "f7000ec3a90544c0c7c16090d8951779c2b322e14dad5006290f498567d439ea",
+      "size": 3330061
+    },
+    {
+      "path": "encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+      "sha256": "408bbd740838c42d5bf6d1c5b80b3c88b616c7860b92d980328b5b068c76ae48",
+      "size": 4599656
+    },
+    {
+      "path": "joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+      "sha256": "190d4067b4cc20b72a42a1916e69d92052000fb7051a427ebb1bc72a69207dc1",
+      "size": 86629
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "2d3f32311f9b692b964da3c90e830258d3e78e013cb0c992dbfb15cd5a1a71b0",
+      "size": 1928
+    }
+  ],
+  "format": 1,
+  "kind": "kws",
+  "languages": [
+    "zh",
+    "en"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "modelId": "kws.zipformer.zh-en.2025-12-20",
+  "modelType": "kws-transducer",
+  "recommended": true,
+  "releasedAt": "2026-10-16T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder-epoch-13-avg-2-chunk-16-left-64.onnx",
+      "encoder": "encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+      "joiner": "joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+      "lexicon": [
+        "en.phone"
+      ],
+      "modelType": "zipformer2",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Open-vocabulary keyword spotter with about 3 million parameters for Mandarin and English. Keywords become pinyin and phone tokens; about 320 ms chunk latency.",
+    "zh-CN": "约 300 万参数的开放词表唤醒词模型, 支持普通话与英语. 关键词转换为拼音与音素 token, 分块延迟约 320 毫秒."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20/decoder-epoch-13-avg-2-chunk-16-left-64.onnx": "decoder-epoch-13-avg-2-chunk-16-left-64.onnx",
+        "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20/en.phone": "en.phone",
+        "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20/encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx": "encoder-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+        "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20/joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx": "joiner-epoch-13-avg-2-chunk-16-left-64.int8.onnx",
+        "sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20/tokens.txt": "tokens.txt"
+      },
+      "sha256": "68447f4fbc67e70eee3a93961f36e81e98f47aef73ce7e7ca00885c6cd3616a6",
+      "size": 32885699,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/kws-models/sherpa-onnx-kws-zipformer-zh-en-3M-2025-12-20.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

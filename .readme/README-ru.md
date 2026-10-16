@@ -21,6 +21,7 @@
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): дополнительные шрифты WOFF2 для редактора Ace в AutoJs6. Обычный Iosevka по-прежнему встроен в AutoJs6 и здесь не распространяется.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): локальные модели ранжирования для генерации кода интерфейсов с независимыми версиями, собственными подписанными каталогами и тегами выпусков.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): речевые модели sherpa-onnx (распознавание, обнаружение ключевых слов и синтез), которые плагин 3-Macaw Speech загружает по запросу. В репозитории хранятся только манифесты источников и тексты лицензий; архивы воспроизводятся из закреплённых исходных ресурсов и имеют собственные подписанные каталоги и теги выпусков.
 - Новые семейства ресурсов должны иметь собственные каталог, манифест, префикс тега, процесс публикации, политику целостности и при необходимости ключ подписи.
 
 Ресурсы, необходимые для сборки или отображения установленного приложения (например, основной логотип или встроенный CSS), обычно остаются в исходном репозитории AutoJs6. Здесь хранятся независимо выпускаемые/загружаемые или общие для нескольких проектов ресурсы. Удаленный CSS является активным содержимым и не должен попадать в `ace-fonts`; выделите ему отдельное пространство имен и более строгую политику подписи/проверки.
@@ -40,6 +41,7 @@
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 Созданные пакеты находятся в игнорируемом `build/`. Эталонные WOFF2 и файлы уведомлений отслеживаются напрямую, поэтому чистый клон воспроизводит выпуски без каталога AutoJs6 `build/` и прежнего снимка `tools/.../sources`. Git LFS намеренно не используется.
@@ -75,7 +85,15 @@ tools/codegen-model-distribution/
 
 У распространения моделей собственные настройки и условия публикации; см. [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). Текущая tiny-модель является проверенным тестовым артефактом для запуска в fork или частном репозитории и не допускается в производственный каталог. Официальные средства подписи и проверки качества производственных моделей независимы от существующей настройки шрифтов Ace.
 
+Шаги подписи и публикации речевых моделей описаны в [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), инструменты - в [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). Двоичные файлы моделей не хранятся в репозитории; процесс публикации проверяет и воспроизводит каждый архив из закреплённых исходных ресурсов sherpa-onnx. Лицензия каждой модели и допустимость коммерческого использования записаны в аудите лицензий.
+
 ## Журнал изменений
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `Функция` Добавлены манифесты источников, аудит лицензий и инструменты публикации нового семейства speech-models, из которого плагин 3-Macaw Speech по запросу загружает офлайн-модели распознавания речи, слова активации и синтеза речи
 
 ### 2026-10-12
 

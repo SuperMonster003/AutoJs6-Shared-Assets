@@ -1,0 +1,13 @@
+License status of tts.vits.icefall.zh-aishell3
+
+The upstream publisher has not declared a license for these model weights. The k2-fsa / sherpa-onnx
+project distributes them publicly from its GitHub release, and AutoJs6-Shared-Assets mirrors that exact
+release asset without modification of the selected files.
+
+Training data: AISHELL-3 (https://www.openslr.org/93/), Apache-2.0. No named training dataset
+restricts commercial use, but without a declared weights license the catalog sets commercialUse
+to "unknown".
+
+Until the publisher declares a license, the AutoJs6 catalog records license.spdx as
+LicenseRef-NoLicenseDeclared and shows a license notice before download. See
+speech-models/audits/license-audit-v1.json for the evidence links.

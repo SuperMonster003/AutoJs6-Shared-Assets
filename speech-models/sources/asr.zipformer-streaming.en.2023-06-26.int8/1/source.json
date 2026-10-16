@@ -1,0 +1,89 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "2fdadd2e1094b0ea5500991d112215e7969211b8189d411cd0dd8e14ecd726f4",
+    "size": 70326784
+  },
+  "displayName": {
+    "en": "Streaming Zipformer, English (int8, mobile)",
+    "zh-CN": "流式 Zipformer 英文 (int8, 移动版)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c914dd28e23310a6dd345ea10495003d3e4820d2ed987181e4c2d67e501b6b76",
+      "size": 216
+    },
+    {
+      "path": "decoder-epoch-99-avg-1-chunk-16-left-128.onnx",
+      "sha256": "85914f840b71110487ece7a30ebd0bd4b8fb5c2623215bba3aa5ab4c138fc591",
+      "size": 2093080
+    },
+    {
+      "path": "encoder-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+      "sha256": "ac01b68c61d1a716d90baea606b9683ddab07fbd097fc54398d19b027f390ef1",
+      "size": 67963182
+    },
+    {
+      "path": "joiner-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+      "sha256": "abd5e30f3f16fc510605c6029dba33f10e4386bd75c5bdc30cf94076864db10d",
+      "size": 259416
+    },
+    {
+      "path": "notes.md",
+      "sha256": "cadd14b266b46fa69d81da081a39427b0b8d953efde13e0a54bab7d56b990990",
+      "size": 209
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "49e3c2646595fd907228b3c6787069658f67b17377c60aeb8619c4551b2316fb",
+      "size": 5048
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "en"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "modelId": "asr.zipformer-streaming.en.2023-06-26.int8",
+  "modelType": "online-transducer",
+  "recommended": true,
+  "releasedAt": "2026-10-16T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder-epoch-99-avg-1-chunk-16-left-128.onnx",
+      "encoder": "encoder-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+      "joiner": "joiner-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+      "modelType": "zipformer2",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Lightweight streaming recognizer for English trained on LibriSpeech. Hotwords are unavailable because the archive has no BPE vocabulary.",
+    "zh-CN": "基于 LibriSpeech 训练的轻量英语流式识别模型. 归档不含 BPE 词表, 因此不支持热词."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/README.md": "README.md",
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/decoder-epoch-99-avg-1-chunk-16-left-128.onnx": "decoder-epoch-99-avg-1-chunk-16-left-128.onnx",
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/encoder-epoch-99-avg-1-chunk-16-left-128.int8.onnx": "encoder-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/joiner-epoch-99-avg-1-chunk-16-left-128.int8.onnx": "joiner-epoch-99-avg-1-chunk-16-left-128.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/notes.md": "notes.md",
+        "sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile/tokens.txt": "tokens.txt"
+      },
+      "sha256": "4dad6f4849cad551042eb875505b3fdc0fac9f1c88d709165c48b921681e61dc",
+      "size": 305410008,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-en-2023-06-26-mobile.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

@@ -1,0 +1,83 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "62ed0dbde124a6546b5252c18a5dfa18c2dad9620c30555f0d5f6be04be4019a",
+    "size": 167366656
+  },
+  "displayName": {
+    "en": "Streaming Zipformer, Chinese (int8, 2025)",
+    "zh-CN": "流式 Zipformer 中文 (int8, 2025)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "24a953594138ebd61a4e60637febcff1cecd4f79ed05632109a937b74f9ebcd7",
+      "size": 317
+    },
+    {
+      "path": "decoder.onnx",
+      "sha256": "06522ad63cec0fdf6809f4e1db9bb4f7d710c34582e3b35db62ac60eccafac7e",
+      "size": 5165083
+    },
+    {
+      "path": "encoder.int8.onnx",
+      "sha256": "5ac51e27981bb4dab01bb9be4958453ba50c3b61c063ddda0eab23fd3671aa4f",
+      "size": 161141793
+    },
+    {
+      "path": "joiner.int8.onnx",
+      "sha256": "b34584dc6f561089e1d747fedebb3765f2caa72c927ef54d7ca55e5ae40a814b",
+      "size": 1033416
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "6193c7ea1c96d0d9a1e9652789b40d13a8a913b434a5451e93158f5a09fd6652",
+      "size": 20628
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "zh"
+  ],
+  "license": {
+    "commercialUse": false,
+    "noticeKey": "speech_model_license_non_commercial",
+    "spdx": "LicenseRef-NoLicenseDeclared"
+  },
+  "modelId": "asr.zipformer-streaming.zh.2025-06-30.int8",
+  "modelType": "online-transducer",
+  "recommended": false,
+  "releasedAt": "2026-10-16T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder.onnx",
+      "encoder": "encoder.int8.onnx",
+      "joiner": "joiner.int8.onnx",
+      "modelType": "zipformer2",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Newer large streaming recognizer for Mandarin, trained on about 14,000 hours of public Chinese corpora, several of which allow non-commercial use only.",
+    "zh-CN": "较新的大型普通话流式识别模型, 由约 14000 小时公开中文语料训练, 其中多个语料仅限非商业用途."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/README.md": "README.md",
+        "sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/decoder.onnx": "decoder.onnx",
+        "sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/encoder.int8.onnx": "encoder.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/joiner.int8.onnx": "joiner.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30/tokens.txt": "tokens.txt"
+      },
+      "sha256": "5a2832047ea1f97dd0dc595b816c230c4bafad65cfc0341fa57517cadc50afd0",
+      "size": 132634597,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-zh-int8-2025-06-30.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

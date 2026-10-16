@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-10-16
+
+###### 2026/10/16
+
+* `기능` 새 음성 모델 계열 speech-models의 원본 매니페스트, 라이선스 감사와 게시 도구를 추가했습니다. 3-Macaw Speech 플러그인은 여기에서 오프라인 음성 인식, 호출어, 음성 합성 모델을 필요할 때 내려받습니다
+
 # 2026-10-12
 
 ###### 2026/10/12

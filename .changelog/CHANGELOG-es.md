@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-10-16
+
+###### 2026/10/16
+
+* `Función` Se añaden los manifiestos de origen, la auditoría de licencias y las herramientas de publicación de la nueva familia speech-models, desde la que el plugin 3-Macaw Speech descarga bajo demanda modelos sin conexión de reconocimiento de voz, palabra de activación y síntesis de voz
+
 # 2026-10-12
 
 ###### 2026/10/12

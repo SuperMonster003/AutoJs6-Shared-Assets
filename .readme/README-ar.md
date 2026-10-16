@@ -21,6 +21,7 @@
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): خطوط WOFF2 اختيارية لمحرر Ace في AutoJs6. يبقى Iosevka العادي مدمجا في AutoJs6 ولا يوزع هنا.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): نماذج ترتيب محلية لتوليد كود التخطيطات, بإصدارات مستقلة وكتالوجات موقعة ووسوم إصدار خاصة بها.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): نماذج كلام sherpa-onnx (التعرف على الكلام واكتشاف الكلمات المفتاحية وتوليف الكلام) التي يحملها ملحق 3-Macaw Speech عند الحاجة. يحفظ المستودع بيانات المصادر ونصوص التراخيص فقط, وتعاد إنتاج الأرشيفات من موارد الإصدار الأصلية المثبتة, مع كتالوجات موقعة ووسوم إصدار خاصة بها.
 - يجب أن تستخدم كل عائلة موارد جديدة مجلدها وبيانها وبادئة وسومها وسير عملها وسياسة سلامتها ومفتاح توقيعها عند الحاجة.
 
 تبقى الموارد المطلوبة لبناء التطبيق المثبت أو عرضه (مثل شعاره الأساسي أو CSS المدمج) عادة في مستودع مصدر AutoJs6. هذا المستودع للموارد المستقلة في الإصدار/التنزيل أو المشتركة بين المشاريع. CSS البعيد محتوى نشط فلا يضاف أبدا إلى `ace-fonts`; خصص له نطاق أسماء مستقلا وسياسة توقيع/مراجعة أشد.
@@ -40,6 +41,7 @@
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 تحفظ الحزم المولدة في `build/` المستثنى من Git. تتتبع مصادر WOFF2 المرجعية وملفات الإشعارات مباشرة, لذا تعيد نسخة نظيفة إنتاج الإصدارات دون مجلد AutoJs6 `build/` أو لقطة `tools/.../sources` القديمة. لا يستخدم Git LFS عن قصد.
@@ -75,7 +85,15 @@ tools/codegen-model-distribution/
 
 لتوزيع النماذج إعداداته وشروط نشره الخاصة; انظر [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). مصدر نموذج tiny الحالي ناتج اختبار مراجع لتشغيل سير عمل في fork أو مستودع خاص ولا يقبل في كتالوج الإنتاج. مواد توقيع النماذج الرسمية وبوابات جودة الإنتاج مستقلة عن إعداد خطوط Ace الحالي.
 
+خطوات توقيع نماذج الكلام ونشرها موجودة في [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), ووصف الأدوات في [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). لا تحفظ ملفات النماذج الثنائية في المستودع; يتحقق سير عمل النشر من كل أرشيف ويعيد إنتاجه من موارد sherpa-onnx الأصلية المثبتة. ترخيص كل نموذج وإمكانية استخدامه تجاريا مسجلان في تدقيق التراخيص.
+
 ## سجل التغييرات
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `ميزة` إضافة بيانات المصادر وتدقيق التراخيص وأدوات النشر لعائلة speech-models الجديدة, التي يحمل منها ملحق 3-Macaw Speech عند الحاجة نماذج التعرف على الكلام وكلمة التنبيه وتوليف الكلام دون اتصال
 
 ### 2026-10-12
 

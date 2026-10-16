@@ -21,6 +21,7 @@
 
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): AutoJs6 Ace 편집기용 선택적 WOFF2 글꼴. 일반 Iosevka는 계속 AutoJs6에 내장되며 여기서 배포하지 않습니다.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): 자체 서명 카탈로그와 릴리스 태그를 가진, 독립 버전 관리 방식의 로컬 레이아웃 코드 생성 순위 모델.
+- [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech 플러그인이 필요할 때 내려받는 sherpa-onnx 음성 모델 (음성 인식, 키워드 검출, 음성 합성). 저장소에는 원본 매니페스트와 라이선스 문서만 두고 아카이브는 고정된 업스트림 릴리스 자산에서 재현하며, 자체 서명 카탈로그와 릴리스 태그를 사용합니다.
 - 새 리소스 계열은 별도 디렉터리, 매니페스트, 태그 접두사, 워크플로, 무결성 정책과 필요에 따라 별도 서명 키를 사용해야 합니다.
 
 설치 앱의 빌드나 표시에 필요한 리소스 (주 로고나 내장 CSS 등)는 보통 AutoJs6 소스 저장소에 둡니다. 이 저장소는 독립 배포/다운로드 또는 여러 프로젝트가 공유하는 리소스용입니다. 원격 CSS는 활성 콘텐츠이므로 `ace-fonts`에 넣으면 안 됩니다. 별도 네임스페이스와 더 엄격한 서명/검토 정책을 적용하세요.
@@ -40,6 +41,7 @@ V4 항목은 명시적인 `mono`, `nerd`, `variable`, `cn`, `jp` 특성과 안�
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -59,6 +61,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 생성 패키지는 Git에서 제외한 `build/`에 둡니다. 표준 WOFF2 원본과 고지 파일을 직접 추적하므로 새 클론도 AutoJs6 `build/` 디렉터리나 이전 `tools/.../sources` 스냅샷 없이 릴리스를 재현할 수 있습니다. Git LFS는 의도적으로 사용하지 않습니다.
@@ -75,7 +85,15 @@ tools/codegen-model-distribution/
 
 모델 배포는 별도의 설정 및 게시 조건을 가지며 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md)를 참조하세요. 현재 tiny 모델 원본은 fork/비공개 워크플로 검증용으로 검토된 테스트 산출물이며 운영 모델 카탈로그에 넣을 수 없습니다. 공식 모델 서명 자료와 운영 품질 검증은 기존 Ace 글꼴 설정과 별개입니다.
 
+음성 모델의 서명 및 게시 절차는 [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), 도구 설명은 [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md)를 참조하세요. 모델 바이너리는 버전 관리하지 않으며, 게시 워크플로가 고정된 sherpa-onnx 업스트림 자산에서 각 아카이브를 검증하고 재현합니다. 모델별 라이선스와 상업적 이용 가능 여부는 라이선스 감사 파일에 기록되어 있습니다.
+
 ## 변경 기록
+
+### 2026-10-16
+
+###### 2026/10/16
+
+* `기능` 새 음성 모델 계열 speech-models의 원본 매니페스트, 라이선스 감사와 게시 도구를 추가했습니다. 3-Macaw Speech 플러그인은 여기에서 오프라인 음성 인식, 호출어, 음성 합성 모델을 필요할 때 내려받습니다
 
 ### 2026-10-12
 

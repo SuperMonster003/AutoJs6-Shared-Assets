@@ -1,0 +1,14 @@
+License status of the acoustic model of tts.matcha.icefall.zh-baker
+
+The upstream publisher has not declared a license for these model weights. The k2-fsa / sherpa-onnx
+project distributes them publicly from its GitHub release, and AutoJs6-Shared-Assets mirrors that exact
+release asset without modification of the selected files.
+
+Training data: the Data-Baker Chinese Standard Mandarin Speech Corpus
+(https://www.data-baker.com/open_source.html), which its owner releases for non-commercial use
+only. The catalog sets commercialUse to false. The bundled vocoder hifigan_v2.onnx is covered by
+LICENSE-hifigan (MIT).
+
+Until the publisher declares a license, the AutoJs6 catalog records license.spdx as
+LicenseRef-NoLicenseDeclared and shows a license notice before download. See
+speech-models/audits/license-audit-v1.json for the evidence links.

@@ -24,5 +24,7 @@
   "assets015": "貢献とライセンス",
   "assets016": "バイナリの貢献には上流リポジトリ, 分かる場合は正確な版またはコミット, 再配布可能なライセンス/通知ファイル, レビュー済み WOFF2 Normal 400 成果物が必要です. このリポジトリは第三者のフォントの所有権を主張せず, 各リリースに著作権とライセンス情報を同梱します.",
   "assets017": "実行可能コンテンツ, 秘密情報, 秘密鍵, 未レビューのバイナリを提出しないでください.",
-  "assets018": "モデル配布には独自の設定と公開条件があります. [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md) を参照してください. 現在の tiny モデル原本は fork/非公開ワークフロー検証用のレビュー済みテスト成果物であり, 本番モデルカタログには登録できません. 公式モデル署名情報と本番品質検証は既存の Ace フォント設定とは別です."
+  "assets018": "モデル配布には独自の設定と公開条件があります. [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md) を参照してください. 現在の tiny モデル原本は fork/非公開ワークフロー検証用のレビュー済みテスト成果物であり, 本番モデルカタログには登録できません. 公式モデル署名情報と本番品質検証は既存の Ace フォント設定とは別です.",
+  "assets019": "[`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech プラグインが必要に応じてダウンロードする sherpa-onnx 音声モデル (音声認識, キーワード検出, 音声合成). リポジトリには原本マニフェストとライセンス文のみを置き, アーカイブは固定された上流リリース資産から再現します. 専用の署名済みカタログとリリースタグを持ちます.",
+  "assets020": "音声モデルの署名と公開の手順は [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md) に, ツールの説明は [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md) にあります. モデルのバイナリはバージョン管理せず, 公開ワークフローが固定された sherpa-onnx 上流資産から各アーカイブを検証して再現します. 各モデルのライセンスと商用利用の可否はライセンス監査ファイルに記録しています."
 }

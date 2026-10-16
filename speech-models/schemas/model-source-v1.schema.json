@@ -1,0 +1,731 @@
+{
+  "$defs": {
+    "configByModelType": {
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "online-transducer"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "bpeVocab": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "decoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "encoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "joiner": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "modelType": {
+                        "enum": [
+                          "zipformer",
+                          "zipformer2"
+                        ]
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "encoder",
+                      "decoder",
+                      "joiner",
+                      "tokens",
+                      "modelType"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "sense-voice"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "tokens"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "kws-transducer"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "decoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "encoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "joiner": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "lexicon": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "modelType": {
+                        "enum": [
+                          "zipformer",
+                          "zipformer2"
+                        ]
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "encoder",
+                      "decoder",
+                      "joiner",
+                      "tokens",
+                      "modelType"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "vits"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "dataDir": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "lexicon": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "ruleFars": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "ruleFsts": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "tokens"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "matcha"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "acousticModel": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "dataDir": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "lexicon": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "ruleFars": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "ruleFsts": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "vocoder": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "acousticModel",
+                      "vocoder",
+                      "tokens"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "kokoro"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "dataDir": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "lexicon": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "ruleFars": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "ruleFsts": {
+                        "$ref": "#/$defs/paths"
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "voices": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "voices",
+                      "tokens"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "displayName": {
+      "additionalProperties": false,
+      "maxProperties": 64,
+      "minProperties": 2,
+      "patternProperties": {
+        "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "en",
+        "zh-CN"
+      ],
+      "type": "object"
+    },
+    "file": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "size": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "size",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "files": {
+      "description": "Installed files in ascending byte order of path; paths are unique ignoring case and never also used as directories.",
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "maxItems": 4096,
+      "minItems": 1,
+      "type": "array"
+    },
+    "kind": {
+      "enum": [
+        "asr",
+        "kws",
+        "tts"
+      ]
+    },
+    "languages": {
+      "items": {
+        "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+        "type": "string"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "license": {
+      "additionalProperties": false,
+      "properties": {
+        "commercialUse": {
+          "enum": [
+            true,
+            false,
+            "unknown"
+          ]
+        },
+        "noticeKey": {
+          "pattern": "^speech_model_license_[a-z0-9_]{1,40}$",
+          "type": "string"
+        },
+        "spdx": {
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9.+-]+(?: (?:AND|OR|WITH) [A-Za-z0-9.+-]+)*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "spdx",
+        "commercialUse",
+        "noticeKey"
+      ],
+      "type": "object"
+    },
+    "modelId": {
+      "pattern": "^(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
+      "type": "string"
+    },
+    "modelType": {
+      "enum": [
+        "online-transducer",
+        "sense-voice",
+        "kws-transducer",
+        "vits",
+        "matcha",
+        "kokoro"
+      ]
+    },
+    "path": {
+      "description": "Relative POSIX path of printable ASCII; no empty, '.', '..', leading-dot or trailing-space segments; storable in a USTAR header.",
+      "maxLength": 240,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_+!](?:[A-Za-z0-9 _.+!-]{0,126}[A-Za-z0-9_+!-])?(?:/[A-Za-z0-9_+!](?:[A-Za-z0-9 _.+!-]{0,126}[A-Za-z0-9_+!-])?){0,11}$",
+      "type": "string"
+    },
+    "paths": {
+      "items": {
+        "$ref": "#/$defs/path"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "runtime": {
+      "additionalProperties": false,
+      "properties": {
+        "config": {
+          "description": "File roles for the sherpa-onnx configuration of modelType; dataDir names an installed directory.",
+          "type": "object"
+        },
+        "minSherpaOnnx": {
+          "pattern": "^(?:0|[1-9][0-9]{0,3})\\.(?:0|[1-9][0-9]{0,3})\\.(?:0|[1-9][0-9]{0,3})$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "minSherpaOnnx",
+        "config"
+      ],
+      "type": "object"
+    },
+    "sampleRate": {
+      "maximum": 192000,
+      "minimum": 8000,
+      "type": "integer"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "speakers": {
+      "maximum": 100000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "speakersByKind": {
+      "else": {
+        "not": {
+          "required": [
+            "speakers"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "modelType": {
+            "enum": [
+              "vits",
+              "matcha",
+              "kokoro"
+            ]
+          }
+        },
+        "required": [
+          "modelType"
+        ]
+      },
+      "then": {
+        "required": [
+          "speakers"
+        ]
+      }
+    },
+    "summary": {
+      "additionalProperties": false,
+      "maxProperties": 64,
+      "minProperties": 2,
+      "patternProperties": {
+        "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "en",
+        "zh-CN"
+      ],
+      "type": "object"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "maxLength": 64,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,9})?(?:Z|[+-](?:(?:0[0-9]|1[0-7]):[0-5][0-9]|18:00))$",
+      "type": "string"
+    },
+    "upstream": {
+      "description": "Fallback sources; together their members install exactly the files array.",
+      "items": {
+        "$ref": "#/$defs/upstreamPart"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "type": "array"
+    },
+    "upstreamPart": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "format": {
+              "const": "tar.bz2"
+            },
+            "members": {
+              "additionalProperties": {
+                "$ref": "#/$defs/path"
+              },
+              "description": "Upstream archive member name to installed path.",
+              "maxProperties": 4096,
+              "minProperties": 1,
+              "propertyNames": {
+                "$ref": "#/$defs/path"
+              },
+              "type": "object"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "size": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "url": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/upstreamUrl"
+                },
+                {
+                  "pattern": "\\.tar\\.bz2$"
+                }
+              ]
+            }
+          },
+          "required": [
+            "url",
+            "size",
+            "sha256",
+            "format",
+            "members"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "format": {
+              "const": "file"
+            },
+            "path": {
+              "$ref": "#/$defs/path"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "size": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "url": {
+              "$ref": "#/$defs/upstreamUrl"
+            }
+          },
+          "required": [
+            "url",
+            "size",
+            "sha256",
+            "format",
+            "path"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "upstreamUrl": {
+      "maxLength": 2048,
+      "pattern": "^https://github\\.com/k2-fsa/sherpa-onnx/releases/download/[A-Za-z0-9][A-Za-z0-9._-]{0,63}/[A-Za-z0-9][A-Za-z0-9._+-]{0,254}$",
+      "type": "string"
+    }
+  },
+  "$id": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/schemas/model-source-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$ref": "#/$defs/configByModelType"
+    },
+    {
+      "$ref": "#/$defs/speakersByKind"
+    }
+  ],
+  "properties": {
+    "archive": {
+      "description": "Measured mirror archive; null only before prepare_sources.py --update-sources.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "format": {
+              "const": "tar"
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "size": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "format",
+            "size",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "displayName": {
+      "$ref": "#/$defs/displayName"
+    },
+    "files": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/files"
+        }
+      ]
+    },
+    "format": {
+      "const": 1
+    },
+    "kind": {
+      "$ref": "#/$defs/kind"
+    },
+    "languages": {
+      "$ref": "#/$defs/languages"
+    },
+    "license": {
+      "$ref": "#/$defs/license"
+    },
+    "modelId": {
+      "$ref": "#/$defs/modelId"
+    },
+    "modelType": {
+      "$ref": "#/$defs/modelType"
+    },
+    "recommended": {
+      "type": "boolean"
+    },
+    "releasedAt": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "revoked": {
+      "type": "boolean"
+    },
+    "runtime": {
+      "$ref": "#/$defs/runtime"
+    },
+    "sampleRate": {
+      "$ref": "#/$defs/sampleRate"
+    },
+    "speakers": {
+      "$ref": "#/$defs/speakers"
+    },
+    "summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "upstream": {
+      "$ref": "#/$defs/upstream"
+    },
+    "versionCode": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "format",
+    "modelId",
+    "versionCode",
+    "kind",
+    "modelType",
+    "displayName",
+    "summary",
+    "recommended",
+    "languages",
+    "sampleRate",
+    "releasedAt",
+    "license",
+    "runtime",
+    "upstream",
+    "archive",
+    "files"
+  ],
+  "title": "AutoJs6 speech model source v1 (speech-models/sources/<modelId>/<versionCode>/source.json)",
+  "type": "object"
+}

@@ -18,6 +18,15 @@
     "adjustment": "调整"
   },
   "$data": {
+    "2026-10-16": {
+      "released_date": "2026/10/16",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新增语音模型类别 speech-models 的来源清单, 许可审核与发布工具, 供 3-Macaw Speech 插件按需下载离线语音识别, 唤醒词与语音合成模型"
+        }
+      ]
+    },
     "2026-10-12": {
       "released_date": "2026/10/12",
       "entries": [

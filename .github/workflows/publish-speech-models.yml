@@ -1,0 +1,183 @@
+name: Publish immutable speech model release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release tag in the offline-signed speech model catalog
+        required: true
+        default: speech-models-v1
+      key_id:
+        description: Expected offline speech model signing key ID
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-speech-models-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    environment: speech-models-release
+    env:
+      GH_HOST: github.com
+      RELEASE_TAG: ${{ inputs.release_tag }}
+      EXPECTED_KEY_ID: ${{ inputs.key_id }}
+    steps:
+      - name: Require the default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]]; then
+            echo "Dispatch from the repository's default branch." >&2
+            exit 1
+          fi
+
+      - name: Checkout shared-assets repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Run speech model distribution tests
+        run: python -m unittest discover -s tools/speech-model-distribution/tests -v
+
+      - name: Require and validate the offline-signed release inputs
+        id: catalog
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os, pathlib, sys
+          sys.path.insert(0, "tools/speech-model-distribution")
+          from verify_release import distribution
+          root = pathlib.Path("speech-models")
+          for relative in ("catalogs/catalog-v1.json", "catalogs/catalog-v1.sig.json", "keys/catalog-signing-public.pem"):
+              if not (root / relative).is_file():
+                  raise SystemExit("Missing offline-reviewed signing input: " + relative + "; nothing will be published")
+          catalog = distribution.read_json(root / "catalogs/catalog-v1.json")
+          distribution.validate_catalog(catalog, expected_repository=os.environ["GITHUB_REPOSITORY"])
+          if catalog["releaseTag"] != os.environ["RELEASE_TAG"]:
+              raise SystemExit("Dispatch release_tag differs from the signed catalog")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write("version=" + str(catalog["catalogVersion"]) + "\n")
+              output.write("generated_at=" + catalog["generatedAt"] + "\n")
+          PY
+
+      - name: Verify current and historical catalog signatures
+        env:
+          CATALOG_VERSION: ${{ steps.catalog.outputs.version }}
+        run: |
+          set -euo pipefail
+          previous_args=()
+          if (( CATALOG_VERSION > 1 )); then
+            previous_args=(--previous-catalog "speech-models/catalogs/history/v$((CATALOG_VERSION - 1))/catalog-v1.json")
+          fi
+          python tools/speech-model-distribution/verify_catalog.py \
+            speech-models/catalogs/catalog-v1.json \
+            --signature speech-models/catalogs/catalog-v1.sig.json \
+            --public-key speech-models/keys/catalog-signing-public.pem \
+            --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
+            --minimum-catalog-version "$CATALOG_VERSION" "${previous_args[@]}"
+          for (( version=1; version<CATALOG_VERSION; version++ )); do
+            history="speech-models/catalogs/history/v${version}"
+            previous_history_args=()
+            if (( version > 1 )); then
+              previous_history_args=(--previous-catalog "speech-models/catalogs/history/v$((version - 1))/catalog-v1.json")
+            fi
+            python tools/speech-model-distribution/verify_catalog.py \
+              "$history/catalog-v1.json" --signature "$history/catalog-v1.sig.json" \
+              --public-key speech-models/keys/catalog-signing-public.pem \
+              --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
+              --minimum-catalog-version "$version" "${previous_history_args[@]}"
+            python - "$history/catalog-v1.json" "$version" <<'PY'
+          import json, pathlib, sys
+          catalog = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          if catalog["catalogVersion"] != int(sys.argv[2]):
+              raise SystemExit("History path and signed catalog version differ")
+          PY
+          done
+
+      - name: Reproduce the reviewed catalog from its sources
+        env:
+          CATALOG_VERSION: ${{ steps.catalog.outputs.version }}
+          CATALOG_GENERATED_AT: ${{ steps.catalog.outputs.generated_at }}
+        run: |
+          set -euo pipefail
+          previous_args=()
+          if (( CATALOG_VERSION > 1 )); then
+            previous_args=(--previous-catalog "speech-models/catalogs/history/v$((CATALOG_VERSION - 1))/catalog-v1.json")
+          fi
+          python tools/speech-model-distribution/build_catalog.py \
+            --source-root speech-models/sources --output build/speech-models-current \
+            --repository "$GITHUB_REPOSITORY" --catalog-version "$CATALOG_VERSION" \
+            --generated-at "$CATALOG_GENERATED_AT" "${previous_args[@]}"
+          cmp speech-models/catalogs/catalog-v1.json build/speech-models-current/catalog-v1.json
+          pending="speech-models/catalogs/pending/v${CATALOG_VERSION}"
+          if [[ -f "$pending/catalog-v1.json" ]]; then
+            cmp "$pending/catalog-v1.json" speech-models/catalogs/catalog-v1.json
+          fi
+          if [[ -f "$pending/catalog-v1.sig.json" ]]; then
+            cmp "$pending/catalog-v1.sig.json" speech-models/catalogs/catalog-v1.sig.json
+          fi
+
+      - name: Rebuild the new mirror archives from pinned upstream assets
+        run: |
+          set -euo pipefail
+          python tools/speech-model-distribution/prepare_sources.py \
+            --catalog speech-models/catalogs/catalog-v1.json --source-root speech-models/sources \
+            --cache-dir build/speech-models-upstream --output-dir build/speech-models-assets
+          python tools/speech-model-distribution/verify_release.py \
+            speech-models/catalogs/catalog-v1.json --assets-dir build/speech-models-assets \
+            --asset-list build/speech-models-current/release-assets.txt \
+            --expected-repository "$GITHUB_REPOSITORY"
+          rm -rf build/speech-models-upstream
+
+      - name: Confirm authenticated absence of both the release and tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python tools/speech-model-distribution/verify_release.py --check-absent \
+            --repository "$GITHUB_REPOSITORY" --release-tag "$RELEASE_TAG"
+
+      - name: Create a new tag, upload to a draft release, and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          asset_paths=()
+          while IFS= read -r name; do
+            if [[ -n "$name" ]]; then asset_paths+=("build/speech-models-assets/$name"); fi
+          done < build/speech-models-current/release-assets.txt
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            --raw-field ref="refs/tags/$RELEASE_TAG" --raw-field sha="$GITHUB_SHA" >/dev/null
+          gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --draft --verify-tag --latest=false \
+            --title "AutoJs6 speech models $RELEASE_TAG" \
+            --notes "Offline-signed, content-addressed sherpa-onnx speech models for 3-Macaw Speech. Licenses: speech-models/sources and speech-models/audits." \
+            "${asset_paths[@]}" speech-models/catalogs/catalog-v1.json speech-models/catalogs/catalog-v1.sig.json
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
+
+      - name: Download every published asset and verify exact reviewed bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          downloaded=$(mktemp -d)
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$downloaded"
+          python tools/speech-model-distribution/verify_release.py \
+            speech-models/catalogs/catalog-v1.json --assets-dir "$downloaded" \
+            --downloaded-release --signature speech-models/catalogs/catalog-v1.sig.json \
+            --expected-repository "$GITHUB_REPOSITORY"
+          python tools/speech-model-distribution/verify_catalog.py "$downloaded/catalog-v1.json" \
+            --signature "$downloaded/catalog-v1.sig.json" --public-key speech-models/keys/catalog-signing-public.pem \
+            --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY"

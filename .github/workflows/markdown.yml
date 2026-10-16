@@ -31,3 +31,6 @@ jobs:
 
       - name: Test documentation validation
         run: python -m unittest discover -s .python/tests
+
+      - name: Check speech model documents
+        run: python tools/speech-model-distribution/check_docs.py

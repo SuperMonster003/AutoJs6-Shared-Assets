@@ -12,6 +12,7 @@
 
 - {{ assets002 }}
 - {{ assets003 }}
+- {{ assets019 }}
 - {{ assets004 }}
 
 {{ assets005 }}
@@ -31,6 +32,7 @@
 ```text
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
+.github/workflows/publish-speech-models.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -50,6 +52,14 @@ codegen-models/
   keys/                           # model-specific public key after maintainer setup
   schemas/                        # catalog, signature and model-manifest schemas
 tools/codegen-model-distribution/
+speech-models/
+  sources/<modelId>/<versionCode>/ # source.json, model card and license texts only
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  audits/license-audit-vN.json     # license evidence and commercial-use conclusions
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # catalog, signature and model-source schemas
+tools/speech-model-distribution/
 ```
 
 {{ assets012 }}
@@ -65,6 +75,8 @@ tools/codegen-model-distribution/
 {{ assets017 }}
 
 {{ assets018 }}
+
+{{ assets020 }}
 
 ## {{ h2_changelog }}
 

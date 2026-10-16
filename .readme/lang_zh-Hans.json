@@ -24,5 +24,7 @@
   "assets015": "贡献与许可",
   "assets016": "每项二进制贡献必须包含上游仓库, 可获得时的准确版本或提交, 允许再分发的许可/声明文件, 以及审核过的 WOFF2 Normal 400 产物. 本仓库不主张第三方字体的所有权; 版权与许可信息随每次发行提供.",
   "assets017": "请勿提交可执行内容, 秘密信息, 私钥或未经审核的二进制文件.",
-  "assets018": "模型分发有独立的设置与发布前提, 参阅 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). 当前 tiny 模型来源是供 fork/私有工作流验收使用的已审核测试产物, 不可进入生产模型目录. 官方模型签名材料与生产质量模型门禁独立于现有 Ace 字体设置."
+  "assets018": "模型分发有独立的设置与发布前提, 参阅 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md). 当前 tiny 模型来源是供 fork/私有工作流验收使用的已审核测试产物, 不可进入生产模型目录. 官方模型签名材料与生产质量模型门禁独立于现有 Ace 字体设置.",
+  "assets019": "[`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech 插件按需下载的 sherpa-onnx 语音模型 (识别, 唤醒词与合成). 仓库只保存来源清单与许可文本, 模型归档由固定的上游发行资源复现, 使用独立的签名目录与发行标签.",
+  "assets020": "语音模型的签名与发布步骤见 [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), 工具说明见 [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). 模型二进制不纳入版本控制; 发布工作流从固定的 sherpa-onnx 上游资源校验并复现每个归档. 每个模型的许可与可否商用记录在许可审核文件中."
 }

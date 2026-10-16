@@ -24,5 +24,7 @@
   "assets015": "기여와 라이선스",
   "assets016": "바이너리 기여에는 상위 저장소, 가능하면 정확한 버전이나 커밋, 재배포 가능한 라이선스/고지 파일, 검토된 WOFF2 Normal 400 산출물이 포함되어야 합니다. 이 저장소는 타사 글꼴의 소유권을 주장하지 않으며 각 릴리스에 저작권과 라이선스 정보를 제공합니다.",
   "assets017": "실행 가능한 콘텐츠, 비밀 정보, 개인 키 또는 검토하지 않은 바이너리를 제출하지 마세요.",
-  "assets018": "모델 배포는 별도의 설정 및 게시 조건을 가지며 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md)를 참조하세요. 현재 tiny 모델 원본은 fork/비공개 워크플로 검증용으로 검토된 테스트 산출물이며 운영 모델 카탈로그에 넣을 수 없습니다. 공식 모델 서명 자료와 운영 품질 검증은 기존 Ace 글꼴 설정과 별개입니다."
+  "assets018": "모델 배포는 별도의 설정 및 게시 조건을 가지며 [`tools/codegen-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/codegen-model-distribution/README.md)를 참조하세요. 현재 tiny 모델 원본은 fork/비공개 워크플로 검증용으로 검토된 테스트 산출물이며 운영 모델 카탈로그에 넣을 수 없습니다. 공식 모델 서명 자료와 운영 품질 검증은 기존 Ace 글꼴 설정과 별개입니다.",
+  "assets019": "[`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech 플러그인이 필요할 때 내려받는 sherpa-onnx 음성 모델 (음성 인식, 키워드 검출, 음성 합성). 저장소에는 원본 매니페스트와 라이선스 문서만 두고 아카이브는 고정된 업스트림 릴리스 자산에서 재현하며, 자체 서명 카탈로그와 릴리스 태그를 사용합니다.",
+  "assets020": "음성 모델의 서명 및 게시 절차는 [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), 도구 설명은 [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md)를 참조하세요. 모델 바이너리는 버전 관리하지 않으며, 게시 워크플로가 고정된 sherpa-onnx 업스트림 자산에서 각 아카이브를 검증하고 재현합니다. 모델별 라이선스와 상업적 이용 가능 여부는 라이선스 감사 파일에 기록되어 있습니다."
 }

@@ -1,0 +1,108 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "8fb21f32bfcae2604c087cfbcff31cee6817a6794e4357b6d0f4ecb345a1158e",
+    "size": 32769536
+  },
+  "displayName": {
+    "en": "VITS AISHELL-3 Chinese, 174 voices",
+    "zh-CN": "VITS AISHELL-3 中文, 174 个音色"
+  },
+  "files": [
+    {
+      "path": "date.fst",
+      "sha256": "eb8aa079ae3cb81d8f4404992f39d61a0cb990947512b5b8d1e54d1f6980e718",
+      "size": 59154
+    },
+    {
+      "path": "lexicon.txt",
+      "sha256": "ab2e61d357551e7b24ddd965d924aca784c20165ff58c150794e539c6b5e9e35",
+      "size": 2042943
+    },
+    {
+      "path": "model.onnx",
+      "sha256": "5511d651b7840c0a93a6bbfd4afd070a2c7f39ca1ec3ff2ecd73191519bbb852",
+      "size": 30482262
+    },
+    {
+      "path": "new_heteronym.fst",
+      "sha256": "ca14b2127e27baa571664e4bb791e143e7425f56a6bc29db08d74f97e6aa4e29",
+      "size": 21974
+    },
+    {
+      "path": "number.fst",
+      "sha256": "743f402181fcfebf76cc2f0546b71fa26476e626fbe4e460fb7b4c3a7a8bd5bd",
+      "size": 64482
+    },
+    {
+      "path": "phone.fst",
+      "sha256": "1ac2b6fa56b1442320c4de7db08353bab8963a2b57f365eebcdd3a2d3562f8d7",
+      "size": 88630
+    },
+    {
+      "path": "speakers.txt",
+      "sha256": "50a825fc9a89172eee04a4d68869d933d0eca0d847f3b6fcffff9514cc72442d",
+      "size": 1392
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "50b45a7b7de1752fd3c7b4755661c285f1547f59186eca2281089a81307ad953",
+      "size": 1671
+    }
+  ],
+  "format": 1,
+  "kind": "tts",
+  "languages": [
+    "zh"
+  ],
+  "license": {
+    "commercialUse": "unknown",
+    "noticeKey": "speech_model_license_unknown",
+    "spdx": "LicenseRef-NoLicenseDeclared"
+  },
+  "modelId": "tts.vits.icefall.zh-aishell3",
+  "modelType": "vits",
+  "recommended": true,
+  "releasedAt": "2026-10-16T00:00:00Z",
+  "runtime": {
+    "config": {
+      "lexicon": [
+        "lexicon.txt"
+      ],
+      "model": "model.onnx",
+      "ruleFsts": [
+        "phone.fst",
+        "date.fst",
+        "number.fst",
+        "new_heteronym.fst"
+      ],
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 8000,
+  "speakers": 174,
+  "summary": {
+    "en": "Small multi-speaker Mandarin model trained with icefall on AISHELL-3, 8 kHz output. The optional 181 MB rule.far normalizer is omitted.",
+    "zh-CN": "使用 icefall 在 AISHELL-3 上训练的小型多说话人普通话模型, 输出 8 kHz. 省略了可选的 181 MB 文本规范化规则 rule.far."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "vits-icefall-zh-aishell3/date.fst": "date.fst",
+        "vits-icefall-zh-aishell3/lexicon.txt": "lexicon.txt",
+        "vits-icefall-zh-aishell3/model.onnx": "model.onnx",
+        "vits-icefall-zh-aishell3/new_heteronym.fst": "new_heteronym.fst",
+        "vits-icefall-zh-aishell3/number.fst": "number.fst",
+        "vits-icefall-zh-aishell3/phone.fst": "phone.fst",
+        "vits-icefall-zh-aishell3/speakers.txt": "speakers.txt",
+        "vits-icefall-zh-aishell3/tokens.txt": "tokens.txt"
+      },
+      "sha256": "ab468db3a3308cdd861495e0db2f25d79418a0c00639f74944c7cdf5dd8c6ec1",
+      "size": 31559701,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-icefall-zh-aishell3.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

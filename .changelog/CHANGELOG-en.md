@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-10-16
+
+###### 2026/10/16
+
+* `Feature` Added source manifests, a license audit and release tools for the new speech-models family, from which the 3-Macaw Speech plugin downloads offline speech recognition, wake word and speech synthesis models on demand
+
 # 2026-10-12
 
 ###### 2026/10/12

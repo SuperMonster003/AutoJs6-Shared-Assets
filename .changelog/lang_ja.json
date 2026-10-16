@@ -18,6 +18,15 @@
     "adjustment": "調整"
   },
   "$data": {
+    "2026-10-16": {
+      "released_date": "2026/10/16",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新しい音声モデル群 speech-models の原本マニフェスト, ライセンス監査, 公開ツールを追加. 3-Macaw Speech プラグインはここからオフラインの音声認識, ウェイクワード, 音声合成モデルを必要に応じてダウンロードします"
+        }
+      ]
+    },
     "2026-10-12": {
       "released_date": "2026/10/12",
       "entries": [
