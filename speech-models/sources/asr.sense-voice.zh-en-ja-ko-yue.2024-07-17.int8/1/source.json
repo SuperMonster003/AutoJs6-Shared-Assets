@@ -47,7 +47,7 @@
   "mirror": true,
   "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8",
   "modelType": "sense-voice",
-  "recommended": false,
+  "recommended": true,
   "releasedAt": "2026-10-16T00:00:00Z",
   "runtime": {
     "config": {

@@ -1,6 +1,6 @@
 {
   "catalogVersion": 1,
-  "generatedAt": "2026-10-16T05:30:00Z",
+  "generatedAt": "2026-10-16T06:15:00Z",
   "models": [
     {
       "displayName": {
@@ -9,7 +9,7 @@
       },
       "kind": "asr",
       "modelId": "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8",
-      "recommended": false,
+      "recommended": true,
       "recommendedVersionCode": 1,
       "summary": {
         "en": "Offline recognizer for Mandarin, Cantonese, English, Japanese and Korean with punctuation, run on segments cut by voice activity detection. Official FunAudioLLM SenseVoiceSmall export; commercial use is permitted with attribution.",
