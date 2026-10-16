@@ -286,7 +286,8 @@ generation/export/signature tests run in the shared-assets repository.
 `catalog-v1.schema.json` and `signature-v1.schema.json` document the wire format;
 `validate_catalog.py` enforces additional cross-field invariants.
 
-On Windows, Python 3.13+ gives `tempfile.mkdtemp()` directories a DACL that allows
-only SYSTEM, Administrators and the owner, and a rename keeps it; release, export
-and repository staging directories are therefore reset by `inherit_parent_acl()`
-to the rights inherited from the destination before anything is written into them.
+On Windows, since the CVE-2024-4030 fix (Python 3.12.4 and 3.13),
+`tempfile.mkdtemp()` gives new directories a DACL that allows only SYSTEM,
+Administrators and the owner, and a rename keeps it; release, export and
+repository staging directories are therefore reset by `inherit_parent_acl()` to
+the rights inherited from the destination before anything is written into them.

@@ -91,12 +91,12 @@ def sha256_bytes(content: bytes) -> str:
 def inherit_parent_acl(path: Path) -> None:
     """Give a staging directory the Windows access rights of a plain mkdir in its parent.
 
-    Since Python 3.13, tempfile.mkdtemp() on Windows sets a protected DACL that allows
-    only SYSTEM, Administrators and OWNER RIGHTS. Files created inside inherit it and a
-    rename keeps it, so a file written from an elevated window ends up owned by
-    Administrators and unreadable for Git. An empty, unprotected DACL keeps only the
-    entries inherited from the parent (what icacls /reset does). Other platforms are
-    left untouched.
+    Since the CVE-2024-4030 fix (Python 3.12.4 and 3.13), tempfile.mkdtemp() on Windows
+    sets a protected DACL that allows only SYSTEM, Administrators and OWNER RIGHTS.
+    Files created inside inherit it and a rename keeps it, so a file written from an
+    elevated window ends up owned by Administrators and unreadable for Git. An empty,
+    unprotected DACL keeps only the entries inherited from the parent (what
+    icacls /reset does). Other platforms are left untouched.
     """
     if os.name != "nt":
         return

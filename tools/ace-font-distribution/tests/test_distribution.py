@@ -85,10 +85,6 @@ from prepare_repository import (  # noqa: E402
 from verify_release import verify_release  # noqa: E402
 
 
-windows_mkdtemp_dacl = unittest.skipUnless(
-    os.name == "nt" and sys.version_info >= (3, 13),
-    "only Python 3.13+ on Windows gives mkdtemp() a restricted DACL",
-)
 MKDTEMP_ACCOUNTS = frozenset({"SY", "BA", "OW"})  # SYSTEM, Administrators, OWNER RIGHTS
 
 
@@ -131,6 +127,26 @@ def dacl_entries(path: Path) -> tuple[str, list[str]]:
         kernel32.LocalFree(ctypes.cast(text, ctypes.c_void_p))
         kernel32.LocalFree(descriptor)
     return flags, re.findall(r"\(([^()]*)\)", entries)
+
+
+def mkdtemp_is_restricted() -> bool:
+    """Whether mkdtemp() gives a new directory a protected DACL.
+
+    Windows only, since the CVE-2024-4030 fix (Python 3.12.4 and 3.13).
+    """
+    if os.name != "nt":
+        return False
+    path = tempfile.mkdtemp()
+    try:
+        return "P" in dacl_entries(Path(path))[0]
+    finally:
+        os.rmdir(path)
+
+
+windows_mkdtemp_dacl = unittest.skipUnless(
+    mkdtemp_is_restricted(),
+    "tempfile.mkdtemp() does not restrict new directories here",
+)
 
 
 def plain_directory(test: unittest.TestCase) -> Path:

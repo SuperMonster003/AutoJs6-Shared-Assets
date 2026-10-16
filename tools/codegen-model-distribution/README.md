@@ -156,10 +156,11 @@ deterministic preparation, real OpenSSL signing, exact-byte tampering, wrong key
 rollback, actual tiny-package release verification, authentication failures and workflow
 ordering. Tests create private keys in temporary directories and remove them afterward.
 
-On Windows, Python 3.13+ gives `tempfile.mkdtemp()` directories a DACL that allows only
-SYSTEM, Administrators and the owner, and a rename keeps it; `distribution.inherit_parent_acl()`
-therefore resets the pending output's staging directory and the bootstrap pair to the rights
-inherited from the destination, so Git can read them and any signature written there later.
+On Windows, since the CVE-2024-4030 fix (Python 3.12.4 and 3.13), `tempfile.mkdtemp()` gives
+new directories a DACL that allows only SYSTEM, Administrators and the owner, and a rename
+keeps it; `distribution.inherit_parent_acl()` therefore resets the pending output's staging
+directory and the bootstrap pair to the rights inherited from the destination, so Git can
+read them and any signature written there later.
 
 On 2026-10-03, 63 tests passed. An additional local CLI round trip prepared the checked-in
 tiny source twice with identical catalog bytes, signed with a disposable key, verified and

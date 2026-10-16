@@ -18,10 +18,11 @@ signing and publication steps are in [the family README](../../speech-models/REA
 `preparation.py` holds the downloader and repacker; `crypto.py` adapts the codegen signature code and
 refuses the Ace and codegen keys.
 
-On Windows, Python 3.13+ gives `tempfile.mkdtemp()` directories a DACL that allows only SYSTEM,
-Administrators and the owner, and a rename keeps it; `distribution.inherit_parent_acl()` therefore
-resets every staging directory and each promoted archive to the rights inherited from the destination,
-so Git and other accounts can read the output, including a signature later written into it.
+On Windows, since the CVE-2024-4030 fix (Python 3.12.4 and 3.13), `tempfile.mkdtemp()` gives new
+directories a DACL that allows only SYSTEM, Administrators and the owner, and a rename keeps it;
+`distribution.inherit_parent_acl()` therefore resets every staging directory and each promoted
+archive to the rights inherited from the destination, so Git and other accounts can read the output,
+including a signature later written into it.
 
 ## Upstream cache and repacking
 

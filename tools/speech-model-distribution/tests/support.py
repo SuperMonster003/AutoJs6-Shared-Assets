@@ -148,8 +148,6 @@ def read_source(folder):
 
 # Windows access rights -----------------------------------------------------------------------
 
-windows_mkdtemp_dacl = unittest.skipUnless(os.name == "nt" and sys.version_info >= (3, 13),
-                                           "only Python 3.13+ on Windows gives mkdtemp() a restricted DACL")
 MKDTEMP_ACCOUNTS = frozenset({"SY", "BA", "OW"})  # SYSTEM, Administrators, OWNER RIGHTS
 
 
@@ -178,6 +176,20 @@ def dacl_entries(path):
         kernel32.LocalFree(ctypes.cast(text, ctypes.c_void_p))
         kernel32.LocalFree(descriptor)
     return flags, re.findall(r"\(([^()]*)\)", entries)
+
+
+def mkdtemp_is_restricted():
+    """Whether tempfile.mkdtemp() gives a new directory a protected DACL (Windows since Python 3.12.4 and 3.13)."""
+    if os.name != "nt":
+        return False
+    path = tempfile.mkdtemp()
+    try:
+        return "P" in dacl_entries(path)[0]
+    finally:
+        os.rmdir(path)
+
+
+windows_mkdtemp_dacl = unittest.skipUnless(mkdtemp_is_restricted(), "tempfile.mkdtemp() does not restrict new directories here")
 
 
 def plain_directory(test):
