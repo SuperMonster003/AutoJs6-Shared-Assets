@@ -157,6 +157,7 @@ def repack(source, cache_dir, output_dir, *, offline=False, fetch=download):
     output_dir.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix=".work-", dir=output_dir))
     try:
+        distribution.inherit_parent_acl(work)
         blobs = work / "blobs"
         blobs.mkdir()
         records = {}
@@ -188,6 +189,8 @@ def repack(source, cache_dir, output_dir, *, offline=False, fetch=download):
                 raise DistributionError("A different file already uses the content-addressed name: " + name)
         else:
             os.replace(temporary, target)
+            # Inherit from the output directory itself, not through the work directory.
+            distribution.inherit_parent_acl(target)
         return target, files, {"format": "tar", "size": size, "sha256": digest}
     finally:
         shutil.rmtree(work, ignore_errors=True)

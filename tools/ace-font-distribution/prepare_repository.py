@@ -16,6 +16,7 @@ from distribution import (
     DistributionError,
     build_catalog,
     canonical_json_bytes,
+    inherit_parent_acl,
     read_json,
 )
 from export_sources import DEFAULT_SOURCE_PREFIX, export_sources
@@ -93,6 +94,8 @@ def prepare_repository(
         tempfile.mkdtemp(prefix=f".{destination.name}-", dir=destination.parent)
     )
     try:
+        # Before anything is written, so every file inherits the destination's rights.
+        inherit_parent_acl(staging)
         tools_destination = staging / "tools/ace-font-distribution"
         shutil.copytree(
             TOOL_DIR,

@@ -8,8 +8,10 @@ import unittest
 from unittest import mock
 
 if __package__:
+    from . import windows_access
     from .test_crypto import catalog_value, crypto, load_tool
 else:
+    import windows_access
     from test_crypto import catalog_value, crypto, load_tool
 
 bootstrap = load_tool("prepare_bootstrap")
@@ -129,6 +131,22 @@ class BootstrapTest(unittest.TestCase):
         with self.assertRaises(crypto.DistributionError):
             self.prepare()
         self.assertFalse(self.output.exists())
+
+    @windows_access.windows_mkdtemp_dacl
+    def test_signature_and_staged_pair_inherit_the_parent_access_rights(self):
+        # The pair is written in a mkdtemp() transaction, which used to pass its restricted DACL on.
+        parent = windows_access.plain_directory(self)
+        pending = parent / "pending"
+        pending.mkdir()
+        self.catalog = pending / "catalog-v1.json"
+        self.catalog.write_bytes((self.root / "catalog-v1.json").read_bytes())
+        self.signature = pending / "catalog-v1.sig.json"
+        self.sign()
+        self.output = parent / "staged"
+        self.prepare()
+        self.assertEqual({bootstrap.PUBLIC_KEY_RESOURCE, bootstrap.CATALOG_RESOURCE}, {path.name for path in self.output.iterdir()})
+        windows_access.assert_inherited_access(self, pending)
+        windows_access.assert_inherited_access(self, self.output)
 
 
 if __name__ == "__main__":

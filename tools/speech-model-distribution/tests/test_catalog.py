@@ -14,6 +14,7 @@ if not hasattr(support, "distribution"):
 distribution = support.distribution
 DistributionError = distribution.DistributionError
 build_catalog = support.load("build_catalog")
+crypto = support.load("crypto")
 verify_catalog = support.load("verify_catalog")
 
 
@@ -139,6 +140,25 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(0, verify_catalog.main(arguments[:3]))
         with self.assertRaises(SystemExit):
             verify_catalog.main([str(catalog), "--signature", str(catalog)])
+
+
+@support.windows_mkdtemp_dacl
+class PendingAccessTest(unittest.TestCase):
+    def test_pending_output_archives_and_signature_inherit_the_parent_access_rights(self):
+        # mkdtemp() staging used to leave only SYSTEM, Administrators and OWNER RIGHTS on all of these.
+        parent = support.plain_directory(self)
+        sources, cache = parent / "sources", parent / "cache"
+        support.tts_fixture(sources, cache)
+        support.measure(sources, cache, parent / "assets")
+        pending = parent / "pending"
+        self.assertEqual(0, build_catalog.main(["--source-root", str(sources), "--output", str(pending),
+                                                "--catalog-version", "1", "--generated-at", support.TIME1]))
+        openssl = crypto.find_openssl()
+        private, pem, der = parent / "keys/private.pem", parent / "keys/public.pem", parent / "keys/public.der"
+        key_id = crypto.generate_key_pair(private, pem, der, openssl)
+        crypto.sign_catalog(pending / distribution.CATALOG_FILE, private, pending / distribution.SIGNATURE_FILE, key_id, openssl)
+        support.assert_inherited_access(self, parent / "assets")
+        support.assert_inherited_access(self, pending)
 
 
 if __name__ == "__main__":

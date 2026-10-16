@@ -31,6 +31,7 @@ def _crypto():
 
 crypto = _crypto()
 DistributionError = crypto.DistributionError
+inherit_parent_acl = crypto.distribution.inherit_parent_acl
 PUBLIC_KEY_RESOURCE = "codegen_model_catalog_public_key_v1.der"
 CATALOG_RESOURCE = "codegen_model_catalog_v1.json"
 CANONICAL_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
@@ -63,6 +64,8 @@ def _atomic_pair(directory: Path, contents: dict[str, bytes]) -> None:
     replaced: list[str] = []
     retain_backups = False
     try:
+        # First, so backups and retained recovery files keep the directory's access rights too.
+        inherit_parent_acl(temporary)
         for name, content in contents.items():
             with (temporary / name).open("xb") as stream:
                 stream.write(content)
@@ -89,6 +92,9 @@ def _atomic_pair(directory: Path, contents: dict[str, bytes]) -> None:
                 retain_backups = True
                 raise DistributionError(f"bootstrap rollback was blocked; recovery files retained at {temporary}") from error
             raise
+        # The pair is complete; inherit from the resource directory itself, not through the transaction.
+        for target in targets.values():
+            inherit_parent_acl(target)
     finally:
         if not retain_backups:
             # The only recursively removed directory is this freshly created private transaction.

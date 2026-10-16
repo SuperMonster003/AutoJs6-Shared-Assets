@@ -15,6 +15,11 @@ import warnings
 import zipfile
 import zlib
 
+if __package__:
+    from . import windows_access
+else:
+    import windows_access
+
 
 TOOL_DIR = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = TOOL_DIR.parents[1]
@@ -291,6 +296,15 @@ class DistributionTest(unittest.TestCase):
             path.write_bytes(content)
             with self.assertRaises(DistributionError):
                 distribution.read_json(path)
+
+    @windows_access.windows_mkdtemp_dacl
+    def test_pending_output_inherits_the_parent_access_rights(self):
+        # mkdtemp() staging used to leave only SYSTEM, Administrators and OWNER RIGHTS on the output.
+        source(self.sources)
+        output = windows_access.plain_directory(self) / "pending"
+        distribution.prepare_catalog(self.sources, output, distribution.DEFAULT_REPOSITORY, 1, TIME1)
+        self.assertTrue((output / "assets").is_dir())
+        windows_access.assert_inherited_access(self, output)
 
 
 class PackageValidationTest(unittest.TestCase):

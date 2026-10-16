@@ -155,7 +155,9 @@ openssl pkey -pubin -in speech-models/keys/catalog-signing-public.pem -outform D
 
 Run from the repository root on the machine that holds the offline key
 `D:/offline-keys/speech-models.private.pem`. The tools need Python 3.12 or newer and OpenSSL; signing
-refuses a private key inside any Git working tree and a catalog that fails validation.
+refuses a private key inside any Git working tree and a catalog that fails validation. Sign from a
+normal PowerShell window, not an elevated Administrator one: files written there belong to
+Administrators, and in a directory with a restricted DACL neither Git nor the tests can read them.
 
 1. Re-check the reviewed candidate against its sources, then sign the exact bytes:
 

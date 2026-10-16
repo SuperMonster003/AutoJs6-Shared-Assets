@@ -16,6 +16,7 @@ from distribution import (
     COMMIT_PATTERN,
     DistributionError,
     canonical_json_bytes,
+    inherit_parent_acl,
     read_json,
     validate_manifest,
     validate_woff2,
@@ -141,6 +142,8 @@ def export_sources(
 
     staging = Path(tempfile.mkdtemp(prefix=f".{output.name}-", dir=output.parent))
     try:
+        # Before anything is written, so every file inherits the final directory's rights.
+        inherit_parent_acl(staging)
         for relative_value, is_font in required:
             relative = _safe_relative_path(relative_value, "manifest source path")
             content = _read_git_regular_file(

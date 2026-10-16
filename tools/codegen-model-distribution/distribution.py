@@ -4,6 +4,7 @@ from copy import deepcopy
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import re
 import shutil
@@ -52,6 +53,35 @@ def canonical_json_bytes(value):
 
 def sha256_bytes(content):
     return hashlib.sha256(content).hexdigest()
+
+
+def inherit_parent_acl(path):
+    """Give a staging directory or a moved file the Windows access rights of a plain mkdir in its parent.
+
+    Since Python 3.13, tempfile.mkdtemp() on Windows sets a protected DACL that allows only SYSTEM,
+    Administrators and OWNER RIGHTS. Files created inside inherit it and a rename keeps it, so a
+    signature written from an elevated window ends up owned by Administrators and unreadable for Git.
+    An empty, unprotected DACL keeps only the entries inherited from the parent (what icacls /reset
+    does). Other platforms are left untouched.
+    """
+    if os.name != "nt":
+        return
+    import ctypes
+    from ctypes import wintypes
+    advapi32 = ctypes.WinDLL("advapi32", use_last_error=True)
+    initialize = advapi32.InitializeAcl
+    initialize.argtypes, initialize.restype = (ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD), wintypes.BOOL
+    apply = advapi32.SetNamedSecurityInfoW
+    apply.argtypes = (wintypes.LPCWSTR, ctypes.c_int, wintypes.DWORD) + (ctypes.c_void_p,) * 4
+    apply.restype = wintypes.DWORD
+    # An empty ACL, never a NULL one: a NULL DACL would grant everyone full access.
+    acl = ctypes.create_string_buffer(8)  # sizeof(ACL)
+    if not initialize(acl, len(acl), 2):  # ACL_REVISION
+        raise ctypes.WinError(ctypes.get_last_error())
+    # SE_FILE_OBJECT, DACL_SECURITY_INFORMATION | UNPROTECTED_DACL_SECURITY_INFORMATION
+    error = apply(str(path), 1, 0x20000004, None, None, acl, None)
+    if error:
+        raise OSError(None, ctypes.FormatError(error), str(path), error)
 
 
 def read_json(path):
@@ -392,6 +422,8 @@ def prepare_catalog(source_root, output, repository, catalog_version, generated_
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix="." + output.name + "-", dir=output.parent))
     try:
+        # Before anything is written, so every file inherits the access rights of the final directory.
+        inherit_parent_acl(temporary)
         (temporary / "assets").mkdir()
         for filename, path in sorted(assets.items()):
             target = temporary / "assets" / filename

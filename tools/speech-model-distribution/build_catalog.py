@@ -36,6 +36,8 @@ def write_output(output, catalog, new_assets, distribution):
         raise distribution.DistributionError("Newly introduced archives differ from the catalog's release assets")
     temporary = Path(tempfile.mkdtemp(prefix="." + output.name + "-", dir=output.parent))
     try:
+        # Before anything is written, so every file inherits the access rights of the final directory.
+        distribution.inherit_parent_acl(temporary)
         (temporary / distribution.CATALOG_FILE).write_bytes(distribution.canonical_json_bytes(catalog))
         (temporary / "release-assets.txt").write_text("".join(name + "\n" for name in new_assets), encoding="utf-8", newline="\n")
         (temporary / "preparation.json").write_bytes(distribution.canonical_json_bytes({
