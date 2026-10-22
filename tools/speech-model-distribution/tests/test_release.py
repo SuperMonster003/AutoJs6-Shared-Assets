@@ -36,7 +36,7 @@ class ReleaseVerificationTest(unittest.TestCase):
         self.assets = self.root / "assets"
         support.measure(sources, cache, self.assets)
         self.catalog, self.names = distribution.build_catalog(sources, REPOSITORY, 1, support.TIME1)
-        self.catalog_path = self.root / "catalog-v1.json"
+        self.catalog_path = self.root / distribution.CATALOG_FILE
         self.catalog_path.write_bytes(distribution.canonical_json_bytes(self.catalog))
 
     def verify(self, **kwargs):
@@ -97,16 +97,26 @@ class ReleaseVerificationTest(unittest.TestCase):
             self.verify()
 
     def test_downloaded_release_requires_exact_catalog_and_signature(self):
-        signature = self.root / "catalog-v1.sig.json"
+        signature = self.root / distribution.SIGNATURE_FILE
         signature.write_bytes(b'{"reviewed": true}\n')
-        shutil.copyfile(self.catalog_path, self.assets / "catalog-v1.json")
-        shutil.copyfile(signature, self.assets / "catalog-v1.sig.json")
+        shutil.copyfile(self.catalog_path, self.assets / distribution.CATALOG_FILE)
+        shutil.copyfile(signature, self.assets / distribution.SIGNATURE_FILE)
         self.assertTrue(self.verify(downloaded_release=True, signature_path=signature)["downloadedRelease"])
         with self.assertRaisesRegex(DistributionError, "signature"):
             self.verify(downloaded_release=True)
-        (self.assets / "catalog-v1.sig.json").write_bytes(b"{}\n")
+        (self.assets / distribution.SIGNATURE_FILE).write_bytes(b"{}\n")
         with self.assertRaisesRegex(DistributionError, "signature differs"):
             self.verify(downloaded_release=True, signature_path=signature)
+        # A schema 1 release carries catalog-v1.json and catalog-v1.sig.json instead.
+        self.catalog["schemaVersion"] = 1
+        self.catalog_path.write_bytes(distribution.canonical_json_bytes(self.catalog))
+        with self.assertRaisesRegex(DistributionError, "catalog-v1.json, catalog-v1.sig.json"):
+            self.verify(downloaded_release=True, signature_path=signature)
+        (self.assets / distribution.CATALOG_FILE).unlink()
+        (self.assets / distribution.SIGNATURE_FILE).unlink()
+        shutil.copyfile(self.catalog_path, self.assets / "catalog-v1.json")
+        shutil.copyfile(signature, self.assets / "catalog-v1.sig.json")
+        self.assertTrue(self.verify(downloaded_release=True, signature_path=signature)["downloadedRelease"])
 
     def test_current_release_and_all_artifacts_modes_distinguish_historical_urls(self):
         self.catalog.update(catalogVersion=2, releaseTag="speech-models-v2", generatedAt=support.TIME2)
@@ -168,7 +178,7 @@ class WorkflowContractTest(unittest.TestCase):
 
     def test_review_reproduction_and_preflight_precede_mutation_and_readback_follows(self):
         ordered = ["Require the default branch", "Run speech model distribution tests", "Missing offline-reviewed signing input",
-                   "Verify current and historical catalog signatures", "build_catalog.py", "cmp speech-models/catalogs/catalog-v1.json",
+                   "Verify current and historical catalog signatures", "build_catalog.py", 'cmp "$CURRENT_CATALOG"',
                    "prepare_sources.py", "--asset-list build/speech-models-current/release-assets.txt", "--check-absent",
                    "gh api --method POST", "gh release create", "gh release edit", "gh release download", "--downloaded-release"]
         positions = [self.workflow.index(value) for value in ordered]
@@ -176,12 +186,15 @@ class WorkflowContractTest(unittest.TestCase):
         for forbidden in ("--clobber", "gh release delete", "git push", "private", "secrets."):
             self.assertNotIn(forbidden, self.workflow)
         self.assertIn("--draft --verify-tag --latest=false", self.workflow)
+        # File names follow the newest catalog schema; only the history lookup comment names catalog-v1.json.
+        self.assertIn("distribution.CATALOG_FILE", self.workflow)
+        self.assertNotIn("catalogs/catalog-v1", self.workflow)
 
     def test_permissions_environment_and_action_pins(self):
         for expected in ("workflow_dispatch:", "contents: write", "environment: speech-models-release",
                          "group: publish-speech-models-", "cancel-in-progress: false", "persist-credentials: false",
                          "python-version: '3.12'", "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
-                         "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "default: speech-models-v1"):
+                         "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "default: speech-models-v2"):
             self.assertIn(expected, self.workflow)
         codegen = (support.REPOSITORY_ROOT / ".github/workflows/publish-codegen-models.yml").read_text(encoding="utf-8")
         self.assertNotIn("speech-models", codegen)

@@ -243,6 +243,48 @@ class ValidationTest(unittest.TestCase):
         with self.assertRaisesRegex(DistributionError, "revoked"):
             distribution.validate_catalog(restored, previous_catalog=revoked)
 
+    def test_punct_kind_and_model_types_need_catalog_schema_2(self):
+        with tempfile.TemporaryDirectory() as value:
+            root = Path(value)
+            sources, cache = root / "sources", root / "cache"
+            support.tts_fixture(sources, cache)
+            ct_transformer, casing = support.punct_fixtures(sources, cache)
+            support.measure(sources, cache, root / "assets")
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            distribution.validate_source(support.read_source(ct_transformer))
+            casing = support.read_source(casing)
+        self.assertEqual((2, 3), (catalog["schemaVersion"], len(assets)))
+        for change, pattern in ((lambda value: value.update(sampleRate=16000), "sampleRate"),
+                                (lambda value: value.update(speakers=1), "speakers"),
+                                (lambda value: value["runtime"]["config"].pop("bpeVocab"), "missing"),
+                                (lambda value: value.update(modelType="ct-transformer"), "unknown"),
+                                (lambda value: value.update(modelType="vits"), "modelType"),
+                                (lambda value: value.update(modelId="tts.cnn-bilstm.unit-test"), "kind")):
+            changed = deepcopy(casing)
+            change(changed)
+            with self.subTest(pattern=pattern), self.assertRaisesRegex(DistributionError, pattern):
+                distribution.validate_source(changed)
+        for schema in (0, 3, True, "2"):
+            with self.subTest(schema=schema), self.assertRaisesRegex(DistributionError, "Unsupported catalog schemaVersion"):
+                distribution.validate_catalog(dict(catalog, schemaVersion=schema))
+        with self.assertRaisesRegex(DistributionError, "kind punct requires catalog schemaVersion 2"):
+            distribution.validate_catalog(dict(catalog, schemaVersion=1))
+        legacy = dict(catalog, schemaVersion=1, models=[model for model in catalog["models"] if model["kind"] != "punct"])
+        distribution.validate_catalog(legacy)
+        later = dict(legacy, catalogVersion=2, releaseTag="speech-models-v2", generatedAt=support.TIME2)
+        with self.assertRaisesRegex(DistributionError, "earlier schema"):
+            distribution.validate_catalog(later, previous_catalog=catalog)
+        distribution.validate_catalog(dict(later, schemaVersion=2), previous_catalog=legacy)
+        self.assertEqual(("catalog-v1.json", "catalog-v2.sig.json"), (distribution.catalog_file(1), distribution.signature_file(2)))
+        # Member names packed from "." keep their "./" prefix, which schema 1 does not allow.
+        self.assertTrue(all(member.startswith("./") for member in casing["upstream"][0]["members"]))
+        self.assertEqual("./a/b.onnx", distribution.upstream_member("./a/b.onnx"))
+        with self.assertRaisesRegex(DistributionError, "prefix ./ requires catalog schemaVersion 2"):
+            distribution.upstream_member("./a/b.onnx", 1)
+        for member in ("././a", "./../a", "./", ".//a", "a/./b"):
+            with self.subTest(member=member), self.assertRaisesRegex(DistributionError, "upstream member"):
+                distribution.upstream_member(member)
+
     def test_json_parsing_is_strict(self):
         for data in (b'{"a": 1, "a": 2}', b'{"a": NaN}', b"\xef\xbb\xbf{}", b"[]", b"{"):
             with self.subTest(data=data), self.assertRaises(DistributionError):

@@ -42,8 +42,8 @@ class CatalogCryptoTest(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory(prefix="speech-crypto-test-")
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
-        self.catalog = self.root / "catalog-v1.json"
-        self.signature = self.root / "catalog-v1.sig.json"
+        self.catalog = self.root / distribution.CATALOG_FILE
+        self.signature = self.root / distribution.SIGNATURE_FILE
         self.catalog.write_bytes(distribution.canonical_json_bytes(self.catalog_value))
 
     def sign(self):
@@ -126,6 +126,28 @@ class CatalogCryptoTest(unittest.TestCase):
             crypto.verify_catalog_material(renamed, self.signature, self.pem, self.key_id, openssl_value=self.openssl)
         with self.assertRaises(DistributionError):
             crypto.verify_catalog_material(self.catalog, self.signature, self.pem, self.key_id, 2, self.openssl)
+
+    def test_envelope_and_file_names_follow_the_catalog_schema(self):
+        self.assertEqual("catalog-v2.json", self.sign()["catalog"])
+        signed = self.signature.read_bytes()
+        v1_value, _ = distribution.build_catalog(self.sources, support.REPOSITORY, 1, support.TIME1, schema=1)
+        v1, v1_signature = self.root / "catalog-v1.json", self.root / "catalog-v1.sig.json"
+        v1.write_bytes(distribution.canonical_json_bytes(v1_value))
+        envelope = crypto.sign_catalog(v1, self.private, v1_signature, self.key_id, self.openssl)
+        self.assertEqual("catalog-v1.json", envelope["catalog"])
+        crypto.verify_catalog_material(v1, v1_signature, self.pem, self.key_id, openssl_value=self.openssl)
+        # A schema 2 catalog never passes as catalog-v1.json, and an envelope never names another schema's file.
+        v1.write_bytes(self.catalog.read_bytes())
+        with self.assertRaisesRegex(DistributionError, "catalog-v2.json"):
+            crypto.sign_catalog(v1, self.private, v1_signature, self.key_id, self.openssl)
+        with self.assertRaisesRegex(DistributionError, "catalog-v2.json"):
+            crypto.verify_catalog_material(v1, self.signature, self.pem, self.key_id, openssl_value=self.openssl)
+        self.signature.write_bytes(distribution.canonical_json_bytes(dict(json.loads(signed), catalog="catalog-v1.json")))
+        with self.assertRaisesRegex(DistributionError, "envelope"):
+            self.verify()
+        self.catalog.write_bytes(distribution.canonical_json_bytes(dict(self.catalog_value, schemaVersion=3)))
+        with self.assertRaisesRegex(DistributionError, "schemaVersion"):
+            self.sign()
 
     def test_command_line_sign_and_verify_round_trip(self):
         self.assertEqual(0, sign_catalog.main([str(self.catalog), "--private-key", str(self.private), "--output", str(self.signature),

@@ -1,0 +1,84 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "599cc87297d6a0102f105f0cfadb287f954e7b3d59ab273671216dd10615d811",
+    "size": 129017344
+  },
+  "displayName": {
+    "en": "Streaming Zipformer, French (int8)",
+    "zh-CN": "流式 Zipformer 法语 (int8)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "ee4888fa9f00700cd89a81f84faa0e57fbdfd1cbde31213d70824e05ddf9842a",
+      "size": 204
+    },
+    {
+      "path": "decoder-epoch-29-avg-9-with-averaged-model.onnx",
+      "sha256": "3ef2840b684440e26382af87b2174d25732a9f113f1965cd8abba7ffc5d033fb",
+      "size": 2092272
+    },
+    {
+      "path": "encoder-epoch-29-avg-9-with-averaged-model.int8.onnx",
+      "sha256": "47a94a7fdc8dff63d708be4ea0535747640224467f91e238311f1ddbdd09327e",
+      "size": 126655903
+    },
+    {
+      "path": "joiner-epoch-29-avg-9-with-averaged-model.int8.onnx",
+      "sha256": "fc2f3bb851a15a532c6f2422d53eecd1ca949f12b0897e07a852021c30481711",
+      "size": 259572
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "37fb3f2a7bcb85e5fff3f1f66be04e6fbb05077a22f56d177fe85704e945fb31",
+      "size": 4819
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "fr"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "asr.zipformer-streaming.fr.2023-04-14.int8",
+  "modelType": "online-transducer",
+  "recommended": true,
+  "releasedAt": "2026-10-23T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder-epoch-29-avg-9-with-averaged-model.onnx",
+      "encoder": "encoder-epoch-29-avg-9-with-averaged-model.int8.onnx",
+      "joiner": "joiner-epoch-29-avg-9-with-averaged-model.int8.onnx",
+      "modelType": "zipformer",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Streaming recognizer for French trained on Common Voice 12 (CC0). Hotwords are unavailable because the archive has no BPE vocabulary.",
+    "zh-CN": "基于 Common Voice 12 (CC0) 训练的法语流式识别模型. 归档不含 BPE 词表, 因此不支持热词."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-fr-2023-04-14/README.md": "README.md",
+        "sherpa-onnx-streaming-zipformer-fr-2023-04-14/decoder-epoch-29-avg-9-with-averaged-model.onnx": "decoder-epoch-29-avg-9-with-averaged-model.onnx",
+        "sherpa-onnx-streaming-zipformer-fr-2023-04-14/encoder-epoch-29-avg-9-with-averaged-model.int8.onnx": "encoder-epoch-29-avg-9-with-averaged-model.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-fr-2023-04-14/joiner-epoch-29-avg-9-with-averaged-model.int8.onnx": "joiner-epoch-29-avg-9-with-averaged-model.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-fr-2023-04-14/tokens.txt": "tokens.txt"
+      },
+      "sha256": "77d4cbd61dcfa55fd2c14efc0ce5c6798be5931c05f35df5bab60c921950bb8c",
+      "size": 398444115,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-fr-2023-04-14.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

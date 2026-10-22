@@ -297,6 +297,74 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "ct-transformer"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "cnn-bilstm"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "bpeVocab": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "bpeVocab"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -353,6 +421,7 @@
       "enum": [
         "asr",
         "kws",
+        "punct",
         "tts"
       ]
     },
@@ -394,7 +463,7 @@
       "type": "object"
     },
     "modelId": {
-      "pattern": "^(asr|kws|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
+      "pattern": "^(asr|kws|punct|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
       "type": "string"
     },
     "modelType": {
@@ -404,7 +473,9 @@
         "kws-transducer",
         "vits",
         "matcha",
-        "kokoro"
+        "kokoro",
+        "ct-transformer",
+        "cnn-bilstm"
       ]
     },
     "path": {
@@ -445,6 +516,33 @@
       "maximum": 192000,
       "minimum": 8000,
       "type": "integer"
+    },
+    "sampleRateByKind": {
+      "else": {
+        "required": [
+          "sampleRate"
+        ]
+      },
+      "if": {
+        "properties": {
+          "modelType": {
+            "enum": [
+              "ct-transformer",
+              "cnn-bilstm"
+            ]
+          }
+        },
+        "required": [
+          "modelType"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "sampleRate"
+          ]
+        }
+      }
     },
     "sha256": {
       "pattern": "^[0-9a-f]{64}$",
@@ -516,6 +614,13 @@
       "minItems": 1,
       "type": "array"
     },
+    "upstreamMember": {
+      "description": "Upstream archive member name: a path as in #/$defs/path, optionally behind one './' (archives packed from '.').",
+      "maxLength": 242,
+      "minLength": 1,
+      "pattern": "^(?:\\./)?[A-Za-z0-9_+!](?:[A-Za-z0-9 _.+!-]{0,126}[A-Za-z0-9_+!-])?(?:/[A-Za-z0-9_+!](?:[A-Za-z0-9 _.+!-]{0,126}[A-Za-z0-9_+!-])?){0,11}$",
+      "type": "string"
+    },
     "upstreamPart": {
       "oneOf": [
         {
@@ -532,7 +637,7 @@
               "maxProperties": 4096,
               "minProperties": 1,
               "propertyNames": {
-                "$ref": "#/$defs/path"
+                "$ref": "#/$defs/upstreamMember"
               },
               "type": "object"
             },
@@ -611,6 +716,9 @@
     },
     {
       "$ref": "#/$defs/speakersByKind"
+    },
+    {
+      "$ref": "#/$defs/sampleRateByKind"
     },
     {
       "if": {
@@ -741,7 +849,6 @@
     "summary",
     "recommended",
     "languages",
-    "sampleRate",
     "releasedAt",
     "license",
     "runtime",

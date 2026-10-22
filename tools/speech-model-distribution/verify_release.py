@@ -32,8 +32,6 @@ def _module(name, filename):
 
 distribution = _module("distribution", "distribution.py")
 DistributionError = distribution.DistributionError
-CATALOG_NAME = distribution.CATALOG_FILE
-SIGNATURE_NAME = distribution.SIGNATURE_FILE
 
 
 def _same_bytes(actual_path, expected):
@@ -53,10 +51,12 @@ def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_
         raise DistributionError("Release asset directory does not exist")
     expected = distribution.expected_release_assets(catalog, all_artifacts=all_artifacts)
     names = set(expected)
+    catalog_name = distribution.catalog_file(catalog["schemaVersion"])
+    signature_name = distribution.signature_file(catalog["schemaVersion"])
     if downloaded_release:
         if signature_path is None:
             raise DistributionError("Downloaded-release verification requires the reviewed signature")
-        names.update((CATALOG_NAME, SIGNATURE_NAME))
+        names.update((catalog_name, signature_name))
     actual = {}
     for path in assets_dir.iterdir():
         if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(assets_dir):
@@ -68,9 +68,9 @@ def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_
     if unexpected:
         raise DistributionError("Unexpected release assets: " + ", ".join(sorted(unexpected)))
     if downloaded_release:
-        if not _same_bytes(actual[CATALOG_NAME], catalog_path.read_bytes()):
+        if not _same_bytes(actual[catalog_name], catalog_path.read_bytes()):
             raise DistributionError("Downloaded catalog differs from the offline-reviewed catalog")
-        if not _same_bytes(actual[SIGNATURE_NAME], Path(signature_path).read_bytes()):
+        if not _same_bytes(actual[signature_name], Path(signature_path).read_bytes()):
             raise DistributionError("Downloaded signature differs from the offline-reviewed signature")
     if asset_list is not None:
         entries = Path(asset_list).read_text(encoding="utf-8").splitlines()

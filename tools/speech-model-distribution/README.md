@@ -67,12 +67,16 @@ asset or a replaced upstream file requires a new `versionCode`.
 3. Review the recorded `files[]`, add the license evidence to a new or updated
    `speech-models/audits/license-audit-vN.json`, and reproduce once more without `--update-sources`.
 4. Copy the previous current catalog and signature unchanged into `catalogs/history/v<N-1>/`, then
-   build the next candidate:
+   build the next candidate. Catalog files are named by wire schema (`catalog-v<S>.json`, `S` = 2
+   today; `distribution.CATALOG_FILE`), so the previous release may use an older name:
 
    ```powershell
-   python tools/speech-model-distribution/build_catalog.py --source-root speech-models/sources --output speech-models/catalogs/pending/v<N> --catalog-version <N> --generated-at <review time, UTC> --previous-catalog speech-models/catalogs/history/v<N-1>/catalog-v1.json
-   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v<N>/catalog-v1.json --previous-catalog speech-models/catalogs/history/v<N-1>/catalog-v1.json --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
+   python tools/speech-model-distribution/build_catalog.py --source-root speech-models/sources --output speech-models/catalogs/pending/v<N> --catalog-version <N> --generated-at <review time, UTC> --previous-catalog speech-models/catalogs/history/v<N-1>/catalog-v<S'>.json
+   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v<N>/catalog-v<S>.json --previous-catalog speech-models/catalogs/history/v<N-1>/catalog-v<S'>.json --minimum-catalog-version <N> --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
    ```
+
+   A new wire schema gets its own `catalog-v<S>.schema.json` and `signature-v<S>.schema.json`; the
+   older catalog file stays frozen in `catalogs/` next to its identical history copy.
 
 5. Sign, promote and publish as in the family README, using tag `speech-models-v<N>`.
 
@@ -84,14 +88,15 @@ previous catalog and must still match its source.
 
 ```powershell
 python -m unittest discover -s tools/speech-model-distribution/tests -v
-python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v1/catalog-v1.json --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
+python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v2/catalog-v2.json --previous-catalog speech-models/catalogs/history/v1/catalog-v1.json --minimum-catalog-version 2 --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
 python tools/speech-model-distribution/check_docs.py
 ```
 
 The tests use synthetic upstream archives, fake HTTP responses and disposable OpenSSL keys in
 temporary directories; they need no network and no real model. They cover the archive format, source
-and catalog validation, history rules, repacking, the downloader, signatures, release verification,
-the remote preflight, the workflow contract and the checked-in v1 data.
+and catalog validation, schema 1 and 2 rules, history rules, repacking, the downloader, signatures,
+release verification, the remote preflight, the workflow contract and the checked-in data (the
+frozen v1 catalog, its history copy and the pending v2 candidate).
 
 ## Measured v1 preparation (2026-10-16)
 
@@ -104,3 +109,12 @@ directory reproduced all nine archives with identical SHA-256 digests while re-m
 upstream-only Chinese streaming model (five files, 167,361,237 bytes, no archive). `verify_release.py`
 accepted the reproduced set against the pending v1 catalog and its `release-assets.txt`. No network
 publication took place.
+
+## Measured v2 preparation (2026-10-23)
+
+The nine pinned upstream assets of the new sources (1,020,254,475 bytes) were downloaded once into a
+local cache. `prepare_sources.py --update-sources` measured the eight new archives (388,244,480 bytes)
+and the files of the upstream-only Korean model (four files, 140,919,603 bytes, no archive); a second
+offline run reproduced all eight archives with identical SHA-256 digests. `build_catalog.py` then
+built `pending/v2` against `history/v1/catalog-v1.json`, and `verify_catalog.py` accepted it with the
+rebuild from sources. No network publication took place.

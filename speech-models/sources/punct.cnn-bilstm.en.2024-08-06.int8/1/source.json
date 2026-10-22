@@ -1,0 +1,68 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "f8894f672557620c960d499e6a742fdccb918031def4e1ee0b55c8b9ea6cf966",
+    "size": 7643136
+  },
+  "displayName": {
+    "en": "CNN-BiLSTM punctuation and casing, English (int8)",
+    "zh-CN": "CNN-BiLSTM 标点与大小写 英文 (int8)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "9963c9b161b436463e418f1831dd367557f48a0f031e160d34058ec4ba7a469b",
+      "size": 244
+    },
+    {
+      "path": "bpe.vocab",
+      "sha256": "e118b7ad88c54db562517df49e1cffd4836d166c34fb190fd311d7f34eb238f5",
+      "size": 149430
+    },
+    {
+      "path": "model.int8.onnx",
+      "sha256": "9d611f445fe4a46186080fe161be6059d87d72eb88d3a8cb00c1a06e83a6067e",
+      "size": 7490500
+    }
+  ],
+  "format": 1,
+  "kind": "punct",
+  "languages": [
+    "en"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "punct.cnn-bilstm.en.2024-08-06.int8",
+  "modelType": "cnn-bilstm",
+  "recommended": true,
+  "releasedAt": "2026-10-23T00:00:00Z",
+  "runtime": {
+    "config": {
+      "bpeVocab": "bpe.vocab",
+      "model": "model.int8.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "summary": {
+    "en": "Adds punctuation and restores capital letters in English text. Small and fast; from the Edge-Punct-Casing project.",
+    "zh-CN": "为英文文本加标点并恢复大写字母. 体积小, 速度快; 来自 Edge-Punct-Casing 项目."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "./sherpa-onnx-online-punct-en-2024-08-06/README.md": "README.md",
+        "./sherpa-onnx-online-punct-en-2024-08-06/bpe.vocab": "bpe.vocab",
+        "./sherpa-onnx-online-punct-en-2024-08-06/model.int8.onnx": "model.int8.onnx"
+      },
+      "sha256": "9f5e5a72c7d2829635bd074fce92b6bbd5b78da8a52e7ad8ed1be933f366b99d",
+      "size": 30667839,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/punctuation-models/sherpa-onnx-online-punct-en-2024-08-06.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

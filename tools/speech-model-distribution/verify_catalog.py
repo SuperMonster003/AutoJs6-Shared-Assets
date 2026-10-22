@@ -35,7 +35,8 @@ def verify(args, distribution, crypto=None):
         raise distribution.DistributionError("Catalog bytes are not in canonical form")
     if args.source_root:
         rebuilt, _ = distribution.build_catalog(args.source_root, catalog["repository"], catalog["catalogVersion"],
-                                                catalog["generatedAt"], previous_catalog=previous)
+                                                catalog["generatedAt"], previous_catalog=previous,
+                                                schema=catalog["schemaVersion"])
         if distribution.canonical_json_bytes(rebuilt) != data:
             raise distribution.DistributionError("Catalog differs from the catalog rebuilt from its sources")
     if args.signature:

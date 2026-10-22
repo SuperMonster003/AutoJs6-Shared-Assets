@@ -6,7 +6,7 @@ on:
       release_tag:
         description: Release tag in the offline-signed speech model catalog
         required: true
-        default: speech-models-v1
+        default: speech-models-v2
       key_id:
         description: Expected offline speech model signing key ID
         required: true
@@ -53,6 +53,9 @@ jobs:
 
       - name: Require and validate the offline-signed release inputs
         id: catalog
+        # The current catalog uses the newest schema's file name (catalog-v2.json for schema 2). Older
+        # schemas' files stay in speech-models/catalogs, frozen for older plugins, and must equal a signed
+        # copy under catalogs/history.
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -60,16 +63,35 @@ jobs:
           sys.path.insert(0, "tools/speech-model-distribution")
           from verify_release import distribution
           root = pathlib.Path("speech-models")
-          for relative in ("catalogs/catalog-v1.json", "catalogs/catalog-v1.sig.json", "keys/catalog-signing-public.pem"):
+          name, signature = distribution.CATALOG_FILE, distribution.SIGNATURE_FILE
+          for relative in ("catalogs/" + name, "catalogs/" + signature, "keys/catalog-signing-public.pem"):
               if not (root / relative).is_file():
                   raise SystemExit("Missing offline-reviewed signing input: " + relative + "; nothing will be published")
-          catalog = distribution.read_json(root / "catalogs/catalog-v1.json")
+          catalog = distribution.read_json(root / "catalogs" / name)
           distribution.validate_catalog(catalog, expected_repository=os.environ["GITHUB_REPOSITORY"])
+          if distribution.catalog_file(catalog["schemaVersion"]) != name:
+              raise SystemExit("The current catalog must use the newest catalog schema")
           if catalog["releaseTag"] != os.environ["RELEASE_TAG"]:
               raise SystemExit("Dispatch release_tag differs from the signed catalog")
+          for frozen in sorted((root / "catalogs").glob("catalog-v*.json")):
+              if frozen.name not in (name, signature) and not any(
+                      copy.read_bytes() == frozen.read_bytes() for copy in (root / "catalogs/history").glob("v*/" + frozen.name)):
+                  raise SystemExit("Frozen catalog file has no identical signed history copy: " + frozen.name)
+          previous = ""
+          if catalog["catalogVersion"] > 1:
+              history = root / "catalogs/history" / ("v" + str(catalog["catalogVersion"] - 1))
+              copies = [path for path in history.glob("catalog-v*.json") if not path.name.endswith(".sig.json")]
+              if len(copies) != 1:
+                  raise SystemExit("The previous release's history must hold exactly one catalog: " + history.as_posix())
+              previous = copies[0].as_posix()
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
               output.write("version=" + str(catalog["catalogVersion"]) + "\n")
               output.write("generated_at=" + catalog["generatedAt"] + "\n")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as environment:
+              environment.write("CATALOG_NAME=" + name + "\nSIGNATURE_NAME=" + signature + "\n")
+              environment.write("CURRENT_CATALOG=speech-models/catalogs/" + name + "\n")
+              environment.write("CURRENT_SIGNATURE=speech-models/catalogs/" + signature + "\n")
+              environment.write("PREVIOUS_CATALOG=" + previous + "\n")
           PY
 
       - name: Verify current and historical catalog signatures
@@ -77,28 +99,40 @@ jobs:
           CATALOG_VERSION: ${{ steps.catalog.outputs.version }}
         run: |
           set -euo pipefail
+          # history/vN holds the signed catalog of release N under its schema's file name (catalog-v1.json, catalog-v2.json, ...).
+          history_catalog() {
+            local path matches=()
+            for path in "speech-models/catalogs/history/v$1"/catalog-v*.json; do
+              if [[ -f "$path" && "$path" != *.sig.json ]]; then matches+=("$path"); fi
+            done
+            if (( ${#matches[@]} != 1 )); then
+              echo "speech-models/catalogs/history/v$1 must hold exactly one catalog" >&2
+              return 1
+            fi
+            printf '%s\n' "${matches[0]}"
+          }
           previous_args=()
           if (( CATALOG_VERSION > 1 )); then
-            previous_args=(--previous-catalog "speech-models/catalogs/history/v$((CATALOG_VERSION - 1))/catalog-v1.json")
+            previous_args=(--previous-catalog "$PREVIOUS_CATALOG")
           fi
           python tools/speech-model-distribution/verify_catalog.py \
-            speech-models/catalogs/catalog-v1.json \
-            --signature speech-models/catalogs/catalog-v1.sig.json \
+            "$CURRENT_CATALOG" \
+            --signature "$CURRENT_SIGNATURE" \
             --public-key speech-models/keys/catalog-signing-public.pem \
             --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
             --minimum-catalog-version "$CATALOG_VERSION" "${previous_args[@]}"
           for (( version=1; version<CATALOG_VERSION; version++ )); do
-            history="speech-models/catalogs/history/v${version}"
+            history=$(history_catalog "$version")
             previous_history_args=()
             if (( version > 1 )); then
-              previous_history_args=(--previous-catalog "speech-models/catalogs/history/v$((version - 1))/catalog-v1.json")
+              previous_history_args=(--previous-catalog "$(history_catalog $((version - 1)))")
             fi
             python tools/speech-model-distribution/verify_catalog.py \
-              "$history/catalog-v1.json" --signature "$history/catalog-v1.sig.json" \
+              "$history" --signature "${history%.json}.sig.json" \
               --public-key speech-models/keys/catalog-signing-public.pem \
               --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY" \
               --minimum-catalog-version "$version" "${previous_history_args[@]}"
-            python - "$history/catalog-v1.json" "$version" <<'PY'
+            python - "$history" "$version" <<'PY'
           import json, pathlib, sys
           catalog = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
           if catalog["catalogVersion"] != int(sys.argv[2]):
@@ -114,19 +148,19 @@ jobs:
           set -euo pipefail
           previous_args=()
           if (( CATALOG_VERSION > 1 )); then
-            previous_args=(--previous-catalog "speech-models/catalogs/history/v$((CATALOG_VERSION - 1))/catalog-v1.json")
+            previous_args=(--previous-catalog "$PREVIOUS_CATALOG")
           fi
           python tools/speech-model-distribution/build_catalog.py \
             --source-root speech-models/sources --output build/speech-models-current \
             --repository "$GITHUB_REPOSITORY" --catalog-version "$CATALOG_VERSION" \
             --generated-at "$CATALOG_GENERATED_AT" "${previous_args[@]}"
-          cmp speech-models/catalogs/catalog-v1.json build/speech-models-current/catalog-v1.json
+          cmp "$CURRENT_CATALOG" "build/speech-models-current/$CATALOG_NAME"
           pending="speech-models/catalogs/pending/v${CATALOG_VERSION}"
-          if [[ -f "$pending/catalog-v1.json" ]]; then
-            cmp "$pending/catalog-v1.json" speech-models/catalogs/catalog-v1.json
+          if [[ -f "$pending/$CATALOG_NAME" ]]; then
+            cmp "$pending/$CATALOG_NAME" "$CURRENT_CATALOG"
           fi
-          if [[ -f "$pending/catalog-v1.sig.json" ]]; then
-            cmp "$pending/catalog-v1.sig.json" speech-models/catalogs/catalog-v1.sig.json
+          if [[ -f "$pending/$SIGNATURE_NAME" ]]; then
+            cmp "$pending/$SIGNATURE_NAME" "$CURRENT_SIGNATURE"
           fi
 
       - name: Rebuild the new mirror archives from pinned upstream assets
@@ -135,10 +169,10 @@ jobs:
         run: |
           set -euo pipefail
           python tools/speech-model-distribution/prepare_sources.py \
-            --catalog speech-models/catalogs/catalog-v1.json --source-root speech-models/sources \
+            --catalog "$CURRENT_CATALOG" --source-root speech-models/sources \
             --cache-dir build/speech-models-upstream --output-dir build/speech-models-assets
           python tools/speech-model-distribution/verify_release.py \
-            speech-models/catalogs/catalog-v1.json --assets-dir build/speech-models-assets \
+            "$CURRENT_CATALOG" --assets-dir build/speech-models-assets \
             --asset-list build/speech-models-current/release-assets.txt \
             --expected-repository "$GITHUB_REPOSITORY"
           rm -rf build/speech-models-upstream
@@ -166,7 +200,7 @@ jobs:
             --draft --verify-tag --latest=false \
             --title "AutoJs6 speech models $RELEASE_TAG" \
             --notes "Offline-signed, content-addressed sherpa-onnx speech models for 3-Macaw Speech. Licenses: speech-models/sources and speech-models/audits." \
-            "${asset_paths[@]}" speech-models/catalogs/catalog-v1.json speech-models/catalogs/catalog-v1.sig.json
+            "${asset_paths[@]}" "$CURRENT_CATALOG" "$CURRENT_SIGNATURE"
           gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false
 
       - name: Download every published asset and verify exact reviewed bytes
@@ -177,9 +211,9 @@ jobs:
           downloaded=$(mktemp -d)
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$downloaded"
           python tools/speech-model-distribution/verify_release.py \
-            speech-models/catalogs/catalog-v1.json --assets-dir "$downloaded" \
-            --downloaded-release --signature speech-models/catalogs/catalog-v1.sig.json \
+            "$CURRENT_CATALOG" --assets-dir "$downloaded" \
+            --downloaded-release --signature "$CURRENT_SIGNATURE" \
             --expected-repository "$GITHUB_REPOSITORY"
-          python tools/speech-model-distribution/verify_catalog.py "$downloaded/catalog-v1.json" \
-            --signature "$downloaded/catalog-v1.sig.json" --public-key speech-models/keys/catalog-signing-public.pem \
+          python tools/speech-model-distribution/verify_catalog.py "$downloaded/$CATALOG_NAME" \
+            --signature "$downloaded/$SIGNATURE_NAME" --public-key speech-models/keys/catalog-signing-public.pem \
             --expected-key-id "$EXPECTED_KEY_ID" --expected-repository "$GITHUB_REPOSITORY"

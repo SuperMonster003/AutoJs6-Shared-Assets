@@ -1,0 +1,74 @@
+{
+  "archive": null,
+  "displayName": {
+    "en": "Streaming Zipformer, Korean (int8)",
+    "zh-CN": "流式 Zipformer 韩语 (int8)"
+  },
+  "files": [
+    {
+      "path": "decoder-epoch-99-avg-1.onnx",
+      "sha256": "b29cfb4575141e50a30a22b2c4579934f3d4f45b83c9c8c08c3aef5a3fa7abfc",
+      "size": 11309084
+    },
+    {
+      "path": "encoder-epoch-99-avg-1.int8.onnx",
+      "sha256": "8d0b1aa24fbedd4e3948564ab7facd151b8ce9b0c48fc987c541de2de3af5697",
+      "size": 126968852
+    },
+    {
+      "path": "joiner-epoch-99-avg-1.int8.onnx",
+      "sha256": "128b80a66a1f718488af8560f9d15895109b99ff3e573f0a0130e03774ef1ced",
+      "size": 2581421
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "016bdf0965029263b7ad01b742366ee542ef0bef38261510e8176ff6f2e9e668",
+      "size": 60246
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "ko"
+  ],
+  "license": {
+    "commercialUse": false,
+    "noticeKey": "speech_model_license_non_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": false,
+  "modelId": "asr.zipformer-streaming.ko.2024-06-16.int8",
+  "modelType": "online-transducer",
+  "recommended": false,
+  "releasedAt": "2026-10-23T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder-epoch-99-avg-1.onnx",
+      "encoder": "encoder-epoch-99-avg-1.int8.onnx",
+      "joiner": "joiner-epoch-99-avg-1.int8.onnx",
+      "modelType": "zipformer",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Streaming recognizer for Korean trained on KsponSpeech from AI Hub, whose terms restrict use outside Korea. Installed directly from the sherpa-onnx release, without a mirror.",
+    "zh-CN": "基于 AI Hub 的 KsponSpeech 训练的韩语流式识别模型, 该数据的条款限制韩国境外使用. 直接从 sherpa-onnx 发布安装, 没有镜像."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-korean-2024-06-16/decoder-epoch-99-avg-1.onnx": "decoder-epoch-99-avg-1.onnx",
+        "sherpa-onnx-streaming-zipformer-korean-2024-06-16/encoder-epoch-99-avg-1.int8.onnx": "encoder-epoch-99-avg-1.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-korean-2024-06-16/joiner-epoch-99-avg-1.int8.onnx": "joiner-epoch-99-avg-1.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-korean-2024-06-16/tokens.txt": "tokens.txt"
+      },
+      "sha256": "e346a5882a409650472be17326237e24df7bf409db6b4a8a52e1a61422bf2500",
+      "size": 418218652,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-korean-2024-06-16.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

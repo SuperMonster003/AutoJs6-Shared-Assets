@@ -1,0 +1,8 @@
+autojs6-speech-asr.zipformer-streaming.fr.2023-04-14.int8-v1-599cc872.tar
+autojs6-speech-asr.zipformer-streaming.ru.2025-08-16.int8-v1-7a289484.tar
+autojs6-speech-punct.cnn-bilstm.en.2024-08-06.int8-v1-f8894f67.tar
+autojs6-speech-punct.ct-transformer.zh-en.2024-04-12.int8-v1-67b56e3f.tar
+autojs6-speech-tts.vits.piper.de-de-thorsten-medium.int8-v1-a316efde.tar
+autojs6-speech-tts.vits.piper.es-es-davefx-medium.int8-v1-2b1ac6ee.tar
+autojs6-speech-tts.vits.piper.fr-fr-siwis-medium.int8-v1-f5d228ce.tar
+autojs6-speech-tts.vits.piper.ru-ru-denis-medium.int8-v1-95595be0.tar

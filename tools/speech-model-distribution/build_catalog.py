@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build an unsigned speech model catalog from reviewed sources, without network access.
 
-The output directory receives catalog-v1.json, release-assets.txt (archives first published
-by this catalog version), preparation.json and a marker file. Existing output is never replaced.
+The output directory receives catalog-v{schemaVersion}.json (catalog-v2.json for the current
+schema), release-assets.txt (archives first published by this catalog version), preparation.json
+and a marker file. Existing output is never replaced.
 """
 
 import argparse
@@ -38,7 +39,7 @@ def write_output(output, catalog, new_assets, distribution):
     try:
         # Before anything is written, so every file inherits the access rights of the final directory.
         distribution.inherit_parent_acl(temporary)
-        (temporary / distribution.CATALOG_FILE).write_bytes(distribution.canonical_json_bytes(catalog))
+        (temporary / distribution.catalog_file(catalog["schemaVersion"])).write_bytes(distribution.canonical_json_bytes(catalog))
         (temporary / "release-assets.txt").write_text("".join(name + "\n" for name in new_assets), encoding="utf-8", newline="\n")
         (temporary / "preparation.json").write_bytes(distribution.canonical_json_bytes({
             "format": 1, "repository": catalog["repository"], "catalogVersion": catalog["catalogVersion"],

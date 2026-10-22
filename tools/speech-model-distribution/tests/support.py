@@ -92,6 +92,8 @@ def source_value(model_id, upstream, config, *, kind="tts", model_type="vits", s
              "archive": None, "files": None}
     if kind == "tts":
         value["speakers"] = speakers
+    if kind == "punct":
+        del value["sampleRate"]
     value.update(extra)
     return value
 
@@ -120,6 +122,27 @@ def asr_fixture(sources, cache, model_id="asr.online.unit-test"):
     config = {"encoder": "encoder.int8.onnx", "decoder": "decoder.onnx", "joiner": "joiner.int8.onnx", "tokens": "tokens.txt",
               "modelType": "zipformer2"}
     return write_source(sources, source_value(model_id, [part, raw], config, kind="asr", model_type="online-transducer"))
+
+
+PUNCT_ID = "punct.ct-transformer.unit-test"
+CASING_ID = "punct.cnn-bilstm.unit-test"
+
+
+def punct_fixtures(sources, cache):
+    """The two punctuation model types of catalog schema 2: ct-transformer and cnn-bilstm.
+
+    The cnn-bilstm archive is packed from "." like sherpa-onnx-online-punct-en, so its member names start with "./".
+    """
+    folders = []
+    for model_id, top, model_type, members, config in (
+            (PUNCT_ID, PUNCT_ID, "ct-transformer", {"model.int8.onnx": b"ct-transformer" * 30, "config.yaml": b"punc_list: []\n"},
+             {"model": "model.int8.onnx"}),
+            (CASING_ID, distribution.MEMBER_PREFIX + CASING_ID, "cnn-bilstm",
+             {"model.int8.onnx": b"cnn-bilstm" * 30, "bpe.vocab": b"<unk> 0\n"}, {"model": "model.int8.onnx", "bpeVocab": "bpe.vocab"})):
+        part = write_upstream(cache, "punctuation-models", model_id + ".tar.bz2", top, members)
+        folders.append(write_source(sources, source_value(model_id, [part], config, kind="punct", model_type=model_type,
+                                                          languages=["en"])))
+    return folders
 
 
 UPSTREAM_ONLY_ID = "asr.sense-voice.unit-test"

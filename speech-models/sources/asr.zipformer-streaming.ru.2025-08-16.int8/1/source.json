@@ -1,0 +1,84 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "7a289484097b39f9043444a37a8c2a0ed149a863b613c1f0a053c1a93dac7256",
+    "size": 28578304
+  },
+  "displayName": {
+    "en": "Streaming Zipformer, Russian (int8, small)",
+    "zh-CN": "流式 Zipformer 俄语 (int8, 小型)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e82a5bf74fd3cb1b3c31c096000ac5a422e40decf8f8ad9051eee87f5e6a02a5",
+      "size": 111
+    },
+    {
+      "path": "decoder.onnx",
+      "sha256": "89b3088a9e20e1ef7f2e85ce1a3478afe6a9c4ac57369cabcc4beb8e95328ea0",
+      "size": 2093080
+    },
+    {
+      "path": "encoder.int8.onnx",
+      "sha256": "e0db705e94ec35d803b1df4f40cda23d064e1142977c80ab288430b109777a9d",
+      "size": 26214060
+    },
+    {
+      "path": "joiner.int8.onnx",
+      "sha256": "b55784b071ab7512eab4c7c44e4f5478284ef33c83562cc6a249b972515a31e5",
+      "size": 259417
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "93bbbc0bae6b78c0bbb743d4aa9fded3bb5ff3aac5f0200e3a769a5a05e0fdf6",
+      "size": 6388
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "ru"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "asr.zipformer-streaming.ru.2025-08-16.int8",
+  "modelType": "online-transducer",
+  "recommended": true,
+  "releasedAt": "2026-10-23T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder.onnx",
+      "encoder": "encoder.int8.onnx",
+      "joiner": "joiner.int8.onnx",
+      "modelType": "zipformer2",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Small streaming recognizer for Russian from the Vosk project (alphacep). Hotwords are unavailable because the catalog installs no BPE vocabulary.",
+    "zh-CN": "Vosk 项目 (alphacep) 的小型俄语流式识别模型. 目录不安装 BPE 词表, 因此不支持热词."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16/README.md": "README.md",
+        "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16/decoder.onnx": "decoder.onnx",
+        "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16/encoder.int8.onnx": "encoder.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16/joiner.int8.onnx": "joiner.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16/tokens.txt": "tokens.txt"
+      },
+      "sha256": "6ba68a01ff3c5445aaf2d61e9b97b026f1149dcc9049d11af3f44f55176341d8",
+      "size": 24110855,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-small-ru-vosk-int8-2025-08-16.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

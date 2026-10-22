@@ -5,6 +5,11 @@ records the upstream sherpa-onnx release assets, their SHA-256 digests and the m
 that are repacked into one deterministic USTAR archive per model version. A version whose
 source sets mirror to false is upstream-only: it keeps files[] and upstream[] but has no
 archive, and the catalog records mirror as null for it.
+
+Catalog schema 2 adds the punct kind and its model types, and lets upstream archive member
+names start with one "./" (archives packed from "."). Each schema has its own catalog
+file name, catalog-v{schemaVersion}.json, so plugins that only know schema 1 keep reading
+the frozen catalog-v1.json; schema 1 catalogs stay valid and verifiable.
 """
 
 from __future__ import annotations
@@ -22,8 +27,10 @@ from urllib.parse import urlsplit
 
 DEFAULT_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
 FAMILY_DIRECTORY = "speech-models"
-CATALOG_FILE = "catalog-v1.json"
-SIGNATURE_FILE = "catalog-v1.sig.json"
+CATALOG_SCHEMAS = (1, 2)
+CATALOG_SCHEMA_VERSION = CATALOG_SCHEMAS[-1]
+CATALOG_FILE = f"catalog-v{CATALOG_SCHEMA_VERSION}.json"
+SIGNATURE_FILE = f"catalog-v{CATALOG_SCHEMA_VERSION}.sig.json"
 OUTPUT_MARKER = ".speech-model-distribution-output"
 UPSTREAM_REPOSITORY = "k2-fsa/sherpa-onnx"
 
@@ -44,7 +51,7 @@ BLOCK = 512
 
 REPOSITORY_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*")
 RELEASE_TAG_PATTERN = re.compile(r"speech-models-v([1-9][0-9]{0,9})")
-MODEL_ID_PATTERN = re.compile(r"(asr|kws|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
+MODEL_ID_PATTERN = re.compile(r"(asr|kws|punct|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 LANGUAGE_PATTERN = re.compile(r"[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*")
 MAP_LANGUAGE_PATTERN = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*")
@@ -61,7 +68,7 @@ TIMESTAMP_PATTERN = re.compile(
     r"(?:\.([0-9]{1,9}))?(Z|[+-](?:0[0-9]|1[0-8]):[0-5][0-9])"
 )
 
-KINDS = ("asr", "kws", "tts")
+KINDS = ("asr", "kws", "punct", "tts")
 COMMERCIAL_USE_VALUES = (True, False, "unknown")
 LIST_ROLES = frozenset({"lexicon", "ruleFsts", "ruleFars"})
 DIRECTORY_ROLES = frozenset({"dataDir"})
@@ -75,17 +82,25 @@ MODEL_TYPES = {
     "vits": {"kind": "tts", "required": ("model", "tokens"), "optional": TTS_OPTIONAL},
     "matcha": {"kind": "tts", "required": ("acousticModel", "vocoder", "tokens"), "optional": TTS_OPTIONAL},
     "kokoro": {"kind": "tts", "required": ("model", "voices", "tokens"), "optional": TTS_OPTIONAL},
+    # Punctuation models: sherpa-onnx OfflinePunctuation (ctTransformer) and OnlinePunctuation (cnnBilstm, bpeVocab).
+    "ct-transformer": {"kind": "punct", "required": ("model",), "optional": ()},
+    "cnn-bilstm": {"kind": "punct", "required": ("model", "bpeVocab"), "optional": ()},
 }
+# An upstream archive member name may start with this prefix (tar archives packed from ".").
+MEMBER_PREFIX = "./"
+# The first catalog schemaVersion that may use a kind, model type or member prefix; everything else exists since schema 1.
+SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, MEMBER_PREFIX: 2}
 
 SOURCE_REQUIRED = ("format", "modelId", "versionCode", "kind", "modelType", "displayName", "summary", "recommended",
-                   "languages", "sampleRate", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")
+                   "languages", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")
 FLAG_FIELDS = ("deprecated", "revoked")
-SOURCE_OPTIONAL = ("speakers",) + FLAG_FIELDS
+# sampleRate is required for every kind except punct, which works on text; speakers only for tts.
+SOURCE_OPTIONAL = ("sampleRate", "speakers") + FLAG_FIELDS
 CATALOG_FIELDS = ("schemaVersion", "catalogVersion", "releaseTag", "generatedAt", "repository", "models")
 MODEL_FIELDS = ("modelId", "kind", "displayName", "summary", "recommended", "versions", "recommendedVersionCode")
-VERSION_REQUIRED = ("versionCode", "modelType", "languages", "sampleRate", "releasedAt", "license", "runtime",
+VERSION_REQUIRED = ("versionCode", "modelType", "languages", "releasedAt", "license", "runtime",
                     "sourceUrl", "mirror", "upstream", "files")
-VERSION_OPTIONAL = ("speakers",) + FLAG_FIELDS
+VERSION_OPTIONAL = ("sampleRate", "speakers") + FLAG_FIELDS
 LICENSE_FIELDS = ("spdx", "commercialUse", "noticeKey")
 RUNTIME_FIELDS = ("minSherpaOnnx", "config")
 MIRROR_FIELDS = ("fileName", "format", "size", "sha256", "url")
@@ -278,6 +293,27 @@ def repository_name(value):
     return value
 
 
+def schema_version(value):
+    if type(value) is not int or value not in CATALOG_SCHEMAS:
+        raise DistributionError("Unsupported catalog schemaVersion")
+    return value
+
+
+def catalog_file(schema):
+    """The file name of a catalog with this schemaVersion, e.g. catalog-v1.json."""
+    return f"catalog-v{schema_version(schema)}.json"
+
+
+def signature_file(schema):
+    return f"catalog-v{schema_version(schema)}.sig.json"
+
+
+def _require_schema(name, schema, what):
+    introduced = SCHEMA_INTRODUCED.get(name, 1)
+    if introduced > schema:
+        raise DistributionError(f"{what} {name} requires catalog schemaVersion {introduced} or later")
+
+
 # Paths and the USTAR archive format ----------------------------------------------------------
 
 def ustar_split(path):
@@ -459,7 +495,16 @@ def upstream_url(value, name="upstream url"):
     return parts[0], parts[1]
 
 
-def validate_upstream(parts, file_paths=None):
+def upstream_member(value, schema=CATALOG_SCHEMA_VERSION):
+    """An upstream archive member name: an install path, behind one "./" from schema 2 on."""
+    if isinstance(value, str) and value.startswith(MEMBER_PREFIX):
+        _require_schema(MEMBER_PREFIX, schema, "Upstream member prefix")
+        install_path(value[len(MEMBER_PREFIX):], "upstream member")
+        return value
+    return install_path(value, "upstream member")
+
+
+def validate_upstream(parts, file_paths=None, schema=CATALOG_SCHEMA_VERSION):
     """Return {installPath: (partIndex, member or None)}; file_paths, when given, must match exactly."""
     if not isinstance(parts, list) or not 1 <= len(parts) <= MAX_UPSTREAM_PARTS:
         raise DistributionError("upstream must be an array of 1..8 release assets")
@@ -481,7 +526,7 @@ def validate_upstream(parts, file_paths=None):
                 raise DistributionError("tar.bz2 upstream assets must use the .tar.bz2 extension")
             if not isinstance(members, dict) or not 1 <= len(members) <= MAX_FILES:
                 raise DistributionError("upstream members must map 1..4096 archive members")
-            pairs = [(install_path(member, "upstream member"), install_path(target)) for member, target in members.items()]
+            pairs = [(upstream_member(member, schema), install_path(target)) for member, target in members.items()]
         else:
             pairs = [(None, install_path(part["path"]))]
         for member, target in pairs:
@@ -527,12 +572,17 @@ def validate_runtime(value, model_type, file_paths, directories):
     return value
 
 
-def _common_version(value, kind, file_paths, directories):
+def _common_version(value, kind, file_paths, directories, schema):
     model_type = value["modelType"]
     if model_type not in MODEL_TYPES or MODEL_TYPES[model_type]["kind"] != kind:
         raise DistributionError("modelType does not belong to the model kind")
+    _require_schema(model_type, schema, "modelType")
     languages(value["languages"])
-    integer(value["sampleRate"], "sampleRate", 8000, 192000)
+    if kind == "punct":
+        if "sampleRate" in value:
+            raise DistributionError("sampleRate is not valid for punct models")
+    else:
+        integer(value.get("sampleRate"), "sampleRate", 8000, 192000)
     if kind == "tts":
         integer(value.get("speakers"), "speakers", 1, 100000)
     elif "speakers" in value:
@@ -586,7 +636,7 @@ def validate_source(value, *, require_measured=True):
         by_path = dict.fromkeys(mapping)
         directories = {"/".join(path.split("/")[:index]) for path in by_path for index in range(1, path.count("/") + 1)}
         validate_files([{"path": path, "size": 0, "sha256": "0" * 64} for path in sorted(by_path)])
-    _common_version(value, kind, by_path, directories)
+    _common_version(value, kind, by_path, directories, CATALOG_SCHEMA_VERSION)
     return value
 
 
@@ -605,12 +655,12 @@ def _release_number(tag):
     return int(matched.group(1))
 
 
-def _validate_catalog_version(item, model, repository, catalog_version, generated):
+def _validate_catalog_version(item, model, repository, catalog_version, generated, schema):
     fields(item, VERSION_REQUIRED, VERSION_OPTIONAL, name="catalog version")
     code = integer(item["versionCode"], "versionCode")
     by_path, directories = validate_files(item["files"])
-    validate_upstream(item["upstream"], by_path)
-    _common_version(item, model["kind"], by_path, directories)
+    validate_upstream(item["upstream"], by_path, schema)
+    _common_version(item, model["kind"], by_path, directories, schema)
     if timestamp(item["releasedAt"], "releasedAt") > generated:
         raise DistributionError("releasedAt cannot be later than the catalog generatedAt")
     if item["mirror"] is None:
@@ -655,8 +705,7 @@ def _immutable(version):
 
 def validate_catalog(catalog, minimum_catalog_version=1, *, previous_catalog=None, expected_repository=None):
     fields(catalog, CATALOG_FIELDS, name="catalog")
-    if type(catalog["schemaVersion"]) is not int or catalog["schemaVersion"] != 1:
-        raise DistributionError("Unsupported catalog schemaVersion")
+    schema = schema_version(catalog["schemaVersion"])
     integer(minimum_catalog_version, "minimum catalog version")
     version = integer(catalog["catalogVersion"], "catalogVersion", minimum_catalog_version)
     if catalog["releaseTag"] != f"speech-models-v{version}":
@@ -676,6 +725,7 @@ def validate_catalog(catalog, minimum_catalog_version=1, *, previous_catalog=Non
             raise DistributionError("Invalid modelId")
         if model["kind"] not in KINDS or not model_id.startswith(model["kind"] + "."):
             raise DistributionError("modelId must start with its kind")
+        _require_schema(model["kind"], schema, "kind")
         model_ids.append(model_id)
         language_map(model["displayName"], "displayName")
         language_map(model["summary"], "summary", 1024)
@@ -684,7 +734,7 @@ def validate_catalog(catalog, minimum_catalog_version=1, *, previous_catalog=Non
             raise DistributionError("Model versions must be a nonempty bounded array")
         codes, eligible = [], []
         for item in model["versions"]:
-            code, artifact = _validate_catalog_version(item, model, repository, version, generated)
+            code, artifact = _validate_catalog_version(item, model, repository, version, generated, schema)
             if artifact is not None:
                 if artifact in artifacts:
                     raise DistributionError("Duplicate mirror archive")
@@ -708,6 +758,8 @@ def validate_catalog(catalog, minimum_catalog_version=1, *, previous_catalog=Non
         previous_version = previous_catalog["catalogVersion"]
         if version < previous_version:
             raise DistributionError("Catalog rollback is forbidden")
+        if schema < previous_catalog["schemaVersion"]:
+            raise DistributionError("Catalog schemaVersion cannot go back to an earlier schema")
         if version == previous_version and canonical_json_bytes(catalog) != canonical_json_bytes(previous_catalog):
             raise DistributionError("Same catalogVersion has different content")
         if generated < timestamp(previous_catalog["generatedAt"], "previous generatedAt"):
@@ -796,7 +848,6 @@ def catalog_version_entry(source, repository, release_tag):
         "versionCode": source["versionCode"],
         "modelType": source["modelType"],
         "languages": deepcopy(source["languages"]),
-        "sampleRate": source["sampleRate"],
         "releasedAt": source["releasedAt"],
         "license": deepcopy(source["license"]),
         "runtime": deepcopy(source["runtime"]),
@@ -819,9 +870,11 @@ def _without_release_location(version):
     return value
 
 
-def build_catalog(source_root, repository, catalog_version, generated_at, *, previous_catalog=None):
+def build_catalog(source_root, repository, catalog_version, generated_at, *, previous_catalog=None,
+                  schema=CATALOG_SCHEMA_VERSION):
     """Return (catalog, newly introduced archive names); no network, no archive bytes needed."""
     repository = repository_name(repository)
+    schema_version(schema)
     integer(catalog_version, "catalogVersion")
     timestamp(generated_at, "generatedAt")
     if previous_catalog is not None:
@@ -860,7 +913,7 @@ def build_catalog(source_root, repository, catalog_version, generated_at, *, pre
         model["recommendedVersionCode"] = max(active) if active else None
     if not models:
         raise DistributionError("No speech model sources were found")
-    catalog = {"schemaVersion": 1, "catalogVersion": catalog_version, "releaseTag": release_tag, "generatedAt": generated_at,
+    catalog = {"schemaVersion": schema, "catalogVersion": catalog_version, "releaseTag": release_tag, "generatedAt": generated_at,
                "repository": repository, "models": [models[key] for key in sorted(models)]}
     validate_catalog(catalog, previous_catalog=previous_catalog, expected_repository=repository)
     return catalog, sorted(new_assets)

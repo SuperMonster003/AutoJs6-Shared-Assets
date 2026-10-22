@@ -1,0 +1,62 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "67b56e3fb0a45a8077974a111a652d03a5010009d0f8d3658654a7268584382b",
+    "size": 75523072
+  },
+  "displayName": {
+    "en": "CT-Transformer punctuation, Chinese and English (int8)",
+    "zh-CN": "CT-Transformer 标点 中英文 (int8)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c4653586d436602e27aa3f12b080fe4417600204193ad46ed1235b42c20f6936",
+      "size": 1487
+    },
+    {
+      "path": "model.int8.onnx",
+      "sha256": "65a3fb9f5ad7bfb96bf69e0dc4481df97f6ee60513c1d94ce981ba6effd524b1",
+      "size": 75519198
+    }
+  ],
+  "format": 1,
+  "kind": "punct",
+  "languages": [
+    "zh",
+    "en"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "punct.ct-transformer.zh-en.2024-04-12.int8",
+  "modelType": "ct-transformer",
+  "recommended": true,
+  "releasedAt": "2026-10-23T00:00:00Z",
+  "runtime": {
+    "config": {
+      "model": "model.int8.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "summary": {
+    "en": "Adds punctuation to recognized Chinese and English sentences, offline. Converted from the FunASR CT-Transformer model (Apache-2.0, FunASR attribution kept).",
+    "zh-CN": "离线为识别出的中英文句子加标点. 由 FunASR 的 CT-Transformer 模型转换 (Apache-2.0, 保留 FunASR 署名)."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-punct-ct-transformer-zh-en-vocab272727-2024-04-12-int8/README.md": "README.md",
+        "sherpa-onnx-punct-ct-transformer-zh-en-vocab272727-2024-04-12-int8/model.int8.onnx": "model.int8.onnx"
+      },
+      "sha256": "c0d5aa5f8eeb686032345e180bedf39319dc2e0556781c6264bcadba8328a6e1",
+      "size": 64717756,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/punctuation-models/sherpa-onnx-punct-ct-transformer-zh-en-vocab272727-2024-04-12-int8.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

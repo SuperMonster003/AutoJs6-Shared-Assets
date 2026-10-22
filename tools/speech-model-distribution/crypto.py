@@ -42,7 +42,6 @@ distribution = _load_distribution()
 DistributionError = distribution.DistributionError
 canonical_json_bytes = distribution.canonical_json_bytes
 ALGORITHM = "ECDSA_P256_SHA256"
-CATALOG_NAME = distribution.CATALOG_FILE
 SIGNATURE_FIELDS = frozenset({"algorithm", "catalog", "keyId", "signature"})
 KEY_ID_PATTERN = re.compile(r"^p256-[0-9a-f]{16}$")
 MAX_CATALOG_BYTES = distribution.MAX_CATALOG_BYTES
@@ -169,16 +168,21 @@ def _require_key_id(value: str, der: bytes) -> None:
         raise DistributionError("expected keyId must equal p256- followed by the SPKI SHA-256 prefix")
 
 
+def catalog_name(data: bytes) -> str:
+    """The file name the catalog bytes must use and the envelope must name: catalog-v{schemaVersion}.json."""
+    return distribution.catalog_file(distribution.parse_json(data).get("schemaVersion"))
+
+
 def _catalog(data: bytes, directory: Path, minimum_version: int, expected_repository: str | None) -> tuple[Path, dict[str, Any]]:
-    path = directory / CATALOG_NAME
+    path = directory / catalog_name(data)
     path.write_bytes(data)
     parsed = distribution.read_json(path)
     distribution.validate_catalog(parsed, minimum_version, expected_repository=expected_repository)
     return path, parsed
 
 
-def _signature_bytes(envelope: dict[str, Any], expected_key_id: str, der: bytes) -> bytes:
-    if set(envelope) != SIGNATURE_FIELDS or envelope.get("algorithm") != ALGORITHM or envelope.get("catalog") != CATALOG_NAME:
+def _signature_bytes(envelope: dict[str, Any], expected_key_id: str, der: bytes, name: str) -> bytes:
+    if set(envelope) != SIGNATURE_FIELDS or envelope.get("algorithm") != ALGORITHM or envelope.get("catalog") != name:
         raise DistributionError("signature envelope must contain the fixed algorithm/catalog and exactly four fields")
     _require_key_id(expected_key_id, der)
     if envelope.get("keyId") != expected_key_id:
@@ -234,12 +238,13 @@ def _atomic_write(path: Path, content: bytes) -> None:
 
 def sign_catalog(catalog_path: Path, private_key: Path, signature_path: Path, key_id: str, openssl_value: str | None = None, *, expected_repository: str | None = None) -> dict[str, Any]:
     catalog_path, signature_path = Path(catalog_path), Path(signature_path)
-    if catalog_path.name != CATALOG_NAME:
-        raise DistributionError(f"catalog filename must be {CATALOG_NAME}")
     private_key = assert_private_key_outside_git(private_key)
     if signature_path.resolve() in {catalog_path.resolve(), private_key}:
         raise DistributionError("signature output must differ from the catalog and private key")
     data = _bytes(catalog_path, MAX_CATALOG_BYTES, "catalog")
+    name = catalog_name(data)
+    if catalog_path.name != name:
+        raise DistributionError(f"catalog filename must be {name}")
     _bytes(private_key, MAX_KEY_BYTES, "private key")
     openssl = find_openssl(openssl_value)
     _assert_p256(openssl, private_key, public=False)
@@ -253,8 +258,8 @@ def sign_catalog(catalog_path: Path, private_key: Path, signature_path: Path, ke
         signature_path_temp = directory / "signature.der"
         _run([openssl, "dgst", "-sha256", "-sign", str(private_key), "-out", str(signature_path_temp), str(snapshot)], sensitive=True)
         signature = _bytes(signature_path_temp, 128, "signature")
-        envelope = {"algorithm": ALGORITHM, "catalog": CATALOG_NAME, "keyId": key_id, "signature": base64.b64encode(signature).decode("ascii")}
-        _verify(openssl, directory, snapshot, der, _signature_bytes(envelope, key_id, der))
+        envelope = {"algorithm": ALGORITHM, "catalog": name, "keyId": key_id, "signature": base64.b64encode(signature).decode("ascii")}
+        _verify(openssl, directory, snapshot, der, _signature_bytes(envelope, key_id, der, name))
     if _bytes(catalog_path, MAX_CATALOG_BYTES, "catalog") != data:
         raise DistributionError("catalog changed while signing; no signature was written")
     _atomic_write(signature_path, canonical_json_bytes(envelope))
@@ -271,9 +276,10 @@ class VerifiedCatalog:
 
 def verify_catalog_material(catalog_path: Path, signature_path: Path, public_key: Path, expected_key_id: str, minimum_catalog_version: int = 1, openssl_value: str | None = None, *, expected_repository: str | None = None) -> VerifiedCatalog:
     catalog_path = Path(catalog_path)
-    if catalog_path.name != CATALOG_NAME:
-        raise DistributionError(f"catalog filename must be {CATALOG_NAME}")
     data = _bytes(catalog_path, MAX_CATALOG_BYTES, "catalog")
+    name = catalog_name(data)
+    if catalog_path.name != name:
+        raise DistributionError(f"catalog filename must be {name}")
     signature_data = _bytes(signature_path, MAX_SIGNATURE_BYTES, "signature envelope")
     openssl = find_openssl(openssl_value)
     der = public_key_der(public_key, openssl)
@@ -282,7 +288,7 @@ def verify_catalog_material(catalog_path: Path, signature_path: Path, public_key
         directory = Path(value)
         snapshot, catalog = _catalog(data, directory, minimum_catalog_version, expected_repository)
         envelope = distribution.parse_json(signature_data)
-        signature = _signature_bytes(envelope, expected_key_id, der)
+        signature = _signature_bytes(envelope, expected_key_id, der, name)
         _verify(openssl, directory, snapshot, der, signature)
     return VerifiedCatalog(data, catalog, envelope, der)
 

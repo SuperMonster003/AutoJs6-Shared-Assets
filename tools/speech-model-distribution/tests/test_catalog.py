@@ -16,6 +16,7 @@ DistributionError = distribution.DistributionError
 build_catalog = support.load("build_catalog")
 crypto = support.load("crypto")
 verify_catalog = support.load("verify_catalog")
+CATALOG = distribution.CATALOG_FILE
 
 
 class CatalogTest(unittest.TestCase):
@@ -40,31 +41,31 @@ class CatalogTest(unittest.TestCase):
     def test_pending_output_is_reproducible_and_never_overwritten(self):
         code, first = self.build("pending")
         self.assertEqual(0, code)
-        self.assertEqual({"catalog-v1.json", "release-assets.txt", "preparation.json", distribution.OUTPUT_MARKER},
+        self.assertEqual({CATALOG, "release-assets.txt", "preparation.json", distribution.OUTPUT_MARKER},
                          {path.name for path in first.iterdir()})
         _code, second = self.build("again")
-        for name in ("catalog-v1.json", "release-assets.txt", "preparation.json"):
+        for name in (CATALOG, "release-assets.txt", "preparation.json"):
             self.assertEqual((first / name).read_bytes(), (second / name).read_bytes())
         names = (first / "release-assets.txt").read_text(encoding="utf-8").splitlines()
         self.assertEqual(2, len(names))
         self.assertTrue(all(name.startswith("autojs6-speech-") and name.endswith(".tar") for name in names))
         self.assertFalse(any(support.UPSTREAM_ONLY_ID in name for name in names))
-        catalog = distribution.read_json(first / "catalog-v1.json")
+        catalog = distribution.read_json(first / CATALOG)
         self.assertEqual(3, len(catalog["models"]))
         self.assertEqual([(support.UPSTREAM_ONLY_ID, 1)], distribution.upstream_only_versions(catalog))
         preparation = distribution.read_json(first / "preparation.json")
         self.assertEqual((2, 1), (preparation["releaseAssetCount"], preparation["upstreamOnlyVersions"]))
-        before = (first / "catalog-v1.json").read_bytes()
+        before = (first / CATALOG).read_bytes()
         self.assertEqual(2, self.build("pending")[0])
-        self.assertEqual(before, (first / "catalog-v1.json").read_bytes())
+        self.assertEqual(before, (first / CATALOG).read_bytes())
 
     def test_next_catalog_keeps_published_urls_and_only_lists_new_archives(self):
         _code, v1 = self.build("v1")
         support.tts_fixture(self.sources, self.cache, code=2, members=dict(support.tts_members(), **{"model.onnx": b"retrained"}))
         support.measure(self.sources, self.cache, self.root / "assets")
-        code, v2 = self.build("v2", 2, v1 / "catalog-v1.json", support.TIME2)
+        code, v2 = self.build("v2", 2, v1 / CATALOG, support.TIME2)
         self.assertEqual(0, code)
-        catalog = distribution.read_json(v2 / "catalog-v1.json")
+        catalog = distribution.read_json(v2 / CATALOG)
         tts = next(model for model in catalog["models"] if model["kind"] == "tts")
         self.assertEqual([1, 2], [version["versionCode"] for version in tts["versions"]])
         self.assertIn("/speech-models-v1/", tts["versions"][0]["mirror"]["url"])
@@ -74,12 +75,45 @@ class CatalogTest(unittest.TestCase):
         carried = next(model for model in catalog["models"] if model["modelId"] == support.UPSTREAM_ONLY_ID)["versions"][0]
         self.assertIsNone(carried["mirror"])
         self.assertIn("/tree/speech-models-v1/", carried["sourceUrl"])
-        self.assertEqual(2, self.build("skip", 3, v1 / "catalog-v1.json", support.TIME2)[0])
+        self.assertEqual(2, self.build("skip", 3, v1 / CATALOG, support.TIME2)[0])
         self.assertEqual(2, self.build("no-previous", 2)[0])
+
+    def test_schema_1_catalogs_stay_verifiable_and_lead_to_schema_2_with_punctuation(self):
+        v1, _ = distribution.build_catalog(self.sources, support.REPOSITORY, 1, support.TIME1, schema=1)
+        self.assertEqual(1, v1["schemaVersion"])
+        v1_path = self.root / "history/v1/catalog-v1.json"
+        v1_path.parent.mkdir(parents=True)
+        v1_path.write_bytes(distribution.canonical_json_bytes(v1))
+        self.assertEqual(0, verify_catalog.main([str(v1_path), "--source-root", str(self.sources)]))
+        support.punct_fixtures(self.sources, self.cache)
+        support.measure(self.sources, self.cache, self.root / "assets")
+        with self.assertRaisesRegex(DistributionError, "schemaVersion 2"):
+            distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=v1, schema=1)
+        self.assertEqual(2, verify_catalog.main([str(v1_path), "--source-root", str(self.sources)]))
+        code, v2 = self.build("v2", 2, v1_path, support.TIME2)
+        self.assertEqual(0, code)
+        self.assertEqual({CATALOG, "release-assets.txt", "preparation.json", distribution.OUTPUT_MARKER},
+                         {path.name for path in v2.iterdir()})
+        catalog = distribution.read_json(v2 / CATALOG)
+        self.assertEqual((2, 2), (catalog["schemaVersion"], catalog["catalogVersion"]))
+        punct = {model["modelId"]: model for model in catalog["models"] if model["kind"] == "punct"}
+        self.assertEqual({support.PUNCT_ID, support.CASING_ID}, set(punct))
+        for model in punct.values():
+            self.assertNotIn("sampleRate", model["versions"][0])
+            self.assertIn("/speech-models-v2/", model["versions"][0]["mirror"]["url"])
+        self.assertEqual(sorted(model["versions"][0]["mirror"]["fileName"] for model in punct.values()),
+                         (v2 / "release-assets.txt").read_text(encoding="utf-8").splitlines())
+        carried = {model["modelId"]: model["versions"] for model in v1["models"]}
+        self.assertEqual(carried, {model["modelId"]: model["versions"] for model in catalog["models"] if model["modelId"] in carried})
+        arguments = [str(v2 / CATALOG), "--previous-catalog", str(v1_path), "--source-root", str(self.sources)]
+        self.assertEqual(0, verify_catalog.main(arguments))
+        downgraded = dict(catalog, schemaVersion=1)
+        with self.assertRaisesRegex(DistributionError, "schemaVersion 2"):
+            distribution.validate_catalog(downgraded, previous_catalog=v1)
 
     def test_published_versions_cannot_change_or_lose_sources(self):
         _code, v1 = self.build("v1")
-        previous = distribution.read_json(v1 / "catalog-v1.json")
+        previous = distribution.read_json(v1 / CATALOG)
         value = support.read_source(self.tts)
         value["license"]["commercialUse"] = False
         (self.tts / "source.json").write_bytes(distribution.canonical_json_bytes(value))
@@ -127,7 +161,7 @@ class CatalogTest(unittest.TestCase):
 
     def test_verify_catalog_checks_canonical_bytes_sources_and_signature_arguments(self):
         _code, pending = self.build("pending")
-        catalog = pending / "catalog-v1.json"
+        catalog = pending / CATALOG
         arguments = [str(catalog), "--expected-repository", support.REPOSITORY, "--source-root", str(self.sources)]
         self.assertEqual(0, verify_catalog.main(arguments))
         catalog.write_bytes(catalog.read_bytes().replace(b"\n", b"\r\n"))

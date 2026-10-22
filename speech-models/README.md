@@ -1,8 +1,9 @@
 # AutoJs6 speech models
 
 This asset family distributes reviewed sherpa-onnx speech models (speech recognition, keyword
-spotting and text-to-speech) for the AutoJs6 plugin 3-Macaw Speech
-(`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phase P2, decisions D9, D24 and D25). The plugin
+spotting, text-to-speech and, since catalog v2, punctuation) for the AutoJs6 plugin 3-Macaw Speech
+(`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2 and P7.7, decisions D9, D24, D25 and
+D102-D109). The plugin
 bundles the sherpa-onnx runtime and the silero VAD model; every other model is downloaded on demand
 from an immutable `speech-models-vN` GitHub Release of this repository, with the upstream sherpa-onnx
 release asset as a fallback. Both paths end with the same file-level SHA-256 checks. A version can also
@@ -15,7 +16,7 @@ key. Ace font and codegen model keys, catalogs and releases remain separate.
 
 ## Difference from codegen-models: no model binaries in Git
 
-`codegen-models/` versions each reviewed package in Git. Speech models are 8-406 MB each, beyond the
+`codegen-models/` versions each reviewed package in Git. Speech models are 7-406 MB each, beyond the
 GitHub 100 MB file limit, and this repository deliberately avoids Git LFS. Therefore
 `sources/<modelId>/<versionCode>/` holds only reviewed text:
 
@@ -38,18 +39,24 @@ Release bytes can always be traced to public upstream bytes plus the reviewed me
 ```text
 speech-models/
   sources/<modelId>/<versionCode>/  # source.json, MODEL_CARD.md, LICENSE files (text only)
-  catalogs/catalog-v1.json          # current signed catalog (after the first promotion)
-  catalogs/catalog-v1.sig.json      # detached offline signature
-  catalogs/history/vN/              # exact earlier catalogs and signatures
+  catalogs/catalog-vS.json          # newest signed catalog of wire schema S, with catalog-vS.sig.json
+  catalogs/history/vN/              # exact catalog and signature of release N (catalog-vS.json)
   catalogs/pending/vN/              # reviewed candidates awaiting offline signing
   audits/license-audit-vN.json      # license evidence and commercialUse conclusions
   keys/catalog-signing-public.pem   # public key only
   schemas/                          # catalog, signature and model-source schemas
 ```
 
-Schemas: [catalog](schemas/catalog-v1.schema.json), [signature](schemas/signature-v1.schema.json)
-(the codegen envelope), [model source](schemas/model-source-v1.schema.json). Cross-field rules are
-enforced by `tools/speech-model-distribution/distribution.py`.
+The catalog file name follows the wire schema, not the release: schema 1 is `catalog-v1.json`,
+schema 2 is `catalog-v2.json`. A plugin reads the newest file name it understands, so
+`catalogs/catalog-v1.json` stays frozen at release 1 for plugins that know only schema 1, and a copy
+of it in `catalogs/history/v1/` proves the frozen bytes are the signed ones. Release N always keeps
+its catalog in `catalogs/history/vN/` once release N+1 is prepared.
+
+Schemas: catalog [v2](schemas/catalog-v2.schema.json) and the frozen [v1](schemas/catalog-v1.schema.json),
+signature [v2](schemas/signature-v2.schema.json) and [v1](schemas/signature-v1.schema.json) (the codegen
+envelope, differing only in the catalog file name), [model source](schemas/model-source-v1.schema.json).
+Cross-field rules are enforced by `tools/speech-model-distribution/distribution.py`.
 
 ## Mirror archive format
 
@@ -65,32 +72,37 @@ byte for byte by a small standard-library writer, independent of zlib, bzip2 or 
 
 ## Catalog entries
 
-Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.` or `tts.`), `kind`, localized
-`displayName` and `summary` (at least `en` and `zh-CN`), `recommended`, `versions[]` and
+Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `punct.` or `tts.`), `kind`,
+localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`, `versions[]` and
 `recommendedVersionCode`. Each immutable version records:
 
-- `modelType`: `online-transducer`, `sense-voice`, `kws-transducer`, `vits`, `matcha` or `kokoro`, and
-  `runtime.config` with the sherpa-onnx 1.13.8 file roles (for example `encoder`, `tokens`,
-  `lexicon[]`, `ruleFsts[]`, `dataDir`) plus `modelType` `zipformer` or `zipformer2` for transducers.
-- `languages`, `sampleRate`, and `speakers` for TTS models.
+- `modelType`: `online-transducer`, `sense-voice`, `kws-transducer`, `vits`, `matcha`, `kokoro`, and
+  since schema 2 the punctuation types `ct-transformer` and `cnn-bilstm`, with `runtime.config`
+  holding the sherpa-onnx 1.13.8 file roles (for example `encoder`, `tokens`, `lexicon[]`,
+  `ruleFsts[]`, `dataDir`, `bpeVocab`) plus `modelType` `zipformer` or `zipformer2` for transducers.
+- `languages`, `sampleRate` (absent for punctuation models, which take text), and `speakers` for TTS
+  models.
 - `license`: `spdx` (license IDs or `LicenseRef-*`), `commercialUse` (`true`, `false` or `"unknown"`)
   and `noticeKey`, the plugin string shown before download (decision D11).
 - `mirror`: the content-addressed Release archive (`fileName`, `format`, `size`, `sha256`, `url`), or
   `null` for an upstream-only version. Such a version has no Release archive at all: clients skip the
   mirror path and install from `upstream[]`, which must still cover exactly `files[]`.
 - `upstream[]`: the sherpa-onnx release assets, each a `tar.bz2` with a `members` map from archive
-  member to installed path, or a single `file`. Together they install exactly `files[]`.
+  member to installed path, or a single `file`. Together they install exactly `files[]`. Since schema
+  2 a member name may start with `./` (an archive packed from `.`); installed paths never do.
 - `files[]`: installed path, size and SHA-256 of every file, the final verification basis.
 - `sourceUrl`: this version's source directory at the release tag that introduced it.
 
 `LicenseRef-NoLicenseDeclared` marks weights whose publisher declares no license. The policy behind
-`commercialUse` and every model's evidence links are in
-[the license audit](audits/license-audit-v1.json).
+`commercialUse` and every model's evidence links are in the license audit of each release:
+[v2](audits/license-audit-v2.json) (current) and [v1](audits/license-audit-v1.json).
 
 ## Version and integrity rules
 
-- Catalog wire schema v1; `catalogVersion` increases by exactly one per release, the tag is
-  `speech-models-vN`, and a signed catalog binds its repository.
+- Catalog wire schema 2 (schema 1 for release 1); `catalogVersion` increases by exactly one per
+  release, the tag is `speech-models-vN`, and a signed catalog binds its repository. A catalog may
+  carry over versions of an older schema, but kinds, model types and member names introduced by a
+  newer schema are refused in an older one.
 - A published `(modelId, versionCode)` never changes. Only `deprecated` and `revoked` may be added,
   and only toward true; `recommendedVersionCode` is the newest active version or null.
 - New versions of a model use a higher `versionCode`. Unchanged versions keep their original Release
@@ -105,11 +117,44 @@ Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.` or `tts.`)
 
 ## Current state
 
-`catalogs/pending/v1/` holds the reviewed, unsigned v1 candidate regenerated on 2026-10-16 from the
-ten sources below (appendix A of the plugin roadmap). It is not signed or promoted yet, and no
-`speech-models-v1` Release exists. Archive sizes are measured, and a second offline rebuild
-reproduced all nine archives byte for byte. Two maintainer decisions of 2026-10-16 shaped this
-candidate:
+Release 1 (`speech-models-v1`) is signed and published; its catalog is `catalogs/catalog-v1.json`
+with an identical copy in `catalogs/history/v1/`. `catalogs/pending/v2/` holds the reviewed, unsigned
+v2 candidate of 2026-10-23 (`catalog-v2.json`, schema 2, plugin roadmap P7.7). It is not signed or
+promoted yet, and no `speech-models-v2` Release exists.
+
+### Catalog v2 candidate
+
+Release 2 carries the ten release 1 models unchanged (their archives stay on `speech-models-v1`) and
+adds nine versions. Its archives were measured from the pinned upstream assets and reproduced byte
+for byte by a second offline run. Maintainer decisions of 2026-10-22 (plugin roadmap D102-D109):
+
+- New file name `catalog-v2.json` for schema 2, so that older plugins keep reading the frozen
+  `catalog-v1.json` and never meet the `punct` kind.
+- The four new Piper voices are fine-tuned from the lessac checkpoint, whose Lessac Blizzard 2013
+  data is licensed for research only, so they are marked commercialUse false by lineage.
+- The Korean streaming model is upstream-only: the KsponSpeech terms restrict use outside Korea, so
+  this repository does not redistribute its weights.
+
+| Model ID | Archive | License expression | commercialUse |
+| --- | ---: | --- | --- |
+| `asr.zipformer-streaming.fr.2023-04-14.int8` | 129.0 MB | `Apache-2.0` | true |
+| `asr.zipformer-streaming.ko.2024-06-16.int8` | upstream only (140.9 MB installed) | `Apache-2.0` | false |
+| `asr.zipformer-streaming.ru.2025-08-16.int8` | 28.6 MB | `Apache-2.0` | true |
+| `punct.cnn-bilstm.en.2024-08-06.int8` | 7.6 MB | `Apache-2.0` | true |
+| `punct.ct-transformer.zh-en.2024-04-12.int8` | 75.5 MB | `Apache-2.0` | true |
+| `tts.vits.piper.de-de-thorsten-medium.int8` | 36.9 MB | `MIT AND GPL-3.0-or-later` | false |
+| `tts.vits.piper.es-es-davefx-medium.int8` | 36.9 MB | `MIT AND GPL-3.0-or-later` | false |
+| `tts.vits.piper.fr-fr-siwis-medium.int8` | 36.9 MB | `MIT AND GPL-3.0-or-later` | false |
+| `tts.vits.piper.ru-ru-denis-medium.int8` | 36.9 MB | `MIT AND GPL-3.0-or-later` | false |
+
+The eight new archives total 388,244,480 bytes (`pending/v2/release-assets.txt`); the Korean
+upstream-only version adds no Release asset. The catalog then lists 19 models, two of them
+upstream-only.
+
+### Release 1 models
+
+Release 1 was prepared from the ten sources below (appendix A of the plugin roadmap). Two maintainer
+decisions of 2026-10-16 shaped it:
 
 - The Chinese streaming model of 2025 stays in the catalog but is upstream-only (`mirror` null):
   no license is declared for its weights and the original repository is gated, so this repository
@@ -117,7 +162,7 @@ candidate:
 - The SenseVoice entry is the official FunAudioLLM export of 2024-07-17 (FunASR Model Open Source
   License Agreement 1.1, commercial use permitted, punctuation supported). It replaced the Cantonese
   fine-tune export `asr.sense-voice.zh-en-ja-ko-yue.2025-09-09.int8` (WenetSpeech-Yue, CC BY-NC 4.0);
-  the pending catalog was unsigned, so that source directory was removed rather than revoked.
+  the candidate was still unsigned, so that source directory was removed rather than revoked.
 
 | Model ID | Archive | License expression | commercialUse |
 | --- | ---: | --- | --- |
@@ -151,58 +196,64 @@ Verify the checked-in public key:
 openssl pkey -pubin -in speech-models/keys/catalog-signing-public.pem -outform DER | openssl dgst -sha256
 ```
 
-## Maintainer signing and publication (roadmap P2.5)
+## Maintainer signing and publication (roadmap P2.5, P7.7)
 
 Run from the repository root on the machine that holds the offline key
 `D:/offline-keys/speech-models.private.pem`. The tools need Python 3.12 or newer and OpenSSL; signing
 refuses a private key inside any Git working tree and a catalog that fails validation. Sign from a
 normal PowerShell window, not an elevated Administrator one: files written there belong to
 Administrators, and in a directory with a restricted DACL neither Git nor the tests can read them.
+The steps below publish release 2; release 1 used the same steps with `v1` paths and no previous
+catalog.
 
-1. Re-check the reviewed candidate against its sources, then sign the exact bytes:
+1. Re-check the reviewed candidate against its sources and release 1, then sign the exact bytes:
 
    ```powershell
    $keyId = 'p256-bf5f0f579c7fbef1'
    $repo = 'SuperMonster003/AutoJs6-Shared-Assets'
-   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v1/catalog-v1.json --expected-repository $repo --source-root speech-models/sources
-   python tools/speech-model-distribution/sign_catalog.py speech-models/catalogs/pending/v1/catalog-v1.json --private-key D:/offline-keys/speech-models.private.pem --output speech-models/catalogs/pending/v1/catalog-v1.sig.json --key-id $keyId --expected-repository $repo
-   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v1/catalog-v1.json --signature speech-models/catalogs/pending/v1/catalog-v1.sig.json --public-key speech-models/keys/catalog-signing-public.pem --expected-key-id $keyId --expected-repository $repo --source-root speech-models/sources
+   $previous = 'speech-models/catalogs/history/v1/catalog-v1.json'
+   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v2/catalog-v2.json --previous-catalog $previous --minimum-catalog-version 2 --expected-repository $repo --source-root speech-models/sources
+   python tools/speech-model-distribution/sign_catalog.py speech-models/catalogs/pending/v2/catalog-v2.json --private-key D:/offline-keys/speech-models.private.pem --output speech-models/catalogs/pending/v2/catalog-v2.sig.json --key-id $keyId --expected-repository $repo
+   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v2/catalog-v2.json --signature speech-models/catalogs/pending/v2/catalog-v2.sig.json --public-key speech-models/keys/catalog-signing-public.pem --expected-key-id $keyId --previous-catalog $previous --minimum-catalog-version 2 --expected-repository $repo --source-root speech-models/sources
    ```
 
-2. Promote the identical bytes (never reformat a signed catalog) and verify the promoted pair:
+2. Promote the identical bytes (never reformat a signed catalog) and verify the promoted pair. Leave
+   `catalogs/catalog-v1.json` and its signature untouched: they stay frozen at release 1.
 
    ```powershell
-   Copy-Item speech-models/catalogs/pending/v1/catalog-v1.json speech-models/catalogs/catalog-v1.json
-   Copy-Item speech-models/catalogs/pending/v1/catalog-v1.sig.json speech-models/catalogs/catalog-v1.sig.json
-   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/catalog-v1.json --signature speech-models/catalogs/catalog-v1.sig.json --public-key speech-models/keys/catalog-signing-public.pem --expected-key-id $keyId --expected-repository $repo --source-root speech-models/sources
+   Copy-Item speech-models/catalogs/pending/v2/catalog-v2.json speech-models/catalogs/catalog-v2.json
+   Copy-Item speech-models/catalogs/pending/v2/catalog-v2.sig.json speech-models/catalogs/catalog-v2.sig.json
+   python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/catalog-v2.json --signature speech-models/catalogs/catalog-v2.sig.json --public-key speech-models/keys/catalog-signing-public.pem --expected-key-id $keyId --previous-catalog $previous --minimum-catalog-version 2 --expected-repository $repo --source-root speech-models/sources
    ```
 
-3. Optionally reproduce and verify the release archives locally (about 2 GB of upstream downloads,
+3. Optionally reproduce and verify the eight new archives locally (about 1 GB of upstream downloads,
    cached in `build/speech-models/upstream/`):
 
    ```powershell
-   python tools/speech-model-distribution/prepare_sources.py --catalog speech-models/catalogs/catalog-v1.json --output-dir build/speech-models/release-v1
-   python tools/speech-model-distribution/verify_release.py speech-models/catalogs/catalog-v1.json --assets-dir build/speech-models/release-v1 --asset-list speech-models/catalogs/pending/v1/release-assets.txt --expected-repository $repo
+   python tools/speech-model-distribution/prepare_sources.py --catalog speech-models/catalogs/catalog-v2.json --output-dir build/speech-models/release-v2
+   python tools/speech-model-distribution/verify_release.py speech-models/catalogs/catalog-v2.json --assets-dir build/speech-models/release-v2 --asset-list speech-models/catalogs/pending/v2/release-assets.txt --expected-repository $repo
    ```
 
 4. Commit the signature and the promoted pair, confirm that the diff contains no private key, and push.
-   Create the GitHub environment `speech-models-release` and keep Immutable Releases enabled.
+   The GitHub environment `speech-models-release` exists since release 1; keep Immutable Releases
+   enabled.
 
 5. Dispatch the workflow from `main` with the exact tag and key ID:
 
    ```powershell
-   gh workflow run publish-speech-models.yml --repo SuperMonster003/AutoJs6-Shared-Assets --ref main -f release_tag=speech-models-v1 -f key_id=p256-bf5f0f579c7fbef1
+   gh workflow run publish-speech-models.yml --repo SuperMonster003/AutoJs6-Shared-Assets --ref main -f release_tag=speech-models-v2 -f key_id=p256-bf5f0f579c7fbef1
    ```
 
-   The workflow runs the tool tests, verifies the signature and history, rebuilds the catalog from the
-   sources and compares bytes, re-downloads the pinned upstream assets and rebuilds the nine archives
-   named in `release-assets.txt` (upstream-only versions are skipped), confirms that neither the tag
-   nor the Release exists, publishes the archives with the catalog and signature, then downloads
-   everything again and verifies it. It never overwrites an existing tag or Release; a failure after
-   tag creation needs manual inspection.
+   The workflow runs the tool tests, checks that every frozen catalog equals its history copy, verifies
+   the current and historical signatures, rebuilds the catalog from the sources against the previous
+   release and compares bytes, re-downloads the pinned upstream assets and rebuilds the archives named
+   in `release-assets.txt` (only the ones this release introduces; upstream-only versions are
+   skipped), confirms that neither the tag nor the Release exists, publishes the archives with the
+   catalog and signature, then downloads everything again and verifies it. It never overwrites an
+   existing tag or Release; a failure after tag creation needs manual inspection.
 
-6. Record the Release URL, the archive count (9, plus 1 upstream-only version), the total size and the
-   key ID in the plugin roadmap (P2.5), and copy the exact signed catalog, signature and public key
-   into the plugin (P2.4).
+6. Record the Release URL, the archive count (8 new, plus the Korean upstream-only version), the total
+   size and the key ID in the plugin roadmap (P7.7), and replace the plugin's bundled pending catalog
+   with the exact signed catalog and signature.
 
 Tool details, adding a model version and local checks: [tools README](../tools/speech-model-distribution/README.md).
