@@ -118,11 +118,14 @@ localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`
 ## Current state
 
 Release 1 (`speech-models-v1`) is signed and published; its catalog is `catalogs/catalog-v1.json`
-with an identical copy in `catalogs/history/v1/`. `catalogs/pending/v2/` holds the reviewed, unsigned
-v2 candidate of 2026-10-23 (`catalog-v2.json`, schema 2, plugin roadmap P7.7). It is not signed or
-promoted yet, and no `speech-models-v2` Release exists.
+with an identical copy in `catalogs/history/v1/`. Release 2's reviewed catalog of 2026-10-23
+(`catalog-v2.json`, schema 2, plugin roadmap P7.7) is signed with `p256-bf5f0f579c7fbef1` and
+promoted to `catalogs/catalog-v2.json` with `catalogs/catalog-v2.sig.json`. Both are byte-identical
+to the reviewed files in `catalogs/pending/v2/`; `preparation.json` retains the original unsigned
+preparation record. The release workflow below publishes the eight new archives and the signed
+catalog as `speech-models-v2`, then downloads and verifies every published asset.
 
-### Catalog v2 candidate
+### Catalog v2
 
 Release 2 carries the ten release 1 models unchanged (their archives stay on `speech-models-v1`) and
 adds nine versions. Its archives were measured from the pinned upstream assets and reproduced byte

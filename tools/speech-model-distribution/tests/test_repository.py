@@ -1,4 +1,4 @@
-"""Checked-in speech model data: sources, pending v2 catalog, v1 history, license audits, schemas and CI wiring."""
+"""Checked-in speech model data: sources, signed v2 catalog, v1 history, license audits, schemas and CI wiring."""
 
 import importlib.util
 import json
@@ -95,7 +95,16 @@ class CheckedInDataTest(unittest.TestCase):
             self.assertEqual((catalogs / name).read_bytes(), (HISTORY_V1 / name).read_bytes())
         self.assertEqual((1, 1, 10), (self.v1["schemaVersion"], self.v1["catalogVersion"], len(self.v1["models"])))
         distribution.validate_catalog(self.v1, expected_repository=distribution.DEFAULT_REPOSITORY)
-        self.assertFalse((catalogs / distribution.CATALOG_FILE).exists(), "catalog-v2.json is added only after offline signing")
+
+    def test_promoted_catalog_v2_is_the_reviewed_candidate_with_a_valid_signature(self):
+        catalogs = FAMILY / "catalogs"
+        for name in (distribution.CATALOG_FILE, distribution.SIGNATURE_FILE):
+            self.assertEqual((PENDING / name).read_bytes(), (catalogs / name).read_bytes())
+        crypto = support.load("crypto")
+        crypto.verify_catalog_material(
+            catalogs / distribution.CATALOG_FILE, catalogs / distribution.SIGNATURE_FILE,
+            FAMILY / "keys/catalog-signing-public.pem", "p256-bf5f0f579c7fbef1",
+            minimum_catalog_version=2, expected_repository=distribution.DEFAULT_REPOSITORY)
 
     def test_license_audits_match_every_catalog_model(self):
         first = self.check_audit("license-audit-v1.json", self.v1)
