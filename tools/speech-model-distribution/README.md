@@ -88,7 +88,7 @@ previous catalog and must still match its source.
 
 ```powershell
 python -m unittest discover -s tools/speech-model-distribution/tests -v
-python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v2/catalog-v2.json --previous-catalog speech-models/catalogs/history/v1/catalog-v1.json --minimum-catalog-version 2 --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
+python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v3/catalog-v2.json --previous-catalog speech-models/catalogs/history/v2/catalog-v2.json --minimum-catalog-version 3 --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
 python tools/speech-model-distribution/check_docs.py
 ```
 
@@ -96,7 +96,7 @@ The tests use synthetic upstream archives, fake HTTP responses and disposable Op
 temporary directories; they need no network and no real model. They cover the archive format, source
 and catalog validation, schema 1 and 2 rules, history rules, repacking, the downloader, signatures,
 release verification, the remote preflight, the workflow contract and the checked-in data (the
-frozen v1 catalog, its history copy and the pending v2 candidate).
+frozen v1 catalog, the signed v2 catalog, their history copies and the pending v3 candidate).
 
 ## Measured v1 preparation (2026-10-16)
 
@@ -118,3 +118,14 @@ and the files of the upstream-only Korean model (four files, 140,919,603 bytes, 
 offline run reproduced all eight archives with identical SHA-256 digests. `build_catalog.py` then
 built `pending/v2` against `history/v1/catalog-v1.json`, and `verify_catalog.py` accepted it with the
 rebuild from sources. No network publication took place.
+
+## Measured v3 preparation (2026-10-25)
+
+The six pinned upstream assets of the new sources (609,262,404 bytes) were downloaded once into a
+local cache outside the repository and checked against the GitHub release digests.
+`prepare_sources.py --update-sources` measured the five new archives (762,554,368 bytes) and the files
+of the upstream-only Arabic miro V2 voice (358 files, 36,566,185 bytes, no archive); a second
+`--offline` run into a new output directory reproduced all five archives with identical SHA-256
+digests. `build_catalog.py` then built `pending/v3` (`catalog-v2.json`, `catalogVersion` 3) against
+`history/v2/catalog-v2.json`, and `verify_catalog.py` accepted it with the rebuild from sources. No
+network publication took place.

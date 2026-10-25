@@ -285,6 +285,37 @@ class ValidationTest(unittest.TestCase):
             with self.subTest(member=member), self.assertRaisesRegex(DistributionError, "upstream member"):
                 distribution.upstream_member(member)
 
+    def test_offline_transducer_takes_nemo_model_type_values_and_needs_catalog_schema_2(self):
+        with tempfile.TemporaryDirectory() as value:
+            root = Path(value)
+            sources, cache = root / "sources", root / "cache"
+            support.tts_fixture(sources, cache)
+            folder = support.offline_transducer_fixture(sources, cache)
+            support.measure(sources, cache, root / "assets")
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            nemo = support.read_source(folder)
+        distribution.validate_source(nemo)
+        self.assertEqual((2, 2), (catalog["schemaVersion"], len(assets)))
+        self.assertEqual(["decoder.int8.onnx", "encoder.int8.onnx", "joiner.int8.onnx", "tokens.txt"], [item["path"] for item in nemo["files"]])
+        for change, pattern in ((lambda value: value["runtime"]["config"].update(modelType="zipformer2"), "modelType"),
+                                (lambda value: value["runtime"]["config"].update(bpeVocab="tokens.txt"), "unknown"),
+                                (lambda value: value["runtime"]["config"].pop("joiner"), "missing"),
+                                (lambda value: value.update(modelId="tts.nemo-transducer.unit-test"), "kind")):
+            changed = deepcopy(nemo)
+            change(changed)
+            with self.subTest(pattern=pattern), self.assertRaisesRegex(DistributionError, pattern):
+                distribution.validate_source(changed)
+        # The zipformer transducers keep their own values.
+        asr = support.read_source(self.sources / "asr.online.unit-test" / "1")
+        asr["runtime"]["config"]["modelType"] = "nemo_transducer"
+        with self.assertRaisesRegex(DistributionError, "modelType"):
+            distribution.validate_source(asr)
+        legacy = deepcopy(dict(catalog, schemaVersion=1, models=[model for model in catalog["models"] if model["kind"] == "asr"]))
+        for part in legacy["models"][0]["versions"][0]["upstream"]:
+            part["members"] = {member.removeprefix(distribution.MEMBER_PREFIX): path for member, path in part["members"].items()}
+        with self.assertRaisesRegex(DistributionError, "modelType offline-transducer requires catalog schemaVersion 2"):
+            distribution.validate_catalog(legacy)
+
     def test_json_parsing_is_strict(self):
         for data in (b'{"a": 1, "a": 2}', b'{"a": NaN}', b"\xef\xbb\xbf{}", b"[]", b"{"):
             with self.subTest(data=data), self.assertRaises(DistributionError):

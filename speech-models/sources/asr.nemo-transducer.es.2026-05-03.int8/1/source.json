@@ -1,0 +1,78 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "295fec22e08c4d961e0b40d1ad3271c82f2292f5b40047ef0041226b6b89dbef",
+    "size": 136493056
+  },
+  "displayName": {
+    "en": "NeMo FastConformer, Spanish (int8)",
+    "zh-CN": "NeMo FastConformer 西班牙语 (int8)"
+  },
+  "files": [
+    {
+      "path": "decoder.int8.onnx",
+      "sha256": "e759e0c04faa31526c34a96927bd8c69574e9b5e83360559b4f924be98f89f0e",
+      "size": 3955863
+    },
+    {
+      "path": "encoder.int8.onnx",
+      "sha256": "17bde3c5005f7a9d0614336ea13db7d2c3c1c4efcacfa380e962b36d768b907e",
+      "size": 131113475
+    },
+    {
+      "path": "joiner.int8.onnx",
+      "sha256": "78f941bcda8d7e3d43b89a8fd805a8e77e99d06bde4c6ceedc9ec423ee4d04bd",
+      "size": 1408182
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "6191b4853e3654f053c42f6fd184ca53b402987aefdd6ff6baa68034d803ee85",
+      "size": 10871
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "es"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "CC-BY-4.0"
+  },
+  "mirror": true,
+  "modelId": "asr.nemo-transducer.es.2026-05-03.int8",
+  "modelType": "offline-transducer",
+  "recommended": true,
+  "releasedAt": "2026-10-25T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder.int8.onnx",
+      "encoder": "encoder.int8.onnx",
+      "joiner": "joiner.int8.onnx",
+      "modelType": "nemo_transducer",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Offline Spanish recognizer from NVIDIA (the transducer head of stt_es_fastconformer_hybrid_large_pc) with punctuation and capitalization; it recognizes each sentence after a pause. Trained on Common Voice, MLS, VoxPopuli and Fisher Spanish.",
+    "zh-CN": "NVIDIA 的离线西班牙语识别模型 (stt_es_fastconformer_hybrid_large_pc 的 transducer 头), 自带标点与大小写, 每说完一句识别一次. 训练数据为 Common Voice, MLS, VoxPopuli 与 Fisher Spanish."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "./sherpa-onnx-nemo-fast-conformer-transducer-es-1424-int8/decoder.int8.onnx": "decoder.int8.onnx",
+        "./sherpa-onnx-nemo-fast-conformer-transducer-es-1424-int8/encoder.int8.onnx": "encoder.int8.onnx",
+        "./sherpa-onnx-nemo-fast-conformer-transducer-es-1424-int8/joiner.int8.onnx": "joiner.int8.onnx",
+        "./sherpa-onnx-nemo-fast-conformer-transducer-es-1424-int8/tokens.txt": "tokens.txt"
+      },
+      "sha256": "d6d29ffd560c366da1b177b71e79d8733a9a9910dd1ace282d9bfae94e056210",
+      "size": 107246685,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-nemo-fast-conformer-transducer-es-1424-int8.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

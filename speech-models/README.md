@@ -2,8 +2,8 @@
 
 This asset family distributes reviewed sherpa-onnx speech models (speech recognition, keyword
 spotting, text-to-speech and, since catalog v2, punctuation) for the AutoJs6 plugin 3-Macaw Speech
-(`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2 and P7.7, decisions D9, D24, D25 and
-D102-D109). The plugin
+(`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2, P7.7 and P8.2, decisions D9, D24, D25,
+D102-D109, D124, D127 and D131). The plugin
 bundles the sherpa-onnx runtime and the silero VAD model; every other model is downloaded on demand
 from an immutable `speech-models-vN` GitHub Release of this repository, with the upstream sherpa-onnx
 release asset as a fallback. Both paths end with the same file-level SHA-256 checks. A version can also
@@ -77,9 +77,10 @@ localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`
 `recommendedVersionCode`. Each immutable version records:
 
 - `modelType`: `online-transducer`, `sense-voice`, `kws-transducer`, `vits`, `matcha`, `kokoro`, and
-  since schema 2 the punctuation types `ct-transformer` and `cnn-bilstm`, with `runtime.config`
-  holding the sherpa-onnx 1.13.8 file roles (for example `encoder`, `tokens`, `lexicon[]`,
-  `ruleFsts[]`, `dataDir`, `bpeVocab`) plus `modelType` `zipformer` or `zipformer2` for transducers.
+  since schema 2 the punctuation types `ct-transformer` and `cnn-bilstm` and the offline recognizer
+  type `offline-transducer`, with `runtime.config` holding the sherpa-onnx 1.13.8 file roles (for
+  example `encoder`, `tokens`, `lexicon[]`, `ruleFsts[]`, `dataDir`, `bpeVocab`) plus `modelType`:
+  `zipformer` or `zipformer2` for streaming transducers, `nemo_transducer` for `offline-transducer`.
 - `languages`, `sampleRate` (absent for punctuation models, which take text), and `speakers` for TTS
   models.
 - `license`: `spdx` (license IDs or `LicenseRef-*`), `commercialUse` (`true`, `false` or `"unknown"`)
@@ -95,7 +96,8 @@ localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`
 
 `LicenseRef-NoLicenseDeclared` marks weights whose publisher declares no license. The policy behind
 `commercialUse` and every model's evidence links are in the license audit of each release:
-[v2](audits/license-audit-v2.json) (current) and [v1](audits/license-audit-v1.json).
+[v3](audits/license-audit-v3.json) (pending), [v2](audits/license-audit-v2.json) (current) and
+[v1](audits/license-audit-v1.json).
 
 ## Version and integrity rules
 
@@ -124,6 +126,39 @@ promoted to `catalogs/catalog-v2.json` with `catalogs/catalog-v2.sig.json`. Both
 to the reviewed files in `catalogs/pending/v2/`; `preparation.json` retains the original unsigned
 preparation record. The release workflow below publishes the eight new archives and the signed
 catalog as `speech-models-v2`, then downloads and verifies every published asset.
+
+Release 3 is being collected in `catalogs/pending/v3/` (plugin roadmap D127): the signed release 2
+catalog is kept in `catalogs/history/v2/`, and the unsigned `pending/v3/catalog-v2.json`
+(`catalogVersion` 3) adds the plugin's 1.3.0 language models, which use existing kinds only. Later
+phases add a schema 3 `catalog-v3.json` with new kinds next to it; the maintainer signs both and
+publishes them together as `speech-models-v3`.
+
+### Catalog v3 (pending)
+
+The pending catalog carries the 19 release 2 models unchanged and adds six versions chosen by the
+maintainer on 2026-10-25 (plugin roadmap D131, Q79-Q85). The five archives were measured from the
+pinned upstream assets and reproduced byte for byte by a second offline run.
+
+- The Spanish recognizer is offline: sherpa-onnx `OfflineTransducerModelConfig` with model type
+  `nemo_transducer`, added to schema 2 as `offline-transducer`. Plugins 1.2.0 and older skip this
+  version as an unknown type (plugin decision D106).
+- PengChengStarling names no training data, so it fails the catalog gate (D124); the maintainer took
+  it as an exception with commercialUse `unknown` and the new notice key
+  `speech_model_license_unknown_data`. Older plugins show their generic unknown-license notice.
+- The Arabic miro V2 voice is upstream-only: the voice and its data are CC BY-NC-ND 4.0, and the
+  sherpa-onnx export rewrites its ONNX metadata.
+
+| Model ID | Archive | License expression | commercialUse |
+| --- | ---: | --- | --- |
+| `asr.nemo-transducer.es.2026-05-03.int8` | 136.5 MB | `CC-BY-4.0` | true |
+| `asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8` | 338.9 MB | `Apache-2.0` | unknown |
+| `tts.kokoro.multi-lang.v1_0.int8` | 169.2 MB | `Apache-2.0 AND GPL-3.0-or-later` | true |
+| `tts.vits.mimic3.ko-ko-kss-low` | 81.1 MB | `CC0-1.0 AND GPL-3.0-or-later` | false |
+| `tts.vits.piper.ar-jo-sa-dii-high.int8` | 36.9 MB | `CC-BY-NC-SA-4.0 AND GPL-3.0-or-later` | false |
+| `tts.vits.piper.ar-jo-sa-miro-v2-high.int8` | upstream only (36.6 MB installed) | `CC-BY-NC-ND-4.0 AND GPL-3.0-or-later` | false |
+
+The five new archives total 762,554,368 bytes (`pending/v3/release-assets.txt`). The catalog then
+lists 25 models, three of them upstream-only.
 
 ### Catalog v2
 
@@ -258,5 +293,11 @@ catalog.
 6. Record the Release URL, the archive count (8 new, plus the Korean upstream-only version), the total
    size and the key ID in the plugin roadmap (P7.7), and replace the plugin's bundled pending catalog
    with the exact signed catalog and signature.
+
+Release 3 differs: it publishes two catalogs (plugin roadmap D127), the schema 3 `catalog-v3.json`
+and a re-signed `catalog-v2.json` with `catalogVersion` 3, while the workflow above still expects one
+current catalog and requires every other `catalog-v*.json` to equal a history copy. Adapting the
+workflow and these steps belongs to the plugin phase that adds `catalog-v3.json`; until then
+`pending/v3/` is reviewed and tested but not signed.
 
 Tool details, adding a model version and local checks: [tools README](../tools/speech-model-distribution/README.md).

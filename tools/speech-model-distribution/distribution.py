@@ -74,10 +74,15 @@ LIST_ROLES = frozenset({"lexicon", "ruleFsts", "ruleFars"})
 DIRECTORY_ROLES = frozenset({"dataDir"})
 VALUE_ROLES = {"modelType": ("zipformer", "zipformer2")}
 TTS_OPTIONAL = ("lexicon", "ruleFsts", "ruleFars", "dataDir")
-# Each modelType maps to one sherpa-onnx configuration family (sherpa-onnx 1.13.8 Kotlin API names).
+# Each modelType maps to one sherpa-onnx configuration family (sherpa-onnx 1.13.8 Kotlin API names); "values" replaces
+# VALUE_ROLES for the types whose value roles take other values.
 MODEL_TYPES = {
     "online-transducer": {"kind": "asr", "required": ("encoder", "decoder", "joiner", "tokens", "modelType"), "optional": ("bpeVocab",)},
     "sense-voice": {"kind": "asr", "required": ("model", "tokens"), "optional": ()},
+    # Offline transducers (sherpa-onnx OfflineTransducerModelConfig), since catalog v3: NeMo FastConformer with its own
+    # modelType value instead of the zipformer ones.
+    "offline-transducer": {"kind": "asr", "required": ("encoder", "decoder", "joiner", "tokens", "modelType"), "optional": (),
+                           "values": {"modelType": ("nemo_transducer",)}},
     "kws-transducer": {"kind": "kws", "required": ("encoder", "decoder", "joiner", "tokens", "modelType"), "optional": ("lexicon",)},
     "vits": {"kind": "tts", "required": ("model", "tokens"), "optional": TTS_OPTIONAL},
     "matcha": {"kind": "tts", "required": ("acousticModel", "vocoder", "tokens"), "optional": TTS_OPTIONAL},
@@ -89,7 +94,7 @@ MODEL_TYPES = {
 # An upstream archive member name may start with this prefix (tar archives packed from ".").
 MEMBER_PREFIX = "./"
 # The first catalog schemaVersion that may use a kind, model type or member prefix; everything else exists since schema 1.
-SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, MEMBER_PREFIX: 2}
+SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, "offline-transducer": 2, MEMBER_PREFIX: 2}
 
 SOURCE_REQUIRED = ("format", "modelId", "versionCode", "kind", "modelType", "displayName", "summary", "recommended",
                    "languages", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")
@@ -556,9 +561,10 @@ def validate_runtime(value, model_type, file_paths, directories):
         raise DistributionError("runtime.minSherpaOnnx must be a plain semantic version")
     specification = MODEL_TYPES[model_type]
     config = fields(value["config"], specification["required"], specification["optional"], name="runtime.config")
+    values = specification.get("values", VALUE_ROLES)
     for role, item in config.items():
-        if role in VALUE_ROLES:
-            if item not in VALUE_ROLES[role]:
+        if role in values:
+            if item not in values[role]:
                 raise DistributionError(f"runtime.config.{role} has an unsupported value")
         elif role in LIST_ROLES:
             if (not isinstance(item, list) or not 1 <= len(item) <= 16 or len(set(map(str, item))) != len(item)

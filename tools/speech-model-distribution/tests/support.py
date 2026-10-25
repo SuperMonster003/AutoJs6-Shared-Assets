@@ -145,6 +145,20 @@ def punct_fixtures(sources, cache):
     return folders
 
 
+OFFLINE_TRANSDUCER_ID = "asr.nemo-transducer.unit-test"
+
+
+def offline_transducer_fixture(sources, cache, model_id=OFFLINE_TRANSDUCER_ID):
+    """An offline NeMo transducer of catalog v3 (schema 2 type offline-transducer); packed from "." like the upstream."""
+    members = {"encoder.int8.onnx": b"nemo-encoder" * 40, "decoder.int8.onnx": b"nemo-decoder", "joiner.int8.onnx": b"joiner",
+               "tokens.txt": b"<unk> 0 "}
+    part = write_upstream(cache, "asr-models", model_id + ".tar.bz2", distribution.MEMBER_PREFIX + model_id, members,
+                          extra={"test_wavs/es.wav": b"RIFF"})
+    config = {"encoder": "encoder.int8.onnx", "decoder": "decoder.int8.onnx", "joiner": "joiner.int8.onnx", "tokens": "tokens.txt",
+              "modelType": "nemo_transducer"}
+    return write_source(sources, source_value(model_id, [part], config, kind="asr", model_type="offline-transducer", languages=["es"]))
+
+
 UPSTREAM_ONLY_ID = "asr.sense-voice.unit-test"
 
 

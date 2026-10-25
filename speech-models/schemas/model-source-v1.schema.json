@@ -96,6 +96,56 @@
           "if": {
             "properties": {
               "modelType": {
+                "const": "offline-transducer"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "decoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "encoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "joiner": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "modelType": {
+                        "enum": [
+                          "nemo_transducer"
+                        ]
+                      },
+                      "tokens": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "encoder",
+                      "decoder",
+                      "joiner",
+                      "tokens",
+                      "modelType"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
                 "const": "kws-transducer"
               }
             },
@@ -470,6 +520,7 @@
       "enum": [
         "online-transducer",
         "sense-voice",
+        "offline-transducer",
         "kws-transducer",
         "vits",
         "matcha",

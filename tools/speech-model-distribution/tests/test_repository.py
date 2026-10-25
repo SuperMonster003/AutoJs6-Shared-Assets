@@ -1,4 +1,4 @@
-"""Checked-in speech model data: sources, signed v2 catalog, v1 history, license audits, schemas and CI wiring."""
+"""Checked-in speech model data: sources, pending v3 catalog, signed v2 catalog, v1 / v2 history, license audits, schemas and CI wiring."""
 
 import importlib.util
 import json
@@ -16,12 +16,19 @@ distribution = support.distribution
 check_docs = support.load("check_docs")
 ROOT = support.REPOSITORY_ROOT
 FAMILY = ROOT / "speech-models"
-PENDING = FAMILY / "catalogs/pending/v2"
+PENDING = FAMILY / "catalogs/pending/v3"
+PENDING_V2 = FAMILY / "catalogs/pending/v2"
 HISTORY_V1 = FAMILY / "catalogs/history/v1"
+HISTORY_V2 = FAMILY / "catalogs/history/v2"
 NOTICE_FOR = {True: "speech_model_license_commercial", False: "speech_model_license_non_commercial",
               "unknown": "speech_model_license_unknown"}
+# Catalog v3 adds a notice for "unknown" when the publisher names no training data (decision D131, Q80).
+UNKNOWN_DATA = "speech_model_license_unknown_data"
+PENGCHENG = "asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8"
+NEMO_ES = "asr.nemo-transducer.es.2026-05-03.int8"
+MIRO_V2 = "tts.vits.piper.ar-jo-sa-miro-v2-high.int8"
 ZH_2025 = "asr.zipformer-streaming.zh.2025-06-30.int8"
-UPSTREAM_ONLY = ["asr.zipformer-streaming.ko.2024-06-16.int8", ZH_2025]
+UPSTREAM_ONLY = ["asr.zipformer-streaming.ko.2024-06-16.int8", ZH_2025, MIRO_V2]
 SENSE_VOICE = "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8"
 PUNCT_EN = "punct.cnn-bilstm.en.2024-08-06.int8"
 
@@ -36,9 +43,10 @@ class CheckedInDataTest(unittest.TestCase):
         cls.sources = distribution.load_sources(FAMILY / "sources")
         cls.catalog = distribution.read_json(PENDING / distribution.CATALOG_FILE)
         cls.v1 = distribution.read_json(HISTORY_V1 / "catalog-v1.json")
+        cls.v2 = distribution.read_json(HISTORY_V2 / "catalog-v2.json")
 
     def test_sources_are_measured_text_only_and_license_complete(self):
-        self.assertEqual(19, len(self.sources))
+        self.assertEqual(25, len(self.sources))
         for folder, source in self.sources:
             names = {path.name for path in folder.iterdir()}
             paths = {item["path"] for item in source["files"]}
@@ -47,7 +55,8 @@ class CheckedInDataTest(unittest.TestCase):
                 self.assertEqual(any(path.startswith("espeak-ng-data/") for path in paths), "LICENSE-espeak-ng-data" in names)
                 self.assertNotIn("test_wavs", " ".join(paths))
                 self.assertEqual("1.13.8", source["runtime"]["minSherpaOnnx"])
-                self.assertEqual(NOTICE_FOR[source["license"]["commercialUse"]], source["license"]["noticeKey"])
+                expected = UNKNOWN_DATA if source["modelId"] == PENGCHENG else NOTICE_FOR[source["license"]["commercialUse"]]
+                self.assertEqual(expected, source["license"]["noticeKey"])
                 self.assertEqual(source["mirror"], source["archive"] is not None)
                 self.assertEqual(distribution.canonical_json_bytes(source), (folder / "source.json").read_bytes())
         self.assertEqual(UPSTREAM_ONLY, [source["modelId"] for _folder, source in self.sources if not source["mirror"]])
@@ -63,27 +72,31 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(["cnn-bilstm", "ct-transformer"], punct)
         self.assertFalse(any("sampleRate" in source for _folder, source in self.sources if source["kind"] == "punct"))
         self.assertTrue(all(member.startswith(distribution.MEMBER_PREFIX) for member in by_id[PUNCT_EN]["upstream"][0]["members"]))
+        # Catalog v3 (P8.2): the NeMo recognizer uses the offline-transducer type added to schema 2.
+        self.assertEqual("offline-transducer", by_id[NEMO_ES]["modelType"])
+        self.assertEqual("nemo_transducer", by_id[NEMO_ES]["runtime"]["config"]["modelType"])
+        self.assertTrue(all(member.startswith(distribution.MEMBER_PREFIX) for member in by_id[NEMO_ES]["upstream"][0]["members"]))
 
     def test_pending_catalog_is_canonical_and_reproduced_from_sources(self):
         data = (PENDING / distribution.CATALOG_FILE).read_bytes()
         self.assertEqual(distribution.canonical_json_bytes(self.catalog), data)
-        distribution.validate_catalog(self.catalog, previous_catalog=self.v1, expected_repository=distribution.DEFAULT_REPOSITORY)
-        self.assertEqual((2, 2, "speech-models-v2"),
+        distribution.validate_catalog(self.catalog, previous_catalog=self.v2, expected_repository=distribution.DEFAULT_REPOSITORY)
+        self.assertEqual((2, 3, "speech-models-v3"),
                          (self.catalog["schemaVersion"], self.catalog["catalogVersion"], self.catalog["releaseTag"]))
-        rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.catalog["repository"], 2, self.catalog["generatedAt"],
-                                                     previous_catalog=self.v1)
+        rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.catalog["repository"], 3, self.catalog["generatedAt"],
+                                                     previous_catalog=self.v2)
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
         self.assertEqual(assets, (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines())
-        self.assertEqual(8, len(assets))
-        self.assertEqual(19, len(self.catalog["models"]))
+        self.assertEqual(5, len(assets))
+        self.assertEqual(25, len(self.catalog["models"]))
         self.assertEqual([(model_id, 1) for model_id in UPSTREAM_ONLY], distribution.upstream_only_versions(self.catalog))
-        # Archives of catalog v1 stay on speech-models-v1; v2 uploads only the archives it introduces.
-        old = {model["modelId"]: model for model in self.v1["models"]}
+        # Archives of catalogs v1 and v2 stay on their releases; v3 uploads only the archives it introduces.
+        old = {model["modelId"]: model for model in self.v2["models"]}
         self.assertFalse(any(model_id in name for name in assets for model_id in set(old) | set(UPSTREAM_ONLY)))
         self.assertEqual(old, {model["modelId"]: model for model in self.catalog["models"] if model["modelId"] in old})
         preparation = distribution.read_json(PENDING / "preparation.json")
         self.assertEqual(len(assets), preparation["releaseAssetCount"])
-        self.assertEqual(2, preparation["upstreamOnlyVersions"])
+        self.assertEqual(3, preparation["upstreamOnlyVersions"])
         self.assertEqual(sum(version["mirror"]["size"] for model in self.catalog["models"] for version in model["versions"]
                              if version["mirror"] is not None and version["mirror"]["fileName"] in assets),
                          preparation["releaseAssetBytes"])
@@ -99,7 +112,9 @@ class CheckedInDataTest(unittest.TestCase):
     def test_promoted_catalog_v2_is_the_reviewed_candidate_with_a_valid_signature(self):
         catalogs = FAMILY / "catalogs"
         for name in (distribution.CATALOG_FILE, distribution.SIGNATURE_FILE):
-            self.assertEqual((PENDING / name).read_bytes(), (catalogs / name).read_bytes())
+            self.assertEqual((PENDING_V2 / name).read_bytes(), (catalogs / name).read_bytes())
+            self.assertEqual((HISTORY_V2 / name).read_bytes(), (catalogs / name).read_bytes())
+        self.assertEqual((2, 2, 19), (self.v2["schemaVersion"], self.v2["catalogVersion"], len(self.v2["models"])))
         crypto = support.load("crypto")
         crypto.verify_catalog_material(
             catalogs / distribution.CATALOG_FILE, catalogs / distribution.SIGNATURE_FILE,
@@ -109,18 +124,24 @@ class CheckedInDataTest(unittest.TestCase):
     def test_license_audits_match_every_catalog_model(self):
         first = self.check_audit("license-audit-v1.json", self.v1)
         self.assertEqual(2, len(first["decisions"]))
-        audit = self.check_audit("license-audit-v2.json", self.catalog)
+        audit = self.check_audit("license-audit-v2.json", self.v2)
         self.assertEqual(first["decisions"], audit["decisions"][:2])
         self.assertEqual(5, len(audit["decisions"]))
         carried = {entry["modelId"] for entry in first["models"]}
         self.assertEqual(first["models"], [entry for entry in audit["models"] if entry["modelId"] in carried])
+        third = self.check_audit("license-audit-v3.json", self.catalog, set(NOTICE_FOR.values()) | {UNKNOWN_DATA})
+        self.assertEqual(audit["decisions"], third["decisions"][:5])
+        self.assertEqual(8, len(third["decisions"]))
+        self.assertEqual(audit["models"], [entry for entry in third["models"] if entry["modelId"] in {item["modelId"] for item in audit["models"]}])
+        pengcheng = next(entry for entry in third["models"] if entry["modelId"] == PENGCHENG)
+        self.assertEqual(["undisclosed"], [item["commercialRestriction"] for item in pengcheng["trainingData"]])
         for entry in audit["models"]:
             if entry["modelId"].startswith("tts.vits.piper."):
                 with self.subTest(model=entry["modelId"]):
                     self.assertIs(False, entry["commercialUse"])
                     self.assertTrue(any(item["name"].startswith("Lessac Blizzard 2013") for item in entry["trainingData"]))
 
-    def check_audit(self, name, catalog_value):
+    def check_audit(self, name, catalog_value, notice_keys=frozenset(NOTICE_FOR.values())):
         audit = distribution.read_json(FAMILY / "audits" / name)
         self.assertEqual(distribution.canonical_json_bytes(audit), (FAMILY / "audits" / name).read_bytes())
         self.assertEqual(catalog_value["catalogVersion"], audit["catalogVersion"])
@@ -139,7 +160,7 @@ class CheckedInDataTest(unittest.TestCase):
                 if version["license"]["commercialUse"] is False:
                     restricted = any(item["commercialRestriction"] is True for item in entry["trainingData"])
                     self.assertTrue(restricted, "false requires a named restricted dataset")
-        self.assertEqual(set(NOTICE_FOR.values()), set(audit["policy"]["noticeKeys"]))
+        self.assertEqual(set(notice_keys), set(audit["policy"]["noticeKeys"]))
         self.assertIs(False, by_id["tts.matcha.icefall.zh-baker"]["commercialUse"])
         self.assertIs(True, by_id[SENSE_VOICE]["commercialUse"])
         self.assertEqual({"upstream-only"}, {by_id[model_id]["distribution"] for model_id in upstream_only})

@@ -1,0 +1,91 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "0e09bec3246c0825e135667b97aa7879d34374a36892c24edb2a7247028c2f18",
+    "size": 338878464
+  },
+  "displayName": {
+    "en": "Streaming Zipformer, 8 languages (PengChengStarling, int8)",
+    "zh-CN": "流式 Zipformer 八语 (PengChengStarling, int8)"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "a3014fe7765afb8fbd510a8d446395dfafa11b25d6e1893e34b28bcdded81921",
+      "size": 105
+    },
+    {
+      "path": "decoder-epoch-75-avg-11-chunk-16-left-128.onnx",
+      "sha256": "7ebc63f34b21c8efb4a41a5a2eee7fe1448829ce0230ecc5369e67fc14d90d48",
+      "size": 33837085
+    },
+    {
+      "path": "encoder-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+      "sha256": "f9001ed7a9e46d0294438c1a30cd7c72d1cc4bdd4e7880edbcda36f67081e32e",
+      "size": 296583597
+    },
+    {
+      "path": "joiner-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+      "sha256": "db88e3172323551abaa99b91b18fb422a27ea4a834fd0db10389f9478816f917",
+      "size": 8257421
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "784f24950f6bcce1b0021035632dd60fd4617ecd8ca0581ab57d7b39d77ba5ab",
+      "size": 195244
+    }
+  ],
+  "format": 1,
+  "kind": "asr",
+  "languages": [
+    "ar",
+    "en",
+    "id",
+    "ja",
+    "ru",
+    "th",
+    "vi",
+    "zh"
+  ],
+  "license": {
+    "commercialUse": "unknown",
+    "noticeKey": "speech_model_license_unknown_data",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8",
+  "modelType": "online-transducer",
+  "recommended": false,
+  "releasedAt": "2026-10-25T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "decoder-epoch-75-avg-11-chunk-16-left-128.onnx",
+      "encoder": "encoder-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+      "joiner": "joiner-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+      "modelType": "zipformer2",
+      "tokens": "tokens.txt"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Streaming recognizer for Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese and Chinese that detects the language by itself and writes no punctuation. The weights are Apache-2.0, but the training data is not named, so whether commercial use is allowed is unknown.",
+    "zh-CN": "阿拉伯语, 英语, 印尼语, 日语, 俄语, 泰语, 越南语与中文的流式识别模型, 自动判别语言, 不出标点. 权重为 Apache-2.0, 但训练数据未点名, 能否商用未知."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10/README.md": "README.md",
+        "sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10/decoder-epoch-75-avg-11-chunk-16-left-128.onnx": "decoder-epoch-75-avg-11-chunk-16-left-128.onnx",
+        "sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10/encoder-epoch-75-avg-11-chunk-16-left-128.int8.onnx": "encoder-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10/joiner-epoch-75-avg-11-chunk-16-left-128.int8.onnx": "joiner-epoch-75-avg-11-chunk-16-left-128.int8.onnx",
+        "sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10/tokens.txt": "tokens.txt"
+      },
+      "sha256": "28044b67324f7f831689f0a3761473dd2ade380e93aa53f1dbcd479ef71c40d4",
+      "size": 258999581,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-ar_en_id_ja_ru_th_vi_zh-2025-02-10.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}
