@@ -159,6 +159,16 @@ def offline_transducer_fixture(sources, cache, model_id=OFFLINE_TRANSDUCER_ID):
     return write_source(sources, source_value(model_id, [part], config, kind="asr", model_type="offline-transducer", languages=["es"]))
 
 
+SPEAKER_ID = "speaker.eres2net.unit-test"
+
+
+def speaker_fixture(sources, cache, model_id=SPEAKER_ID):
+    """A speaker embedding model of catalog schema 3: one raw ONNX file, like the speaker-recongition-models assets."""
+    raw = write_raw(cache, "speaker-recongition-models", "unit_test_speaker_16k.onnx", b"speaker-embedding" * 30, "model.onnx")
+    return write_source(sources, source_value(model_id, [raw], {"model": "model.onnx"}, kind="speaker", model_type="speaker-embedding",
+                                              languages=["en", "zh"]))
+
+
 UPSTREAM_ONLY_ID = "asr.sense-voice.unit-test"
 
 

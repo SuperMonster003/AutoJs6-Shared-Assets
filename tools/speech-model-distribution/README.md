@@ -67,7 +67,7 @@ asset or a replaced upstream file requires a new `versionCode`.
 3. Review the recorded `files[]`, add the license evidence to a new or updated
    `speech-models/audits/license-audit-vN.json`, and reproduce once more without `--update-sources`.
 4. Copy the previous current catalog and signature unchanged into `catalogs/history/v<N-1>/`, then
-   build the next candidate. Catalog files are named by wire schema (`catalog-v<S>.json`, `S` = 2
+   build the next candidate. Catalog files are named by wire schema (`catalog-v<S>.json`, `S` = 3
    today; `distribution.CATALOG_FILE`), so the previous release may use an older name:
 
    ```powershell
@@ -76,7 +76,11 @@ asset or a replaced upstream file requires a new `versionCode`.
    ```
 
    A new wire schema gets its own `catalog-v<S>.schema.json` and `signature-v<S>.schema.json`; the
-   older catalog file stays frozen in `catalogs/` next to its identical history copy.
+   older catalog file stays frozen in `catalogs/` next to its identical history copy. When a release
+   also serves plugins that read an older schema (decision D127), build that catalog with
+   `--schema <S>` into a second new directory and move its `catalog-v<S>.json` next to the newest
+   one; it leaves out the versions that need a newer schema, and the newest catalog's
+   `release-assets.txt` and `preparation.json` cover both.
 
 5. Sign, promote and publish as in the family README, using tag `speech-models-v<N>`.
 
@@ -88,15 +92,16 @@ previous catalog and must still match its source.
 
 ```powershell
 python -m unittest discover -s tools/speech-model-distribution/tests -v
+python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v3/catalog-v3.json --previous-catalog speech-models/catalogs/history/v2/catalog-v2.json --minimum-catalog-version 3 --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
 python tools/speech-model-distribution/verify_catalog.py speech-models/catalogs/pending/v3/catalog-v2.json --previous-catalog speech-models/catalogs/history/v2/catalog-v2.json --minimum-catalog-version 3 --expected-repository SuperMonster003/AutoJs6-Shared-Assets --source-root speech-models/sources
 python tools/speech-model-distribution/check_docs.py
 ```
 
 The tests use synthetic upstream archives, fake HTTP responses and disposable OpenSSL keys in
 temporary directories; they need no network and no real model. They cover the archive format, source
-and catalog validation, schema 1 and 2 rules, history rules, repacking, the downloader, signatures,
+and catalog validation, schema 1, 2 and 3 rules, history rules, repacking, the downloader, signatures,
 release verification, the remote preflight, the workflow contract and the checked-in data (the
-frozen v1 catalog, the signed v2 catalog, their history copies and the pending v3 candidate).
+frozen v1 catalog, the signed v2 catalog, their history copies and the pending v3 candidates).
 
 ## Measured v1 preparation (2026-10-16)
 
@@ -129,3 +134,15 @@ of the upstream-only Arabic miro V2 voice (358 files, 36,566,185 bytes, no archi
 digests. `build_catalog.py` then built `pending/v3` (`catalog-v2.json`, `catalogVersion` 3) against
 `history/v2/catalog-v2.json`, and `verify_catalog.py` accepted it with the rebuild from sources. No
 network publication took place.
+
+## Measured v3 speaker model (2026-10-29)
+
+The pinned upstream asset of the speaker model (one ONNX file, 26,485,263 bytes, SHA-256 matching the
+sherpa-onnx `checksum.txt` of the `speaker-recongition-models` release) was downloaded once into a
+local cache outside the repository. `prepare_sources.py --update-sources --offline` measured its
+archive (26,487,296 bytes) and a second `--offline` run into a new output directory reproduced it with
+an identical SHA-256 digest. `build_catalog.py` (schema 3) then built `catalog-v3.json` against
+`history/v2/catalog-v2.json` in a temporary directory; the file, `release-assets.txt` and
+`preparation.json` were moved into `pending/v3`, and `verify_catalog.py` accepted both pending
+catalogs with the rebuild from sources (`catalog-v2.json` unchanged). No network publication took
+place.

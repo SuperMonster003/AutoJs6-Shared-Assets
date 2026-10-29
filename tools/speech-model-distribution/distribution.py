@@ -10,6 +10,11 @@ Catalog schema 2 adds the punct kind and its model types, and lets upstream arch
 names start with one "./" (archives packed from "."). Each schema has its own catalog
 file name, catalog-v{schemaVersion}.json, so plugins that only know schema 1 keep reading
 the frozen catalog-v1.json; schema 1 catalogs stay valid and verifiable.
+
+Catalog schema 3 adds the speaker kind (speaker embedding models, plugin roadmap P8.3). A release
+may publish catalogs of several schemas (decision D127): a catalog of an older schema is built from
+the same sources but leaves out every version that needs a newer schema, so catalog-v2.json never
+lists a speaker model.
 """
 
 from __future__ import annotations
@@ -27,7 +32,7 @@ from urllib.parse import urlsplit
 
 DEFAULT_REPOSITORY = "SuperMonster003/AutoJs6-Shared-Assets"
 FAMILY_DIRECTORY = "speech-models"
-CATALOG_SCHEMAS = (1, 2)
+CATALOG_SCHEMAS = (1, 2, 3)
 CATALOG_SCHEMA_VERSION = CATALOG_SCHEMAS[-1]
 CATALOG_FILE = f"catalog-v{CATALOG_SCHEMA_VERSION}.json"
 SIGNATURE_FILE = f"catalog-v{CATALOG_SCHEMA_VERSION}.sig.json"
@@ -51,7 +56,7 @@ BLOCK = 512
 
 REPOSITORY_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*")
 RELEASE_TAG_PATTERN = re.compile(r"speech-models-v([1-9][0-9]{0,9})")
-MODEL_ID_PATTERN = re.compile(r"(asr|kws|punct|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
+MODEL_ID_PATTERN = re.compile(r"(asr|kws|punct|speaker|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 LANGUAGE_PATTERN = re.compile(r"[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*")
 MAP_LANGUAGE_PATTERN = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*")
@@ -68,7 +73,7 @@ TIMESTAMP_PATTERN = re.compile(
     r"(?:\.([0-9]{1,9}))?(Z|[+-](?:0[0-9]|1[0-8]):[0-5][0-9])"
 )
 
-KINDS = ("asr", "kws", "punct", "tts")
+KINDS = ("asr", "kws", "punct", "speaker", "tts")
 COMMERCIAL_USE_VALUES = (True, False, "unknown")
 LIST_ROLES = frozenset({"lexicon", "ruleFsts", "ruleFars"})
 DIRECTORY_ROLES = frozenset({"dataDir"})
@@ -90,11 +95,14 @@ MODEL_TYPES = {
     # Punctuation models: sherpa-onnx OfflinePunctuation (ctTransformer) and OnlinePunctuation (cnnBilstm, bpeVocab).
     "ct-transformer": {"kind": "punct", "required": ("model",), "optional": ()},
     "cnn-bilstm": {"kind": "punct", "required": ("model", "bpeVocab"), "optional": ()},
+    # Speaker embedding extractors (sherpa-onnx SpeakerEmbeddingExtractorConfig), since schema 3.
+    "speaker-embedding": {"kind": "speaker", "required": ("model",), "optional": ()},
 }
 # An upstream archive member name may start with this prefix (tar archives packed from ".").
 MEMBER_PREFIX = "./"
 # The first catalog schemaVersion that may use a kind, model type or member prefix; everything else exists since schema 1.
-SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, "offline-transducer": 2, MEMBER_PREFIX: 2}
+SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, "offline-transducer": 2, MEMBER_PREFIX: 2,
+                     "speaker": 3, "speaker-embedding": 3}
 
 SOURCE_REQUIRED = ("format", "modelId", "versionCode", "kind", "modelType", "displayName", "summary", "recommended",
                    "languages", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")
@@ -311,6 +319,14 @@ def catalog_file(schema):
 
 def signature_file(schema):
     return f"catalog-v{schema_version(schema)}.sig.json"
+
+
+def required_schema(source):
+    """The first catalog schemaVersion that can list this source version: its kind, model type and member names."""
+    names = [source["kind"], source["modelType"]]
+    names += [MEMBER_PREFIX for part in source["upstream"] if part.get("format") == "tar.bz2"
+              for member in part.get("members", {}) if member.startswith(MEMBER_PREFIX)]
+    return max(SCHEMA_INTRODUCED.get(name, 1) for name in names)
 
 
 def _require_schema(name, schema, what):
@@ -878,7 +894,10 @@ def _without_release_location(version):
 
 def build_catalog(source_root, repository, catalog_version, generated_at, *, previous_catalog=None,
                   schema=CATALOG_SCHEMA_VERSION):
-    """Return (catalog, newly introduced archive names); no network, no archive bytes needed."""
+    """Return (catalog, newly introduced archive names); no network, no archive bytes needed.
+
+    Source versions that need a newer schema than the requested one are left out (decision D127).
+    """
     repository = repository_name(repository)
     schema_version(schema)
     integer(catalog_version, "catalogVersion")
@@ -893,6 +912,8 @@ def build_catalog(source_root, repository, catalog_version, generated_at, *, pre
     old_versions = {} if previous_catalog is None else _versions(previous_catalog)
     models, new_assets, seen = {}, [], set()
     for _folder, source in load_sources(source_root):
+        if required_schema(source) > schema:
+            continue
         key = (source["modelId"], source["versionCode"])
         seen.add(key)
         entry = catalog_version_entry(source, repository, release_tag)

@@ -415,6 +415,38 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "speaker-embedding"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -472,6 +504,7 @@
         "asr",
         "kws",
         "punct",
+        "speaker",
         "tts"
       ]
     },
@@ -513,7 +546,7 @@
       "type": "object"
     },
     "modelId": {
-      "pattern": "^(asr|kws|punct|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
+      "pattern": "^(asr|kws|punct|speaker|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
       "type": "string"
     },
     "modelType": {
@@ -526,7 +559,8 @@
         "matcha",
         "kokoro",
         "ct-transformer",
-        "cnn-bilstm"
+        "cnn-bilstm",
+        "speaker-embedding"
       ]
     },
     "path": {

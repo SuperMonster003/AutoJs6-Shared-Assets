@@ -1,4 +1,4 @@
-"""Checked-in speech model data: sources, pending v3 catalog, signed v2 catalog, v1 / v2 history, license audits, schemas and CI wiring."""
+"""Checked-in speech model data: sources, pending v3 catalogs (schema 3 and 2), signed v2 catalog, v1 / v2 history, license audits, schemas and CI wiring."""
 
 import importlib.util
 import json
@@ -31,6 +31,7 @@ ZH_2025 = "asr.zipformer-streaming.zh.2025-06-30.int8"
 UPSTREAM_ONLY = ["asr.zipformer-streaming.ko.2024-06-16.int8", ZH_2025, MIRO_V2]
 SENSE_VOICE = "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8"
 PUNCT_EN = "punct.cnn-bilstm.en.2024-08-06.int8"
+SPEAKER = "speaker.eres2net.3dspeaker.en-voxceleb"
 
 
 def schema(name):
@@ -42,11 +43,12 @@ class CheckedInDataTest(unittest.TestCase):
     def setUpClass(cls):
         cls.sources = distribution.load_sources(FAMILY / "sources")
         cls.catalog = distribution.read_json(PENDING / distribution.CATALOG_FILE)
+        cls.pending_v2 = distribution.read_json(PENDING / "catalog-v2.json")
         cls.v1 = distribution.read_json(HISTORY_V1 / "catalog-v1.json")
         cls.v2 = distribution.read_json(HISTORY_V2 / "catalog-v2.json")
 
     def test_sources_are_measured_text_only_and_license_complete(self):
-        self.assertEqual(25, len(self.sources))
+        self.assertEqual(26, len(self.sources))
         for folder, source in self.sources:
             names = {path.name for path in folder.iterdir()}
             paths = {item["path"] for item in source["files"]}
@@ -76,19 +78,24 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual("offline-transducer", by_id[NEMO_ES]["modelType"])
         self.assertEqual("nemo_transducer", by_id[NEMO_ES]["runtime"]["config"]["modelType"])
         self.assertTrue(all(member.startswith(distribution.MEMBER_PREFIX) for member in by_id[NEMO_ES]["upstream"][0]["members"]))
+        # Schema 3 (P8.3): the speaker kind, one raw ONNX file of the upstream speaker-recongition-models release.
+        self.assertEqual([SPEAKER], [source["modelId"] for _folder, source in self.sources if source["kind"] == "speaker"])
+        self.assertEqual(("speaker-embedding", 16000, {"model": "model.onnx"}, ["model.onnx"], "file"),
+                         (by_id[SPEAKER]["modelType"], by_id[SPEAKER]["sampleRate"], by_id[SPEAKER]["runtime"]["config"],
+                          [item["path"] for item in by_id[SPEAKER]["files"]], by_id[SPEAKER]["upstream"][0]["format"]))
 
     def test_pending_catalog_is_canonical_and_reproduced_from_sources(self):
         data = (PENDING / distribution.CATALOG_FILE).read_bytes()
         self.assertEqual(distribution.canonical_json_bytes(self.catalog), data)
         distribution.validate_catalog(self.catalog, previous_catalog=self.v2, expected_repository=distribution.DEFAULT_REPOSITORY)
-        self.assertEqual((2, 3, "speech-models-v3"),
+        self.assertEqual((3, 3, "speech-models-v3"),
                          (self.catalog["schemaVersion"], self.catalog["catalogVersion"], self.catalog["releaseTag"]))
         rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.catalog["repository"], 3, self.catalog["generatedAt"],
                                                      previous_catalog=self.v2)
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
         self.assertEqual(assets, (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines())
-        self.assertEqual(5, len(assets))
-        self.assertEqual(25, len(self.catalog["models"]))
+        self.assertEqual(6, len(assets))
+        self.assertEqual(26, len(self.catalog["models"]))
         self.assertEqual([(model_id, 1) for model_id in UPSTREAM_ONLY], distribution.upstream_only_versions(self.catalog))
         # Archives of catalogs v1 and v2 stay on their releases; v3 uploads only the archives it introduces.
         old = {model["modelId"]: model for model in self.v2["models"]}
@@ -102,6 +109,20 @@ class CheckedInDataTest(unittest.TestCase):
                          preparation["releaseAssetBytes"])
         self.assertTrue(preparation["unsigned"])
 
+    def test_pending_catalog_v2_is_the_same_release_without_newer_kinds(self):
+        # Decision D127: release 3 also publishes catalog-v2.json for plugins 1.2.0 and older, without the speaker kind.
+        data = (PENDING / "catalog-v2.json").read_bytes()
+        self.assertEqual(distribution.canonical_json_bytes(self.pending_v2), data)
+        distribution.validate_catalog(self.pending_v2, previous_catalog=self.v2, expected_repository=distribution.DEFAULT_REPOSITORY)
+        self.assertEqual((2, 3, "speech-models-v3"),
+                         (self.pending_v2["schemaVersion"], self.pending_v2["catalogVersion"], self.pending_v2["releaseTag"]))
+        rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.pending_v2["repository"], 3, self.pending_v2["generatedAt"],
+                                                     previous_catalog=self.v2, schema=2)
+        self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
+        self.assertEqual([model for model in self.catalog["models"] if model["kind"] != "speaker"], self.pending_v2["models"])
+        released = (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines()
+        self.assertEqual([name for name in released if SPEAKER not in name], assets)
+
     def test_catalog_v1_is_frozen_with_a_signed_history_copy(self):
         catalogs = FAMILY / "catalogs"
         for name in ("catalog-v1.json", "catalog-v1.sig.json"):
@@ -111,13 +132,13 @@ class CheckedInDataTest(unittest.TestCase):
 
     def test_promoted_catalog_v2_is_the_reviewed_candidate_with_a_valid_signature(self):
         catalogs = FAMILY / "catalogs"
-        for name in (distribution.CATALOG_FILE, distribution.SIGNATURE_FILE):
+        for name in ("catalog-v2.json", "catalog-v2.sig.json"):
             self.assertEqual((PENDING_V2 / name).read_bytes(), (catalogs / name).read_bytes())
             self.assertEqual((HISTORY_V2 / name).read_bytes(), (catalogs / name).read_bytes())
         self.assertEqual((2, 2, 19), (self.v2["schemaVersion"], self.v2["catalogVersion"], len(self.v2["models"])))
         crypto = support.load("crypto")
         crypto.verify_catalog_material(
-            catalogs / distribution.CATALOG_FILE, catalogs / distribution.SIGNATURE_FILE,
+            catalogs / "catalog-v2.json", catalogs / "catalog-v2.sig.json",
             FAMILY / "keys/catalog-signing-public.pem", "p256-bf5f0f579c7fbef1",
             minimum_catalog_version=2, expected_repository=distribution.DEFAULT_REPOSITORY)
 
@@ -131,7 +152,7 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(first["models"], [entry for entry in audit["models"] if entry["modelId"] in carried])
         third = self.check_audit("license-audit-v3.json", self.catalog, set(NOTICE_FOR.values()) | {UNKNOWN_DATA})
         self.assertEqual(audit["decisions"], third["decisions"][:5])
-        self.assertEqual(8, len(third["decisions"]))
+        self.assertEqual(9, len(third["decisions"]))
         self.assertEqual(audit["models"], [entry for entry in third["models"] if entry["modelId"] in {item["modelId"] for item in audit["models"]}])
         pengcheng = next(entry for entry in third["models"] if entry["modelId"] == PENGCHENG)
         self.assertEqual(["undisclosed"], [item["commercialRestriction"] for item in pengcheng["trainingData"]])
@@ -170,7 +191,7 @@ class CheckedInDataTest(unittest.TestCase):
         return audit
 
     def test_schemas_follow_the_validator(self):
-        catalog = schema("catalog-v2.schema.json")
+        catalog = schema("catalog-v3.schema.json")
         version = catalog["$defs"]["version"]
         model = catalog["properties"]["models"]["items"]
         self.assertEqual(distribution.CATALOG_SCHEMA_VERSION, catalog["properties"]["schemaVersion"]["const"])
@@ -200,6 +221,14 @@ class CheckedInDataTest(unittest.TestCase):
             members = document["$defs"]["upstreamPart"]["oneOf"][0]["properties"]["members"]
             self.assertEqual({"$ref": "#/$defs/upstreamMember"}, members["propertyNames"])
             self.assertEqual("^(?:\\./)?" + document["$defs"]["path"]["pattern"][1:], document["$defs"]["upstreamMember"]["pattern"])
+        # catalog-v2.schema.json is frozen with schema 2: everything of catalog-v3.schema.json except the speaker kind and type.
+        older = lambda names: [name for name in names if distribution.SCHEMA_INTRODUCED.get(name, 1) <= 2]
+        frozen = schema("catalog-v2.schema.json")
+        self.assertEqual(2, frozen["properties"]["schemaVersion"]["const"])
+        self.assertEqual(older(distribution.KINDS), frozen["$defs"]["kind"]["enum"])
+        self.assertEqual(older(distribution.MODEL_TYPES), frozen["$defs"]["modelType"]["enum"])
+        self.assertEqual(older(distribution.MODEL_TYPES),
+                         [rule["if"]["properties"]["modelType"]["const"] for rule in frozen["$defs"]["configByModelType"]["allOf"]])
         # catalog-v1.schema.json is frozen with schema 1: no punct kind or types, sampleRate always required.
         frozen = schema("catalog-v1.schema.json")
         first = lambda names: [name for name in names if distribution.SCHEMA_INTRODUCED.get(name, 1) == 1]
@@ -215,10 +244,13 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(strip(codegen), strip(signature))
         signature_v2 = strip(schema("signature-v2.schema.json"))
         self.assertEqual({"const": "catalog-v2.json"}, signature_v2["properties"].pop("catalog"))
+        signature_v3 = strip(schema("signature-v3.schema.json"))
+        self.assertEqual({"const": "catalog-v3.json"}, signature_v3["properties"].pop("catalog"))
         signature["properties"].pop("catalog")
         self.assertEqual(strip(signature), signature_v2)
-        for name in ("catalog-v1.schema.json", "catalog-v2.schema.json", "model-source-v1.schema.json", "signature-v1.schema.json",
-                     "signature-v2.schema.json"):
+        self.assertEqual(signature_v2, signature_v3)
+        for name in ("catalog-v1.schema.json", "catalog-v2.schema.json", "catalog-v3.schema.json", "model-source-v1.schema.json",
+                     "signature-v1.schema.json", "signature-v2.schema.json", "signature-v3.schema.json"):
             self.assertEqual(distribution.canonical_json_bytes(schema(name)), (FAMILY / "schemas" / name).read_bytes())
 
     def test_documents_ci_and_ignore_rules(self):

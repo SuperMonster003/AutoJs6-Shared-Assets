@@ -30,12 +30,14 @@ class CatalogTest(unittest.TestCase):
         support.upstream_only_fixture(self.sources, self.cache)
         support.measure(self.sources, self.cache, self.root / "assets")
 
-    def build(self, name, version=1, previous=None, generated=support.TIME1):
+    def build(self, name, version=1, previous=None, generated=support.TIME1, schema=None):
         output = self.root / name
         arguments = ["--source-root", str(self.sources), "--output", str(output), "--catalog-version", str(version),
                      "--generated-at", generated]
         if previous:
             arguments += ["--previous-catalog", str(previous)]
+        if schema:
+            arguments += ["--schema", str(schema)]
         return build_catalog.main(arguments), output
 
     def test_pending_output_is_reproducible_and_never_overwritten(self):
@@ -87,14 +89,15 @@ class CatalogTest(unittest.TestCase):
         self.assertEqual(0, verify_catalog.main([str(v1_path), "--source-root", str(self.sources)]))
         support.punct_fixtures(self.sources, self.cache)
         support.measure(self.sources, self.cache, self.root / "assets")
-        with self.assertRaisesRegex(DistributionError, "schemaVersion 2"):
-            distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=v1, schema=1)
-        self.assertEqual(2, verify_catalog.main([str(v1_path), "--source-root", str(self.sources)]))
-        code, v2 = self.build("v2", 2, v1_path, support.TIME2)
+        # A catalog of an older schema leaves out the versions that need a newer one (decision D127), so v1 stays reproducible.
+        legacy, assets = distribution.build_catalog(self.sources, support.REPOSITORY, 2, support.TIME2, previous_catalog=v1, schema=1)
+        self.assertEqual(([model["modelId"] for model in v1["models"]], []), ([model["modelId"] for model in legacy["models"]], assets))
+        self.assertEqual(0, verify_catalog.main([str(v1_path), "--source-root", str(self.sources)]))
+        code, v2 = self.build("v2", 2, v1_path, support.TIME2, schema=2)
         self.assertEqual(0, code)
-        self.assertEqual({CATALOG, "release-assets.txt", "preparation.json", distribution.OUTPUT_MARKER},
+        self.assertEqual({"catalog-v2.json", "release-assets.txt", "preparation.json", distribution.OUTPUT_MARKER},
                          {path.name for path in v2.iterdir()})
-        catalog = distribution.read_json(v2 / CATALOG)
+        catalog = distribution.read_json(v2 / "catalog-v2.json")
         self.assertEqual((2, 2), (catalog["schemaVersion"], catalog["catalogVersion"]))
         punct = {model["modelId"]: model for model in catalog["models"] if model["kind"] == "punct"}
         self.assertEqual({support.PUNCT_ID, support.CASING_ID}, set(punct))
@@ -105,11 +108,31 @@ class CatalogTest(unittest.TestCase):
                          (v2 / "release-assets.txt").read_text(encoding="utf-8").splitlines())
         carried = {model["modelId"]: model["versions"] for model in v1["models"]}
         self.assertEqual(carried, {model["modelId"]: model["versions"] for model in catalog["models"] if model["modelId"] in carried})
-        arguments = [str(v2 / CATALOG), "--previous-catalog", str(v1_path), "--source-root", str(self.sources)]
+        arguments = [str(v2 / "catalog-v2.json"), "--previous-catalog", str(v1_path), "--source-root", str(self.sources)]
         self.assertEqual(0, verify_catalog.main(arguments))
         downgraded = dict(catalog, schemaVersion=1)
         with self.assertRaisesRegex(DistributionError, "schemaVersion 2"):
             distribution.validate_catalog(downgraded, previous_catalog=v1)
+
+    def test_one_release_publishes_schema_3_with_speakers_and_schema_2_without(self):
+        _code, v1 = self.build("v1", schema=2)
+        previous = v1 / "catalog-v2.json"
+        support.speaker_fixture(self.sources, self.cache)
+        support.measure(self.sources, self.cache, self.root / "assets")
+        code, newest = self.build("v2", 2, previous, support.TIME2)
+        self.assertEqual((0, "catalog-v3.json"), (code, CATALOG))
+        code, older = self.build("v2-schema-2", 2, previous, support.TIME2, schema=2)
+        self.assertEqual(0, code)
+        catalog, legacy = distribution.read_json(newest / CATALOG), distribution.read_json(older / "catalog-v2.json")
+        self.assertEqual((3, 2, 2), (catalog["schemaVersion"], legacy["schemaVersion"], legacy["catalogVersion"]))
+        speaker = [model for model in catalog["models"] if model["kind"] == "speaker"]
+        self.assertEqual([support.SPEAKER_ID], [model["modelId"] for model in speaker])
+        self.assertEqual(legacy["models"], [model for model in catalog["models"] if model["kind"] != "speaker"])
+        self.assertEqual([speaker[0]["versions"][0]["mirror"]["fileName"]], (newest / "release-assets.txt").read_text(encoding="utf-8").splitlines())
+        self.assertEqual("", (older / "release-assets.txt").read_text(encoding="utf-8"))
+        for path in (newest / CATALOG, older / "catalog-v2.json"):
+            with self.subTest(catalog=path.name):
+                self.assertEqual(0, verify_catalog.main([str(path), "--previous-catalog", str(previous), "--source-root", str(self.sources)]))
 
     def test_published_versions_cannot_change_or_lose_sources(self):
         _code, v1 = self.build("v1")

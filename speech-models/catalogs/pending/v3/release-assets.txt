@@ -1,5 +1,6 @@
 autojs6-speech-asr.nemo-transducer.es.2026-05-03.int8-v1-295fec22.tar
 autojs6-speech-asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8-v1-0e09bec3.tar
+autojs6-speech-speaker.eres2net.3dspeaker.en-voxceleb-v1-d4a5b9b9.tar
 autojs6-speech-tts.kokoro.multi-lang.v1_0.int8-v1-d8ea5193.tar
 autojs6-speech-tts.vits.mimic3.ko-ko-kss-low-v1-332167b3.tar
 autojs6-speech-tts.vits.piper.ar-jo-sa-dii-high.int8-v1-470fdb21.tar

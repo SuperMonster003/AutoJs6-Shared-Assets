@@ -250,7 +250,7 @@ class ValidationTest(unittest.TestCase):
             support.tts_fixture(sources, cache)
             ct_transformer, casing = support.punct_fixtures(sources, cache)
             support.measure(sources, cache, root / "assets")
-            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1, schema=2)
             distribution.validate_source(support.read_source(ct_transformer))
             casing = support.read_source(casing)
         self.assertEqual((2, 3), (catalog["schemaVersion"], len(assets)))
@@ -264,7 +264,7 @@ class ValidationTest(unittest.TestCase):
             change(changed)
             with self.subTest(pattern=pattern), self.assertRaisesRegex(DistributionError, pattern):
                 distribution.validate_source(changed)
-        for schema in (0, 3, True, "2"):
+        for schema in (0, 4, True, "2"):
             with self.subTest(schema=schema), self.assertRaisesRegex(DistributionError, "Unsupported catalog schemaVersion"):
                 distribution.validate_catalog(dict(catalog, schemaVersion=schema))
         with self.assertRaisesRegex(DistributionError, "kind punct requires catalog schemaVersion 2"):
@@ -292,7 +292,7 @@ class ValidationTest(unittest.TestCase):
             support.tts_fixture(sources, cache)
             folder = support.offline_transducer_fixture(sources, cache)
             support.measure(sources, cache, root / "assets")
-            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1, schema=2)
             nemo = support.read_source(folder)
         distribution.validate_source(nemo)
         self.assertEqual((2, 2), (catalog["schemaVersion"], len(assets)))
@@ -315,6 +315,36 @@ class ValidationTest(unittest.TestCase):
             part["members"] = {member.removeprefix(distribution.MEMBER_PREFIX): path for member, path in part["members"].items()}
         with self.assertRaisesRegex(DistributionError, "modelType offline-transducer requires catalog schemaVersion 2"):
             distribution.validate_catalog(legacy)
+
+    def test_speaker_kind_takes_one_model_file_and_needs_catalog_schema_3(self):
+        with tempfile.TemporaryDirectory() as value:
+            root = Path(value)
+            sources, cache = root / "sources", root / "cache"
+            support.tts_fixture(sources, cache)
+            folder = support.speaker_fixture(sources, cache)
+            support.measure(sources, cache, root / "assets")
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            speaker = support.read_source(folder)
+        distribution.validate_source(speaker)
+        self.assertEqual((3, 2), (catalog["schemaVersion"], len(assets)))
+        self.assertEqual((3, 1), (distribution.required_schema(speaker), distribution.required_schema(support.read_source(self.sources / "tts.vits.unit-test" / "1"))))
+        self.assertEqual(["model.onnx"], [item["path"] for item in speaker["files"]])
+        for change, pattern in ((lambda value: value.pop("sampleRate"), "sampleRate"),
+                                (lambda value: value.update(speakers=1), "speakers"),
+                                (lambda value: value["runtime"]["config"].update(tokens="model.onnx"), "unknown"),
+                                (lambda value: value.update(modelType="vits"), "modelType"),
+                                (lambda value: value.update(modelId="tts.eres2net.unit-test"), "kind")):
+            changed = deepcopy(speaker)
+            change(changed)
+            with self.subTest(pattern=pattern), self.assertRaisesRegex(DistributionError, pattern):
+                distribution.validate_source(changed)
+        with self.assertRaisesRegex(DistributionError, "kind speaker requires catalog schemaVersion 3"):
+            distribution.validate_catalog(dict(catalog, schemaVersion=2))
+        legacy = deepcopy(catalog)
+        legacy["models"][0]["kind"] = "tts"
+        with self.assertRaisesRegex(DistributionError, "modelId must start with its kind"):
+            distribution.validate_catalog(legacy)
+        self.assertEqual("catalog-v3.json", distribution.catalog_file(3))
 
     def test_json_parsing_is_strict(self):
         for data in (b'{"a": 1, "a": 2}', b'{"a": NaN}', b"\xef\xbb\xbf{}", b"[]", b"{"):

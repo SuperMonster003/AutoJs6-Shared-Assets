@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build an unsigned speech model catalog from reviewed sources, without network access.
 
-The output directory receives catalog-v{schemaVersion}.json (catalog-v2.json for the current
+The output directory receives catalog-v{schemaVersion}.json (catalog-v3.json for the newest
 schema), release-assets.txt (archives first published by this catalog version), preparation.json
-and a marker file. Existing output is never replaced.
+and a marker file. Existing output is never replaced. --schema builds the catalog of an older
+schema from the same sources, leaving out the versions that need a newer one (decision D127).
 """
 
 import argparse
@@ -65,11 +66,13 @@ def main(argv=None):
     parser.add_argument("--catalog-version", required=True, type=int)
     parser.add_argument("--generated-at", required=True)
     parser.add_argument("--previous-catalog", type=Path)
+    parser.add_argument("--schema", type=int, default=distribution.CATALOG_SCHEMA_VERSION,
+                        help="Catalog schemaVersion (default: the newest)")
     args = parser.parse_args(argv)
     try:
         previous = distribution.read_json(args.previous_catalog) if args.previous_catalog else None
         catalog, new_assets = distribution.build_catalog(args.source_root, args.repository, args.catalog_version,
-                                                         args.generated_at, previous_catalog=previous)
+                                                         args.generated_at, previous_catalog=previous, schema=args.schema)
         write_output(args.output, catalog, new_assets, distribution)
     except (distribution.DistributionError, OSError) as error:
         print("error: " + str(error), file=sys.stderr)

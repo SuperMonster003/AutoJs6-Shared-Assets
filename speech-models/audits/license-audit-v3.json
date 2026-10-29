@@ -1,5 +1,5 @@
 {
-  "auditedAt": "2026-10-25",
+  "auditedAt": "2026-10-29",
   "bundledWithPlugin": [
     {
       "commercialUse": true,
@@ -24,7 +24,8 @@
     "2026-10-22: asr.zipformer-streaming.ko.2024-06-16.int8 is upstream-only (mirror null): the KsponSpeech terms restrict use outside Korea, so the maintainer does not redistribute the weights.",
     "2026-10-25: catalog v3 adds, in existing kinds (D127), an offline Spanish recognizer (NeMo FastConformer transducer, new model type offline-transducer in schema 2), the PengChengStarling streaming recognizer for Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese and Chinese, Kokoro v1.0 int8, two Arabic Piper voices (dii, miro V2) and the Mimic 3 Korean KSS voice. Not added: Kroko Spanish and German (license still unstated), Supertonic 3 (OpenRAIL-M), the Piper voice kareem (no dataset license), Nabra-82M (training data not named), Moonshine (community license, non-commercial), Whisper (training data not disclosed), Omnilingual 300M, Canary 180M flash and the 10-language NeMo transducer (not chosen), Dolphin base (training data not named), models installing above 350 MiB and vits-mms voices (CC-BY-NC, uroman needed).",
     "2026-10-25: asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8 fails the D124 gate because its training data is not named; the maintainer took it as an exception (Q80) with commercialUse unknown and the notice key speech_model_license_unknown_data.",
-    "2026-10-25: tts.vits.piper.ar-jo-sa-miro-v2-high.int8 is upstream-only (mirror null): the voice is CC BY-NC-ND 4.0 and the sherpa-onnx conversion rewrites its ONNX metadata, so the maintainer does not redistribute it (Q85)."
+    "2026-10-25: tts.vits.piper.ar-jo-sa-miro-v2-high.int8 is upstream-only (mirror null): the voice is CC BY-NC-ND 4.0 and the sherpa-onnx conversion rewrites its ONNX metadata, so the maintainer does not redistribute it (Q85).",
+    "2026-10-26: speaker.eres2net.3dspeaker.en-voxceleb is the speaker embedding model of the new speaker kind (catalog schema 3, plugin roadmap D137, Q93). The more accurate CAM++ zh-en advanced model was not taken because its training data is not named (D124)."
   ],
   "format": 1,
   "models": [
@@ -457,6 +458,37 @@
         ],
         "license": "Apache-2.0",
         "publisher": "Alibaba DAMO Academy (FunASR); int8 ONNX export by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": true,
+      "conclusion": "3D-Speaker publishes the model under Apache-2.0, which permits commercial use. Its training set VoxCeleb2 is released under CC-BY-4.0 and does not restrict commercial use; the dataset page notes that the copyright of the source videos stays with their owners, which concerns the dataset, not the published weights.",
+      "distribution": "mirror",
+      "modelId": "speaker.eres2net.3dspeaker.en-voxceleb",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "Apache-2.0",
+      "trainingData": [
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://www.robots.ox.ac.uk/~vgg/data/voxceleb/",
+            "https://www.modelscope.cn/models/iic/speech_eres2net_sv_en_voxceleb_16k"
+          ],
+          "license": "CC-BY-4.0",
+          "name": "VoxCeleb2 dev"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://www.modelscope.cn/models/iic/speech_eres2net_sv_en_voxceleb_16k",
+          "https://github.com/modelscope/3D-Speaker/blob/main/LICENSE",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/speaker-recongition-models"
+        ],
+        "license": "Apache-2.0",
+        "publisher": "3D-Speaker (Alibaba Tongyi Lab, iic/speech_eres2net_sv_en_voxceleb_16k); ONNX export by k2-fsa"
       }
     },
     {
@@ -1047,5 +1079,5 @@
       "speech_model_license_unknown_data": "commercialUse unknown because the publisher does not name the training data; scripts must pass acceptLicense: true. Plugins that do not know the key show speech_model_license_unknown."
     }
   },
-  "scope": "Engineering license review of the speech-models-v3 candidates of existing kinds for 3-Macaw Speech (roadmap P8.2, decisions D124, D127 and D131). The entries of the catalog v2 models are carried over unchanged. It records public evidence and is not legal advice; the maintainer confirms it before signing."
+  "scope": "Engineering license review of the speech-models-v3 candidates for 3-Macaw Speech: existing kinds (roadmap P8.2, decisions D124, D127 and D131) and the speaker kind of catalog schema 3 (P8.3, D137). The entries of the catalog v2 models are carried over unchanged. It records public evidence and is not legal advice; the maintainer confirms it before signing."
 }

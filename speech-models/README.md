@@ -1,9 +1,9 @@
 # AutoJs6 speech models
 
 This asset family distributes reviewed sherpa-onnx speech models (speech recognition, keyword
-spotting, text-to-speech and, since catalog v2, punctuation) for the AutoJs6 plugin 3-Macaw Speech
-(`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2, P7.7 and P8.2, decisions D9, D24, D25,
-D102-D109, D124, D127 and D131). The plugin
+spotting, text-to-speech, since catalog v2 punctuation and since catalog schema 3 speaker embedding)
+for the AutoJs6 plugin 3-Macaw Speech (`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2, P7.7,
+P8.2 and P8.3, decisions D9, D24, D25, D102-D109, D124, D127, D131 and D137). The plugin
 bundles the sherpa-onnx runtime and the silero VAD model; every other model is downloaded on demand
 from an immutable `speech-models-vN` GitHub Release of this repository, with the upstream sherpa-onnx
 release asset as a fallback. Both paths end with the same file-level SHA-256 checks. A version can also
@@ -48,13 +48,17 @@ speech-models/
 ```
 
 The catalog file name follows the wire schema, not the release: schema 1 is `catalog-v1.json`,
-schema 2 is `catalog-v2.json`. A plugin reads the newest file name it understands, so
-`catalogs/catalog-v1.json` stays frozen at release 1 for plugins that know only schema 1, and a copy
-of it in `catalogs/history/v1/` proves the frozen bytes are the signed ones. Release N always keeps
-its catalog in `catalogs/history/vN/` once release N+1 is prepared.
+schema 2 is `catalog-v2.json`, schema 3 is `catalog-v3.json`. A plugin reads the newest file name it
+understands, so `catalogs/catalog-v1.json` stays frozen at release 1 for plugins that know only
+schema 1, and a copy of it in `catalogs/history/v1/` proves the frozen bytes are the signed ones.
+Release N always keeps its catalog in `catalogs/history/vN/` once release N+1 is prepared. From
+release 3 on a release may publish catalogs of two schemas (decision D127): the older one is built
+from the same sources with `build_catalog.py --schema` and leaves out the versions that need the newer
+schema, so `catalog-v2.json` keeps serving plugins 1.2.0 and older without the speaker kind.
 
-Schemas: catalog [v2](schemas/catalog-v2.schema.json) and the frozen [v1](schemas/catalog-v1.schema.json),
-signature [v2](schemas/signature-v2.schema.json) and [v1](schemas/signature-v1.schema.json) (the codegen
+Schemas: catalog [v3](schemas/catalog-v3.schema.json), the frozen [v2](schemas/catalog-v2.schema.json)
+and [v1](schemas/catalog-v1.schema.json), signature [v3](schemas/signature-v3.schema.json),
+[v2](schemas/signature-v2.schema.json) and [v1](schemas/signature-v1.schema.json) (the codegen
 envelope, differing only in the catalog file name), [model source](schemas/model-source-v1.schema.json).
 Cross-field rules are enforced by `tools/speech-model-distribution/distribution.py`.
 
@@ -72,15 +76,17 @@ byte for byte by a small standard-library writer, independent of zlib, bzip2 or 
 
 ## Catalog entries
 
-Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `punct.` or `tts.`), `kind`,
-localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`, `versions[]` and
-`recommendedVersionCode`. Each immutable version records:
+Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `punct.`, `speaker.` or
+`tts.`), `kind`, localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`,
+`versions[]` and `recommendedVersionCode`. Each immutable version records:
 
 - `modelType`: `online-transducer`, `sense-voice`, `kws-transducer`, `vits`, `matcha`, `kokoro`, and
   since schema 2 the punctuation types `ct-transformer` and `cnn-bilstm` and the offline recognizer
   type `offline-transducer`, with `runtime.config` holding the sherpa-onnx 1.13.8 file roles (for
   example `encoder`, `tokens`, `lexicon[]`, `ruleFsts[]`, `dataDir`, `bpeVocab`) plus `modelType`:
   `zipformer` or `zipformer2` for streaming transducers, `nemo_transducer` for `offline-transducer`.
+  Since schema 3 the speaker kind has the type `speaker-embedding`, one `model` file that turns
+  speech into a voiceprint vector (sherpa-onnx `SpeakerEmbeddingExtractorConfig`).
 - `languages`, `sampleRate` (absent for punctuation models, which take text), and `speakers` for TTS
   models.
 - `license`: `spdx` (license IDs or `LicenseRef-*`), `commercialUse` (`true`, `false` or `"unknown"`)
@@ -101,10 +107,11 @@ localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`
 
 ## Version and integrity rules
 
-- Catalog wire schema 2 (schema 1 for release 1); `catalogVersion` increases by exactly one per
-  release, the tag is `speech-models-vN`, and a signed catalog binds its repository. A catalog may
-  carry over versions of an older schema, but kinds, model types and member names introduced by a
-  newer schema are refused in an older one.
+- Catalog wire schema 3 (schema 2 for release 2, schema 1 for release 1); `catalogVersion` increases
+  by exactly one per release, the tag is `speech-models-vN`, and a signed catalog binds its repository.
+  A catalog may carry over versions of an older schema, but kinds, model types and member names
+  introduced by a newer schema are refused in an older one; an older schema's catalog of the same
+  release leaves those versions out.
 - A published `(modelId, versionCode)` never changes. Only `deprecated` and `revoked` may be added,
   and only toward true; `recommendedVersionCode` is the newest active version or null.
 - New versions of a model use a higher `versionCode`. Unchanged versions keep their original Release
@@ -129,14 +136,17 @@ catalog as `speech-models-v2`, then downloads and verifies every published asset
 
 Release 3 is being collected in `catalogs/pending/v3/` (plugin roadmap D127): the signed release 2
 catalog is kept in `catalogs/history/v2/`, and the unsigned `pending/v3/catalog-v2.json`
-(`catalogVersion` 3) adds the plugin's 1.3.0 language models, which use existing kinds only. Later
-phases add a schema 3 `catalog-v3.json` with new kinds next to it; the maintainer signs both and
-publishes them together as `speech-models-v3`.
+(`catalogVersion` 3) adds the plugin's 1.3.0 language models, which use existing kinds only. The
+schema 3 `pending/v3/catalog-v3.json` next to it lists the same versions plus the new kinds (P8.3:
+`speaker`; later phases may add more); the maintainer signs both and publishes them together as
+`speech-models-v3`. `release-assets.txt` and `preparation.json` describe `catalog-v3.json`, whose
+archives include every archive of `catalog-v2.json`.
 
 ### Catalog v3 (pending)
 
-The pending catalog carries the 19 release 2 models unchanged and adds six versions chosen by the
-maintainer on 2026-10-25 (plugin roadmap D131, Q79-Q85). The five archives were measured from the
+The pending catalogs carry the 19 release 2 models unchanged. `catalog-v2.json` adds six versions
+chosen by the maintainer on 2026-10-25 (plugin roadmap D131, Q79-Q85); `catalog-v3.json` also adds the
+speaker embedding model chosen on 2026-10-26 (D137, Q93). The six archives were measured from the
 pinned upstream assets and reproduced byte for byte by a second offline run.
 
 - The Spanish recognizer is offline: sherpa-onnx `OfflineTransducerModelConfig` with model type
@@ -147,6 +157,9 @@ pinned upstream assets and reproduced byte for byte by a second offline run.
   `speech_model_license_unknown_data`. Older plugins show their generic unknown-license notice.
 - The Arabic miro V2 voice is upstream-only: the voice and its data are CC BY-NC-ND 4.0, and the
   sherpa-onnx export rewrites its ONNX metadata.
+- The speaker model (3D-Speaker ERes2Net trained on VoxCeleb2) is the only version of the new kind
+  `speaker` and appears in `catalog-v3.json` only. The more accurate CAM++ zh-en model was not taken
+  because its training data is not named (D124).
 
 | Model ID | Archive | License expression | commercialUse |
 | --- | ---: | --- | --- |
@@ -156,9 +169,11 @@ pinned upstream assets and reproduced byte for byte by a second offline run.
 | `tts.vits.mimic3.ko-ko-kss-low` | 81.1 MB | `CC0-1.0 AND GPL-3.0-or-later` | false |
 | `tts.vits.piper.ar-jo-sa-dii-high.int8` | 36.9 MB | `CC-BY-NC-SA-4.0 AND GPL-3.0-or-later` | false |
 | `tts.vits.piper.ar-jo-sa-miro-v2-high.int8` | upstream only (36.6 MB installed) | `CC-BY-NC-ND-4.0 AND GPL-3.0-or-later` | false |
+| `speaker.eres2net.3dspeaker.en-voxceleb` | 26.5 MB (schema 3 only) | `Apache-2.0` | true |
 
-The five new archives total 762,554,368 bytes (`pending/v3/release-assets.txt`). The catalog then
-lists 25 models, three of them upstream-only.
+The six new archives total 789,041,664 bytes (`pending/v3/release-assets.txt`; 762,554,368 bytes
+without the speaker model). `catalog-v3.json` then lists 26 models and `catalog-v2.json` 25, three of
+them upstream-only.
 
 ### Catalog v2
 

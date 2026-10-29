@@ -1,0 +1,55 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "d4a5b9b9af61199779b0fd5ab60df7f112002dc6d3f52864a1cc6d24030b448a",
+    "size": 26487296
+  },
+  "displayName": {
+    "en": "ERes2Net speaker embedding (VoxCeleb)",
+    "zh-CN": "ERes2Net 声纹模型 (VoxCeleb)"
+  },
+  "files": [
+    {
+      "path": "model.onnx",
+      "sha256": "c59158379255ad66e161679cca6af8d52d51e389e3224ab7d7a7baae295c2db5",
+      "size": 26485263
+    }
+  ],
+  "format": 1,
+  "kind": "speaker",
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "Apache-2.0"
+  },
+  "mirror": true,
+  "modelId": "speaker.eres2net.3dspeaker.en-voxceleb",
+  "modelType": "speaker-embedding",
+  "recommended": true,
+  "releasedAt": "2026-10-29T00:00:00Z",
+  "runtime": {
+    "config": {
+      "model": "model.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Turns speech into a 192-dimensional voiceprint for speaker verification and identification. Trained by 3D-Speaker on VoxCeleb2; also works for Mandarin. Needs 16 kHz audio and at least one second of speech.",
+    "zh-CN": "把语音转成 192 维声纹, 用于说话人验证与辨认. 3D-Speaker 用 VoxCeleb2 训练, 也适用于普通话. 需要 16 kHz 音频, 至少一秒语音."
+  },
+  "upstream": [
+    {
+      "format": "file",
+      "path": "model.onnx",
+      "sha256": "c59158379255ad66e161679cca6af8d52d51e389e3224ab7d7a7baae295c2db5",
+      "size": 26485263,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-recongition-models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx"
+    }
+  ],
+  "versionCode": 1
+}

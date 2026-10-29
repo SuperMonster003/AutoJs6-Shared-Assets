@@ -1,0 +1,31 @@
+{
+  "$id": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/schemas/signature-v3.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "const": "ECDSA_P256_SHA256"
+    },
+    "catalog": {
+      "const": "catalog-v3.json"
+    },
+    "keyId": {
+      "pattern": "^p256-[0-9a-f]{16}$",
+      "type": "string"
+    },
+    "signature": {
+      "contentEncoding": "base64",
+      "maxLength": 128,
+      "minLength": 8,
+      "type": "string"
+    }
+  },
+  "required": [
+    "algorithm",
+    "catalog",
+    "keyId",
+    "signature"
+  ],
+  "title": "AutoJs6 speech model catalog detached signature v3",
+  "type": "object"
+}
