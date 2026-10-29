@@ -447,6 +447,110 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "pyannote-segmentation"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "whisper-langid"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "decoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "encoder": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "encoder",
+                      "decoder"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "ced"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "labels": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "labels"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -503,8 +607,11 @@
       "enum": [
         "asr",
         "kws",
+        "langid",
         "punct",
+        "segment",
         "speaker",
+        "tagger",
         "tts"
       ]
     },
@@ -546,7 +653,7 @@
       "type": "object"
     },
     "modelId": {
-      "pattern": "^(asr|kws|punct|speaker|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
+      "pattern": "^(asr|kws|langid|punct|segment|speaker|tagger|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
       "type": "string"
     },
     "modelType": {
@@ -560,7 +667,10 @@
         "kokoro",
         "ct-transformer",
         "cnn-bilstm",
-        "speaker-embedding"
+        "speaker-embedding",
+        "pyannote-segmentation",
+        "whisper-langid",
+        "ced"
       ]
     },
     "path": {

@@ -1,9 +1,10 @@
 # AutoJs6 speech models
 
 This asset family distributes reviewed sherpa-onnx speech models (speech recognition, keyword
-spotting, text-to-speech, since catalog v2 punctuation and since catalog schema 3 speaker embedding)
-for the AutoJs6 plugin 3-Macaw Speech (`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2, P7.7,
-P8.2 and P8.3, decisions D9, D24, D25, D102-D109, D124, D127, D131 and D137). The plugin
+spotting, text-to-speech, since catalog v2 punctuation and since catalog schema 3 speaker embedding,
+speaker segmentation, spoken language identification and audio tagging) for the AutoJs6 plugin
+3-Macaw Speech (`AutoJs6-Plugin-Three-Macaw-Speech`, roadmap phases P2, P7.7, P8.2, P8.3 and P8.4,
+decisions D9, D24, D25, D102-D109, D124, D127, D131, D137, D144-D146 and D154). The plugin
 bundles the sherpa-onnx runtime and the silero VAD model; every other model is downloaded on demand
 from an immutable `speech-models-vN` GitHub Release of this repository, with the upstream sherpa-onnx
 release asset as a fallback. Both paths end with the same file-level SHA-256 checks. A version can also
@@ -76,8 +77,8 @@ byte for byte by a small standard-library writer, independent of zlib, bzip2 or 
 
 ## Catalog entries
 
-Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `punct.`, `speaker.` or
-`tts.`), `kind`, localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`,
+Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `langid.`, `punct.`,
+`segment.`, `speaker.`, `tagger.` or `tts.`), `kind`, localized `displayName` and `summary` (at least `en` and `zh-CN`), `recommended`,
 `versions[]` and `recommendedVersionCode`. Each immutable version records:
 
 - `modelType`: `online-transducer`, `sense-voice`, `kws-transducer`, `vits`, `matcha`, `kokoro`, and
@@ -86,7 +87,13 @@ Each model has stable `modelId` (prefixed by its kind: `asr.`, `kws.`, `punct.`,
   example `encoder`, `tokens`, `lexicon[]`, `ruleFsts[]`, `dataDir`, `bpeVocab`) plus `modelType`:
   `zipformer` or `zipformer2` for streaming transducers, `nemo_transducer` for `offline-transducer`.
   Since schema 3 the speaker kind has the type `speaker-embedding`, one `model` file that turns
-  speech into a voiceprint vector (sherpa-onnx `SpeakerEmbeddingExtractorConfig`).
+  speech into a voiceprint vector (sherpa-onnx `SpeakerEmbeddingExtractorConfig`). The kinds of the
+  offline analyses also arrive with schema 3: `segment` with `pyannote-segmentation` (one `model`
+  file, sherpa-onnx `OfflineSpeakerDiarization` together with a speaker model), `langid` with
+  `whisper-langid` (`encoder` and `decoder`, sherpa-onnx `SpokenLanguageIdentification`) and `tagger`
+  with `ced` (`model` and `labels`, the AudioSet class table, sherpa-onnx `AudioTagging`). Their
+  `languages` are `mul` (language identification) or `zxx` (segmentation and tagging do not depend
+  on the language).
 - `languages`, `sampleRate` (absent for punctuation models, which take text), and `speakers` for TTS
   models.
 - `license`: `spdx` (license IDs or `LicenseRef-*`), `commercialUse` (`true`, `false` or `"unknown"`)
@@ -138,7 +145,7 @@ Release 3 is being collected in `catalogs/pending/v3/` (plugin roadmap D127): th
 catalog is kept in `catalogs/history/v2/`, and the unsigned `pending/v3/catalog-v2.json`
 (`catalogVersion` 3) adds the plugin's 1.3.0 language models, which use existing kinds only. The
 schema 3 `pending/v3/catalog-v3.json` next to it lists the same versions plus the new kinds (P8.3:
-`speaker`; later phases may add more); the maintainer signs both and publishes them together as
+`speaker`; P8.4: `segment`, `langid` and `tagger`); the maintainer signs both and publishes them together as
 `speech-models-v3`. `release-assets.txt` and `preparation.json` describe `catalog-v3.json`, whose
 archives include every archive of `catalog-v2.json`.
 
@@ -146,8 +153,9 @@ archives include every archive of `catalog-v2.json`.
 
 The pending catalogs carry the 19 release 2 models unchanged. `catalog-v2.json` adds six versions
 chosen by the maintainer on 2026-10-25 (plugin roadmap D131, Q79-Q85); `catalog-v3.json` also adds the
-speaker embedding model chosen on 2026-10-26 (D137, Q93). The six archives were measured from the
-pinned upstream assets and reproduced byte for byte by a second offline run.
+speaker embedding model chosen on 2026-10-26 (D137, Q93) and the four analysis models chosen on
+2026-10-29 (D144-D146, D154, Q101-Q104, Q113). The ten archives were measured from the pinned upstream
+assets and reproduced byte for byte by a second offline run.
 
 - The Spanish recognizer is offline: sherpa-onnx `OfflineTransducerModelConfig` with model type
   `nemo_transducer`, added to schema 2 as `offline-transducer`. Plugins 1.2.0 and older skip this
@@ -160,6 +168,12 @@ pinned upstream assets and reproduced byte for byte by a second offline run.
 - The speaker model (3D-Speaker ERes2Net trained on VoxCeleb2) is the only version of the new kind
   `speaker` and appears in `catalog-v3.json` only. The more accurate CAM++ zh-en model was not taken
   because its training data is not named (D124).
+- The analysis models appear in `catalog-v3.json` only. The pyannote segmentation model keeps the
+  float32 export (it counted speakers better than int8, D154); one of its nine named training sets,
+  MSDWild, is for research only, so its commercialUse is `false`. Whisper tiny and base identify
+  spoken languages (tiny is recommended); Whisper's training data is not named, so they are taken
+  like PengChengStarling, with commercialUse `unknown` and `speech_model_license_unknown_data`. The
+  CED-mini tagger ships the AudioSet class table under CC-BY-SA-4.0 next to its weights.
 
 | Model ID | Archive | License expression | commercialUse |
 | --- | ---: | --- | --- |
@@ -170,9 +184,13 @@ pinned upstream assets and reproduced byte for byte by a second offline run.
 | `tts.vits.piper.ar-jo-sa-dii-high.int8` | 36.9 MB | `CC-BY-NC-SA-4.0 AND GPL-3.0-or-later` | false |
 | `tts.vits.piper.ar-jo-sa-miro-v2-high.int8` | upstream only (36.6 MB installed) | `CC-BY-NC-ND-4.0 AND GPL-3.0-or-later` | false |
 | `speaker.eres2net.3dspeaker.en-voxceleb` | 26.5 MB (schema 3 only) | `Apache-2.0` | true |
+| `segment.pyannote.3-0` | 6.0 MB (schema 3 only) | `MIT` | false |
+| `langid.whisper.tiny.int8` | 102.8 MB (schema 3 only) | `MIT` | unknown |
+| `langid.whisper.base.int8` | 159.8 MB (schema 3 only) | `MIT` | unknown |
+| `tagger.ced.mini.int8` | 10.5 MB (schema 3 only) | `CC-BY-4.0 AND CC-BY-SA-4.0` | true |
 
-The six new archives total 789,041,664 bytes (`pending/v3/release-assets.txt`; 762,554,368 bytes
-without the speaker model). `catalog-v3.json` then lists 26 models and `catalog-v2.json` 25, three of
+The ten new archives total 1,068,096,000 bytes (`pending/v3/release-assets.txt`; 762,554,368 bytes
+without the schema 3 models). `catalog-v3.json` then lists 30 models and `catalog-v2.json` 25, three of
 them upstream-only.
 
 ### Catalog v2

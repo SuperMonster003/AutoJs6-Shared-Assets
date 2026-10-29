@@ -25,7 +25,8 @@
     "2026-10-25: catalog v3 adds, in existing kinds (D127), an offline Spanish recognizer (NeMo FastConformer transducer, new model type offline-transducer in schema 2), the PengChengStarling streaming recognizer for Arabic, English, Indonesian, Japanese, Russian, Thai, Vietnamese and Chinese, Kokoro v1.0 int8, two Arabic Piper voices (dii, miro V2) and the Mimic 3 Korean KSS voice. Not added: Kroko Spanish and German (license still unstated), Supertonic 3 (OpenRAIL-M), the Piper voice kareem (no dataset license), Nabra-82M (training data not named), Moonshine (community license, non-commercial), Whisper (training data not disclosed), Omnilingual 300M, Canary 180M flash and the 10-language NeMo transducer (not chosen), Dolphin base (training data not named), models installing above 350 MiB and vits-mms voices (CC-BY-NC, uroman needed).",
     "2026-10-25: asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8 fails the D124 gate because its training data is not named; the maintainer took it as an exception (Q80) with commercialUse unknown and the notice key speech_model_license_unknown_data.",
     "2026-10-25: tts.vits.piper.ar-jo-sa-miro-v2-high.int8 is upstream-only (mirror null): the voice is CC BY-NC-ND 4.0 and the sherpa-onnx conversion rewrites its ONNX metadata, so the maintainer does not redistribute it (Q85).",
-    "2026-10-26: speaker.eres2net.3dspeaker.en-voxceleb is the speaker embedding model of the new speaker kind (catalog schema 3, plugin roadmap D137, Q93). The more accurate CAM++ zh-en advanced model was not taken because its training data is not named (D124)."
+    "2026-10-26: speaker.eres2net.3dspeaker.en-voxceleb is the speaker embedding model of the new speaker kind (catalog schema 3, plugin roadmap D137, Q93). The more accurate CAM++ zh-en advanced model was not taken because its training data is not named (D124).",
+    "2026-10-29: catalog v3 adds the three kinds of the offline analyses (plugin roadmap P8.4, D144 - D146, D154): segment.pyannote.3-0 (commercialUse false because MSDWild is research only), langid.whisper.tiny.int8 and langid.whisper.base.int8 (training data not disclosed, exception to the D124 gate like Q80) and tagger.ced.mini.int8. Not taken: CED-tiny and the zipformer-small tagger (less accurate, slower), the int8 segmentation model (counted speakers worse) and Revai reverb-diarization (non-commercial weights)."
   ],
   "format": 1,
   "models": [
@@ -400,6 +401,80 @@
     },
     {
       "bundledComponents": [],
+      "commercialUse": "unknown",
+      "conclusion": "OpenAI publishes the Whisper code and weights under the MIT License, but describes the training data only as about 680,000 hours of audio collected from the internet without naming the sources, so their licenses cannot be looked up; the result is unknown, shown with the training-data notice.",
+      "decisions": [
+        "2026-10-29: taken by maintainer decision (plugin roadmap Q101 / D144: both tiny and base, tiny recommended) as an exception to the D124 gate, like Q80; sherpa-onnx 1.13.8 identifies spoken languages only with Whisper."
+      ],
+      "distribution": "mirror",
+      "modelId": "langid.whisper.base.int8",
+      "noticeKey": "speech_model_license_unknown_data",
+      "openQuestions": [
+        "Which sources the training audio came from and whether any of them restricts commercial use."
+      ],
+      "spdx": "MIT",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://arxiv.org/abs/2212.04356",
+            "https://github.com/openai/whisper/blob/main/model-card.md"
+          ],
+          "license": "undisclosed",
+          "name": "Whisper training data (about 680,000 hours of web audio with transcripts, sources not named)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://github.com/openai/whisper/blob/main/LICENSE",
+          "https://github.com/openai/whisper/blob/main/model-card.md",
+          "https://k2-fsa.github.io/sherpa/onnx/spoken-language-identification/pretrained_models.html",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models"
+        ],
+        "license": "MIT",
+        "publisher": "OpenAI (Whisper base, multilingual); ONNX int8 export by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [],
+      "commercialUse": "unknown",
+      "conclusion": "OpenAI publishes the Whisper code and weights under the MIT License, but describes the training data only as about 680,000 hours of audio collected from the internet without naming the sources, so their licenses cannot be looked up; the result is unknown, shown with the training-data notice.",
+      "decisions": [
+        "2026-10-29: taken by maintainer decision (plugin roadmap Q101 / D144: both tiny and base, tiny recommended) as an exception to the D124 gate, like Q80; sherpa-onnx 1.13.8 identifies spoken languages only with Whisper."
+      ],
+      "distribution": "mirror",
+      "modelId": "langid.whisper.tiny.int8",
+      "noticeKey": "speech_model_license_unknown_data",
+      "openQuestions": [
+        "Which sources the training audio came from and whether any of them restricts commercial use."
+      ],
+      "spdx": "MIT",
+      "trainingData": [
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://arxiv.org/abs/2212.04356",
+            "https://github.com/openai/whisper/blob/main/model-card.md"
+          ],
+          "license": "undisclosed",
+          "name": "Whisper training data (about 680,000 hours of web audio with transcripts, sources not named)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://github.com/openai/whisper/blob/main/LICENSE",
+          "https://github.com/openai/whisper/blob/main/model-card.md",
+          "https://k2-fsa.github.io/sherpa/onnx/spoken-language-identification/pretrained_models.html",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models"
+        ],
+        "license": "MIT",
+        "publisher": "OpenAI (Whisper tiny, multilingual); ONNX int8 export by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "The Edge-Punct-Casing project is published under Apache-2.0, and the publisher names no training dataset.",
       "distribution": "mirror",
@@ -462,6 +537,107 @@
     },
     {
       "bundledComponents": [],
+      "commercialUse": false,
+      "conclusion": "The weights are published under the MIT License. Of the nine training sets the model card names, MSDWild is released only for research purposes under its own license agreement, which makes the result false under the policy (a named training set that limits use to research takes precedence). The others are released under Creative Commons licenses (AMI and VoxConverse under CC-BY-4.0, AISHELL-4 and AliMeeting under CC-BY-SA-4.0) or under the LDC, ELRA and Ego4D agreements, whose terms concern the data and also license commercial users; the AVA-AVD annotations declare no license.",
+      "decisions": [
+        "2026-10-29: the only segmentation model of sherpa-onnx with named training data (plugin roadmap D146, D154: float32 export); Revai reverb-diarization v1 / v2 were not taken because their weights are non-commercial. Recorded as commercialUse false by the policy; the plugin asks the maintainer to confirm (plugin roadmap appendix D Q115)."
+      ],
+      "distribution": "mirror",
+      "modelId": "segment.pyannote.3-0",
+      "noticeKey": "speech_model_license_non_commercial",
+      "openQuestions": [
+        "The AVA-AVD annotation repository declares no license of its own."
+      ],
+      "spdx": "MIT",
+      "trainingData": [
+        {
+          "commercialRestriction": true,
+          "evidence": [
+            "https://github.com/X-LANCE/MSDWILD",
+            "https://x-lance.github.io/MSDWILD/"
+          ],
+          "license": "MSDWild license agreement (research only)",
+          "name": "MSDWild"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://www.openslr.org/111/"
+          ],
+          "license": "CC-BY-SA-4.0",
+          "name": "AISHELL-4"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://www.openslr.org/119/"
+          ],
+          "license": "CC-BY-SA-4.0",
+          "name": "AliMeeting"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml"
+          ],
+          "license": "CC-BY-4.0",
+          "name": "AMI Meeting Corpus"
+        },
+        {
+          "commercialRestriction": "undisclosed",
+          "evidence": [
+            "https://github.com/zcxu-eric/AVA-AVD",
+            "https://research.google.com/ava/download.html"
+          ],
+          "license": "not declared (built on the AVA videos, whose annotations are CC-BY-4.0)",
+          "name": "AVA-AVD"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://dihardchallenge.github.io/dihard3/"
+          ],
+          "license": "LDC user agreement",
+          "name": "DIHARD III"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://ego4d-data.org/pdfs/Ego4D-Licenses-Draft.pdf"
+          ],
+          "license": "Ego4D license agreement (academic, commercial or non-commercial purposes; no redistribution)",
+          "name": "Ego4D"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://catalogue.elra.info/en-us/repository/browse/ELRA-E0044/"
+          ],
+          "license": "ELRA end user license",
+          "name": "REPERE"
+        },
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://github.com/joonson/voxconverse"
+          ],
+          "license": "CC-BY-4.0",
+          "name": "VoxConverse"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://huggingface.co/pyannote/segmentation-3.0",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/speaker-segmentation-models",
+          "https://k2-fsa.github.io/sherpa/onnx/speaker-diarization/models.html"
+        ],
+        "license": "MIT",
+        "publisher": "pyannote.audio (Hervé Bredin, CNRS; pyannote/segmentation-3.0); ONNX export by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [],
       "commercialUse": true,
       "conclusion": "3D-Speaker publishes the model under Apache-2.0, which permits commercial use. Its training set VoxCeleb2 is released under CC-BY-4.0 and does not restrict commercial use; the dataset page notes that the copyright of the source videos stays with their owners, which concerns the dataset, not the published weights.",
       "distribution": "mirror",
@@ -489,6 +665,47 @@
         ],
         "license": "Apache-2.0",
         "publisher": "3D-Speaker (Alibaba Tongyi Lab, iic/speech_eres2net_sv_en_voxceleb_16k); ONNX export by k2-fsa"
+      }
+    },
+    {
+      "bundledComponents": [
+        {
+          "evidence": [
+            "https://research.google.com/audioset/download.html",
+            "https://github.com/audioset/ontology"
+          ],
+          "license": "CC-BY-SA-4.0",
+          "name": "class_labels_indices.csv",
+          "note": "The AudioSet class table (index, machine id, English display name) taken from the AudioSet ontology, which Google releases under CC-BY-SA-4.0. The license text ships as LICENSE-audioset-ontology."
+        }
+      ],
+      "commercialUse": true,
+      "conclusion": "The checkpoint that the sherpa-onnx export converts is published on Zenodo under CC-BY-4.0 (the same weights are on Hugging Face under Apache-2.0), and the class table comes from the AudioSet ontology under CC-BY-SA-4.0; both permit commercial use with attribution. The training set AudioSet releases its labels under CC-BY-4.0; its audio stays on YouTube and is not distributed.",
+      "distribution": "mirror",
+      "modelId": "tagger.ced.mini.int8",
+      "noticeKey": "speech_model_license_commercial",
+      "openQuestions": [],
+      "spdx": "CC-BY-4.0 AND CC-BY-SA-4.0",
+      "trainingData": [
+        {
+          "commercialRestriction": false,
+          "evidence": [
+            "https://research.google.com/audioset/download.html"
+          ],
+          "license": "CC-BY-4.0 (labels); audio not distributed",
+          "name": "AudioSet (labels of about two million YouTube clips)"
+        }
+      ],
+      "versionCode": 1,
+      "weights": {
+        "evidence": [
+          "https://zenodo.org/records/8275347",
+          "https://huggingface.co/mispeech/ced-mini",
+          "https://github.com/RicherMans/CED",
+          "https://github.com/k2-fsa/sherpa-onnx/releases/tag/audio-tagging-models"
+        ],
+        "license": "CC-BY-4.0 (Zenodo checkpoint converted by sherpa-onnx); also Apache-2.0 on Hugging Face",
+        "publisher": "Xiaomi (CED, Heinrich Dinkel et al.); ONNX int8 export by k2-fsa"
       }
     },
     {
@@ -1079,5 +1296,5 @@
       "speech_model_license_unknown_data": "commercialUse unknown because the publisher does not name the training data; scripts must pass acceptLicense: true. Plugins that do not know the key show speech_model_license_unknown."
     }
   },
-  "scope": "Engineering license review of the speech-models-v3 candidates for 3-Macaw Speech: existing kinds (roadmap P8.2, decisions D124, D127 and D131) and the speaker kind of catalog schema 3 (P8.3, D137). The entries of the catalog v2 models are carried over unchanged. It records public evidence and is not legal advice; the maintainer confirms it before signing."
+  "scope": "Engineering license review of the speech-models-v3 candidates for 3-Macaw Speech: existing kinds (roadmap P8.2, decisions D124, D127 and D131) the speaker kind of catalog schema 3 (P8.3, D137) and the segment, langid and tagger kinds of the offline analyses (P8.4, D144 - D146, D154). The entries of the catalog v2 models are carried over unchanged. It records public evidence and is not legal advice; the maintainer confirms it before signing."
 }

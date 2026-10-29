@@ -1,0 +1,56 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "6441ef8ab852bed01f78c40f7d5ca5ac7cf546d69025f4bd90eb7c8e741a911b",
+    "size": 5994496
+  },
+  "displayName": {
+    "en": "pyannote speaker segmentation 3.0",
+    "zh-CN": "pyannote 说话人分割 3.0"
+  },
+  "files": [
+    {
+      "path": "model.onnx",
+      "sha256": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+      "size": 5992913
+    }
+  ],
+  "format": 1,
+  "kind": "segment",
+  "languages": [
+    "zxx"
+  ],
+  "license": {
+    "commercialUse": false,
+    "noticeKey": "speech_model_license_non_commercial",
+    "spdx": "MIT"
+  },
+  "mirror": true,
+  "modelId": "segment.pyannote.3-0",
+  "modelType": "pyannote-segmentation",
+  "recommended": true,
+  "releasedAt": "2026-10-29T00:00:00Z",
+  "runtime": {
+    "config": {
+      "model": "model.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Finds where speech is and where speakers change, for speaker diarization together with a speaker embedding model. Needs 16 kHz audio; works for any language.",
+    "zh-CN": "找出哪里有人说话, 哪里换人, 与声纹模型一起用于说话人分离. 需要 16 kHz 音频, 不限语言."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-pyannote-segmentation-3-0/model.onnx": "model.onnx"
+      },
+      "sha256": "24615ee884c897d9d2ba09bb4d30da6bb1b15e685065962db5b02e76e4996488",
+      "size": 6958444,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-segmentation-models/sherpa-onnx-pyannote-segmentation-3-0.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

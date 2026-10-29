@@ -316,6 +316,42 @@ class ValidationTest(unittest.TestCase):
         with self.assertRaisesRegex(DistributionError, "modelType offline-transducer requires catalog schemaVersion 2"):
             distribution.validate_catalog(legacy)
 
+    def test_analysis_kinds_take_their_roles_and_need_catalog_schema_3(self):
+        with tempfile.TemporaryDirectory() as value:
+            root = Path(value)
+            sources, cache = root / "sources", root / "cache"
+            support.tts_fixture(sources, cache)
+            folders = support.analysis_fixtures(sources, cache)
+            support.measure(sources, cache, root / "assets")
+            catalog, assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1)
+            legacy, legacy_assets = distribution.build_catalog(sources, support.REPOSITORY, 1, support.TIME1, schema=2)
+            segment, langid, tagger = (support.read_source(folder) for folder in folders)
+        for source in (segment, langid, tagger):
+            distribution.validate_source(source)
+            self.assertEqual(3, distribution.required_schema(source))
+        self.assertEqual((3, 4), (catalog["schemaVersion"], len(assets)))
+        self.assertEqual((["tts.vits.unit-test"], 1), ([model["modelId"] for model in legacy["models"]], len(legacy_assets)))
+        self.assertEqual(
+            [["model.onnx"], ["tiny-decoder.int8.onnx", "tiny-encoder.int8.onnx"], ["class_labels_indices.csv", "model.int8.onnx"]],
+            [[item["path"] for item in source["files"]] for source in (segment, langid, tagger)])
+        for source, change, pattern in ((segment, lambda value: value.pop("sampleRate"), "sampleRate"),
+                                        (segment, lambda value: value.update(speakers=1), "speakers"),
+                                        (langid, lambda value: value["runtime"]["config"].pop("decoder"), "decoder"),
+                                        (langid, lambda value: value["runtime"]["config"].update(tokens="tiny-encoder.int8.onnx"), "unknown"),
+                                        (tagger, lambda value: value["runtime"]["config"].pop("labels"), "labels"),
+                                        (tagger, lambda value: value.update(modelType="speaker-embedding"), "modelType"),
+                                        (segment, lambda value: value.update(modelId="speaker.pyannote.unit-test"), "kind")):
+            changed = deepcopy(source)
+            change(changed)
+            with self.subTest(model=source["modelId"], pattern=pattern), self.assertRaisesRegex(DistributionError, pattern):
+                distribution.validate_source(changed)
+        for kind in ("langid", "segment", "tagger"):
+            older = deepcopy(catalog)
+            older["schemaVersion"] = 2
+            older["models"] = [model for model in older["models"] if model["kind"] in (kind, "tts")]
+            with self.subTest(kind=kind), self.assertRaisesRegex(DistributionError, f"kind {kind} requires catalog schemaVersion 3"):
+                distribution.validate_catalog(older)
+
     def test_speaker_kind_takes_one_model_file_and_needs_catalog_schema_3(self):
         with tempfile.TemporaryDirectory() as value:
             root = Path(value)

@@ -2,9 +2,9 @@
   "catalogVersion": 3,
   "format": 1,
   "generatedAt": "2026-10-29T00:00:00Z",
-  "models": 26,
-  "releaseAssetBytes": 789041664,
-  "releaseAssetCount": 6,
+  "models": 30,
+  "releaseAssetBytes": 1068096000,
+  "releaseAssetCount": 10,
   "repository": "SuperMonster003/AutoJs6-Shared-Assets",
   "unsigned": true,
   "upstreamOnlyVersions": 3

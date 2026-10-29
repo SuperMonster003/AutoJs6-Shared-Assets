@@ -169,6 +169,33 @@ def speaker_fixture(sources, cache, model_id=SPEAKER_ID):
                                               languages=["en", "zh"]))
 
 
+
+SEGMENT_ID = "segment.pyannote.unit-test"
+LANGID_ID = "langid.whisper.unit-test"
+TAGGER_ID = "tagger.ced.unit-test"
+
+
+def analysis_fixtures(sources, cache):
+    """The three analysis kinds of catalog schema 3, as tar.bz2 archives with float32 or int8 duplicates left out:
+    a pyannote segmentation model, a whisper encoder and decoder without their tokens, and a CED tagger with its labels."""
+    segment = write_upstream(cache, "speaker-segmentation-models", SEGMENT_ID + ".tar.bz2", SEGMENT_ID,
+                             {"model.onnx": b"pyannote" * 40}, extra={"model.int8.onnx": b"int8", "LICENSE": b"MIT"})
+    langid = write_upstream(cache, "asr-models", LANGID_ID + ".tar.bz2", LANGID_ID,
+                            {"tiny-encoder.int8.onnx": b"whisper-encoder" * 30, "tiny-decoder.int8.onnx": b"whisper-decoder" * 20},
+                            extra={"tiny-encoder.onnx": b"fp32", "tiny-tokens.txt": b"<|en|> 0"})
+    tagger = write_upstream(cache, "audio-tagging-models", TAGGER_ID + ".tar.bz2", TAGGER_ID,
+                            {"model.int8.onnx": b"ced" * 60, "class_labels_indices.csv": b'index,mid,display_name\n0,/m/09x0r,"Speech"\n'},
+                            extra={"model.onnx": b"fp32", "test_wavs/1.wav": b"RIFF"})
+    return [
+        write_source(sources, source_value(SEGMENT_ID, [segment], {"model": "model.onnx"}, kind="segment",
+                                           model_type="pyannote-segmentation", languages=["zxx"])),
+        write_source(sources, source_value(LANGID_ID, [langid], {"encoder": "tiny-encoder.int8.onnx", "decoder": "tiny-decoder.int8.onnx"},
+                                           kind="langid", model_type="whisper-langid", languages=["mul"])),
+        write_source(sources, source_value(TAGGER_ID, [tagger], {"model": "model.int8.onnx", "labels": "class_labels_indices.csv"},
+                                           kind="tagger", model_type="ced", languages=["zxx"])),
+    ]
+
+
 UPSTREAM_ONLY_ID = "asr.sense-voice.unit-test"
 
 

@@ -1,5 +1,5 @@
 {
-  "$comment": "Cross-field rules (ordering, content-addressed names, history immutability) are enforced by tools/speech-model-distribution/distribution.py. Schema 2 adds the punct kind with the ct-transformer and cnn-bilstm model types; punct versions carry no sampleRate; upstream member names may start with './'. Schema 3 adds the speaker kind with the speaker-embedding model type (one model file; sampleRate required). A release may also publish an older schema's catalog, which leaves out the versions that need a newer schema. Catalogs of schema N are published as catalog-vN.json.",
+  "$comment": "Cross-field rules (ordering, content-addressed names, history immutability) are enforced by tools/speech-model-distribution/distribution.py. Schema 2 adds the punct kind with the ct-transformer and cnn-bilstm model types; punct versions carry no sampleRate; upstream member names may start with './'. Schema 3 adds the speaker kind with the speaker-embedding model type (one model file; sampleRate required), and the kinds of the offline analyses: segment (pyannote-segmentation: model), langid (whisper-langid: encoder and decoder) and tagger (ced: model and the labels table); all require sampleRate. A release may also publish an older schema's catalog, which leaves out the versions that need a newer schema. Catalogs of schema N are published as catalog-vN.json.",
   "$defs": {
     "configByModelType": {
       "allOf": [
@@ -448,6 +448,110 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "pyannote-segmentation"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "whisper-langid"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "decoder": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "encoder": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "encoder",
+                      "decoder"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "modelType": {
+                "const": "ced"
+              }
+            },
+            "required": [
+              "modelType"
+            ]
+          },
+          "then": {
+            "properties": {
+              "runtime": {
+                "properties": {
+                  "config": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "labels": {
+                        "$ref": "#/$defs/path"
+                      },
+                      "model": {
+                        "$ref": "#/$defs/path"
+                      }
+                    },
+                    "required": [
+                      "model",
+                      "labels"
+                    ],
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     },
@@ -504,8 +608,11 @@
       "enum": [
         "asr",
         "kws",
+        "langid",
         "punct",
+        "segment",
         "speaker",
+        "tagger",
         "tts"
       ]
     },
@@ -547,7 +654,7 @@
       "type": "object"
     },
     "modelId": {
-      "pattern": "^(asr|kws|punct|speaker|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
+      "pattern": "^(asr|kws|langid|punct|segment|speaker|tagger|tts)\\.[a-z0-9][a-z0-9._-]{1,59}$",
       "type": "string"
     },
     "modelType": {
@@ -561,7 +668,10 @@
         "kokoro",
         "ct-transformer",
         "cnn-bilstm",
-        "speaker-embedding"
+        "speaker-embedding",
+        "pyannote-segmentation",
+        "whisper-langid",
+        "ced"
       ]
     },
     "path": {

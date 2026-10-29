@@ -14,7 +14,9 @@ the frozen catalog-v1.json; schema 1 catalogs stay valid and verifiable.
 Catalog schema 3 adds the speaker kind (speaker embedding models, plugin roadmap P8.3). A release
 may publish catalogs of several schemas (decision D127): a catalog of an older schema is built from
 the same sources but leaves out every version that needs a newer schema, so catalog-v2.json never
-lists a speaker model.
+lists a speaker model. Schema 3 also has the kinds of the offline analyses (plugin roadmap P8.4):
+segment (pyannote speaker segmentation), langid (whisper spoken language identification) and tagger
+(CED audio tagging, with its AudioSet label table as the labels role).
 """
 
 from __future__ import annotations
@@ -56,7 +58,7 @@ BLOCK = 512
 
 REPOSITORY_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*")
 RELEASE_TAG_PATTERN = re.compile(r"speech-models-v([1-9][0-9]{0,9})")
-MODEL_ID_PATTERN = re.compile(r"(asr|kws|punct|speaker|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
+MODEL_ID_PATTERN = re.compile(r"(asr|kws|langid|punct|segment|speaker|tagger|tts)\.[a-z0-9][a-z0-9._-]{1,59}")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 LANGUAGE_PATTERN = re.compile(r"[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*")
 MAP_LANGUAGE_PATTERN = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*")
@@ -73,7 +75,7 @@ TIMESTAMP_PATTERN = re.compile(
     r"(?:\.([0-9]{1,9}))?(Z|[+-](?:0[0-9]|1[0-8]):[0-5][0-9])"
 )
 
-KINDS = ("asr", "kws", "punct", "speaker", "tts")
+KINDS = ("asr", "kws", "langid", "punct", "segment", "speaker", "tagger", "tts")
 COMMERCIAL_USE_VALUES = (True, False, "unknown")
 LIST_ROLES = frozenset({"lexicon", "ruleFsts", "ruleFars"})
 DIRECTORY_ROLES = frozenset({"dataDir"})
@@ -97,12 +99,18 @@ MODEL_TYPES = {
     "cnn-bilstm": {"kind": "punct", "required": ("model", "bpeVocab"), "optional": ()},
     # Speaker embedding extractors (sherpa-onnx SpeakerEmbeddingExtractorConfig), since schema 3.
     "speaker-embedding": {"kind": "speaker", "required": ("model",), "optional": ()},
+    # The offline analyses, since schema 3: sherpa-onnx OfflineSpeakerDiarization (pyannote segmentation),
+    # SpokenLanguageIdentification (whisper encoder and decoder) and AudioTagging (CED with class_labels_indices.csv).
+    "pyannote-segmentation": {"kind": "segment", "required": ("model",), "optional": ()},
+    "whisper-langid": {"kind": "langid", "required": ("encoder", "decoder"), "optional": ()},
+    "ced": {"kind": "tagger", "required": ("model", "labels"), "optional": ()},
 }
 # An upstream archive member name may start with this prefix (tar archives packed from ".").
 MEMBER_PREFIX = "./"
 # The first catalog schemaVersion that may use a kind, model type or member prefix; everything else exists since schema 1.
 SCHEMA_INTRODUCED = {"punct": 2, "ct-transformer": 2, "cnn-bilstm": 2, "offline-transducer": 2, MEMBER_PREFIX: 2,
-                     "speaker": 3, "speaker-embedding": 3}
+                     "speaker": 3, "speaker-embedding": 3, "segment": 3, "langid": 3, "tagger": 3,
+                     "pyannote-segmentation": 3, "whisper-langid": 3, "ced": 3}
 
 SOURCE_REQUIRED = ("format", "modelId", "versionCode", "kind", "modelType", "displayName", "summary", "recommended",
                    "languages", "releasedAt", "license", "runtime", "mirror", "upstream", "archive", "files")

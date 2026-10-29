@@ -1,0 +1,63 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "629bd298df135e2ebc85e5d7e86e768e92dc8cfc17fafcbe8a35021e16c1c435",
+    "size": 159795200
+  },
+  "displayName": {
+    "en": "Whisper base language identification",
+    "zh-CN": "Whisper base 语种识别"
+  },
+  "files": [
+    {
+      "path": "base-decoder.int8.onnx",
+      "sha256": "9759d217388a01b3a4c7c15533201067b48ae819c4daafc8624e64b9409dc02d",
+      "size": 130672026
+    },
+    {
+      "path": "base-encoder.int8.onnx",
+      "sha256": "0b8fb1304b6109976038efff5ace81720e00386f3ff6b54ee8c75291ca0a1e11",
+      "size": 29120534
+    }
+  ],
+  "format": 1,
+  "kind": "langid",
+  "languages": [
+    "mul"
+  ],
+  "license": {
+    "commercialUse": "unknown",
+    "noticeKey": "speech_model_license_unknown_data",
+    "spdx": "MIT"
+  },
+  "mirror": true,
+  "modelId": "langid.whisper.base.int8",
+  "modelType": "whisper-langid",
+  "recommended": false,
+  "releasedAt": "2026-10-29T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "base-decoder.int8.onnx",
+      "encoder": "base-encoder.int8.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Tells which language is spoken, out of the 99 languages of Whisper. A little more accurate than tiny on short clips, about twice as slow. Needs 16 kHz audio.",
+    "zh-CN": "判断说的是哪种语言, 覆盖 Whisper 的 99 种语言. 短片段上比 tiny 略准, 速度约慢一倍. 需要 16 kHz 音频."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-whisper-base/base-decoder.int8.onnx": "base-decoder.int8.onnx",
+        "sherpa-onnx-whisper-base/base-encoder.int8.onnx": "base-encoder.int8.onnx"
+      },
+      "sha256": "911b2083efd7c0dca2ac3b358b75222660dc09fb716d64fbfc417ba6c99ff3de",
+      "size": 207557382,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-base.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

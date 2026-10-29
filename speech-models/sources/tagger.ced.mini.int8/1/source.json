@@ -1,0 +1,63 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "d2821e3278e7968d60cdeee7bbae2c0252230f9568168efc8f6bdb773ff89970",
+    "size": 10468864
+  },
+  "displayName": {
+    "en": "CED-mini audio tagging",
+    "zh-CN": "CED-mini 音频标签"
+  },
+  "files": [
+    {
+      "path": "class_labels_indices.csv",
+      "sha256": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429",
+      "size": 14675
+    },
+    {
+      "path": "model.int8.onnx",
+      "sha256": "ff29f39f9fbe637f72535160e9d006d61d872fdab0fce838672265b9b38cf946",
+      "size": 10451715
+    }
+  ],
+  "format": 1,
+  "kind": "tagger",
+  "languages": [
+    "zxx"
+  ],
+  "license": {
+    "commercialUse": true,
+    "noticeKey": "speech_model_license_commercial",
+    "spdx": "CC-BY-4.0 AND CC-BY-SA-4.0"
+  },
+  "mirror": true,
+  "modelId": "tagger.ced.mini.int8",
+  "modelType": "ced",
+  "recommended": true,
+  "releasedAt": "2026-10-29T00:00:00Z",
+  "runtime": {
+    "config": {
+      "labels": "class_labels_indices.csv",
+      "model": "model.int8.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Recognizes sounds such as speech, music, animals, vehicles and alarms, with the 527 English labels of AudioSet. Needs 16 kHz audio.",
+    "zh-CN": "识别人声, 音乐, 动物, 车辆, 警报等声音, 使用 AudioSet 的 527 个英文标签. 需要 16 kHz 音频."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-ced-mini-audio-tagging-2024-04-19/class_labels_indices.csv": "class_labels_indices.csv",
+        "sherpa-onnx-ced-mini-audio-tagging-2024-04-19/model.int8.onnx": "model.int8.onnx"
+      },
+      "sha256": "bec8bfa0af2c20ec3a9e7c6dd6c92d0fb6e96d6b25370ebe7a48e7283a60a02c",
+      "size": 47658399,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/audio-tagging-models/sherpa-onnx-ced-mini-audio-tagging-2024-04-19.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

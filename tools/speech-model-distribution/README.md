@@ -146,3 +146,16 @@ an identical SHA-256 digest. `build_catalog.py` (schema 3) then built `catalog-v
 `preparation.json` were moved into `pending/v3`, and `verify_catalog.py` accepted both pending
 catalogs with the rebuild from sources (`catalog-v2.json` unchanged). No network publication took
 place.
+
+## Measured v3 analysis models (2026-10-29)
+
+The four pinned upstream assets of the analysis models (378,379,086 bytes: the pyannote segmentation,
+Whisper tiny and base and CED-mini archives) were downloaded once into a local cache outside the
+repository; the three that the sherpa-onnx `checksum.txt` files list matched it, and the pyannote
+archive, which has none, matched the release's size. `prepare_sources.py --update-sources --offline`
+measured the four archives (279,054,336 bytes) and a second `--offline` run into a new output
+directory reproduced them with identical SHA-256 digests. `build_catalog.py` (schema 3) then built
+`catalog-v3.json` (30 models) against `history/v2/catalog-v2.json` in a temporary directory; the
+file, `release-assets.txt` and `preparation.json` were moved into `pending/v3`, the schema 2 build
+with the same sources reproduced `catalog-v2.json` byte for byte, and `verify_catalog.py` accepted both
+pending catalogs with the rebuild from sources. No network publication took place.

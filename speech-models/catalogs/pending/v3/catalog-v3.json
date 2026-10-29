@@ -900,6 +900,144 @@
     },
     {
       "displayName": {
+        "en": "Whisper base language identification",
+        "zh-CN": "Whisper base 语种识别"
+      },
+      "kind": "langid",
+      "modelId": "langid.whisper.base.int8",
+      "recommended": false,
+      "recommendedVersionCode": 1,
+      "summary": {
+        "en": "Tells which language is spoken, out of the 99 languages of Whisper. A little more accurate than tiny on short clips, about twice as slow. Needs 16 kHz audio.",
+        "zh-CN": "判断说的是哪种语言, 覆盖 Whisper 的 99 种语言. 短片段上比 tiny 略准, 速度约慢一倍. 需要 16 kHz 音频."
+      },
+      "versions": [
+        {
+          "files": [
+            {
+              "path": "base-decoder.int8.onnx",
+              "sha256": "9759d217388a01b3a4c7c15533201067b48ae819c4daafc8624e64b9409dc02d",
+              "size": 130672026
+            },
+            {
+              "path": "base-encoder.int8.onnx",
+              "sha256": "0b8fb1304b6109976038efff5ace81720e00386f3ff6b54ee8c75291ca0a1e11",
+              "size": 29120534
+            }
+          ],
+          "languages": [
+            "mul"
+          ],
+          "license": {
+            "commercialUse": "unknown",
+            "noticeKey": "speech_model_license_unknown_data",
+            "spdx": "MIT"
+          },
+          "mirror": {
+            "fileName": "autojs6-speech-langid.whisper.base.int8-v1-629bd298.tar",
+            "format": "tar",
+            "sha256": "629bd298df135e2ebc85e5d7e86e768e92dc8cfc17fafcbe8a35021e16c1c435",
+            "size": 159795200,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v3/autojs6-speech-langid.whisper.base.int8-v1-629bd298.tar"
+          },
+          "modelType": "whisper-langid",
+          "releasedAt": "2026-10-29T00:00:00Z",
+          "runtime": {
+            "config": {
+              "decoder": "base-decoder.int8.onnx",
+              "encoder": "base-encoder.int8.onnx"
+            },
+            "minSherpaOnnx": "1.13.8"
+          },
+          "sampleRate": 16000,
+          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v3/speech-models/sources/langid.whisper.base.int8/1",
+          "upstream": [
+            {
+              "format": "tar.bz2",
+              "members": {
+                "sherpa-onnx-whisper-base/base-decoder.int8.onnx": "base-decoder.int8.onnx",
+                "sherpa-onnx-whisper-base/base-encoder.int8.onnx": "base-encoder.int8.onnx"
+              },
+              "sha256": "911b2083efd7c0dca2ac3b358b75222660dc09fb716d64fbfc417ba6c99ff3de",
+              "size": 207557382,
+              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-base.tar.bz2"
+            }
+          ],
+          "versionCode": 1
+        }
+      ]
+    },
+    {
+      "displayName": {
+        "en": "Whisper tiny language identification",
+        "zh-CN": "Whisper tiny 语种识别"
+      },
+      "kind": "langid",
+      "modelId": "langid.whisper.tiny.int8",
+      "recommended": true,
+      "recommendedVersionCode": 1,
+      "summary": {
+        "en": "Tells which language is spoken, out of the 99 languages of Whisper. Small and fast; the default language identifier. Needs 16 kHz audio.",
+        "zh-CN": "判断说的是哪种语言, 覆盖 Whisper 的 99 种语言. 小而快, 是默认的语种识别模型. 需要 16 kHz 音频."
+      },
+      "versions": [
+        {
+          "files": [
+            {
+              "path": "tiny-decoder.int8.onnx",
+              "sha256": "d2fece8dd42771f1df975c6c0445770d0c292bf7547c2cae04a6c0cc57540925",
+              "size": 89855401
+            },
+            {
+              "path": "tiny-encoder.int8.onnx",
+              "sha256": "d24fb083ae3b1041fc24e97971d60e280c9342201fbb67b0ab428a8b4a51a434",
+              "size": 12937772
+            }
+          ],
+          "languages": [
+            "mul"
+          ],
+          "license": {
+            "commercialUse": "unknown",
+            "noticeKey": "speech_model_license_unknown_data",
+            "spdx": "MIT"
+          },
+          "mirror": {
+            "fileName": "autojs6-speech-langid.whisper.tiny.int8-v1-443bb547.tar",
+            "format": "tar",
+            "sha256": "443bb5471db6c520e7788768b009eacae06be06586a9fcfddbfb695a3a2ca108",
+            "size": 102795776,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v3/autojs6-speech-langid.whisper.tiny.int8-v1-443bb547.tar"
+          },
+          "modelType": "whisper-langid",
+          "releasedAt": "2026-10-29T00:00:00Z",
+          "runtime": {
+            "config": {
+              "decoder": "tiny-decoder.int8.onnx",
+              "encoder": "tiny-encoder.int8.onnx"
+            },
+            "minSherpaOnnx": "1.13.8"
+          },
+          "sampleRate": 16000,
+          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v3/speech-models/sources/langid.whisper.tiny.int8/1",
+          "upstream": [
+            {
+              "format": "tar.bz2",
+              "members": {
+                "sherpa-onnx-whisper-tiny/tiny-decoder.int8.onnx": "tiny-decoder.int8.onnx",
+                "sherpa-onnx-whisper-tiny/tiny-encoder.int8.onnx": "tiny-encoder.int8.onnx"
+              },
+              "sha256": "c46116994e539aa165266d96b325252728429c12535eb9d8b6a2b10f129e66b1",
+              "size": 116204861,
+              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.tar.bz2"
+            }
+          ],
+          "versionCode": 1
+        }
+      ]
+    },
+    {
+      "displayName": {
         "en": "CNN-BiLSTM punctuation and casing, English (int8)",
         "zh-CN": "CNN-BiLSTM 标点与大小写 英文 (int8)"
       },
@@ -1042,6 +1180,68 @@
     },
     {
       "displayName": {
+        "en": "pyannote speaker segmentation 3.0",
+        "zh-CN": "pyannote 说话人分割 3.0"
+      },
+      "kind": "segment",
+      "modelId": "segment.pyannote.3-0",
+      "recommended": true,
+      "recommendedVersionCode": 1,
+      "summary": {
+        "en": "Finds where speech is and where speakers change, for speaker diarization together with a speaker embedding model. Needs 16 kHz audio; works for any language.",
+        "zh-CN": "找出哪里有人说话, 哪里换人, 与声纹模型一起用于说话人分离. 需要 16 kHz 音频, 不限语言."
+      },
+      "versions": [
+        {
+          "files": [
+            {
+              "path": "model.onnx",
+              "sha256": "220ad67ca923bef2fa91f2390c786097bf305bceb5e261d4af67b38e938e1079",
+              "size": 5992913
+            }
+          ],
+          "languages": [
+            "zxx"
+          ],
+          "license": {
+            "commercialUse": false,
+            "noticeKey": "speech_model_license_non_commercial",
+            "spdx": "MIT"
+          },
+          "mirror": {
+            "fileName": "autojs6-speech-segment.pyannote.3-0-v1-6441ef8a.tar",
+            "format": "tar",
+            "sha256": "6441ef8ab852bed01f78c40f7d5ca5ac7cf546d69025f4bd90eb7c8e741a911b",
+            "size": 5994496,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v3/autojs6-speech-segment.pyannote.3-0-v1-6441ef8a.tar"
+          },
+          "modelType": "pyannote-segmentation",
+          "releasedAt": "2026-10-29T00:00:00Z",
+          "runtime": {
+            "config": {
+              "model": "model.onnx"
+            },
+            "minSherpaOnnx": "1.13.8"
+          },
+          "sampleRate": 16000,
+          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v3/speech-models/sources/segment.pyannote.3-0/1",
+          "upstream": [
+            {
+              "format": "tar.bz2",
+              "members": {
+                "sherpa-onnx-pyannote-segmentation-3-0/model.onnx": "model.onnx"
+              },
+              "sha256": "24615ee884c897d9d2ba09bb4d30da6bb1b15e685065962db5b02e76e4996488",
+              "size": 6958444,
+              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-segmentation-models/sherpa-onnx-pyannote-segmentation-3-0.tar.bz2"
+            }
+          ],
+          "versionCode": 1
+        }
+      ]
+    },
+    {
+      "displayName": {
         "en": "ERes2Net speaker embedding (VoxCeleb)",
         "zh-CN": "ERes2Net 声纹模型 (VoxCeleb)"
       },
@@ -1095,6 +1295,75 @@
               "sha256": "c59158379255ad66e161679cca6af8d52d51e389e3224ab7d7a7baae295c2db5",
               "size": 26485263,
               "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-recongition-models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx"
+            }
+          ],
+          "versionCode": 1
+        }
+      ]
+    },
+    {
+      "displayName": {
+        "en": "CED-mini audio tagging",
+        "zh-CN": "CED-mini 音频标签"
+      },
+      "kind": "tagger",
+      "modelId": "tagger.ced.mini.int8",
+      "recommended": true,
+      "recommendedVersionCode": 1,
+      "summary": {
+        "en": "Recognizes sounds such as speech, music, animals, vehicles and alarms, with the 527 English labels of AudioSet. Needs 16 kHz audio.",
+        "zh-CN": "识别人声, 音乐, 动物, 车辆, 警报等声音, 使用 AudioSet 的 527 个英文标签. 需要 16 kHz 音频."
+      },
+      "versions": [
+        {
+          "files": [
+            {
+              "path": "class_labels_indices.csv",
+              "sha256": "cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429",
+              "size": 14675
+            },
+            {
+              "path": "model.int8.onnx",
+              "sha256": "ff29f39f9fbe637f72535160e9d006d61d872fdab0fce838672265b9b38cf946",
+              "size": 10451715
+            }
+          ],
+          "languages": [
+            "zxx"
+          ],
+          "license": {
+            "commercialUse": true,
+            "noticeKey": "speech_model_license_commercial",
+            "spdx": "CC-BY-4.0 AND CC-BY-SA-4.0"
+          },
+          "mirror": {
+            "fileName": "autojs6-speech-tagger.ced.mini.int8-v1-d2821e32.tar",
+            "format": "tar",
+            "sha256": "d2821e3278e7968d60cdeee7bbae2c0252230f9568168efc8f6bdb773ff89970",
+            "size": 10468864,
+            "url": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/releases/download/speech-models-v3/autojs6-speech-tagger.ced.mini.int8-v1-d2821e32.tar"
+          },
+          "modelType": "ced",
+          "releasedAt": "2026-10-29T00:00:00Z",
+          "runtime": {
+            "config": {
+              "labels": "class_labels_indices.csv",
+              "model": "model.int8.onnx"
+            },
+            "minSherpaOnnx": "1.13.8"
+          },
+          "sampleRate": 16000,
+          "sourceUrl": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/tree/speech-models-v3/speech-models/sources/tagger.ced.mini.int8/1",
+          "upstream": [
+            {
+              "format": "tar.bz2",
+              "members": {
+                "sherpa-onnx-ced-mini-audio-tagging-2024-04-19/class_labels_indices.csv": "class_labels_indices.csv",
+                "sherpa-onnx-ced-mini-audio-tagging-2024-04-19/model.int8.onnx": "model.int8.onnx"
+              },
+              "sha256": "bec8bfa0af2c20ec3a9e7c6dd6c92d0fb6e96d6b25370ebe7a48e7283a60a02c",
+              "size": 47658399,
+              "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/audio-tagging-models/sherpa-onnx-ced-mini-audio-tagging-2024-04-19.tar.bz2"
             }
           ],
           "versionCode": 1

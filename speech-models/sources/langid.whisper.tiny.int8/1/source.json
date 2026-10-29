@@ -1,0 +1,63 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "443bb5471db6c520e7788768b009eacae06be06586a9fcfddbfb695a3a2ca108",
+    "size": 102795776
+  },
+  "displayName": {
+    "en": "Whisper tiny language identification",
+    "zh-CN": "Whisper tiny 语种识别"
+  },
+  "files": [
+    {
+      "path": "tiny-decoder.int8.onnx",
+      "sha256": "d2fece8dd42771f1df975c6c0445770d0c292bf7547c2cae04a6c0cc57540925",
+      "size": 89855401
+    },
+    {
+      "path": "tiny-encoder.int8.onnx",
+      "sha256": "d24fb083ae3b1041fc24e97971d60e280c9342201fbb67b0ab428a8b4a51a434",
+      "size": 12937772
+    }
+  ],
+  "format": 1,
+  "kind": "langid",
+  "languages": [
+    "mul"
+  ],
+  "license": {
+    "commercialUse": "unknown",
+    "noticeKey": "speech_model_license_unknown_data",
+    "spdx": "MIT"
+  },
+  "mirror": true,
+  "modelId": "langid.whisper.tiny.int8",
+  "modelType": "whisper-langid",
+  "recommended": true,
+  "releasedAt": "2026-10-29T00:00:00Z",
+  "runtime": {
+    "config": {
+      "decoder": "tiny-decoder.int8.onnx",
+      "encoder": "tiny-encoder.int8.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 16000,
+  "summary": {
+    "en": "Tells which language is spoken, out of the 99 languages of Whisper. Small and fast; the default language identifier. Needs 16 kHz audio.",
+    "zh-CN": "判断说的是哪种语言, 覆盖 Whisper 的 99 种语言. 小而快, 是默认的语种识别模型. 需要 16 kHz 音频."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "sherpa-onnx-whisper-tiny/tiny-decoder.int8.onnx": "tiny-decoder.int8.onnx",
+        "sherpa-onnx-whisper-tiny/tiny-encoder.int8.onnx": "tiny-encoder.int8.onnx"
+      },
+      "sha256": "c46116994e539aa165266d96b325252728429c12535eb9d8b6a2b10f129e66b1",
+      "size": 116204861,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.tar.bz2"
+    }
+  ],
+  "versionCode": 1
+}

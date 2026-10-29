@@ -32,6 +32,11 @@ UPSTREAM_ONLY = ["asr.zipformer-streaming.ko.2024-06-16.int8", ZH_2025, MIRO_V2]
 SENSE_VOICE = "asr.sense-voice.zh-en-ja-ko-yue.2024-07-17.int8"
 PUNCT_EN = "punct.cnn-bilstm.en.2024-08-06.int8"
 SPEAKER = "speaker.eres2net.3dspeaker.en-voxceleb"
+SEGMENT = "segment.pyannote.3-0"
+WHISPER = ["langid.whisper.base.int8", "langid.whisper.tiny.int8"]
+TAGGER = "tagger.ced.mini.int8"
+# The versions that need catalog schema 3 (plugin roadmap P8.3, P8.4): catalog-v2.json of release 3 leaves them out.
+SCHEMA_3 = [SPEAKER, SEGMENT, *WHISPER, TAGGER]
 
 
 def schema(name):
@@ -48,7 +53,7 @@ class CheckedInDataTest(unittest.TestCase):
         cls.v2 = distribution.read_json(HISTORY_V2 / "catalog-v2.json")
 
     def test_sources_are_measured_text_only_and_license_complete(self):
-        self.assertEqual(26, len(self.sources))
+        self.assertEqual(30, len(self.sources))
         for folder, source in self.sources:
             names = {path.name for path in folder.iterdir()}
             paths = {item["path"] for item in source["files"]}
@@ -57,7 +62,7 @@ class CheckedInDataTest(unittest.TestCase):
                 self.assertEqual(any(path.startswith("espeak-ng-data/") for path in paths), "LICENSE-espeak-ng-data" in names)
                 self.assertNotIn("test_wavs", " ".join(paths))
                 self.assertEqual("1.13.8", source["runtime"]["minSherpaOnnx"])
-                expected = UNKNOWN_DATA if source["modelId"] == PENGCHENG else NOTICE_FOR[source["license"]["commercialUse"]]
+                expected = UNKNOWN_DATA if source["modelId"] in (PENGCHENG, *WHISPER) else NOTICE_FOR[source["license"]["commercialUse"]]
                 self.assertEqual(expected, source["license"]["noticeKey"])
                 self.assertEqual(source["mirror"], source["archive"] is not None)
                 self.assertEqual(distribution.canonical_json_bytes(source), (folder / "source.json").read_bytes())
@@ -94,8 +99,8 @@ class CheckedInDataTest(unittest.TestCase):
                                                      previous_catalog=self.v2)
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
         self.assertEqual(assets, (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines())
-        self.assertEqual(6, len(assets))
-        self.assertEqual(26, len(self.catalog["models"]))
+        self.assertEqual(10, len(assets))
+        self.assertEqual(30, len(self.catalog["models"]))
         self.assertEqual([(model_id, 1) for model_id in UPSTREAM_ONLY], distribution.upstream_only_versions(self.catalog))
         # Archives of catalogs v1 and v2 stay on their releases; v3 uploads only the archives it introduces.
         old = {model["modelId"]: model for model in self.v2["models"]}
@@ -110,7 +115,7 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertTrue(preparation["unsigned"])
 
     def test_pending_catalog_v2_is_the_same_release_without_newer_kinds(self):
-        # Decision D127: release 3 also publishes catalog-v2.json for plugins 1.2.0 and older, without the speaker kind.
+        # Decision D127: release 3 also publishes catalog-v2.json for plugins 1.2.0 and older, without the kinds of schema 3.
         data = (PENDING / "catalog-v2.json").read_bytes()
         self.assertEqual(distribution.canonical_json_bytes(self.pending_v2), data)
         distribution.validate_catalog(self.pending_v2, previous_catalog=self.v2, expected_repository=distribution.DEFAULT_REPOSITORY)
@@ -119,9 +124,11 @@ class CheckedInDataTest(unittest.TestCase):
         rebuilt, assets = distribution.build_catalog(FAMILY / "sources", self.pending_v2["repository"], 3, self.pending_v2["generatedAt"],
                                                      previous_catalog=self.v2, schema=2)
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
-        self.assertEqual([model for model in self.catalog["models"] if model["kind"] != "speaker"], self.pending_v2["models"])
+        self.assertEqual([model for model in self.catalog["models"] if model["modelId"] not in SCHEMA_3], self.pending_v2["models"])
+        self.assertEqual(SCHEMA_3, sorted((model["modelId"] for model in self.catalog["models"] if model["kind"] in ("langid", "segment", "speaker", "tagger")),
+                                          key=SCHEMA_3.index))
         released = (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines()
-        self.assertEqual([name for name in released if SPEAKER not in name], assets)
+        self.assertEqual([name for name in released if not any(f"-{model_id}-v1-" in name for model_id in SCHEMA_3)], assets)
 
     def test_catalog_v1_is_frozen_with_a_signed_history_copy(self):
         catalogs = FAMILY / "catalogs"
@@ -152,10 +159,16 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(first["models"], [entry for entry in audit["models"] if entry["modelId"] in carried])
         third = self.check_audit("license-audit-v3.json", self.catalog, set(NOTICE_FOR.values()) | {UNKNOWN_DATA})
         self.assertEqual(audit["decisions"], third["decisions"][:5])
-        self.assertEqual(9, len(third["decisions"]))
+        self.assertEqual(10, len(third["decisions"]))
         self.assertEqual(audit["models"], [entry for entry in third["models"] if entry["modelId"] in {item["modelId"] for item in audit["models"]}])
         pengcheng = next(entry for entry in third["models"] if entry["modelId"] == PENGCHENG)
         self.assertEqual(["undisclosed"], [item["commercialRestriction"] for item in pengcheng["trainingData"]])
+        by_id = {entry["modelId"]: entry for entry in third["models"]}
+        # MSDWild is for research only, so the segmentation model is false by the policy; Whisper names no training data.
+        self.assertEqual((False, ["MSDWild"]), (by_id[SEGMENT]["commercialUse"],
+                                                [item["name"] for item in by_id[SEGMENT]["trainingData"] if item["commercialRestriction"] is True]))
+        self.assertEqual([("unknown", UNKNOWN_DATA)] * 2, [(by_id[model_id]["commercialUse"], by_id[model_id]["noticeKey"]) for model_id in WHISPER])
+        self.assertEqual(["class_labels_indices.csv"], [item["name"] for item in by_id[TAGGER]["bundledComponents"]])
         for entry in audit["models"]:
             if entry["modelId"].startswith("tts.vits.piper."):
                 with self.subTest(model=entry["modelId"]):
