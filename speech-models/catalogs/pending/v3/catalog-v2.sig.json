@@ -1,0 +1,6 @@
+{
+  "algorithm": "ECDSA_P256_SHA256",
+  "catalog": "catalog-v2.json",
+  "keyId": "p256-bf5f0f579c7fbef1",
+  "signature": "MEQCIDPTykwd7qtDUePZLMLUfb0goQXk4BcD6wlOYA2YoOt6AiA+sxwMAOwvZhPIGNu9trj2q7atjF3GtaTjfmUXcBrNRA=="
+}
