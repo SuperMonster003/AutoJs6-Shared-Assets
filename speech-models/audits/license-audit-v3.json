@@ -1,5 +1,5 @@
 {
-  "auditedAt": "2026-10-29",
+  "auditedAt": "2026-10-30",
   "bundledWithPlugin": [
     {
       "commercialUse": true,
@@ -26,7 +26,8 @@
     "2026-10-25: asr.zipformer-streaming.ar-en-id-ja-ru-th-vi-zh.2025-02-10.int8 fails the D124 gate because its training data is not named; the maintainer took it as an exception (Q80) with commercialUse unknown and the notice key speech_model_license_unknown_data.",
     "2026-10-25: tts.vits.piper.ar-jo-sa-miro-v2-high.int8 is upstream-only (mirror null): the voice is CC BY-NC-ND 4.0 and the sherpa-onnx conversion rewrites its ONNX metadata, so the maintainer does not redistribute it (Q85).",
     "2026-10-26: speaker.eres2net.3dspeaker.en-voxceleb is the speaker embedding model of the new speaker kind (catalog schema 3, plugin roadmap D137, Q93). The more accurate CAM++ zh-en advanced model was not taken because its training data is not named (D124).",
-    "2026-10-29: catalog v3 adds the three kinds of the offline analyses (plugin roadmap P8.4, D144 - D146, D154): segment.pyannote.3-0 (commercialUse false because MSDWild is research only), langid.whisper.tiny.int8 and langid.whisper.base.int8 (training data not disclosed, exception to the D124 gate like Q80) and tagger.ced.mini.int8. Not taken: CED-tiny and the zipformer-small tagger (less accurate, slower), the int8 segmentation model (counted speakers worse) and Revai reverb-diarization (non-commercial weights)."
+    "2026-10-29: catalog v3 adds the three kinds of the offline analyses (plugin roadmap P8.4, D144 - D146, D154): segment.pyannote.3-0 (commercialUse false because MSDWild is research only), langid.whisper.tiny.int8 and langid.whisper.base.int8 (training data not disclosed, exception to the D124 gate like Q80) and tagger.ced.mini.int8. Not taken: CED-tiny and the zipformer-small tagger (less accurate, slower), the int8 segmentation model (counted speakers worse) and Revai reverb-diarization (non-commercial weights).",
+    "2026-10-30: k2-fsa replaced three pinned upstream assets (plugin roadmap Q118, Q119): kokoro-int8-multi-lang-v1_0 (2026-10-26, model.int8.onnx), kokoro-multi-lang-v1_1 (2026-10-26, model.onnx and lexicon-zh.txt) and matcha-icefall-zh-baker (2026-10-29, model-steps-3.onnx). The unpublished tts.kokoro.multi-lang.v1_0.int8 version 1 is re-pinned in place; the published tts.kokoro.multi-lang.v1_1 and tts.matcha.icefall.zh-baker keep version 1 (mirror only, its upstream pin no longer matches) and gain version 2 with the replacement. Weights, training data and licenses are unchanged, so the model entries are carried as they are."
   ],
   "format": 1,
   "models": [

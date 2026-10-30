@@ -1,8 +1,8 @@
 {
   "archive": {
     "format": "tar",
-    "sha256": "d8ea5193e3b76399132843f3f997da1e4f0d71951487edc58038db038a39f945",
-    "size": 169241600
+    "sha256": "98b9b78a91f83b3fbba8e07f3c56d7b5c49163e3e212a9d341f439678dfcac1c",
+    "size": 169240576
   },
   "displayName": {
     "en": "Kokoro v1.0 multilingual (int8)",
@@ -1811,8 +1811,8 @@
     },
     {
       "path": "model.int8.onnx",
-      "sha256": "4b86207ef680e394d8343bee22dfc4c512e5c707c6d9578e3f35ab09bffd6b36",
-      "size": 114203756
+      "sha256": "75635ea3b85a32d00094dcdd61a258aba87c160f7c264c304a7b3ae9d734195e",
+      "size": 114202993
     },
     {
       "path": "number-zh.fst",
@@ -1855,7 +1855,7 @@
   "modelId": "tts.kokoro.multi-lang.v1_0.int8",
   "modelType": "kokoro",
   "recommended": false,
-  "releasedAt": "2026-10-25T00:00:00Z",
+  "releasedAt": "2026-10-30T00:00:00Z",
   "runtime": {
     "config": {
       "dataDir": "espeak-ng-data",
@@ -2250,8 +2250,8 @@
         "kokoro-int8-multi-lang-v1_0/tokens.txt": "tokens.txt",
         "kokoro-int8-multi-lang-v1_0/voices.bin": "voices.bin"
       },
-      "sha256": "4c3052abaa60943a341f193888cf6abd68787dae6ab8ae5c925a706caa247e4e",
-      "size": 132303094,
+      "sha256": "72c347230107ef8a31098ec4d468a605244beef5f1ed00db97efa13518800653",
+      "size": 132353410,
       "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-int8-multi-lang-v1_0.tar.bz2"
     }
   ],

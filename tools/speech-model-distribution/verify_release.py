@@ -41,8 +41,22 @@ def _same_bytes(actual_path, expected):
         return source.read(len(expected) + 1) == expected
 
 
+def _companion(path, catalog, archives, expected_repository):
+    """A catalog of an older schema published by the same release (decision D127), e.g. catalog-v2.json next to catalog-v3.json."""
+    companion = distribution.read_json(path)
+    distribution.validate_catalog(companion, expected_repository=expected_repository)
+    if (companion["catalogVersion"], companion["releaseTag"]) != (catalog["catalogVersion"], catalog["releaseTag"]):
+        raise DistributionError("A companion catalog must belong to the same release")
+    if companion["schemaVersion"] >= catalog["schemaVersion"]:
+        raise DistributionError("A companion catalog must use an older schema than the release catalog")
+    if not set(distribution.expected_release_assets(companion)) <= archives:
+        raise DistributionError("A companion catalog names archives that the release catalog does not")
+    return companion
+
+
 def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_release=False, all_artifacts=False,
-                   expected_repository=None, asset_list=None):
+                   expected_repository=None, asset_list=None, companions=()):
+    """companions: (catalog, signature) path pairs that a downloaded release also carries byte for byte."""
     catalog_path = Path(catalog_path).resolve()
     catalog = distribution.read_json(catalog_path)
     distribution.validate_catalog(catalog, expected_repository=expected_repository)
@@ -53,10 +67,20 @@ def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_
     names = set(expected)
     catalog_name = distribution.catalog_file(catalog["schemaVersion"])
     signature_name = distribution.signature_file(catalog["schemaVersion"])
+    reviewed = {}
+    if companions and not downloaded_release:
+        raise DistributionError("Companion catalogs are verified only in a downloaded release")
     if downloaded_release:
         if signature_path is None:
             raise DistributionError("Downloaded-release verification requires the reviewed signature")
-        names.update((catalog_name, signature_name))
+        reviewed = {catalog_name: catalog_path.read_bytes(), signature_name: Path(signature_path).read_bytes()}
+        for companion_path, companion_signature in companions:
+            schema = _companion(companion_path, catalog, set(distribution.expected_release_assets(catalog)), expected_repository)["schemaVersion"]
+            if distribution.catalog_file(schema) in reviewed:
+                raise DistributionError("Each companion catalog needs its own schema")
+            reviewed[distribution.catalog_file(schema)] = Path(companion_path).read_bytes()
+            reviewed[distribution.signature_file(schema)] = Path(companion_signature).read_bytes()
+        names.update(reviewed)
     actual = {}
     for path in assets_dir.iterdir():
         if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(assets_dir):
@@ -67,11 +91,10 @@ def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_
         raise DistributionError("Missing release assets: " + ", ".join(sorted(missing)))
     if unexpected:
         raise DistributionError("Unexpected release assets: " + ", ".join(sorted(unexpected)))
-    if downloaded_release:
-        if not _same_bytes(actual[catalog_name], catalog_path.read_bytes()):
-            raise DistributionError("Downloaded catalog differs from the offline-reviewed catalog")
-        if not _same_bytes(actual[signature_name], Path(signature_path).read_bytes()):
-            raise DistributionError("Downloaded signature differs from the offline-reviewed signature")
+    for name, content in reviewed.items():
+        if not _same_bytes(actual[name], content):
+            kind = "signature" if name.endswith(".sig.json") else "catalog"
+            raise DistributionError(f"Downloaded {kind} differs from the offline-reviewed {kind}: {name}")
     if asset_list is not None:
         entries = Path(asset_list).read_text(encoding="utf-8").splitlines()
         if len(entries) != len(set(entries)) or set(entries) != set(expected):
@@ -88,7 +111,7 @@ def verify_release(catalog_path, assets_dir, *, signature_path=None, downloaded_
             raise DistributionError("Release archive content differs from the catalog files: " + filename)
         total += mirror["size"]
     return {"releaseTag": catalog["releaseTag"], "archives": len(expected), "bytes": total,
-            "downloadedRelease": downloaded_release, "allArtifacts": all_artifacts}
+            "downloadedRelease": downloaded_release, "allArtifacts": all_artifacts, "catalogs": sorted(reviewed)}
 
 
 def _github_get(endpoint, runner):
@@ -142,6 +165,8 @@ def main(argv=None):
     parser.add_argument("--downloaded-release", action="store_true")
     parser.add_argument("--all-artifacts", action="store_true")
     parser.add_argument("--asset-list", type=Path)
+    parser.add_argument("--companion", nargs=2, type=Path, action="append", default=[], metavar=("CATALOG", "SIGNATURE"),
+                        help="A same-release catalog of an older schema and its signature (downloaded release only)")
     parser.add_argument("--expected-repository")
     parser.add_argument("--check-absent", action="store_true")
     parser.add_argument("--repository")
@@ -158,7 +183,8 @@ def main(argv=None):
                 parser.error("catalog and --assets-dir are required")
             result = verify_release(args.catalog, args.assets_dir, signature_path=args.signature,
                                     downloaded_release=args.downloaded_release, all_artifacts=args.all_artifacts,
-                                    expected_repository=args.expected_repository, asset_list=args.asset_list)
+                                    expected_repository=args.expected_repository, asset_list=args.asset_list,
+                                    companions=[tuple(pair) for pair in args.companion])
             print(json.dumps(result, sort_keys=True))
     except (DistributionError, OSError) as error:
         print("error: " + str(error), file=sys.stderr)

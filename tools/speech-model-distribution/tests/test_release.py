@@ -1,6 +1,8 @@
 """Release archive verification, read-only remote preflight and the publication workflow contract."""
 
+import contextlib
 import importlib.util
+import io
 import json
 from pathlib import Path
 import shutil
@@ -118,6 +120,50 @@ class ReleaseVerificationTest(unittest.TestCase):
         shutil.copyfile(signature, self.assets / "catalog-v1.sig.json")
         self.assertTrue(self.verify(downloaded_release=True, signature_path=signature)["downloadedRelease"])
 
+    def test_downloaded_release_carries_its_companion_catalogs_byte_for_byte(self):
+        # From release 3 on a release also publishes an older schema's catalog with the same catalogVersion (decision D127).
+        signature = self.root / distribution.SIGNATURE_FILE
+        signature.write_bytes(b'{"reviewed": 3}\n')
+        companion = dict(self.catalog, schemaVersion=2)
+        companion_path, companion_signature = self.root / "catalog-v2.json", self.root / "catalog-v2.sig.json"
+        companion_path.write_bytes(distribution.canonical_json_bytes(companion))
+        companion_signature.write_bytes(b'{"reviewed": 2}\n')
+        for path in (self.catalog_path, signature, companion_path, companion_signature):
+            shutil.copyfile(path, self.assets / path.name)
+        pair = (companion_path, companion_signature)
+        result = self.verify(downloaded_release=True, signature_path=signature, companions=[pair])
+        self.assertEqual(["catalog-v2.json", "catalog-v2.sig.json", distribution.CATALOG_FILE, distribution.SIGNATURE_FILE],
+                         result["catalogs"])
+        arguments = [str(self.catalog_path), "--assets-dir", str(self.assets), "--downloaded-release", "--signature", str(signature),
+                     "--companion", str(companion_path), str(companion_signature), "--expected-repository", REPOSITORY]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(0, release.main(arguments))
+        with self.assertRaisesRegex(DistributionError, "Unexpected release assets: catalog-v2.json"):
+            self.verify(downloaded_release=True, signature_path=signature)
+        with self.assertRaisesRegex(DistributionError, "only in a downloaded release"):
+            self.verify(companions=[pair])
+        with self.assertRaisesRegex(DistributionError, "own schema"):
+            self.verify(downloaded_release=True, signature_path=signature, companions=[pair, pair])
+        (self.assets / "catalog-v2.sig.json").write_bytes(b"{}\n")
+        with self.assertRaisesRegex(DistributionError, "signature differs .*catalog-v2.sig.json"):
+            self.verify(downloaded_release=True, signature_path=signature, companions=[pair])
+        shutil.copyfile(companion_signature, self.assets / "catalog-v2.sig.json")
+        (self.assets / "catalog-v2.json").unlink()
+        with self.assertRaisesRegex(DistributionError, "Missing release assets: catalog-v2.json"):
+            self.verify(downloaded_release=True, signature_path=signature, companions=[pair])
+        shutil.copyfile(companion_path, self.assets / "catalog-v2.json")
+        # A companion is an older schema of the same release, and it names no archive that the release catalog lacks.
+        for change, message in (({"schemaVersion": 3}, "older schema"),
+                                ({"catalogVersion": 2, "releaseTag": "speech-models-v2", "generatedAt": support.TIME2}, "same release")):
+            companion_path.write_bytes(distribution.canonical_json_bytes(dict(companion, **change)))
+            with self.subTest(change=change), self.assertRaisesRegex(DistributionError, message):
+                self.verify(downloaded_release=True, signature_path=signature, companions=[pair])
+        companion_path.write_bytes(distribution.canonical_json_bytes(companion))
+        trimmed = dict(self.catalog, models=[model for model in self.catalog["models"] if model["kind"] != "tts"])
+        self.catalog_path.write_bytes(distribution.canonical_json_bytes(trimmed))
+        with self.assertRaisesRegex(DistributionError, "archives that the release catalog does not"):
+            self.verify(downloaded_release=True, signature_path=signature, companions=[pair])
+
     def test_current_release_and_all_artifacts_modes_distinguish_historical_urls(self):
         self.catalog.update(catalogVersion=2, releaseTag="speech-models-v2", generatedAt=support.TIME2)
         self.catalog_path.write_bytes(distribution.canonical_json_bytes(self.catalog))
@@ -190,11 +236,21 @@ class WorkflowContractTest(unittest.TestCase):
         self.assertIn("distribution.CATALOG_FILE", self.workflow)
         self.assertNotIn("catalogs/catalog-v1", self.workflow)
 
+    def test_companion_catalogs_are_verified_rebuilt_published_and_read_back(self):
+        # Decision D127: release 3 also publishes catalog-v2.json with its own catalogVersion; history/vN may hold one
+        # catalog per schema, and a catalog builds on the previous release's newest schema not above its own.
+        ordered = ["COMPANION_SCHEMAS=", "history_catalog() {", "PREVIOUS_CATALOG_V$schema=", '--schema "$schema"', "comm -23",
+                   'asset_paths+=("speech-models/catalogs/catalog-v$schema.json"', "gh release create", "--companion"]
+        positions = [self.workflow.index(value) for value in ordered]
+        self.assertEqual(sorted(positions), positions)
+        self.assertIn("for (( schema=$2; schema>=1; schema-- ))", self.workflow)
+        self.assertNotIn("must hold exactly one catalog", self.workflow)
+
     def test_permissions_environment_and_action_pins(self):
         for expected in ("workflow_dispatch:", "contents: write", "environment: speech-models-release",
                          "group: publish-speech-models-", "cancel-in-progress: false", "persist-credentials: false",
                          "python-version: '3.12'", "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5",
-                         "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "default: speech-models-v2"):
+                         "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065", "default: speech-models-v3"):
             self.assertIn(expected, self.workflow)
         codegen = (support.REPOSITORY_ROOT / ".github/workflows/publish-codegen-models.yml").read_text(encoding="utf-8")
         self.assertNotIn("speech-models", codegen)

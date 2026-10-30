@@ -37,6 +37,10 @@ WHISPER = ["langid.whisper.base.int8", "langid.whisper.tiny.int8"]
 TAGGER = "tagger.ced.mini.int8"
 # The versions that need catalog schema 3 (plugin roadmap P8.3, P8.4): catalog-v2.json of release 3 leaves them out.
 SCHEMA_3 = [SPEAKER, SEGMENT, *WHISPER, TAGGER]
+# Release 1 models whose upstream asset k2-fsa replaced after publication get version 2 in release 3 (plugin roadmap Q119).
+KOKORO_V1_1 = "tts.kokoro.multi-lang.v1_1"
+MATCHA = "tts.matcha.icefall.zh-baker"
+REPINNED = {KOKORO_V1_1: "kokoro-multi-lang-v1_1.tar.bz2", MATCHA: "matcha-icefall-zh-baker.tar.bz2"}
 
 
 def schema(name):
@@ -53,7 +57,7 @@ class CheckedInDataTest(unittest.TestCase):
         cls.v2 = distribution.read_json(HISTORY_V2 / "catalog-v2.json")
 
     def test_sources_are_measured_text_only_and_license_complete(self):
-        self.assertEqual(30, len(self.sources))
+        self.assertEqual(32, len(self.sources))
         for folder, source in self.sources:
             names = {path.name for path in folder.iterdir()}
             paths = {item["path"] for item in source["files"]}
@@ -99,13 +103,27 @@ class CheckedInDataTest(unittest.TestCase):
                                                      previous_catalog=self.v2)
         self.assertEqual(data, distribution.canonical_json_bytes(rebuilt))
         self.assertEqual(assets, (PENDING / "release-assets.txt").read_text(encoding="utf-8").splitlines())
-        self.assertEqual(10, len(assets))
+        self.assertEqual(12, len(assets))
         self.assertEqual(30, len(self.catalog["models"]))
         self.assertEqual([(model_id, 1) for model_id in UPSTREAM_ONLY], distribution.upstream_only_versions(self.catalog))
         # Archives of catalogs v1 and v2 stay on their releases; v3 uploads only the archives it introduces.
         old = {model["modelId"]: model for model in self.v2["models"]}
-        self.assertFalse(any(model_id in name for name in assets for model_id in set(old) | set(UPSTREAM_ONLY)))
-        self.assertEqual(old, {model["modelId"]: model for model in self.catalog["models"] if model["modelId"] in old})
+        self.assertFalse(any(f"-{model_id}-v1-" in name for name in assets for model_id in set(old) | set(UPSTREAM_ONLY)))
+        current = {model["modelId"]: model for model in self.catalog["models"] if model["modelId"] in old}
+        self.assertEqual({model_id: model for model_id, model in old.items() if model_id not in REPINNED},
+                         {model_id: model for model_id, model in current.items() if model_id not in REPINNED})
+        sources = {(source["modelId"], source["versionCode"]): source for _folder, source in self.sources}
+        for model_id, asset in REPINNED.items():
+            with self.subTest(model=model_id):
+                # Version 1 is carried unchanged; version 2 pins the replaced upstream asset and becomes the recommended one.
+                self.assertEqual(old[model_id]["versions"], current[model_id]["versions"][:1])
+                self.assertEqual(([1, 2], 2), ([version["versionCode"] for version in current[model_id]["versions"]],
+                                               current[model_id]["recommendedVersionCode"]))
+                first, second = sources[(model_id, 1)], sources[(model_id, 2)]
+                self.assertEqual(asset, second["upstream"][0]["url"].rsplit("/", 1)[1])
+                self.assertNotEqual(first["upstream"][0]["sha256"], second["upstream"][0]["sha256"])
+                self.assertEqual(first["runtime"], second["runtime"])
+                self.assertIn(f"-{model_id}-v2-", " ".join(assets))
         preparation = distribution.read_json(PENDING / "preparation.json")
         self.assertEqual(len(assets), preparation["releaseAssetCount"])
         self.assertEqual(3, preparation["upstreamOnlyVersions"])
@@ -137,17 +155,29 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual((1, 1, 10), (self.v1["schemaVersion"], self.v1["catalogVersion"], len(self.v1["models"])))
         distribution.validate_catalog(self.v1, expected_repository=distribution.DEFAULT_REPOSITORY)
 
-    def test_promoted_catalog_v2_is_the_reviewed_candidate_with_a_valid_signature(self):
-        catalogs = FAMILY / "catalogs"
+    def test_promoted_catalogs_are_the_reviewed_candidates_with_valid_signatures(self):
+        # Release 2 stays signed in history/v2. Until release 3 is promoted, catalogs/ serves release 2's catalog-v2.json;
+        # afterwards it serves release 3's catalog-v3.json and its schema 2 companion catalog-v2.json (D127), both signed.
+        catalogs, crypto = FAMILY / "catalogs", support.load("crypto")
         for name in ("catalog-v2.json", "catalog-v2.sig.json"):
-            self.assertEqual((PENDING_V2 / name).read_bytes(), (catalogs / name).read_bytes())
-            self.assertEqual((HISTORY_V2 / name).read_bytes(), (catalogs / name).read_bytes())
+            self.assertEqual((PENDING_V2 / name).read_bytes(), (HISTORY_V2 / name).read_bytes())
         self.assertEqual((2, 2, 19), (self.v2["schemaVersion"], self.v2["catalogVersion"], len(self.v2["models"])))
-        crypto = support.load("crypto")
+        promoted = (catalogs / "catalog-v3.json").exists()
+        reviewed, version, names = (PENDING, 3, ("catalog-v2", "catalog-v3")) if promoted else (PENDING_V2, 2, ("catalog-v2",))
+        if not promoted:
+            self.assertFalse((catalogs / "catalog-v3.sig.json").exists())
         crypto.verify_catalog_material(
-            catalogs / "catalog-v2.json", catalogs / "catalog-v2.sig.json",
+            HISTORY_V2 / "catalog-v2.json", HISTORY_V2 / "catalog-v2.sig.json",
             FAMILY / "keys/catalog-signing-public.pem", "p256-bf5f0f579c7fbef1",
             minimum_catalog_version=2, expected_repository=distribution.DEFAULT_REPOSITORY)
+        for stem in names:
+            with self.subTest(catalog=stem, promoted=promoted):
+                for name in (stem + ".json", stem + ".sig.json"):
+                    self.assertEqual((reviewed / name).read_bytes(), (catalogs / name).read_bytes())
+                crypto.verify_catalog_material(
+                    catalogs / (stem + ".json"), catalogs / (stem + ".sig.json"),
+                    FAMILY / "keys/catalog-signing-public.pem", "p256-bf5f0f579c7fbef1",
+                    minimum_catalog_version=version, expected_repository=distribution.DEFAULT_REPOSITORY)
 
     def test_license_audits_match_every_catalog_model(self):
         first = self.check_audit("license-audit-v1.json", self.v1)
@@ -159,7 +189,7 @@ class CheckedInDataTest(unittest.TestCase):
         self.assertEqual(first["models"], [entry for entry in audit["models"] if entry["modelId"] in carried])
         third = self.check_audit("license-audit-v3.json", self.catalog, set(NOTICE_FOR.values()) | {UNKNOWN_DATA})
         self.assertEqual(audit["decisions"], third["decisions"][:5])
-        self.assertEqual(10, len(third["decisions"]))
+        self.assertEqual(11, len(third["decisions"]))
         self.assertEqual(audit["models"], [entry for entry in third["models"] if entry["modelId"] in {item["modelId"] for item in audit["models"]}])
         pengcheng = next(entry for entry in third["models"] if entry["modelId"] == PENGCHENG)
         self.assertEqual(["undisclosed"], [item["commercialRestriction"] for item in pengcheng["trainingData"]])

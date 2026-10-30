@@ -146,16 +146,27 @@ catalog is kept in `catalogs/history/v2/`, and the unsigned `pending/v3/catalog-
 (`catalogVersion` 3) adds the plugin's 1.3.0 language models, which use existing kinds only. The
 schema 3 `pending/v3/catalog-v3.json` next to it lists the same versions plus the new kinds (P8.3:
 `speaker`; P8.4: `segment`, `langid` and `tagger`); the maintainer signs both and publishes them together as
-`speech-models-v3`. `release-assets.txt` and `preparation.json` describe `catalog-v3.json`, whose
-archives include every archive of `catalog-v2.json`.
+`speech-models-v3`, with `catalog-v2.json` as the companion catalog of the release (see the publication steps
+below). `release-assets.txt` and `preparation.json` describe `catalog-v3.json`, whose archives include every
+archive of `catalog-v2.json`.
 
 ### Catalog v3 (pending)
 
-The pending catalogs carry the 19 release 2 models unchanged. `catalog-v2.json` adds six versions
+The pending catalogs carry every release 2 version unchanged. `catalog-v2.json` adds six versions
 chosen by the maintainer on 2026-10-25 (plugin roadmap D131, Q79-Q85); `catalog-v3.json` also adds the
 speaker embedding model chosen on 2026-10-26 (D137, Q93) and the four analysis models chosen on
-2026-10-29 (D144-D146, D154, Q101-Q104, Q113). The ten archives were measured from the pinned upstream
-assets and reproduced byte for byte by a second offline run.
+2026-10-29 (D144-D146, D154, Q101-Q104, Q113). Both add version 2 of two release 1 models (Q119, below).
+The twelve archives were measured from the pinned upstream assets and reproduced byte for byte by a second
+run.
+
+- k2-fsa replaced three pinned upstream assets after they were pinned (found on 2026-10-30, plugin roadmap
+  Q118, Q119): `kokoro-int8-multi-lang-v1_0.tar.bz2` and `kokoro-multi-lang-v1_1.tar.bz2` on 2026-10-26
+  (new `model.int8.onnx`, and `model.onnx` plus `lexicon-zh.txt`), `matcha-icefall-zh-baker.tar.bz2` on
+  2026-10-29 (new `model-steps-3.onnx`). The unpublished `tts.kokoro.multi-lang.v1_0.int8` version 1 is
+  re-pinned in place. The published `tts.kokoro.multi-lang.v1_1` and `tts.matcha.icefall.zh-baker` keep
+  version 1, which now installs from its `speech-models-v1` mirror archive only because its upstream pin
+  no longer matches, and gain version 2 with the replacement, the same member selection and the same
+  configuration. sherpa-onnx 1.13.8 synthesizes intelligible speech with all three replacements.
 
 - The Spanish recognizer is offline: sherpa-onnx `OfflineTransducerModelConfig` with model type
   `nemo_transducer`, added to schema 2 as `offline-transducer`. Plugins 1.2.0 and older skip this
@@ -188,8 +199,10 @@ assets and reproduced byte for byte by a second offline run.
 | `langid.whisper.tiny.int8` | 102.8 MB (schema 3 only) | `MIT` | unknown |
 | `langid.whisper.base.int8` | 159.8 MB (schema 3 only) | `MIT` | unknown |
 | `tagger.ced.mini.int8` | 10.5 MB (schema 3 only) | `CC-BY-4.0 AND CC-BY-SA-4.0` | true |
+| `tts.kokoro.multi-lang.v1_1` version 2 | 405.9 MB | `Apache-2.0 AND GPL-3.0-or-later` | true |
+| `tts.matcha.icefall.zh-baker` version 2 | 81.0 MB | `LicenseRef-NoLicenseDeclared AND MIT` | false |
 
-The ten new archives total 1,068,096,000 bytes (`pending/v3/release-assets.txt`; 762,554,368 bytes
+The twelve new archives total 1,555,015,680 bytes (`pending/v3/release-assets.txt`; 1,249,474,048 bytes
 without the schema 3 models). `catalog-v3.json` then lists 30 models and `catalog-v2.json` 25, three of
 them upstream-only.
 
@@ -327,10 +340,40 @@ catalog.
    size and the key ID in the plugin roadmap (P7.7), and replace the plugin's bundled pending catalog
    with the exact signed catalog and signature.
 
-Release 3 differs: it publishes two catalogs (plugin roadmap D127), the schema 3 `catalog-v3.json`
-and a re-signed `catalog-v2.json` with `catalogVersion` 3, while the workflow above still expects one
-current catalog and requires every other `catalog-v*.json` to equal a history copy. Adapting the
-workflow and these steps belongs to the plugin phase that adds `catalog-v3.json`; until then
-`pending/v3/` is reviewed and tested but not signed.
+### Release 3: two catalogs (plugin roadmap D127, P8.5)
+
+Release 3 publishes the schema 3 `catalog-v3.json` and, as its companion, a re-signed schema 2
+`catalog-v2.json` with the same `catalogVersion` 3, so plugins 1.2.0 and older see the new versions of
+existing kinds. The workflow treats an older schema's catalog in `catalogs/` whose `catalogVersion` equals the
+current one as a companion: it verifies its signature against the previous release, rebuilds it with
+`build_catalog.py --schema`, checks that its archives are a subset of the current catalog's, uploads it with
+its signature and verifies the downloaded copies (`verify_release.py --companion`). Release 2's
+`catalog-v2.json` and signature stay in `catalogs/history/v2/`; `catalogs/catalog-v1.json` stays frozen. The
+same steps as above, with both catalogs:
+
+```powershell
+$keyId = 'p256-bf5f0f579c7fbef1'
+$repo = 'SuperMonster003/AutoJs6-Shared-Assets'
+$previous = 'speech-models/catalogs/history/v2/catalog-v2.json'
+$pending = 'speech-models/catalogs/pending/v3'
+$public = 'speech-models/keys/catalog-signing-public.pem'
+foreach ($name in 'catalog-v3', 'catalog-v2') {
+    python tools/speech-model-distribution/verify_catalog.py "$pending/$name.json" --previous-catalog $previous --minimum-catalog-version 3 --expected-repository $repo --source-root speech-models/sources
+    python tools/speech-model-distribution/sign_catalog.py "$pending/$name.json" --private-key D:/offline-keys/speech-models.private.pem --output "$pending/$name.sig.json" --key-id $keyId --expected-repository $repo
+    Copy-Item "$pending/$name.json" "speech-models/catalogs/$name.json"
+    Copy-Item "$pending/$name.sig.json" "speech-models/catalogs/$name.sig.json"
+    python tools/speech-model-distribution/verify_catalog.py "speech-models/catalogs/$name.json" --signature "speech-models/catalogs/$name.sig.json" --public-key $public --expected-key-id $keyId --previous-catalog $previous --minimum-catalog-version 3 --expected-repository $repo --source-root speech-models/sources
+}
+python -m unittest discover -s tools/speech-model-distribution/tests
+```
+
+Optionally reproduce the twelve new archives (about 1.6 GB of upstream downloads) with
+`prepare_sources.py --catalog speech-models/catalogs/catalog-v3.json --output-dir build/speech-models/release-v3`
+and `verify_release.py speech-models/catalogs/catalog-v3.json --assets-dir build/speech-models/release-v3
+--asset-list speech-models/catalogs/pending/v3/release-assets.txt --expected-repository $repo`. Then commit the
+two signatures in `pending/v3/` and the two promoted pairs, push, and dispatch the workflow with
+`-f release_tag=speech-models-v3`. The Release then carries the twelve archives, both catalogs and both
+signatures. Record the Release in the plugin roadmap (P8.5.1) and replace the plugin's bundled catalog with
+the exact signed `catalog-v3.json` and its signature (P8.5.2).
 
 Tool details, adding a model version and local checks: [tools README](../tools/speech-model-distribution/README.md).

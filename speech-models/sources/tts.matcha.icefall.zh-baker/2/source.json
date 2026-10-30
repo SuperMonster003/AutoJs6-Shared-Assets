@@ -1,0 +1,115 @@
+{
+  "archive": {
+    "format": "tar",
+    "sha256": "5bb9f9824b54614d44a9a178346102640c18e2962c6bd81201ec443f3cb38307",
+    "size": 80976896
+  },
+  "displayName": {
+    "en": "Matcha-TTS Baker Chinese",
+    "zh-CN": "Matcha-TTS 标贝中文女声"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "d47ef70781df15845b6f28c6c071dee9e51b52c36797a8130a620c5c8895929c",
+      "size": 370
+    },
+    {
+      "path": "date.fst",
+      "sha256": "eb8aa079ae3cb81d8f4404992f39d61a0cb990947512b5b8d1e54d1f6980e718",
+      "size": 59154
+    },
+    {
+      "path": "hifigan_v2.onnx",
+      "sha256": "a41d404cce7924493540238da5b30a4bc14b6ddaf1a37f3c79fa4f59548c19f0",
+      "size": 3749714
+    },
+    {
+      "path": "lexicon.txt",
+      "sha256": "38b886d46aefa50da6322a64d72fd595d5f4fae1051adb160d647541b1e0a4a2",
+      "size": 1363705
+    },
+    {
+      "path": "model-steps-3.onnx",
+      "sha256": "78a9fd17e9a6c20198dca4e69d18f941303f8ab39ec61dde04cfc7595262ddfd",
+      "size": 75624188
+    },
+    {
+      "path": "number.fst",
+      "sha256": "743f402181fcfebf76cc2f0546b71fa26476e626fbe4e460fb7b4c3a7a8bd5bd",
+      "size": 64482
+    },
+    {
+      "path": "phone.fst",
+      "sha256": "1ac2b6fa56b1442320c4de7db08353bab8963a2b57f365eebcdd3a2d3562f8d7",
+      "size": 88630
+    },
+    {
+      "path": "tokens.txt",
+      "sha256": "56209b2bf609d5ac1d66ede6dae7bf5254bd3f8aa24c4a6823713d5b884d87ba",
+      "size": 19591
+    }
+  ],
+  "format": 1,
+  "kind": "tts",
+  "languages": [
+    "zh"
+  ],
+  "license": {
+    "commercialUse": false,
+    "noticeKey": "speech_model_license_non_commercial",
+    "spdx": "LicenseRef-NoLicenseDeclared AND MIT"
+  },
+  "mirror": true,
+  "modelId": "tts.matcha.icefall.zh-baker",
+  "modelType": "matcha",
+  "recommended": false,
+  "releasedAt": "2026-10-30T00:00:00Z",
+  "runtime": {
+    "config": {
+      "acousticModel": "model-steps-3.onnx",
+      "lexicon": [
+        "lexicon.txt"
+      ],
+      "ruleFsts": [
+        "phone.fst",
+        "date.fst",
+        "number.fst"
+      ],
+      "tokens": "tokens.txt",
+      "vocoder": "hifigan_v2.onnx"
+    },
+    "minSherpaOnnx": "1.13.8"
+  },
+  "sampleRate": 22050,
+  "speakers": 1,
+  "summary": {
+    "en": "One female Mandarin voice trained with icefall on the Data-Baker corpus, with the HiFi-GAN v2 vocoder, 22.05 kHz output. The corpus allows non-commercial use only.",
+    "zh-CN": "使用 icefall 在标贝语料上训练的普通话女声, 搭配 HiFi-GAN v2 声码器, 输出 22.05 kHz. 该语料仅限非商业用途."
+  },
+  "upstream": [
+    {
+      "format": "tar.bz2",
+      "members": {
+        "matcha-icefall-zh-baker/README.md": "README.md",
+        "matcha-icefall-zh-baker/date.fst": "date.fst",
+        "matcha-icefall-zh-baker/lexicon.txt": "lexicon.txt",
+        "matcha-icefall-zh-baker/model-steps-3.onnx": "model-steps-3.onnx",
+        "matcha-icefall-zh-baker/number.fst": "number.fst",
+        "matcha-icefall-zh-baker/phone.fst": "phone.fst",
+        "matcha-icefall-zh-baker/tokens.txt": "tokens.txt"
+      },
+      "sha256": "8da2e113b85dfea37b11bcdc994506aa86b584ee3348c2065271fb6f75cb83b8",
+      "size": 75463556,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/matcha-icefall-zh-baker.tar.bz2"
+    },
+    {
+      "format": "file",
+      "path": "hifigan_v2.onnx",
+      "sha256": "a41d404cce7924493540238da5b30a4bc14b6ddaf1a37f3c79fa4f59548c19f0",
+      "size": 3749714,
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/vocoder-models/hifigan_v2.onnx"
+    }
+  ],
+  "versionCode": 2
+}

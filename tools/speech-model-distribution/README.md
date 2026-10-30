@@ -11,7 +11,7 @@ signing and publication steps are in [the family README](../../speech-models/REA
 | `build_catalog.py` | Build an unsigned catalog from the sources (no network), plus `release-assets.txt` and `preparation.json`. |
 | `verify_catalog.py` | Validate schema rules, canonical bytes, history and immutability, optionally the rebuild from sources and the detached signature. |
 | `sign_catalog.py` | Maintainer-only offline signing with the speech key. |
-| `verify_release.py` | Verify release archives by name, size, SHA-256 and USTAR content, or confirm remote tag and Release absence. |
+| `verify_release.py` | Verify release archives by name, size, SHA-256 and USTAR content (a downloaded release also with its catalogs, `--companion` for a same-release catalog of an older schema), or confirm remote tag and Release absence. |
 | `check_docs.py` | ASCII punctuation, relative links and the recorded key fingerprint of the speech documents (run by `markdown.yml`). |
 
 `distribution.py` holds the validators, the canonical archive writer and reader and catalog building;
@@ -159,3 +159,23 @@ directory reproduced them with identical SHA-256 digests. `build_catalog.py` (sc
 file, `release-assets.txt` and `preparation.json` were moved into `pending/v3`, the schema 2 build
 with the same sources reproduced `catalog-v2.json` byte for byte, and `verify_catalog.py` accepted both
 pending catalogs with the rebuild from sources. No network publication took place.
+
+## Measured v3 re-pin (2026-10-30)
+
+Before release 3 was signed, three pinned upstream assets no longer matched GitHub: k2-fsa had replaced
+`kokoro-int8-multi-lang-v1_0.tar.bz2` and `kokoro-multi-lang-v1_1.tar.bz2` on 2026-10-26 and
+`matcha-icefall-zh-baker.tar.bz2` on 2026-10-29, while the other 28 pins still matched (plugin roadmap
+Q118, Q119). The unpublished Kokoro v1.0 int8 version 1 was re-pinned in place; the published Kokoro v1.1
+and Matcha zh-baker got version 2 (`sources/<modelId>/2/`) and keep version 1 unchanged.
+`prepare_sources.py --update-sources --offline` measured the three archives (656,161,280 bytes);
+`build_catalog.py` rebuilt both pending catalogs (`generatedAt` 2026-10-30) against
+`history/v2/catalog-v2.json`, and `verify_catalog.py` accepted them with the rebuild from sources. A second
+run from the pinned upstream assets reproduced all twelve release 3 archives (1,555,015,680 bytes) with
+identical SHA-256 digests, and `verify_release.py` accepted them against `pending/v3/release-assets.txt`.
+
+The publication workflow now handles a release with a companion catalog (an older schema's catalog with the
+same `catalogVersion`, decision D127) and history directories that hold one catalog per schema. A local dry
+run on a copy of the repository, with a disposable P-256 key standing in for the offline key, signed and
+promoted both release 3 catalogs as in the family README, passed the tool tests, the workflow's input,
+signature and reproduction steps, the archive check and the read-back with both catalogs. No network
+publication took place.
