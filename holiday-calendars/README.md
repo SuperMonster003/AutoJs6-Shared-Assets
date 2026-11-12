@@ -251,9 +251,12 @@ bytes raw (minimum / median / maximum) and 20 / 67 / 662 bytes gzip; the largest
 
 ## Current state
 
-Release 1 is prepared and not signed: `catalogs/pending/v1/` holds the reviewed `catalog-v1.json`
-(`catalogVersion` 1, generated at 2026-11-12T00:00:00Z), `release-assets.txt` (all 250 files) and
-`preparation.json`. `holiday-calendars-v1` has neither a tag nor a Release yet.
+Release 1 is signed with key `p256-35ac0585129625d2` and promoted to `catalogs/catalog-v1.json`
+and `catalogs/catalog-v1.sig.json` (`catalogVersion` 1, generated at 2026-11-12T00:00:00Z).
+`catalogs/pending/v1/` retains the identical reviewed catalog and signature, `release-assets.txt`
+(all 250 files) and the original unsigned `preparation.json`. The publication workflow uses this
+signed pair for the immutable `holiday-calendars-v1` release: 250 calendar files (1,886,102 bytes),
+the catalog (193,762 bytes) and its signature (222 bytes), 252 assets totaling 2,080,086 bytes.
 
 ## Signing key
 
