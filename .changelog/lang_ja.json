@@ -18,6 +18,15 @@
     "adjustment": "調整"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新しい祝日カレンダー群 holiday-calendars のデータ, 生成ツールと検証ツール, 公開ワークフローを追加. 3-Chime Alarm プラグインは 2020 - 2035 年の祝日と振替出勤日をここから取得します"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [

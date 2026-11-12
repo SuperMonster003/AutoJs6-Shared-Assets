@@ -22,6 +22,7 @@
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): дополнительные шрифты WOFF2 для редактора Ace в AutoJs6. Обычный Iosevka по-прежнему встроен в AutoJs6 и здесь не распространяется.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): локальные модели ранжирования для генерации кода интерфейсов с независимыми версиями, собственными подписанными каталогами и тегами выпусков.
 - [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): речевые модели sherpa-onnx (распознавание, обнаружение ключевых слов и синтез), которые плагин 3-Macaw Speech загружает по запросу. В репозитории хранятся только манифесты источников и тексты лицензий; архивы воспроизводятся из закреплённых исходных ресурсов и имеют собственные подписанные каталоги и теги выпусков.
+- [`holiday-calendars/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md): календари государственных праздников для плагина 3-Chime Alarm, по одному JSON-файлу на регион за 2020 - 2035 годы, включая перенесённые рабочие дни, например в России и материковом Китае. Данные создаются при сборке из закреплённой версии python-holidays (MIT) и хранятся в репозитории, поэтому воспроизводимы; у них собственный подписанный каталог и теги выпусков.
 - Новые семейства ресурсов должны иметь собственные каталог, манифест, префикс тега, процесс публикации, политику целостности и при необходимости ключ подписи.
 
 Ресурсы, необходимые для сборки или отображения установленного приложения (например, основной логотип или встроенный CSS), обычно остаются в исходном репозитории AutoJs6. Здесь хранятся независимо выпускаемые/загружаемые или общие для нескольких проектов ресурсы. Удаленный CSS является активным содержимым и не должен попадать в `ace-fonts`; выделите ему отдельное пространство имен и более строгую политику подписи/проверки.
@@ -42,6 +43,7 @@
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
 .github/workflows/publish-speech-models.yml
+.github/workflows/publish-holiday-calendars.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -69,6 +71,15 @@ speech-models/
   keys/catalog-signing-public.pem  # public key only
   schemas/                         # catalog, signature and model-source schemas
 tools/speech-model-distribution/
+holiday-calendars/
+  data/<CC>.json                   # generated calendar per region, plus generation.json
+  sources/                         # generator pin and known-date spot checks
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # calendar, catalog and signature schemas
+  *-python-holidays.txt            # upstream MIT license and contributors
+tools/holiday-calendar-distribution/
 ```
 
 Созданные пакеты находятся в игнорируемом `build/`. Эталонные WOFF2 и файлы уведомлений отслеживаются напрямую, поэтому чистый клон воспроизводит выпуски без каталога AutoJs6 `build/` и прежнего снимка `tools/.../sources`. Git LFS намеренно не используется.
@@ -87,7 +98,15 @@ tools/speech-model-distribution/
 
 Шаги подписи и публикации речевых моделей описаны в [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), инструменты - в [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). Двоичные файлы моделей не хранятся в репозитории; процесс публикации проверяет и воспроизводит каждый архив из закреплённых исходных ресурсов sherpa-onnx. Лицензия каждой модели и допустимость коммерческого использования записаны в аудите лицензий.
 
+Формат календарей праздников, шаги подписи и публикации описаны в [`holiday-calendars/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md), инструменты - в [`tools/holiday-calendar-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/holiday-calendar-distribution/README.md). Процесс публикации заново создаёт все данные закреплённой версией python-holidays, сравнивает их побайтно и загружает только регионы, файлы которых изменились. Лицензия MIT и список участников python-holidays хранятся рядом с данными.
+
 ## Журнал изменений
+
+### 2026-11-12
+
+###### 2026/11/12
+
+* `Функция` Добавлены данные, инструменты создания и проверки и процесс публикации нового семейства holiday-calendars - календарей праздников, по которым плагин 3-Chime Alarm определяет праздники и перенесённые рабочие дни за 2020 - 2035 годы
 
 ### 2026-10-16
 

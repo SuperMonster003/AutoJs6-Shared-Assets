@@ -1,0 +1,64 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"10-05":[8],"12-25":[9]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"05-02":[10],"06-25":[4],"09-07":[5],"09-25":[6],"09-26":[11],"10-04":[7],"12-25":[9],"12-26":[12]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[13],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"06-26":[14],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"04-08":[15],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-08":[16],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"10-05":[8],"12-25":[9]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"06-26":[14],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-03":[1],"02-04":[17],"04-07":[2],"04-08":[15],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-08":[16],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"05-02":[10],"06-25":[4],"09-07":[5],"09-25":[6],"09-26":[11],"10-04":[7],"12-25":[9],"12-26":[12]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[13],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"06-26":[14],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-03":[1],"04-07":[2],"05-01":[3],"06-25":[4],"09-07":[5],"09-25":[6],"10-04":[7],"12-25":[9]},"workdays":[]}
+  },
+  "defaultLanguage": "pt-MZ",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "pt-MZ"
+  ],
+  "name": "Mozambique",
+  "names": [
+    {"en-US":"International Fraternalism Day","pt-MZ":"Dia da Fraternidade universal"},
+    {"en-US":"Heroes' Day","pt-MZ":"Dia dos Heróis Moçambicanos"},
+    {"en-US":"Women's Day","pt-MZ":"Dia da Mulher Moçambicana"},
+    {"en-US":"International Workers' Day","pt-MZ":"Dia Internacional dos Trabalhadores"},
+    {"en-US":"National Independence Day","pt-MZ":"Dia da Independência Nacional"},
+    {"en-US":"Victory Day","pt-MZ":"Dia da Vitória"},
+    {"en-US":"Armed Forces Day","pt-MZ":"Dia das Forças Armadas de Libertação Nacional"},
+    {"en-US":"Peace and Reconciliation Day","pt-MZ":"Dia da Paz e Reconciliação"},
+    {"en-US":"Peace and Reconciliation Day (observed)","pt-MZ":"Dia da Paz e Reconciliação (ponte)"},
+    {"en-US":"Family Day","pt-MZ":"Dia da Família"},
+    {"en-US":"International Workers' Day (observed)","pt-MZ":"Dia Internacional dos Trabalhadores (ponte)"},
+    {"en-US":"Armed Forces Day (observed)","pt-MZ":"Dia das Forças Armadas de Libertação Nacional (ponte)"},
+    {"en-US":"Family Day (observed)","pt-MZ":"Dia da Família (ponte)"},
+    {"en-US":"International Fraternalism Day (observed)","pt-MZ":"Dia da Fraternidade universal (ponte)"},
+    {"en-US":"National Independence Day (observed)","pt-MZ":"Dia da Independência Nacional (ponte)"},
+    {"en-US":"Women's Day (observed)","pt-MZ":"Dia da Mulher Moçambicana (ponte)"},
+    {"en-US":"Victory Day (observed)","pt-MZ":"Dia da Vitória (ponte)"},
+    {"en-US":"Heroes' Day (observed)","pt-MZ":"Dia dos Heróis Moçambicanos (ponte)"}
+  ],
+  "region": "MZ",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

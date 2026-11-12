@@ -1,0 +1,68 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"05-01":[4],"05-16":[5],"05-17":[6],"06-30":[7],"08-01":[8],"12-25":[9]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2,10],"01-17":[3],"05-01":[4],"05-17":[6],"06-30":[7],"07-31":[11],"08-01":[8],"12-25":[9]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-04":[1],"01-15":[12],"01-16":[2],"01-17":[3],"04-30":[13],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"12-24":[14],"12-25":[9],"12-31":[15]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"12-25":[9]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-29":[17],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-05":[19],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-03":[20],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-16":[5],"05-17":[6],"06-30":[7],"08-01":[21,22],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2,10],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"07-31":[11],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-04":[1],"01-15":[12],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-29":[17],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-05":[19],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-03":[20],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"07-31":[11],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-04":[1],"01-15":[12],"01-16":[2],"01-17":[3],"04-06":[16],"04-30":[13],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-24":[14],"12-25":[9],"12-31":[15]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"01-04":[1],"01-16":[2],"01-17":[3],"04-06":[16],"05-01":[4],"05-17":[6],"06-30":[7],"08-01":[8],"08-02":[18],"12-25":[9]},"workdays":[]}
+  },
+  "defaultLanguage": "fr",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "fr"
+  ],
+  "name": "Democratic Republic of the Congo",
+  "names": [
+    {"en-US":"New Year's Day","fr":"Nouvel an"},
+    {"en-US":"Martyrs' Day","fr":"Martyrs de l'indépendance"},
+    {"en-US":"National Hero Laurent Désiré Kabila Day","fr":"Journée du héros national Laurent Désiré Kabila"},
+    {"en-US":"National Hero Patrice Emery Lumumba Day","fr":"Journée du héros national Patrice Emery Lumumba"},
+    {"en-US":"Labor Day","fr":"Fête du travail"},
+    {"en-US":"Revolution and Armed Forces Day (observed)","fr":"Journée de la Révolution et des Forces Armées (observé)"},
+    {"en-US":"Revolution and Armed Forces Day","fr":"Journée de la Révolution et des Forces Armées"},
+    {"en-US":"Independence Day","fr":"Journée de l'indépendance"},
+    {"en-US":"Parents' Day","fr":"Fête des parents"},
+    {"en-US":"Christmas Day","fr":"Noël"},
+    {"en-US":"National Hero Patrice Emery Lumumba Day (observed)","fr":"Journée du héros national Patrice Emery Lumumba (observé)"},
+    {"en-US":"Parents' Day (observed)","fr":"Fête des parents (observé)"},
+    {"en-US":"National Hero Laurent Désiré Kabila Day (observed)","fr":"Journée du héros national Laurent Désiré Kabila (observé)"},
+    {"en-US":"Labor Day (observed)","fr":"Fête du travail (observé)"},
+    {"en-US":"Christmas Day (observed)","fr":"Noël (observé)"},
+    {"en-US":"New Year's Day (observed)","fr":"Nouvel an (observé)"},
+    {"en-US":"Day of the Struggle of Simon Kimbangu and African Consciousness","fr":"Journée du combat de Simon Kimbangu et de la conscience africaine"},
+    {"en-US":"Independence Day (observed)","fr":"Journée de l'indépendance (observé)"},
+    {"en-US":"Congolese Genocide Memorial Day","fr":"Journée commémorative du génocide Congolais"},
+    {"en-US":"Day of the Struggle of Simon Kimbangu and African Consciousness (observed)","fr":"Journée du combat de Simon Kimbangu et de la conscience africaine (observé)"},
+    {"en-US":"Martyrs' Day (observed)","fr":"Martyrs de l'indépendance (observé)"},
+    {"en-US":"Congolese Genocide Memorial Day (observed)","fr":"Fête des parents"},
+    {"en-US":"Parents' Day","fr":"Journée commémorative du génocide Congolais (observé)"}
+  ],
+  "region": "CD",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-12":[1],"01-13":[2],"04-07":[3],"04-10":[4],"04-13":[5],"04-26":[6],"04-27":[7],"05-01":[8],"05-24":[9],"05-25":[9],"05-26":[10],"07-07":[11],"07-31":[12],"08-08":[13],"08-10":[14],"10-14":[15],"10-28":[16],"10-29":[17],"12-09":[18],"12-25":[19],"12-26":[20],"12-28":[21]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"01-12":[1],"03-22":[22],"03-25":[22],"04-02":[4],"04-05":[5],"04-07":[3],"04-26":[6],"05-01":[8],"05-03":[23],"05-14":[9],"05-15":[9],"05-17":[10],"07-07":[11],"07-21":[12],"08-08":[13],"08-09":[14],"10-14":[15],"10-19":[17],"12-09":[18],"12-25":[19],"12-26":[20],"12-27":[24,25]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-03":[26],"01-12":[1],"04-07":[3],"04-15":[4],"04-18":[5],"04-26":[6],"05-01":[8],"05-02":[23],"05-03":[9],"05-04":[9],"07-07":[11],"07-10":[12],"07-11":[27],"08-08":[13],"08-23":[28],"10-09":[17],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-12":[1],"04-07":[4,3],"04-10":[5],"04-22":[9],"04-23":[9],"04-26":[6],"05-01":[8],"06-29":[12],"07-07":[11],"08-08":[13],"09-28":[17],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"01-12":[1],"03-29":[4],"04-01":[5],"04-07":[3],"04-10":[9],"04-11":[9],"04-26":[6],"05-01":[8],"06-17":[12],"07-07":[11],"08-08":[13],"09-16":[17],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-12":[1],"03-31":[9],"04-01":[9],"04-07":[3],"04-18":[4],"04-21":[5],"04-26":[6],"05-01":[8],"06-07":[12],"07-07":[11],"08-08":[13],"09-04":[17],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-12":[1],"03-21":[29],"03-22":[29],"04-03":[4],"04-06":[5],"04-07":[3],"04-26":[6],"05-01":[8],"05-28":[30],"07-07":[11],"08-08":[13],"08-26":[31],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"01-12":[1],"03-10":[29],"03-11":[29],"03-26":[4],"03-29":[5],"04-07":[3],"04-26":[6],"05-01":[8],"05-17":[30],"07-07":[11],"08-08":[13],"08-15":[31],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-12":[1],"02-27":[29],"02-28":[29],"04-07":[3],"04-14":[4],"04-17":[5],"04-26":[6],"05-01":[8],"05-06":[30],"07-07":[11],"08-04":[31],"08-08":[13],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"01-12":[1],"02-15":[29],"02-16":[29],"03-30":[4],"04-02":[5],"04-07":[3],"04-25":[30],"04-26":[6],"05-01":[8],"07-07":[11],"07-25":[31],"08-08":[13],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-12":[1],"02-05":[29],"02-06":[29],"04-07":[3],"04-14":[30],"04-19":[4],"04-22":[5],"04-26":[6],"05-01":[8],"07-07":[11],"07-14":[31],"08-08":[13],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-12":[1],"01-25":[29],"01-26":[29],"04-03":[30],"04-07":[3],"04-11":[4],"04-14":[5],"04-26":[6],"05-01":[8],"07-03":[31],"07-07":[11],"08-08":[13],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-12":[1],"01-15":[29],"01-16":[29],"03-23":[30],"03-26":[4],"03-29":[5],"04-07":[3],"04-26":[6],"05-01":[8],"06-21":[31],"07-07":[11],"08-08":[13],"10-14":[15],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-03":[29],"01-04":[29],"01-12":[1],"03-12":[30],"04-07":[3],"04-15":[4],"04-18":[5],"04-26":[6],"05-01":[8],"06-10":[31],"07-07":[11],"08-08":[13],"10-14":[15],"12-09":[18],"12-24":[29],"12-25":[32,33],"12-26":[20]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-12":[1],"03-02":[30],"04-07":[4,3],"04-10":[5],"04-26":[6],"05-01":[8],"05-31":[31],"07-07":[11],"08-08":[13],"10-14":[15],"12-09":[18],"12-13":[29],"12-14":[29],"12-25":[19],"12-26":[20]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"01-12":[1],"02-19":[30],"03-23":[4],"03-26":[5],"04-07":[3],"04-26":[6],"05-01":[8],"05-21":[31],"07-07":[11],"08-08":[13],"10-14":[15],"12-02":[29],"12-03":[29],"12-09":[18],"12-25":[19],"12-26":[20]},"workdays":[]}
+  },
+  "defaultLanguage": "sw",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "sw"
+  ],
+  "name": "Tanzania",
+  "names": [
+    {"en-US":"New Year's Day","sw":"Mwaka Mpya"},
+    {"en-US":"Zanzibar Revolution Day","sw":"Mapinduzi ya Zanzibar"},
+    {"en-US":"Zanzibar Revolution Day (observed)","sw":"Badala ya Mapinduzi ya Zanzibar"},
+    {"en-US":"The Sheikh Abeid Amani Karume Day","sw":"Siku ya kumbukumbu ya Rais wa Kwanza wa Serikali ya Mapinduzi Zanzibar Sheikh Abeid Amani Karume"},
+    {"en-US":"Good Friday","sw":"Ijumaa Kuu"},
+    {"en-US":"Easter Monday","sw":"Jumatatu ya Pasaka"},
+    {"en-US":"Union Celebrations","sw":"Muungano wa Tanzania"},
+    {"en-US":"Union Celebrations (observed)","sw":"Badala ya Muungano wa Tanzania"},
+    {"en-US":"International Workers' Day","sw":"Sikukuu ya Wafanyakazi Ulimwenguni"},
+    {"en-US":"Eid al-Fitr","sw":"Eid El-Fitri"},
+    {"en-US":"Eid al-Fitr (observed)","sw":"Badala ya Eid El-Fitri"},
+    {"en-US":"International Trade Fair","sw":"Sabasaba"},
+    {"en-US":"Eid al-Adha","sw":"Eid El Hajj"},
+    {"en-US":"Peasants' Day","sw":"Sikukuu ya Wakulima"},
+    {"en-US":"Peasants' Day (observed)","sw":"Badala ya Sikukuu ya Wakulima"},
+    {"en-US":"The Mwalimu Nyerere Day and Climax of the Uhuru Torch Race","sw":"Kumbukumbu ya Mwalimu Nyerere na Kilele cha mbio za Mwenge"},
+    {"en-US":"Tanzania General Election Day","sw":"Sikukuu ya Uchaguzi Mkuu wa Tanzania"},
+    {"en-US":"Prophet's Birthday","sw":"Maulidi"},
+    {"en-US":"Independence and Republic Day","sw":"Uhuru na Jamhuri"},
+    {"en-US":"Christmas Day","sw":"Kuzaliwa Kristo"},
+    {"en-US":"Boxing Day","sw":"Siku ya Kupeana Zawadi"},
+    {"en-US":"Boxing Day (observed)","sw":"Badala ya Siku ya Kupeana Zawadi"},
+    {"en-US":"John Pombe Magufuli's Funeral","sw":"Mazishi ya John Pombe Magufuli"},
+    {"en-US":"International Workers' Day (observed)","sw":"Badala ya Sikukuu ya Wafanyakazi Ulimwenguni"},
+    {"en-US":"Boxing Day (observed)","sw":"Badala ya Kuzaliwa Kristo"},
+    {"en-US":"Christmas Day (observed)","sw":"Badala ya Siku ya Kupeana Zawadi"},
+    {"en-US":"New Year's Day (observed)","sw":"Badala ya Mwaka Mpya"},
+    {"en-US":"Eid al-Adha (observed)","sw":"Badala ya Eid El Hajj"},
+    {"en-US":"National Population and Housing Census Day","sw":"Siku ya Sensa ya Kitaifa ya Watu na Makazi"},
+    {"en-US":"Eid al-Fitr (estimated)","sw":"Eid El-Fitri (makisio)"},
+    {"en-US":"Eid al-Adha (estimated)","sw":"Eid El Hajj (makisio)"},
+    {"en-US":"Prophet's Birthday (estimated)","sw":"Maulidi (makisio)"},
+    {"en-US":"Christmas Day","sw":"Eid El-Fitri (makisio)"},
+    {"en-US":"Eid al-Fitr (estimated)","sw":"Kuzaliwa Kristo"}
+  ],
+  "region": "TZ",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

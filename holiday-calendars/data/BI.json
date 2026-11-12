@@ -1,0 +1,79 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"02-05":[1],"04-06":[2],"05-01":[3],"05-21":[4],"05-24":[5],"05-25":[6],"07-01":[7],"07-31":[8],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"11-02":[13],"12-25":[14]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"02-05":[1],"04-06":[2],"05-01":[3],"05-13":[15,16],"07-01":[7],"07-20":[8],"08-15":[9],"08-16":[17],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"02-05":[1],"04-06":[2],"05-01":[3],"05-02":[5,18],"05-26":[4],"06-08":[19],"07-01":[7],"07-09":[8],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14],"12-26":[20]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[21],"02-05":[1],"02-06":[22],"04-06":[2],"04-21":[5],"05-01":[3],"05-18":[4],"06-08":[19],"06-28":[8],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-05":[1],"04-06":[2],"04-10":[5],"05-01":[3],"05-09":[4],"06-08":[19],"06-16":[8],"06-17":[23],"07-01":[7],"08-15":[9],"10-13":[10],"10-14":[24],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"02-05":[1],"03-30":[5],"03-31":[6],"04-06":[2],"04-07":[25],"05-01":[3],"05-29":[4],"06-06":[8],"06-08":[19],"06-09":[26],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"02-05":[1],"03-20":[27],"04-06":[2],"05-01":[3],"05-14":[4],"05-27":[28],"06-08":[19],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"11-02":[13],"12-25":[14]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"02-05":[1],"03-09":[27],"04-06":[2],"05-01":[3],"05-06":[4],"05-16":[28],"05-17":[29],"06-08":[19],"07-01":[7],"08-15":[9],"08-16":[17],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"02-05":[1],"02-26":[27],"04-06":[2],"05-01":[3],"05-05":[28],"05-25":[4],"06-08":[19],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-05":[1],"02-14":[27],"04-06":[2],"04-24":[28],"05-01":[3],"05-10":[4],"06-08":[19],"07-01":[7],"07-02":[30],"08-15":[9],"10-13":[10],"10-21":[11],"10-22":[31],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-04":[27],"02-05":[1],"04-06":[2],"04-13":[28],"05-01":[3],"05-30":[4],"06-08":[19],"07-01":[7],"08-15":[9],"10-13":[10],"10-14":[24],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-24":[27],"02-05":[1],"04-02":[28],"04-06":[2],"04-07":[25],"05-01":[3],"05-22":[4],"06-08":[19],"06-09":[26],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-14":[27],"02-05":[1],"03-22":[28],"04-06":[2],"05-01":[3],"05-06":[4],"06-08":[19],"07-01":[7],"08-15":[9],"08-16":[17],"10-13":[10],"10-21":[11],"11-01":[12],"12-25":[14]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[27],"01-03":[32],"02-05":[1],"03-11":[28],"04-06":[2],"05-01":[3],"05-02":[18],"05-26":[4],"06-08":[19],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-23":[27],"12-25":[14],"12-26":[20]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[21],"02-05":[1],"02-06":[22],"03-01":[28],"04-06":[2],"05-01":[3],"05-18":[4],"06-08":[19],"07-01":[7],"08-15":[9],"10-13":[10],"10-21":[11],"11-01":[12],"12-12":[27],"12-25":[14]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-05":[1],"02-18":[28],"02-19":[29],"04-06":[2],"05-01":[3],"05-03":[4],"06-08":[19],"07-01":[7],"07-02":[30],"08-15":[9],"10-13":[10],"10-21":[11],"10-22":[31],"11-01":[12],"12-01":[27],"12-25":[14]},"workdays":[]}
+  },
+  "defaultLanguage": "fr-BI",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "fr-BI"
+  ],
+  "name": "Burundi",
+  "names": [
+    {"en-US":"New Year's Day","fr-BI":"Jour de l'an"},
+    {"en-US":"Unity Day","fr-BI":"Fête de l'Unité"},
+    {"en-US":"Commemoration of the Assassination of President Cyprien Ntaryamira","fr-BI":"Commémoration de l'Assassinat du Président Cyprien Ntaryamira"},
+    {"en-US":"International Labor Day","fr-BI":"Fête Internationale du Travail"},
+    {"en-US":"Ascension Day","fr-BI":"Jour de l'Ascension"},
+    {"en-US":"Eid al-Fitr","fr-BI":"Aid-El-Fithr"},
+    {"en-US":"Eid al-Fitr (observed)","fr-BI":"Aid-El-Fithr (observé)"},
+    {"en-US":"Independence Day","fr-BI":"Anniversaire de l'Indépendance"},
+    {"en-US":"Eid al-Adha","fr-BI":"Aid-El-Adha"},
+    {"en-US":"Assumption Day","fr-BI":"Assomption"},
+    {"en-US":"Commemoration of the Assassination of National Hero, Prince Louis Rwagasore","fr-BI":"Commémoration de l'Assassinat du Héros National, le Prince Louis Rwagasore"},
+    {"en-US":"Commemoration of the Assassination of President Melchior Ndadaye","fr-BI":"Commémoration de l'Assassinat du Président Melchior Ndadaye"},
+    {"en-US":"All Saints' Day","fr-BI":"Toussaint"},
+    {"en-US":"All Saints' Day (observed)","fr-BI":"Toussaint (observé)"},
+    {"en-US":"Christmas Day","fr-BI":"Noël"},
+    {"en-US":"Ascension Day","fr-BI":"Aid-El-Fithr"},
+    {"en-US":"Eid al-Fitr","fr-BI":"Jour de l'Ascension"},
+    {"en-US":"Assumption Day (observed)","fr-BI":"Assomption (observé)"},
+    {"en-US":"International Labor Day (observed)","fr-BI":"Fête Internationale du Travail (observé)"},
+    {"en-US":"National Day of Patriotism and Commemoration of the Death of President Pierre Nkurunziza","fr-BI":"Journée Nationale du Patriotisme et Commémoration de la Mort du Président Pierre Nkurunziza"},
+    {"en-US":"Christmas Day (observed)","fr-BI":"Noël (observé)"},
+    {"en-US":"New Year's Day (observed)","fr-BI":"Jour de l'an (observé)"},
+    {"en-US":"Unity Day (observed)","fr-BI":"Fête de l'Unité (observé)"},
+    {"en-US":"Eid al-Adha (observed)","fr-BI":"Aid-El-Adha (observé)"},
+    {"en-US":"Commemoration of the Assassination of National Hero, Prince Louis Rwagasore (observed)","fr-BI":"Commémoration de l'Assassinat du Héros National, le Prince Louis Rwagasore (observé)"},
+    {"en-US":"Commemoration of the Assassination of President Cyprien Ntaryamira (observed)","fr-BI":"Commémoration de l'Assassinat du Président Cyprien Ntaryamira (observé)"},
+    {"en-US":"National Day of Patriotism and Commemoration of the Death of President Pierre Nkurunziza (observed)","fr-BI":"Journée Nationale du Patriotisme et Commémoration de la Mort du Président Pierre Nkurunziza (observé)"},
+    {"en-US":"Eid al-Fitr (estimated)","fr-BI":"Aid-El-Fithr (estimé)"},
+    {"en-US":"Eid al-Adha (estimated)","fr-BI":"Aid-El-Adha (estimé)"},
+    {"en-US":"Eid al-Adha (observed, estimated)","fr-BI":"Aid-El-Adha (observé, estimé)"},
+    {"en-US":"Independence Day (observed)","fr-BI":"Anniversaire de l'Indépendance (observé)"},
+    {"en-US":"Commemoration of the Assassination of President Melchior Ndadaye (observed)","fr-BI":"Commémoration de l'Assassinat du Président Melchior Ndadaye (observé)"},
+    {"en-US":"Eid al-Fitr (observed, estimated)","fr-BI":"Aid-El-Fithr (observé, estimé)"}
+  ],
+  "region": "BI",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

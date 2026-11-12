@@ -1,0 +1,71 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"04-13":[1],"05-01":[2],"05-20":[3],"05-21":[4],"05-24":[5],"05-25":[6],"06-01":[7],"07-31":[8],"08-07":[9],"08-15":[10],"10-29":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"04-05":[1],"05-01":[2],"05-09":[3],"05-13":[15,16],"05-24":[7],"07-20":[8],"08-07":[9],"08-15":[10],"10-18":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"04-18":[1],"04-28":[3],"05-01":[2],"05-02":[17,18],"05-26":[4],"06-06":[7],"07-09":[8],"08-07":[9],"08-08":[19],"08-15":[10],"10-08":[11],"11-01":[12],"11-15":[13],"12-25":[14],"12-26":[20]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"04-10":[1],"04-18":[3],"04-21":[5],"05-01":[2],"05-18":[4],"05-29":[7],"06-28":[8],"08-07":[9],"08-15":[10],"09-27":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-12":[21],"04-01":[1],"04-06":[3],"04-10":[5],"05-01":[2],"05-09":[4],"05-20":[7],"06-16":[8],"06-17":[22],"08-07":[9],"08-15":[10],"09-15":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"03-27":[3],"03-30":[5],"03-31":[6],"04-21":[1],"05-01":[2],"05-29":[4],"06-06":[8],"06-09":[7],"08-07":[9],"08-15":[10],"09-04":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"03-16":[3],"03-20":[5],"04-06":[1],"05-01":[2],"05-14":[4],"05-25":[7],"05-27":[8],"08-07":[9],"08-15":[10],"08-25":[11],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-06":[3],"03-09":[5],"03-29":[1],"05-01":[2],"05-06":[4],"05-16":[8],"05-17":[22,7],"08-07":[9],"08-14":[11],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"02-23":[3],"02-26":[5],"04-17":[1],"05-01":[2],"05-05":[8],"05-25":[4],"06-05":[7],"08-03":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-11":[3],"02-14":[5],"04-02":[1],"04-24":[8],"05-01":[2],"05-10":[4],"05-21":[7],"07-24":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-31":[3],"02-04":[5],"04-13":[8],"04-22":[1],"05-01":[2],"05-30":[4],"06-10":[7],"07-13":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-21":[3],"01-24":[5],"04-02":[8],"04-14":[1],"05-01":[2],"05-22":[4],"06-02":[7],"07-02":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-10":[3],"01-14":[5],"03-22":[8],"03-29":[1],"05-01":[2],"05-06":[4],"05-17":[7],"06-20":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-25":[14],"12-30":[3]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[5],"01-03":[6],"03-11":[8],"04-18":[1],"05-01":[2],"05-02":[23],"05-26":[4],"06-06":[7],"06-09":[11],"08-07":[9],"08-08":[19],"08-15":[10],"11-01":[12],"11-15":[13],"12-19":[3],"12-23":[5],"12-25":[14],"12-26":[20]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"03-01":[8],"04-10":[1],"05-01":[2],"05-18":[4],"05-29":[7],"05-30":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"12-08":[3],"12-12":[5],"12-25":[14]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-18":[8],"02-19":[22],"03-26":[1],"05-01":[2],"05-03":[4],"05-14":[7],"05-20":[11],"08-07":[9],"08-15":[10],"11-01":[12],"11-15":[13],"11-27":[3],"12-01":[5],"12-25":[14]},"workdays":[]}
+  },
+  "defaultLanguage": "fr",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-CI",
+    "en-US",
+    "fr"
+  ],
+  "name": "Ivory Coast",
+  "names": [
+    {"en-CI":"New Year's Day","en-US":"New Year's Day","fr":"1er janvier"},
+    {"en-CI":"Easter Monday","en-US":"Easter Monday","fr":"Lundi de Pâques"},
+    {"en-CI":"Labor Day","en-US":"Labor Day","fr":"Fête du travail"},
+    {"en-CI":"Day after Lailatou-Kadr","en-US":"Day after Night of Power","fr":"Lendemain de la Nuit du Destin"},
+    {"en-CI":"Ascension Day","en-US":"Ascension Day","fr":"Jour de l'Ascension"},
+    {"en-CI":"Aid-El-Fitr","en-US":"Eid al-Fitr","fr":"Fête de fin du Ramadan"},
+    {"en-CI":"Day after the Aid-El-Fitr","en-US":"Day after the Eid al-Fitr","fr":"Lendemain de la Fête de fin du Ramadan"},
+    {"en-CI":"Pentecost Monday","en-US":"Pentecost Monday","fr":"Lundi de Pentecôte"},
+    {"en-CI":"Aid-El-Kebir","en-US":"Eid al-Adha","fr":"Fête de la Tabaski"},
+    {"en-CI":"Independence Day","en-US":"Independence Day","fr":"Fête Nationale"},
+    {"en-CI":"Assumption Day","en-US":"Assumption Day","fr":"Fête de l'Assomption"},
+    {"en-CI":"Day after Maouloud","en-US":"Day after Prophet's Birthday","fr":"Lendemain de l'Anniversaire de la Naissance du Prophète Mahomet"},
+    {"en-CI":"All Saints' Day","en-US":"All Saints' Day","fr":"Fête de la Toussaint"},
+    {"en-CI":"National Peace Day","en-US":"National Peace Day","fr":"Journée Nationale de la Paix"},
+    {"en-CI":"Christmas Day","en-US":"Christmas Day","fr":"Fête de Noël"},
+    {"en-CI":"Aid-El-Fitr","en-US":"Ascension Day","fr":"Fête de fin du Ramadan"},
+    {"en-CI":"Ascension Day","en-US":"Eid al-Fitr","fr":"Jour de l'Ascension"},
+    {"en-CI":"Aid-El-Fitr","en-US":"Day after the Labor Day","fr":"Fête de fin du Ramadan"},
+    {"en-CI":"Day after the Labor Day","en-US":"Eid al-Fitr","fr":"Lendemain de la Fête du travail"},
+    {"en-CI":"Day after the Independence Day","en-US":"Day after the Independence Day","fr":"Lendemain de la Fête Nationale"},
+    {"en-CI":"Day after the Christmas Day","en-US":"Day after the Christmas Day","fr":"Lendemain de la Fête de Noël"},
+    {"en-CI":"2024 African Cup of Nations Victory","en-US":"2024 African Cup of Nations Victory","fr":"Victoire à la Coupe d'Afrique des Nations 2024"},
+    {"en-CI":"Day after the Aid-El-Kebir","en-US":"Day after the Eid al-Adha","fr":"Lendemain de la Fête de la Tabaski"},
+    {"en-CI":"Day after the Labor Day","en-US":"Day after the Labor Day","fr":"Lendemain de la Fête du travail"}
+  ],
+  "region": "CI",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

@@ -22,6 +22,7 @@
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): خطوط WOFF2 اختيارية لمحرر Ace في AutoJs6. يبقى Iosevka العادي مدمجا في AutoJs6 ولا يوزع هنا.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): نماذج ترتيب محلية لتوليد كود التخطيطات, بإصدارات مستقلة وكتالوجات موقعة ووسوم إصدار خاصة بها.
 - [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): نماذج كلام sherpa-onnx (التعرف على الكلام واكتشاف الكلمات المفتاحية وتوليف الكلام) التي يحملها ملحق 3-Macaw Speech عند الحاجة. يحفظ المستودع بيانات المصادر ونصوص التراخيص فقط, وتعاد إنتاج الأرشيفات من موارد الإصدار الأصلية المثبتة, مع كتالوجات موقعة ووسوم إصدار خاصة بها.
+- [`holiday-calendars/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md): تقاويم العطلات الرسمية التي يستخدمها ملحق 3-Chime Alarm, ملف JSON واحد لكل منطقة للأعوام 2020 - 2035, بما فيها أيام العمل التعويضية مثل المعمول بها في البر الرئيسي الصيني. تولد البيانات أثناء البناء من إصدار مثبت من python-holidays (MIT) وتحفظ في المستودع, لذا يمكن إعادة إنتاجها, ولها كتالوج موقع ووسوم إصدار خاصة بها.
 - يجب أن تستخدم كل عائلة موارد جديدة مجلدها وبيانها وبادئة وسومها وسير عملها وسياسة سلامتها ومفتاح توقيعها عند الحاجة.
 
 تبقى الموارد المطلوبة لبناء التطبيق المثبت أو عرضه (مثل شعاره الأساسي أو CSS المدمج) عادة في مستودع مصدر AutoJs6. هذا المستودع للموارد المستقلة في الإصدار/التنزيل أو المشتركة بين المشاريع. CSS البعيد محتوى نشط فلا يضاف أبدا إلى `ace-fonts`; خصص له نطاق أسماء مستقلا وسياسة توقيع/مراجعة أشد.
@@ -42,6 +43,7 @@
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
 .github/workflows/publish-speech-models.yml
+.github/workflows/publish-holiday-calendars.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -69,6 +71,15 @@ speech-models/
   keys/catalog-signing-public.pem  # public key only
   schemas/                         # catalog, signature and model-source schemas
 tools/speech-model-distribution/
+holiday-calendars/
+  data/<CC>.json                   # generated calendar per region, plus generation.json
+  sources/                         # generator pin and known-date spot checks
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # calendar, catalog and signature schemas
+  *-python-holidays.txt            # upstream MIT license and contributors
+tools/holiday-calendar-distribution/
 ```
 
 تحفظ الحزم المولدة في `build/` المستثنى من Git. تتتبع مصادر WOFF2 المرجعية وملفات الإشعارات مباشرة, لذا تعيد نسخة نظيفة إنتاج الإصدارات دون مجلد AutoJs6 `build/` أو لقطة `tools/.../sources` القديمة. لا يستخدم Git LFS عن قصد.
@@ -87,7 +98,15 @@ tools/speech-model-distribution/
 
 خطوات توقيع نماذج الكلام ونشرها موجودة في [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), ووصف الأدوات في [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). لا تحفظ ملفات النماذج الثنائية في المستودع; يتحقق سير عمل النشر من كل أرشيف ويعيد إنتاجه من موارد sherpa-onnx الأصلية المثبتة. ترخيص كل نموذج وإمكانية استخدامه تجاريا مسجلان في تدقيق التراخيص.
 
+صيغة تقاويم العطلات وخطوات توقيعها ونشرها موجودة في [`holiday-calendars/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md), ووصف الأدوات في [`tools/holiday-calendar-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/holiday-calendar-distribution/README.md). يعيد سير عمل النشر توليد كل البيانات بإصدار python-holidays المثبت ويقارنها بايتا ببايت, ولا يرفع إلا ملفات المناطق التي تغيرت. يحفظ نص ترخيص MIT وقائمة المساهمين في python-holidays بجانب البيانات.
+
 ## سجل التغييرات
+
+### 2026-11-12
+
+###### 2026/11/12
+
+* `ميزة` إضافة البيانات وأدوات التوليد والتحقق وسير عمل النشر لعائلة holiday-calendars الجديدة, وهي تقاويم العطلات الرسمية التي يحدد بها ملحق 3-Chime Alarm العطلات وأيام العمل التعويضية للأعوام 2020 - 2035
 
 ### 2026-10-16
 

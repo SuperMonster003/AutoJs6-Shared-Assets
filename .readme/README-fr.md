@@ -22,6 +22,7 @@ Ce dépôt est la source de distribution vérifiée des ressources AutoJs6 volum
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): polices WOFF2 facultatives pour l'éditeur Ace d'AutoJs6. Iosevka Regular reste intégré à AutoJs6 et n'est pas distribué ici.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): modèles locaux de classement pour la génération de code d'interface, versionnés indépendamment avec leurs propres catalogues signés et étiquettes de publication.
 - [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): modèles vocaux sherpa-onnx (reconnaissance, détection de mots-clés et synthèse) téléchargés à la demande par le plugin 3-Macaw Speech. Seuls les manifestes de sources et les textes de licence sont versionnés; les archives sont reproduites à partir de ressources amont épinglées, avec leurs propres catalogues signés et étiquettes de publication.
+- [`holiday-calendars/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md): calendriers des jours fériés utilisés par le plugin 3-Chime Alarm, un fichier JSON par région pour 2020 - 2035, y compris les jours ouvrés de rattrapage comme ceux de la Chine continentale. Les données sont générées à la compilation à partir d'une version épinglée de python-holidays (MIT) et versionnées, donc reproductibles; elles ont leur propre catalogue signé et leurs propres étiquettes de publication.
 - Chaque nouvelle famille de ressources doit avoir son répertoire, manifeste, préfixe d'étiquette, workflow, politique d'intégrité et, si nécessaire, sa clé de signature.
 
 Les ressources nécessaires à la compilation ou à l'affichage de l'application installée (logo principal ou CSS intégré) restent normalement dans le dépôt AutoJs6. Ce dépôt partagé accueille les ressources publiées/téléchargées séparément ou communes à plusieurs projets. Le CSS distant est du contenu actif et ne doit jamais être ajouté à `ace-fonts`; attribuez-lui un espace de noms distinct et une politique de signature/vérification plus stricte.
@@ -42,6 +43,7 @@ Les entrées v4 portent les caractéristiques explicites `mono`, `nerd`, `variab
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
 .github/workflows/publish-speech-models.yml
+.github/workflows/publish-holiday-calendars.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -69,6 +71,15 @@ speech-models/
   keys/catalog-signing-public.pem  # public key only
   schemas/                         # catalog, signature and model-source schemas
 tools/speech-model-distribution/
+holiday-calendars/
+  data/<CC>.json                   # generated calendar per region, plus generation.json
+  sources/                         # generator pin and known-date spot checks
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # calendar, catalog and signature schemas
+  *-python-holidays.txt            # upstream MIT license and contributors
+tools/holiday-calendar-distribution/
 ```
 
 Les paquets générés sont dans `build/`, ignoré par Git. Les WOFF2 sources de référence et notices sont suivis directement: un clone neuf reproduit les publications sans répertoire AutoJs6 `build/` ni ancien instantané `tools/.../sources`. Git LFS n'est volontairement pas utilisé.
@@ -87,7 +98,15 @@ La distribution des modèles a ses propres prérequis de configuration et de pub
 
 Les étapes de signature et de publication des modèles vocaux figurent dans [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), et les outils sont décrits dans [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). Les binaires des modèles ne sont pas versionnés; le workflow de publication vérifie et reproduit chaque archive à partir des ressources sherpa-onnx amont épinglées. La licence de chaque modèle et son usage commercial sont consignés dans l'audit de licences.
 
+Le format des calendriers de jours fériés et les étapes de signature et de publication figurent dans [`holiday-calendars/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md), et les outils sont décrits dans [`tools/holiday-calendar-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/holiday-calendar-distribution/README.md). Le workflow de publication régénère toutes les données avec la version épinglée de python-holidays, les compare octet par octet et ne téléverse que les régions dont le fichier a changé. La licence MIT et la liste des contributeurs de python-holidays sont conservées à côté des données.
+
 ## Journal des modifications
+
+### 2026-11-12
+
+###### 2026/11/12
+
+* `Fonctionnalité` Ajout des données, des outils de génération et de vérification et du workflow de publication de la nouvelle famille holiday-calendars, les calendriers de jours fériés dont le plugin 3-Chime Alarm tire les jours fériés et les jours ouvrés de rattrapage de 2020 à 2035
 
 ### 2026-10-16
 

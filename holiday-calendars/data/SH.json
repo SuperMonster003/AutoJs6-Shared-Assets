@@ -1,0 +1,67 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"04-10":[0],"04-13":[1],"06-08":[2],"12-25":[3],"12-26":[4],"12-28":[5]},"workdays":[]},
+    "2021": {"holidays":{"04-02":[0],"04-05":[1],"06-14":[2],"12-25":[3],"12-26":[4],"12-27":[6],"12-28":[5]},"workdays":[]},
+    "2022": {"holidays":{"04-15":[0],"04-18":[1],"06-03":[7],"06-13":[2],"09-19":[8],"12-25":[3],"12-26":[4],"12-27":[6]},"workdays":[]},
+    "2023": {"holidays":{"01-24":[9],"04-07":[0],"04-10":[1],"05-08":[10],"06-19":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2024": {"holidays":{"03-29":[0],"04-01":[1],"11-15":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2025": {"holidays":{"04-18":[0],"04-21":[1],"11-14":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2026": {"holidays":{"04-03":[0],"04-06":[1],"11-13":[11],"12-25":[3],"12-26":[4],"12-28":[5]},"workdays":[]},
+    "2027": {"holidays":{"03-26":[0],"03-29":[1],"11-12":[11],"12-25":[3],"12-26":[4],"12-27":[6],"12-28":[5]},"workdays":[]},
+    "2028": {"holidays":{"04-14":[0],"04-17":[1],"11-17":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2029": {"holidays":{"03-30":[0],"04-02":[1],"11-16":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2030": {"holidays":{"04-19":[0],"04-22":[1],"11-15":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2031": {"holidays":{"04-11":[0],"04-14":[1],"11-14":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2032": {"holidays":{"03-26":[0],"03-29":[1],"11-12":[11],"12-25":[3],"12-26":[4],"12-27":[6],"12-28":[5]},"workdays":[]},
+    "2033": {"holidays":{"04-15":[0],"04-18":[1],"11-11":[11],"12-25":[3],"12-26":[4],"12-27":[6]},"workdays":[]},
+    "2034": {"holidays":{"04-07":[0],"04-10":[1],"11-17":[11],"12-25":[3],"12-26":[4]},"workdays":[]},
+    "2035": {"holidays":{"03-23":[0],"03-26":[1],"11-16":[11],"12-25":[3],"12-26":[4]},"workdays":[]}
+  },
+  "defaultLanguage": "en-GB",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-GB",
+    "en-US"
+  ],
+  "name": "Saint Helena, Ascension and Tristan da Cunha",
+  "names": [
+    {"en-GB":"Good Friday","en-US":"Good Friday"},
+    {"en-GB":"Easter Monday","en-US":"Easter Monday"},
+    {"en-GB":"Queen's Birthday","en-US":"Queen's Birthday"},
+    {"en-GB":"Christmas Day","en-US":"Christmas Day"},
+    {"en-GB":"Boxing Day","en-US":"Boxing Day"},
+    {"en-GB":"Boxing Day (observed)","en-US":"Boxing Day (observed)"},
+    {"en-GB":"Christmas Day (observed)","en-US":"Christmas Day (observed)"},
+    {"en-GB":"Queen Elizabeth II's Platinum Jubilee","en-US":"Queen Elizabeth II's Platinum Jubilee"},
+    {"en-GB":"Queen Elizabeth II's State Funeral","en-US":"Queen Elizabeth II's State Funeral"},
+    {"en-GB":"The Duke of Edinburgh's Visit","en-US":"The Duke of Edinburgh's Visit"},
+    {"en-GB":"Coronation of His Majesty King Charles III","en-US":"Coronation of His Majesty King Charles III"},
+    {"en-GB":"King's Birthday","en-US":"King's Birthday"},
+    {"en-GB":"Ascension Day","en-US":"Ascension Day"},
+    {"en-GB":"Saint Helena Day","en-US":"Saint Helena Day"},
+    {"en-GB":"Saint Helena Day (observed)","en-US":"Saint Helena Day (observed)"},
+    {"en-GB":"Ratting Day","en-US":"Ratting Day"},
+    {"en-GB":"Anniversary Day","en-US":"Anniversary Day"}
+  ],
+  "region": "SH",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {
+    "AC": {"calendar":{"2020":{"holidays":{"05-21":[12]}},"2021":{"holidays":{"05-13":[12]}},"2022":{"holidays":{"05-26":[12]}},"2023":{"holidays":{"05-18":[12]}},"2024":{"holidays":{"05-09":[12]}},"2025":{"holidays":{"05-29":[12]}},"2026":{"holidays":{"05-14":[12]}},"2027":{"holidays":{"05-06":[12]}},"2028":{"holidays":{"05-25":[12]}},"2029":{"holidays":{"05-10":[12]}},"2030":{"holidays":{"05-30":[12]}},"2031":{"holidays":{"05-22":[12]}},"2032":{"holidays":{"05-06":[12]}},"2033":{"holidays":{"05-26":[12]}},"2034":{"holidays":{"05-18":[12]}},"2035":{"holidays":{"05-03":[12]}}},"name":"Ascension"},
+    "HL": {"calendar":{"2020":{"holidays":{"05-21":[13]}},"2021":{"holidays":{"05-21":[13]}},"2022":{"holidays":{"05-20":[14],"05-21":[13]}},"2023":{"holidays":{"05-21":[13],"05-22":[14]}},"2024":{"holidays":{"05-21":[13]}},"2025":{"holidays":{"05-21":[13]}},"2026":{"holidays":{"05-21":[13]}},"2027":{"holidays":{"05-21":[13]}},"2028":{"holidays":{"05-21":[13],"05-22":[14]}},"2029":{"holidays":{"05-21":[13]}},"2030":{"holidays":{"05-21":[13]}},"2031":{"holidays":{"05-21":[13]}},"2032":{"holidays":{"05-21":[13]}},"2033":{"holidays":{"05-20":[14],"05-21":[13]}},"2034":{"holidays":{"05-21":[13],"05-22":[14]}},"2035":{"holidays":{"05-21":[13]}}},"name":"Saint Helena"},
+    "TA": {"calendar":{"2020":{"holidays":{"04-25":[15],"05-21":[12],"08-14":[16]}},"2021":{"holidays":{"04-09":[15],"05-13":[12],"08-14":[16]}},"2022":{"holidays":{"05-26":[12],"08-14":[16]}},"2023":{"holidays":{"05-18":[12],"06-02":[15],"08-14":[16]}},"2024":{"holidays":{"05-09":[12],"08-14":[16]}},"2025":{"holidays":{"05-29":[12],"05-30":[15],"08-14":[16]}},"2026":{"holidays":{"05-14":[12],"08-14":[16]}},"2027":{"holidays":{"05-06":[12],"08-14":[16]}},"2028":{"holidays":{"05-25":[12],"08-14":[16]}},"2029":{"holidays":{"05-10":[12],"08-14":[16]}},"2030":{"holidays":{"05-30":[12],"08-14":[16]}},"2031":{"holidays":{"05-22":[12],"08-14":[16]}},"2032":{"holidays":{"05-06":[12],"08-14":[16]}},"2033":{"holidays":{"05-26":[12],"08-14":[16]}},"2034":{"holidays":{"05-18":[12],"08-14":[16]}},"2035":{"holidays":{"05-03":[12],"08-14":[16]}}},"name":"Tristan da Cunha"}
+  },
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

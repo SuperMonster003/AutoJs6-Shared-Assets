@@ -18,6 +18,15 @@
     "adjustment": "Ajustement"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "Ajout des données, des outils de génération et de vérification et du workflow de publication de la nouvelle famille holiday-calendars, les calendriers de jours fériés dont le plugin 3-Chime Alarm tire les jours fériés et les jours ouvrés de rattrapage de 2020 à 2035"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [

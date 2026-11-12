@@ -1,0 +1,63 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"04-10":[1],"04-13":[2],"04-25":[3],"06-08":[4],"07-04":[5],"09-17":[6],"11-02":[7],"12-07":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"04-02":[1],"04-05":[2],"04-25":[3],"06-07":[4],"07-04":[5],"07-05":[11],"09-17":[6],"11-08":[7],"12-06":[8],"12-25":[9],"12-26":[10],"12-27":[12]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"04-15":[1],"04-18":[2],"04-25":[3],"06-06":[4],"07-04":[5],"09-17":[6],"11-07":[7],"12-05":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"04-07":[1],"04-10":[2],"04-25":[3],"06-05":[4],"07-04":[5],"09-17":[6],"09-18":[13],"11-06":[7],"12-04":[14],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"03-29":[1],"04-01":[2],"04-25":[3],"06-03":[4],"07-04":[5],"09-17":[6],"11-04":[15],"12-02":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"04-18":[1],"04-21":[2],"04-25":[3],"06-02":[4],"07-04":[5],"09-17":[6],"11-03":[7],"12-08":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"04-03":[1],"04-06":[2],"04-25":[3],"06-08":[4],"07-04":[5],"09-17":[6],"11-02":[7],"12-07":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-26":[1],"03-29":[2],"04-25":[3],"06-07":[4],"07-04":[5],"07-05":[11],"09-17":[6],"11-08":[7],"12-06":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"04-14":[1],"04-17":[2],"04-25":[3],"06-05":[4],"07-04":[5],"09-17":[6],"09-18":[13],"11-06":[7],"12-04":[14],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"03-30":[1],"04-02":[2],"04-25":[3],"06-04":[16],"07-04":[5],"09-17":[6],"11-05":[7],"12-03":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"04-19":[1],"04-22":[2],"04-25":[3],"06-03":[4],"07-04":[5],"09-17":[6],"11-04":[15],"12-02":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"04-11":[1],"04-14":[2],"04-25":[3],"06-02":[4],"07-04":[5],"09-17":[6],"11-03":[7],"12-08":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"03-26":[1],"03-29":[2],"04-25":[3],"06-07":[4],"07-04":[5],"07-05":[11],"09-17":[6],"11-08":[7],"12-06":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"04-15":[1],"04-18":[2],"04-25":[3],"06-06":[4],"07-04":[5],"09-17":[6],"11-07":[7],"12-05":[8],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"04-07":[1],"04-10":[2],"04-25":[3],"06-05":[4],"07-04":[5],"09-17":[6],"09-18":[13],"11-06":[7],"12-04":[14],"12-25":[9],"12-26":[10]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"03-23":[1],"03-26":[2],"04-25":[3],"06-04":[16],"07-04":[5],"09-17":[6],"11-05":[7],"12-03":[8],"12-25":[9],"12-26":[10]},"workdays":[]}
+  },
+  "defaultLanguage": "to",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "to"
+  ],
+  "name": "Tonga",
+  "names": [
+    {"en-US":"New Year's Day","to":"ʻUluaki ʻAho ʻo e Taʻu Foʻou"},
+    {"en-US":"Good Friday","to":"Falaite Lelei"},
+    {"en-US":"Easter Monday","to":"Monite ʻo e Toetuʻu"},
+    {"en-US":"ANZAC Day","to":"ʻAho Anzac"},
+    {"en-US":"Emancipation Day (observed)","to":"ʻAho Tauʻataina (fakatokangaʻi)"},
+    {"en-US":"Birthday of the Reigning Sovereign of Tonga","to":"ʻAho ʻAloʻi ʻo ʻEne ʻAfio ko e Tuʻi ʻo Tonga ʻoku lolotonga Pule"},
+    {"en-US":"Birthday of the Heir to the Crown of Tonga","to":"ʻAho ʻAloʻi ʻo e ʻEa ki he Kalauni ʻo Tonga"},
+    {"en-US":"Constitution Day (observed)","to":"ʻAho Konisitutone (fakatokangaʻi)"},
+    {"en-US":"Anniversary of the Coronation of HM King George Tupou I (observed)","to":"ʻAho Fakamanatu ʻo e Hilifaki Kalauni ʻo ʻEne ʻAfio ko Siaosi Tupou I (fakatokangaʻi)"},
+    {"en-US":"Christmas Day","to":"ʻAho Kilisimasi"},
+    {"en-US":"Boxing Day","to":"ʻAho 2 ʻo e Kilisimasi"},
+    {"en-US":"Birthday of the Reigning Sovereign of Tonga (observed)","to":"ʻAho ʻAloʻi ʻo ʻEne ʻAfio ko e Tuʻi ʻo Tonga ʻoku lolotonga Pule (fakatokangaʻi)"},
+    {"en-US":"Boxing Day (observed)","to":"ʻAho 2 ʻo e Kilisimasi (fakatokangaʻi)"},
+    {"en-US":"Birthday of the Heir to the Crown of Tonga (observed)","to":"ʻAho ʻAloʻi ʻo e ʻEa ki he Kalauni ʻo Tonga (fakatokangaʻi)"},
+    {"en-US":"Anniversary of the Coronation of HM King George Tupou I","to":"ʻAho Fakamanatu ʻo e Hilifaki Kalauni ʻo ʻEne ʻAfio ko Siaosi Tupou I"},
+    {"en-US":"Constitution Day","to":"ʻAho Konisitutone"},
+    {"en-US":"Emancipation Day","to":"ʻAho Tauʻataina"}
+  ],
+  "region": "TO",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

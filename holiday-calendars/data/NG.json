@@ -1,0 +1,82 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"04-10":[1],"04-13":[2],"05-01":[3],"05-24":[4],"05-25":[5],"05-26":[6],"06-12":[7],"07-31":[8],"08-01":[9],"08-03":[10],"10-01":[11],"10-29":[12],"12-25":[13],"12-26":[14],"12-28":[15]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"04-02":[1],"04-05":[2],"05-01":[3],"05-03":[16],"05-13":[4],"05-14":[5],"06-12":[7],"06-14":[17],"07-20":[8],"07-21":[9],"10-01":[11],"10-19":[12],"12-25":[13],"12-26":[14],"12-27":[18],"12-28":[15]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-03":[19],"04-15":[1],"04-18":[2],"05-01":[3],"05-02":[4],"05-03":[5],"05-04":[16],"06-12":[7],"06-13":[17],"07-09":[8],"07-10":[9],"07-11":[20],"07-12":[10],"10-01":[11],"10-03":[21],"10-08":[12],"10-10":[22],"12-25":[13],"12-26":[14],"12-27":[18]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[19],"04-07":[1],"04-10":[2],"04-21":[4],"04-22":[5],"04-24":[23],"05-01":[3],"05-29":[24],"06-12":[7],"06-28":[8],"06-29":[9],"09-27":[12],"10-01":[11],"10-02":[21],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"03-29":[1],"04-01":[2],"04-10":[4],"04-11":[5],"05-01":[3],"06-12":[7],"06-16":[8],"06-17":[9],"06-18":[20],"09-16":[12],"10-01":[11],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"03-30":[4],"03-31":[5],"04-01":[6],"04-18":[1],"04-21":[2],"05-01":[3],"06-06":[8],"06-07":[9],"06-09":[10],"06-12":[7],"07-15":[25],"09-05":[12],"10-01":[11],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"03-19":[4],"03-20":[5],"04-03":[1],"04-06":[2],"05-01":[3],"05-28":[26],"05-29":[27],"06-12":[7],"08-26":[28],"10-01":[11],"12-25":[13],"12-26":[14],"12-28":[15]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-10":[29],"03-11":[30],"03-26":[1],"03-29":[2],"05-01":[3],"05-03":[16],"05-17":[26],"05-18":[27],"05-29":[24],"06-12":[7],"06-14":[17],"08-15":[28],"08-16":[31],"10-01":[11],"12-25":[13],"12-26":[14],"12-27":[18],"12-28":[15]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-03":[19],"02-27":[29],"02-28":[30],"02-29":[32],"04-14":[1],"04-17":[2],"05-01":[3],"05-06":[26],"05-07":[27],"05-08":[33],"05-09":[34],"06-12":[7],"08-04":[28],"10-01":[11],"10-02":[21],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-15":[29],"02-16":[30],"03-30":[1],"04-02":[2],"04-25":[26],"04-26":[27],"05-01":[3],"06-12":[7],"07-25":[28],"10-01":[11],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-05":[29],"02-06":[30],"04-14":[26],"04-15":[27],"04-16":[33],"04-19":[1],"04-22":[2],"05-01":[3],"06-12":[7],"07-14":[28],"07-15":[31],"10-01":[11],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-25":[29],"01-26":[30],"01-27":[32],"01-28":[35],"04-03":[26],"04-04":[27],"04-11":[1],"04-14":[2],"05-01":[3],"05-29":[24],"06-12":[7],"07-03":[28],"10-01":[11],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-15":[29],"01-16":[30],"03-23":[26],"03-24":[27],"03-26":[1],"03-29":[2],"05-01":[3],"05-03":[16],"06-12":[7],"06-14":[17],"06-21":[28],"10-01":[11],"12-25":[13],"12-26":[14],"12-27":[18],"12-28":[15]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-03":[29],"01-04":[30],"01-05":[19],"03-12":[26],"03-13":[27],"03-14":[33],"03-15":[34],"04-15":[1],"04-18":[2],"05-01":[3],"05-02":[16],"06-10":[28],"06-12":[7],"06-13":[17],"10-01":[11],"10-03":[21],"12-24":[29],"12-25":[13,30],"12-26":[14],"12-27":[32],"12-28":[18,35]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[19],"03-02":[26],"03-03":[27],"04-07":[1],"04-10":[2],"05-01":[3],"05-31":[28],"06-12":[7],"10-01":[11],"10-02":[21],"12-13":[29],"12-14":[30],"12-25":[13],"12-26":[14]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-19":[26],"02-20":[27],"03-23":[1],"03-26":[2],"05-01":[3],"05-21":[28],"05-29":[24],"06-12":[7],"10-01":[11],"12-02":[29],"12-03":[30],"12-04":[32],"12-25":[13],"12-26":[14]},"workdays":[]}
+  },
+  "defaultLanguage": "en-NG",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-NG",
+    "en-US"
+  ],
+  "name": "Nigeria",
+  "names": [
+    {"en-NG":"New Year's Day","en-US":"New Year's Day"},
+    {"en-NG":"Good Friday","en-US":"Good Friday"},
+    {"en-NG":"Easter Monday","en-US":"Easter Monday"},
+    {"en-NG":"Workers' Day","en-US":"Workers' Day"},
+    {"en-NG":"Id el Fitr","en-US":"Eid al-Fitr"},
+    {"en-NG":"Id el Fitr Holiday","en-US":"Eid al-Fitr Holiday"},
+    {"en-NG":"Id el Fitr (observed)","en-US":"Eid al-Fitr (observed)"},
+    {"en-NG":"Democracy Day","en-US":"Democracy Day"},
+    {"en-NG":"Id el Kabir","en-US":"Eid al-Adha"},
+    {"en-NG":"Id el Kabir Holiday","en-US":"Eid al-Adha Holiday"},
+    {"en-NG":"Id el Kabir Holiday (observed)","en-US":"Eid al-Adha Holiday (observed)"},
+    {"en-NG":"National Day","en-US":"National Day"},
+    {"en-NG":"Id el Maulud","en-US":"Prophet's Birthday"},
+    {"en-NG":"Christmas Day","en-US":"Christmas Day"},
+    {"en-NG":"Boxing Day","en-US":"Boxing Day"},
+    {"en-NG":"Boxing Day (observed)","en-US":"Boxing Day (observed)"},
+    {"en-NG":"Workers' Day (observed)","en-US":"Workers' Day (observed)"},
+    {"en-NG":"Democracy Day (observed)","en-US":"Democracy Day (observed)"},
+    {"en-NG":"Christmas Day (observed)","en-US":"Christmas Day (observed)"},
+    {"en-NG":"New Year's Day (observed)","en-US":"New Year's Day (observed)"},
+    {"en-NG":"Id el Kabir (observed)","en-US":"Eid al-Adha (observed)"},
+    {"en-NG":"National Day (observed)","en-US":"National Day (observed)"},
+    {"en-NG":"Id el Maulud (observed)","en-US":"Prophet's Birthday (observed)"},
+    {"en-NG":"Id el Fitr Holiday (observed)","en-US":"Eid al-Fitr Holiday (observed)"},
+    {"en-NG":"Presidential Inauguration Day","en-US":"Presidential Inauguration Day"},
+    {"en-NG":"Day of Mourning for President Muhammadu Buhari","en-US":"Day of Mourning for President Muhammadu Buhari"},
+    {"en-NG":"Id el Kabir (estimated)","en-US":"Eid al-Adha (estimated)"},
+    {"en-NG":"Id el Kabir Holiday (estimated)","en-US":"Eid al-Adha Holiday (estimated)"},
+    {"en-NG":"Id el Maulud (estimated)","en-US":"Prophet's Birthday (estimated)"},
+    {"en-NG":"Id el Fitr (estimated)","en-US":"Eid al-Fitr (estimated)"},
+    {"en-NG":"Id el Fitr Holiday (estimated)","en-US":"Eid al-Fitr Holiday (estimated)"},
+    {"en-NG":"Id el Maulud (observed, estimated)","en-US":"Prophet's Birthday (observed, estimated)"},
+    {"en-NG":"Id el Fitr (observed, estimated)","en-US":"Eid al-Fitr (observed, estimated)"},
+    {"en-NG":"Id el Kabir (observed, estimated)","en-US":"Eid al-Adha (observed, estimated)"},
+    {"en-NG":"Id el Kabir Holiday (observed, estimated)","en-US":"Eid al-Adha Holiday (observed, estimated)"},
+    {"en-NG":"Id el Fitr Holiday (observed, estimated)","en-US":"Eid al-Fitr Holiday (observed, estimated)"}
+  ],
+  "region": "NG",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

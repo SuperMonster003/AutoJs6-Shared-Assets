@@ -13,6 +13,7 @@
 - {{ assets002 }}
 - {{ assets003 }}
 - {{ assets019 }}
+- {{ assets021 }}
 - {{ assets004 }}
 
 {{ assets005 }}
@@ -33,6 +34,7 @@
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
 .github/workflows/publish-speech-models.yml
+.github/workflows/publish-holiday-calendars.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -60,6 +62,15 @@ speech-models/
   keys/catalog-signing-public.pem  # public key only
   schemas/                         # catalog, signature and model-source schemas
 tools/speech-model-distribution/
+holiday-calendars/
+  data/<CC>.json                   # generated calendar per region, plus generation.json
+  sources/                         # generator pin and known-date spot checks
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # calendar, catalog and signature schemas
+  *-python-holidays.txt            # upstream MIT license and contributors
+tools/holiday-calendar-distribution/
 ```
 
 {{ assets012 }}
@@ -77,6 +88,8 @@ tools/speech-model-distribution/
 {{ assets018 }}
 
 {{ assets020 }}
+
+{{ assets022 }}
 
 ## {{ h2_changelog }}
 

@@ -1,0 +1,9 @@
+# Pinned build-time dependencies of generate_calendars.py.
+# Install with: python -m pip install --require-hashes --only-binary=:all: -r requirements.txt
+# The holidays version must match holiday-calendars/sources/generator.json.
+holidays==0.108 \
+    --hash=sha256:5a08fdccd0b8737093d483ba0d0d9696560396d99d3fa6ef9264fd2ac48749c7
+python-dateutil==2.9.0.post0 \
+    --hash=sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
+six==1.17.0 \
+    --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274

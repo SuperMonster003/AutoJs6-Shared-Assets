@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `Feature` Added data, generation and verification tools and a release workflow for the new holiday-calendars family, the public holiday calendars from which the 3-Chime Alarm plugin learns the holidays and makeup workdays of 2020 - 2035
+
 # 2026-10-16
 
 ###### 2026/10/16

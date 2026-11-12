@@ -34,3 +34,6 @@ jobs:
 
       - name: Check speech model documents
         run: python tools/speech-model-distribution/check_docs.py
+
+      - name: Check holiday calendar documents
+        run: python tools/holiday-calendar-distribution/check_docs.py

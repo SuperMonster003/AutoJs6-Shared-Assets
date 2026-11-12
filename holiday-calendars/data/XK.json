@@ -1,0 +1,72 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"02-17":[2],"04-09":[3],"04-12":[4],"04-13":[5],"04-19":[6],"04-20":[7],"05-01":[8],"05-09":[9],"05-11":[10],"05-24":[11],"05-25":[12],"07-31":[13],"12-25":[14]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"01-02":[0],"01-04":[15],"01-07":[1],"02-17":[2],"04-04":[4],"04-05":[5],"04-09":[3],"05-01":[8],"05-02":[6],"05-03":[16],"05-04":[7],"05-09":[9],"05-10":[10],"05-13":[11],"07-20":[13],"12-25":[14],"12-27":[17]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-02":[0],"01-03":[15],"01-04":[15],"01-07":[1],"02-17":[2],"04-09":[3],"04-11":[18],"04-17":[4],"04-18":[5],"04-24":[6],"04-25":[7],"05-01":[8],"05-02":[11],"05-03":[16],"05-09":[9],"07-09":[13],"07-11":[19],"12-25":[14],"12-26":[17]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[0],"01-03":[15],"01-07":[1],"01-09":[20],"02-17":[2],"04-09":[21,22],"04-10":[23,24],"04-16":[6],"04-17":[7],"04-21":[11],"05-01":[8],"05-09":[9],"06-28":[13],"12-25":[14]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"01-08":[20],"02-17":[2],"02-19":[25],"03-31":[4],"04-01":[5],"04-09":[3],"04-10":[11],"05-01":[8],"05-05":[6],"05-06":[7],"05-09":[9],"06-16":[13],"06-17":[19],"12-25":[14]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"02-17":[2],"03-30":[11],"03-31":[12],"04-09":[3],"04-20":[4,6],"04-21":[5,7],"05-01":[8],"05-09":[9],"06-06":[13],"12-25":[14]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"02-17":[2],"03-20":[11],"04-05":[4],"04-06":[5],"04-09":[3],"04-12":[6],"04-13":[7],"05-01":[8],"05-09":[9],"05-11":[10],"05-27":[13],"12-25":[14]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"01-02":[0],"01-04":[15],"01-07":[1],"02-17":[2],"03-09":[11],"03-28":[4],"03-29":[5],"04-09":[3],"05-01":[8],"05-02":[6],"05-03":[16],"05-04":[7],"05-09":[9],"05-10":[10],"05-16":[13],"05-17":[19],"12-25":[14],"12-27":[17]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-02":[0],"01-03":[15],"01-04":[15],"01-07":[1],"02-17":[2],"02-26":[11],"02-28":[12],"04-09":[3],"04-10":[18],"04-16":[4,6],"04-17":[5,7],"05-01":[8],"05-05":[13],"05-09":[9],"12-25":[14]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"01-08":[20],"02-14":[11],"02-17":[2],"02-19":[25],"04-01":[4],"04-02":[5],"04-08":[6],"04-09":[3],"04-10":[7],"04-24":[13],"05-01":[8],"05-09":[9],"12-25":[14]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"02-04":[11],"02-17":[2],"02-18":[25],"04-09":[3],"04-13":[13],"04-15":[19],"04-21":[4],"04-22":[5],"04-28":[6],"04-29":[7],"05-01":[8],"05-09":[9],"12-25":[14]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"01-24":[11],"02-17":[2],"04-02":[13],"04-09":[3],"04-13":[4,6],"04-14":[5,7],"05-01":[8],"05-09":[9],"12-25":[14]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"01-14":[11],"02-17":[2],"03-22":[13],"03-28":[4],"03-29":[5],"04-09":[3],"05-01":[8],"05-02":[6],"05-03":[16],"05-04":[7],"05-09":[9],"05-10":[10],"12-25":[14],"12-27":[17]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[11,0],"01-03":[15],"01-04":[12,15],"01-07":[1],"02-17":[2],"03-11":[13],"04-09":[3],"04-11":[18],"04-17":[4],"04-18":[5],"04-24":[6],"04-25":[7],"05-01":[8],"05-02":[16],"05-09":[9],"12-23":[11],"12-25":[14],"12-26":[17]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[0],"01-03":[15],"01-07":[1],"01-09":[20],"02-17":[2],"03-01":[13],"04-09":[21,22,6],"04-10":[23,24,7],"05-01":[8],"05-09":[9],"12-12":[11],"12-25":[14]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"01-02":[0],"01-07":[1],"01-08":[20],"02-17":[2],"02-18":[13],"02-19":[25],"02-20":[19],"03-25":[4],"03-26":[5],"04-09":[3],"04-29":[6],"04-30":[7],"05-01":[8],"05-09":[9],"12-01":[11],"12-03":[12],"12-25":[14]},"workdays":[]}
+  },
+  "defaultLanguage": "sq",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "sq"
+  ],
+  "name": "Kosovo",
+  "names": [
+    {"en-US":"New Year's Day","sq":"Viti i Ri"},
+    {"en-US":"Orthodox Christmas Day","sq":"Krishtlindjet Ortodokse"},
+    {"en-US":"Independence Day","sq":"Dita e Pavarësisë së Republikës së Kosovës"},
+    {"en-US":"Constitution Day","sq":"Dita e Kushtetutës së Republikës së Kosovës"},
+    {"en-US":"Catholic Easter","sq":"Pashkët Katolike"},
+    {"en-US":"Catholic Easter (observed)","sq":"Pashkët Katolike (ditë pushimi e shtyrë)"},
+    {"en-US":"Orthodox Easter","sq":"Pashkët Ortodokse"},
+    {"en-US":"Orthodox Easter (observed)","sq":"Pashkët Ortodokse (ditë pushimi e shtyrë)"},
+    {"en-US":"International Labor Day","sq":"Dita Ndërkombëtare e Punës"},
+    {"en-US":"Europe Day","sq":"Dita e Evropës"},
+    {"en-US":"Europe Day (observed)","sq":"Dita e Evropës (ditë pushimi e shtyrë)"},
+    {"en-US":"Eid al-Fitr (estimated)","sq":"Bajrami i Madh, dita e parë (e vlerësuar)"},
+    {"en-US":"Eid al-Fitr (observed, estimated)","sq":"Bajrami i Madh, dita e parë (ditë pushimi e shtyrë, e vlerësuar)"},
+    {"en-US":"Eid al-Adha (estimated)","sq":"Bajrami i Vogël, dita e parë (e vlerësuar)"},
+    {"en-US":"Catholic Christmas Day","sq":"Krishtlindjet Katolike"},
+    {"en-US":"New Year's Day (observed)","sq":"Viti i Ri (ditë pushimi e shtyrë)"},
+    {"en-US":"International Labor Day (observed)","sq":"Dita Ndërkombëtare e Punës (ditë pushimi e shtyrë)"},
+    {"en-US":"Catholic Christmas Day (observed)","sq":"Krishtlindjet Katolike (ditë pushimi e shtyrë)"},
+    {"en-US":"Constitution Day (observed)","sq":"Dita e Kushtetutës së Republikës së Kosovës (ditë pushimi e shtyrë)"},
+    {"en-US":"Eid al-Adha (observed, estimated)","sq":"Bajrami i Vogël, dita e parë (ditë pushimi e shtyrë, e vlerësuar)"},
+    {"en-US":"Orthodox Christmas Day (observed)","sq":"Krishtlindjet Ortodokse (ditë pushimi e shtyrë)"},
+    {"en-US":"Catholic Easter","sq":"Dita e Kushtetutës së Republikës së Kosovës"},
+    {"en-US":"Constitution Day","sq":"Pashkët Katolike"},
+    {"en-US":"Catholic Easter (observed)","sq":"Dita e Kushtetutës së Republikës së Kosovës (ditë pushimi e shtyrë)"},
+    {"en-US":"Constitution Day (observed)","sq":"Pashkët Katolike (ditë pushimi e shtyrë)"},
+    {"en-US":"Independence Day (observed)","sq":"Dita e Pavarësisë së Republikës së Kosovës (ditë pushimi e shtyrë)"}
+  ],
+  "region": "XK",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

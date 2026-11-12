@@ -18,6 +18,15 @@
     "adjustment": "Ajuste"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "Se añaden los datos, las herramientas de generación y verificación y el flujo de publicación de la nueva familia holiday-calendars, los calendarios de días festivos de los que el plugin 3-Chime Alarm obtiene los festivos y los días laborables de recuperación de 2020 a 2035"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [

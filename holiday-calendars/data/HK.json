@@ -1,0 +1,78 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-25":[1],"01-27":[2],"01-28":[3],"04-04":[4],"05-01":[5],"06-25":[6],"07-01":[7],"10-01":[8],"10-02":[9],"10-25":[10],"10-26":[11],"12-25":[12]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"02-12":[1],"02-13":[13],"02-15":[3],"04-04":[4],"04-05":[14],"05-01":[5],"06-14":[6],"07-01":[7],"09-22":[9],"10-01":[8],"10-14":[10],"12-25":[12]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"02-01":[1],"02-02":[13],"02-03":[2],"04-05":[4],"05-01":[5],"05-02":[15],"05-08":[16],"05-09":[17],"06-03":[6],"07-01":[7],"09-12":[18],"10-01":[8],"10-04":[10],"12-25":[12],"12-26":[19]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[20],"01-23":[13],"01-24":[2],"01-25":[3],"04-05":[4],"05-01":[5],"05-26":[16],"06-22":[6],"07-01":[7],"09-30":[9],"10-01":[8],"10-02":[21],"10-23":[10],"12-25":[12]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-10":[1],"02-12":[2],"02-13":[3],"04-04":[4],"05-01":[5],"05-15":[16],"06-10":[6],"07-01":[7],"09-18":[9],"10-01":[8],"10-11":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-29":[1],"01-30":[13],"01-31":[2],"04-04":[4],"05-01":[5],"05-05":[16],"05-31":[6],"07-01":[7],"10-01":[8],"10-07":[9],"10-29":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"02-17":[1],"02-18":[13],"02-19":[2],"04-05":[4],"04-06":[23],"04-07":[14],"05-01":[5],"05-24":[16],"05-25":[17],"06-19":[6],"07-01":[7],"09-26":[9],"10-01":[8],"10-18":[10],"10-19":[11],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"02-06":[1],"02-08":[2],"02-09":[3],"03-29":[23],"04-05":[4],"05-01":[5],"05-13":[16],"06-09":[6],"07-01":[7],"09-16":[9],"10-01":[8],"10-08":[10],"12-25":[12],"12-26":[22],"12-27":[24]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-26":[1],"01-27":[13],"01-28":[2],"04-04":[4],"04-14":[25],"04-17":[23],"05-01":[5],"05-02":[16],"05-28":[6],"05-29":[26],"07-01":[7],"10-01":[8],"10-02":[21],"10-04":[9],"10-26":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-13":[1],"02-14":[13],"02-15":[2],"03-30":[25],"04-02":[23],"04-04":[4],"05-01":[5],"05-20":[16],"05-21":[17],"06-16":[6],"07-01":[7],"07-02":[27],"09-24":[18],"10-01":[8],"10-16":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-04":[13],"02-05":[2],"02-06":[3],"04-05":[4],"04-19":[25],"04-20":[28],"04-22":[23],"05-01":[5],"05-09":[16],"06-05":[6],"07-01":[7],"09-13":[9],"10-01":[8],"10-05":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-23":[1],"01-24":[13],"01-25":[2],"04-05":[4],"04-11":[25],"04-12":[28],"04-14":[23],"05-01":[5],"05-28":[16],"06-24":[6],"07-01":[7],"10-01":[8],"10-02":[9],"10-24":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"02-11":[1],"02-12":[13],"02-13":[2],"03-26":[25],"03-27":[28],"03-29":[23],"04-04":[4],"04-05":[14],"05-01":[5],"05-16":[16],"05-17":[17],"06-12":[6],"07-01":[7],"09-20":[9],"10-01":[8],"10-12":[10],"12-25":[12],"12-26":[22],"12-27":[24]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-31":[1],"02-01":[13],"02-02":[2],"04-04":[4],"04-15":[25],"04-16":[28],"04-18":[23],"05-01":[5],"05-02":[15],"05-06":[16],"06-01":[6],"07-01":[7],"09-09":[9],"10-01":[29,30],"10-03":[21],"12-25":[12],"12-26":[22],"12-27":[19]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[20],"02-20":[13],"02-21":[2],"02-22":[3],"04-05":[4],"04-07":[25],"04-08":[28],"04-10":[23],"05-01":[5],"05-25":[16],"06-20":[6],"07-01":[7],"09-28":[9],"10-01":[8],"10-02":[21],"10-20":[10],"12-25":[12],"12-26":[22]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-08":[1],"02-09":[13],"02-10":[2],"03-23":[25],"03-24":[28],"03-26":[23],"04-05":[4],"05-01":[5],"05-15":[16],"06-10":[6],"06-11":[26],"07-01":[7],"07-02":[27],"09-17":[9],"10-01":[8],"10-09":[10],"12-25":[12],"12-26":[22]},"workdays":[]}
+  },
+  "defaultLanguage": "zh-HK",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-HK",
+    "en-US",
+    "zh-CN",
+    "zh-HK"
+  ],
+  "name": "Hong Kong",
+  "names": [
+    {"en-HK":"The first day of January","en-US":"New Year's Day","zh-CN":"一月一日","zh-HK":"一月一日"},
+    {"en-HK":"Lunar New Year's Day","en-US":"Chinese New Year","zh-CN":"农历年初一","zh-HK":"農曆年初一"},
+    {"en-HK":"The third day of Lunar New Year","en-US":"The third day of Chinese New Year","zh-CN":"农历年初三","zh-HK":"農曆年初三"},
+    {"en-HK":"The fourth day of Lunar New Year","en-US":"The fourth day of Chinese New Year","zh-CN":"农历年初四","zh-HK":"農曆年初四"},
+    {"en-HK":"Ching Ming Festival","en-US":"Tomb-Sweeping Day","zh-CN":"清明节","zh-HK":"清明節"},
+    {"en-HK":"Labour Day","en-US":"Labor Day","zh-CN":"劳动节","zh-HK":"勞動節"},
+    {"en-HK":"Tuen Ng Festival","en-US":"Dragon Boat Festival","zh-CN":"端午节","zh-HK":"端午節"},
+    {"en-HK":"Hong Kong Special Administrative Region Establishment Day","en-US":"Hong Kong S.A.R. Establishment Day","zh-CN":"香港特别行政区成立纪念日","zh-HK":"香港特別行政區成立紀念日"},
+    {"en-HK":"National Day","en-US":"National Day","zh-CN":"国庆日","zh-HK":"國慶日"},
+    {"en-HK":"The day following the Chinese Mid-Autumn Festival","en-US":"The Day following Mid-Autumn Festival","zh-CN":"中秋节翌日","zh-HK":"中秋節翌日"},
+    {"en-HK":"Chung Yeung Festival","en-US":"Double Ninth Festival","zh-CN":"重阳节","zh-HK":"重陽節"},
+    {"en-HK":"Chung Yeung Festival (observed)","en-US":"Double Ninth Festival (observed)","zh-CN":"重阳节（补假）","zh-HK":"重陽節（補假）"},
+    {"en-HK":"Christmas Day","en-US":"Christmas Day","zh-CN":"圣诞节","zh-HK":"聖誕節"},
+    {"en-HK":"The second day of Lunar New Year","en-US":"The second day of Chinese New Year","zh-CN":"农历年初二","zh-HK":"農曆年初二"},
+    {"en-HK":"Ching Ming Festival (observed)","en-US":"Tomb-Sweeping Day (observed)","zh-CN":"清明节（补假）","zh-HK":"清明節（補假）"},
+    {"en-HK":"Labour Day (observed)","en-US":"Labor Day (observed)","zh-CN":"劳动节（补假）","zh-HK":"勞動節（補假）"},
+    {"en-HK":"The Birthday of the Buddha","en-US":"The Buddha's Birthday","zh-CN":"佛诞","zh-HK":"佛誕"},
+    {"en-HK":"The Birthday of the Buddha (observed)","en-US":"The Buddha's Birthday (observed)","zh-CN":"佛诞（补假）","zh-HK":"佛誕（補假）"},
+    {"en-HK":"The second day following the Chinese Mid-Autumn Festival","en-US":"The Second Day following Mid-Autumn Festival","zh-CN":"中秋节后第二日","zh-HK":"中秋節後第二日"},
+    {"en-HK":"Christmas Day (observed)","en-US":"Christmas Day (observed)","zh-CN":"圣诞节（补假）","zh-HK":"聖誕節（補假）"},
+    {"en-HK":"The first day of January (observed)","en-US":"New Year's Day (observed)","zh-CN":"一月一日（补假）","zh-HK":"一月一日（補假）"},
+    {"en-HK":"National Day (observed)","en-US":"National Day (observed)","zh-CN":"国庆日（补假）","zh-HK":"國慶日（補假）"},
+    {"en-HK":"The first weekday after Christmas Day","en-US":"The first weekday after Christmas Day","zh-CN":"圣诞节后第一个周日","zh-HK":"聖誕節後第一個周日"},
+    {"en-HK":"Easter Monday","en-US":"Easter Monday","zh-CN":"复活节星期一","zh-HK":"復活節星期一"},
+    {"en-HK":"The first weekday after Christmas Day (observed)","en-US":"The first weekday after Christmas Day (observed)","zh-CN":"圣诞节后第一个周日（补假）","zh-HK":"聖誕節後第一個周日（補假）"},
+    {"en-HK":"Good Friday","en-US":"Good Friday","zh-CN":"耶稣受难节","zh-HK":"耶穌受難節"},
+    {"en-HK":"Tuen Ng Festival (observed)","en-US":"Dragon Boat Festival (observed)","zh-CN":"端午节（补假）","zh-HK":"端午節（補假）"},
+    {"en-HK":"Hong Kong Special Administrative Region Establishment Day (observed)","en-US":"Hong Kong S.A.R. Establishment Day (observed)","zh-CN":"香港特别行政区成立纪念日（补假）","zh-HK":"香港特別行政區成立紀念日（補假）"},
+    {"en-HK":"The day following Good Friday","en-US":"The day following Good Friday","zh-CN":"耶稣受难节翌日","zh-HK":"耶穌受難節翌日"},
+    {"en-HK":"Chung Yeung Festival","en-US":"Double Ninth Festival","zh-CN":"国庆日","zh-HK":"國慶日"},
+    {"en-HK":"National Day","en-US":"National Day","zh-CN":"重阳节","zh-HK":"重陽節"}
+  ],
+  "region": "HK",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

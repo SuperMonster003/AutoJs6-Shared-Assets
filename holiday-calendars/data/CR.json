@@ -1,0 +1,62 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"04-09":[1],"04-10":[2],"04-11":[3],"05-01":[4],"07-27":[5],"08-17":[6],"09-14":[7],"12-25":[8]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"04-01":[1],"04-02":[2],"04-11":[3],"05-03":[9],"07-26":[5],"08-15":[10],"09-13":[7],"12-25":[8]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"04-11":[3],"04-14":[1],"04-15":[2],"05-01":[4],"07-25":[11],"08-15":[10],"09-19":[7],"12-25":[8]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"04-06":[1],"04-07":[2],"04-10":[12],"05-01":[4],"07-24":[5],"08-14":[6],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"03-28":[1],"03-29":[2],"04-15":[12],"05-01":[4],"07-29":[5],"08-19":[6],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"04-11":[3],"04-17":[1],"04-18":[2],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"04-02":[1],"04-03":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-25":[1],"03-26":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"04-11":[3],"04-13":[1],"04-14":[2],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"03-29":[1],"03-30":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"04-11":[3],"04-18":[1],"04-19":[2],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"04-10":[1],"04-11":[14,15],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"03-25":[1],"03-26":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"04-11":[3],"04-14":[1],"04-15":[2],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"04-06":[1],"04-07":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"03-22":[1],"03-23":[2],"04-11":[3],"05-01":[4],"07-25":[11],"08-15":[10],"09-15":[13],"12-25":[8]},"workdays":[]}
+  },
+  "defaultLanguage": "es",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "es"
+  ],
+  "name": "Costa Rica",
+  "names": [
+    {"en-US":"New Year's Day","es":"Año Nuevo"},
+    {"en-US":"Maundy Thursday","es":"Jueves Santo"},
+    {"en-US":"Good Friday","es":"Viernes Santo"},
+    {"en-US":"Juan Santamaría Day","es":"Día de Juan Santamaría"},
+    {"en-US":"International Labor Day","es":"Día Internacional del Trabajo"},
+    {"en-US":"Annexation of the Party of Nicoya to Costa Rica (observed)","es":"Anexión del Partido de Nicoya a Costa Rica (observado)"},
+    {"en-US":"Mother's Day (observed)","es":"Día de la Madre (observado)"},
+    {"en-US":"Independence Day (observed)","es":"Día de la Independencia (observado)"},
+    {"en-US":"Christmas Day","es":"Navidad"},
+    {"en-US":"International Labor Day (observed)","es":"Día Internacional del Trabajo (observado)"},
+    {"en-US":"Mother's Day","es":"Día de la Madre"},
+    {"en-US":"Annexation of the Party of Nicoya to Costa Rica","es":"Anexión del Partido de Nicoya a Costa Rica"},
+    {"en-US":"Juan Santamaría Day (observed)","es":"Día de Juan Santamaría (observado)"},
+    {"en-US":"Independence Day","es":"Día de la Independencia"},
+    {"en-US":"Good Friday","es":"Día de Juan Santamaría"},
+    {"en-US":"Juan Santamaría Day","es":"Viernes Santo"}
+  ],
+  "region": "CR",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

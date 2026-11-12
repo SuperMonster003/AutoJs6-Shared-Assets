@@ -1,0 +1,63 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"02-27":[0],"03-08":[1],"05-10":[2],"05-20":[3],"05-24":[4],"06-09":[5],"06-17":[6],"07-31":[7],"08-20":[8],"10-12":[9],"10-29":[10]},"workdays":[]},
+    "2021": {"holidays":{"02-27":[0],"03-08":[1],"05-10":[2],"05-13":[4],"05-20":[3],"06-09":[5],"06-17":[6],"07-20":[7],"08-09":[8],"10-12":[9],"10-18":[10]},"workdays":[]},
+    "2022": {"holidays":{"02-27":[0],"03-08":[1],"05-02":[4],"05-10":[2],"05-20":[3],"06-09":[5],"06-17":[6],"07-09":[7],"07-30":[8],"10-08":[10],"10-12":[9]},"workdays":[]},
+    "2023": {"holidays":{"02-27":[0],"03-08":[1],"04-21":[4],"05-10":[2],"05-20":[3],"06-09":[5],"06-17":[6],"06-28":[7],"07-19":[8],"09-27":[10],"10-12":[9]},"workdays":[]},
+    "2024": {"holidays":{"02-27":[0],"03-08":[1],"04-10":[4],"05-10":[2],"05-20":[3],"06-09":[5],"06-16":[7],"06-17":[6],"07-07":[8],"09-15":[10],"10-12":[9]},"workdays":[]},
+    "2025": {"holidays":{"02-27":[0],"03-08":[1],"03-30":[4],"05-10":[2],"05-20":[3],"06-06":[7],"06-09":[5],"06-17":[6],"06-26":[8],"09-04":[10],"10-12":[9]},"workdays":[]},
+    "2026": {"holidays":{"02-27":[0],"03-08":[1],"03-20":[4],"05-10":[2],"05-20":[3],"05-27":[7],"06-09":[5],"06-16":[8],"06-17":[6],"08-25":[10],"10-12":[9]},"workdays":[]},
+    "2027": {"holidays":{"02-27":[0],"03-08":[1],"03-09":[4],"05-10":[2],"05-16":[7],"05-20":[3],"06-06":[8],"06-09":[5],"06-17":[6],"08-14":[10],"10-12":[9]},"workdays":[]},
+    "2028": {"holidays":{"02-26":[4],"02-27":[0],"03-08":[1],"05-05":[7],"05-10":[2],"05-20":[3],"05-25":[8],"06-09":[5],"06-17":[6],"08-03":[10],"10-12":[9]},"workdays":[]},
+    "2029": {"holidays":{"02-14":[4],"02-27":[0],"03-08":[1],"04-24":[7],"05-10":[2],"05-14":[8],"05-20":[3],"06-09":[5],"06-17":[6],"07-24":[10],"10-12":[9]},"workdays":[]},
+    "2030": {"holidays":{"02-04":[4],"02-27":[0],"03-08":[1],"04-13":[7],"05-03":[8],"05-10":[2],"05-20":[3],"06-09":[5],"06-17":[6],"07-13":[10],"10-12":[9]},"workdays":[]},
+    "2031": {"holidays":{"01-24":[4],"02-27":[0],"03-08":[1],"04-02":[7],"04-23":[8],"05-10":[2],"05-20":[3],"06-09":[5],"06-17":[6],"07-02":[10],"10-12":[9]},"workdays":[]},
+    "2032": {"holidays":{"01-14":[4],"02-27":[0],"03-08":[1],"03-22":[7],"04-11":[8],"05-10":[2],"05-20":[3],"06-09":[5],"06-17":[6],"06-20":[10],"10-12":[9]},"workdays":[]},
+    "2033": {"holidays":{"01-02":[4],"02-27":[0],"03-08":[1],"03-11":[7],"04-01":[8],"05-10":[2],"05-20":[3],"06-09":[11,12],"06-17":[6],"10-12":[9],"12-23":[4]},"workdays":[]},
+    "2034": {"holidays":{"02-27":[0],"03-01":[7],"03-08":[1],"03-21":[8],"05-10":[2],"05-20":[3],"05-30":[10],"06-09":[5],"06-17":[6],"10-12":[9],"12-12":[4]},"workdays":[]},
+    "2035": {"holidays":{"02-18":[7],"02-27":[0],"03-08":[1],"03-11":[8],"05-10":[2],"05-20":[13,14],"06-09":[5],"06-17":[6],"10-12":[9],"12-01":[4]},"workdays":[]}
+  },
+  "defaultLanguage": "ar",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "ar",
+    "en-US",
+    "es",
+    "fr"
+  ],
+  "name": "Western Sahara",
+  "names": [
+    {"ar":"إعلان الجمهورية العربية الصحراوية الديمقراطية","en-US":"Proclamation of the SADR","es":"Proclamación de la República Árabe Saharaui Democrática","fr":"Proclamation de la République arabe sahraouie démocratique"},
+    {"ar":"يوم الشهيد الأول","en-US":"First Martyr","es":"Primer mártir","fr":"Premier martyr"},
+    {"ar":"تأسيس الجبهة الشعبية لتحرير الساقية الحمراء ووادي الذهب","en-US":"Creation of the Polisario Front","es":"Creación del Frente POLISARIO","fr":"Création du Front POLISARIO"},
+    {"ar":"اندلاع الكفاح المسلح","en-US":"Commencement of the Armed Struggle","es":"Inicio de la lucha armada","fr":"Déclenchement de la lutte armée"},
+    {"ar":"عيد الفطر المبارك (تقديري)","en-US":"Eid al-Fitr (estimated)","es":"Eid al-Fitr (estimado)","fr":"Aïd el-Fitr (estimé)"},
+    {"ar":"يوم الشهداء","en-US":"Martyrs' Day","es":"Día de los mártires","fr":"Journée des martyrs"},
+    {"ar":"يوم الانتفاضة","en-US":"Uprising Day","es":"Día de la insurrección","fr":"Jour de l'insurrection"},
+    {"ar":"عيد الأضحى المبارك (تقديري)","en-US":"Eid al-Adha (estimated)","es":"Eid al-Adha (estimado)","fr":"Aïd al-Adha (estimé)"},
+    {"ar":"رأس السنة الهجرية (تقديري)","en-US":"Islamic New Year (estimated)","es":"Primer día del año de la Hégira (estimado)","fr":"Premier jour de l'an de l'Hégire (estimé)"},
+    {"ar":"عيد الوحدة الوطنية","en-US":"National Unity Day","es":"Fiesta de la unidad nacional","fr":"Fête de l'unité nationale"},
+    {"ar":"المولد النبوي الشريف (تقديري)","en-US":"Prophet's Birthday (estimated)","es":"Santo Nacimiento del Profeta (estimado)","fr":"Naissance du Prophète (estimé)"},
+    {"ar":"المولد النبوي الشريف (تقديري)","en-US":"Martyrs' Day","es":"Día de los mártires","fr":"Journée des martyrs"},
+    {"ar":"يوم الشهداء","en-US":"Prophet's Birthday (estimated)","es":"Santo Nacimiento del Profeta (estimado)","fr":"Naissance du Prophète (estimé)"},
+    {"ar":"المولد النبوي الشريف (تقديري)","en-US":"Commencement of the Armed Struggle","es":"Inicio de la lucha armada","fr":"Déclenchement de la lutte armée"},
+    {"ar":"اندلاع الكفاح المسلح","en-US":"Prophet's Birthday (estimated)","es":"Santo Nacimiento del Profeta (estimado)","fr":"Naissance du Prophète (estimé)"}
+  ],
+  "region": "EH",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "off": ["01-01/01-03", "02-15/02-23", "04-04/04-06", "05-01/05-05", "06-19/06-21", "09-25/09-27", "10-01/10-07"],
+      "on": ["01-04", "01-05", "02-14", "02-24", "02-28", "05-06", "05-09", "09-20", "10-08", "10-10"],
+      "region": "CN",
+      "source": "General Office of the State Council, 2026 public holiday arrangement (published 2025-11)",
+      "workdays": ["01-04", "02-14", "02-28", "05-09", "09-20", "10-10"],
+      "year": 2026
+    },
+    {
+      "off": ["01-01", "01-28/02-04", "04-04/04-06", "05-01/05-05", "05-31/06-02", "10-01/10-08"],
+      "on": ["01-26", "02-05", "02-08", "04-27", "09-28", "10-09", "10-11"],
+      "region": "CN",
+      "source": "General Office of the State Council, 2025 public holiday arrangement (published 2024-11)",
+      "workdays": ["01-26", "02-08", "04-27", "09-28", "10-11"],
+      "year": 2025
+    },
+    {
+      "exactHolidays": true,
+      "holidays": ["01-01", "01-19", "02-16", "05-25", "06-19", "07-03", "07-04", "09-07", "10-12", "11-11", "11-26", "12-25"],
+      "on": ["07-06", "11-27"],
+      "region": "US",
+      "source": "5 U.S.C. 6103 federal holidays; Independence Day falls on a Saturday and is observed on Friday 07-03",
+      "workdays": [],
+      "year": 2026
+    },
+    {
+      "holidays": ["03-31", "11-27"],
+      "notHolidays": ["10-12"],
+      "region": "US-CA",
+      "source": "California state holidays (Cesar Chavez Day, day after Thanksgiving; no Columbus Day)",
+      "year": 2026
+    },
+    {
+      "exactHolidays": true,
+      "holidays": ["01-01", "01-12", "02-11", "02-23", "03-20", "04-29", "05-03", "05-04", "05-05", "05-06", "07-20", "08-11", "09-21", "09-22", "09-23", "10-12", "11-03", "11-23"],
+      "region": "JP",
+      "source": "Act on National Holidays; 2026 equinoxes 03-20 and 09-23, substitute holiday 05-06, citizens' holiday 09-22",
+      "workdays": [],
+      "year": 2026
+    },
+    {
+      "off": ["01-08", "01-09"],
+      "on": ["01-10"],
+      "region": "AE",
+      "source": "Friday-Saturday weekend until 2021-12-31",
+      "year": 2021
+    },
+    {
+      "off": ["01-10", "01-11"],
+      "on": ["01-09"],
+      "region": "AE",
+      "source": "Saturday-Sunday weekend from 2022-01-01",
+      "year": 2026
+    },
+    {
+      "off": ["01-09", "01-10"],
+      "on": ["01-11"],
+      "region": "MY-03",
+      "source": "Kelantan keeps a Friday-Saturday weekend",
+      "year": 2026
+    },
+    {
+      "off": ["01-05"],
+      "on": ["01-07"],
+      "region": "MY-01",
+      "source": "Johor had a Friday-Saturday weekend until 2024",
+      "year": 2024
+    },
+    {
+      "off": ["01-11"],
+      "on": ["01-09"],
+      "region": "MY-01",
+      "source": "Johor moved to a Saturday-Sunday weekend on 2025-01-01",
+      "year": 2026
+    }
+  ],
+  "schemaVersion": 1
+}

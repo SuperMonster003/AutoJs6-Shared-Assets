@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `機能` 新しい祝日カレンダー群 holiday-calendars のデータ, 生成ツールと検証ツール, 公開ワークフローを追加. 3-Chime Alarm プラグインは 2020 - 2035 年の祝日と振替出勤日をここから取得します
+
 # 2026-10-16
 
 ###### 2026/10/16

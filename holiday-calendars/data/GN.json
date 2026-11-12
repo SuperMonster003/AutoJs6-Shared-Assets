@@ -1,0 +1,68 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"04-03":[1],"04-13":[2],"05-01":[3],"05-20":[4],"05-24":[5],"05-25":[6],"07-31":[7],"08-15":[8],"10-02":[9],"10-29":[10],"11-01":[11],"12-25":[12]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"04-03":[1],"04-05":[2],"05-01":[3],"05-09":[4],"05-13":[5],"05-25":[6],"07-20":[7],"08-15":[8],"10-02":[9],"10-18":[10],"11-01":[11],"12-25":[12]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"04-18":[2],"04-29":[4],"05-01":[3],"05-02":[5],"05-25":[6],"07-10":[7],"08-15":[8],"10-02":[9],"10-08":[10],"12-25":[12]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[13],"04-10":[2],"04-18":[4],"04-21":[5],"05-01":[3],"05-25":[6],"06-28":[7],"06-29":[14],"08-15":[8],"09-27":[10],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"04-01":[2],"04-06":[4],"04-10":[5],"05-01":[3],"05-25":[6],"06-16":[7],"06-17":[14],"08-15":[8],"09-15":[10],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"03-27":[4],"03-31":[5],"04-21":[2],"05-01":[3],"05-25":[6],"06-07":[7],"06-08":[14],"08-15":[8],"09-05":[10],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"03-16":[15],"03-20":[16],"04-06":[2],"05-01":[3],"05-25":[6],"05-27":[17],"05-28":[18],"08-15":[8],"08-25":[19],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-06":[15],"03-09":[16],"03-29":[2],"05-01":[3],"05-16":[17],"05-17":[18],"05-25":[6],"08-14":[19],"08-15":[8],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"02-23":[15],"02-26":[16],"04-17":[2],"05-01":[3],"05-05":[17],"05-06":[18],"05-25":[6],"08-03":[19],"08-15":[8],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-11":[15],"02-14":[16],"04-02":[2],"04-24":[17],"04-25":[18],"05-01":[3],"05-25":[6],"07-24":[19],"08-15":[8],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-31":[15],"02-04":[16],"04-13":[17],"04-14":[18],"04-22":[2],"05-01":[3],"05-25":[6],"07-13":[19],"08-15":[8],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-21":[15],"01-24":[16],"04-02":[17],"04-03":[18],"04-14":[2],"05-01":[3],"05-25":[6],"07-02":[19],"08-15":[8],"10-02":[9],"12-25":[12]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-10":[15],"01-14":[16],"03-22":[17],"03-23":[18],"03-29":[2],"05-01":[3],"05-25":[6],"06-20":[19],"08-15":[8],"10-02":[9],"12-25":[12],"12-30":[15]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[16],"01-03":[20],"03-11":[17],"03-12":[18],"04-18":[2],"05-01":[3],"05-25":[6],"06-09":[19],"08-15":[8],"10-02":[9],"10-03":[21],"12-19":[15],"12-23":[16],"12-25":[12]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[13],"03-01":[17],"03-02":[18],"04-10":[2],"05-01":[3],"05-25":[6],"05-30":[19],"08-15":[8],"10-02":[9],"12-08":[15],"12-12":[16],"12-25":[12]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-18":[17],"02-19":[18],"03-26":[2],"05-01":[3],"05-20":[19],"05-25":[6],"08-15":[8],"10-02":[9],"11-27":[15],"12-01":[16],"12-25":[12]},"workdays":[]}
+  },
+  "defaultLanguage": "fr",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "fr"
+  ],
+  "name": "Guinea",
+  "names": [
+    {"en-US":"New Year's Day","fr":"Fête du Nouvel an"},
+    {"en-US":"Second Republic Day","fr":"Jour de la Deuxième République"},
+    {"en-US":"Easter Monday","fr":"Lundi de Pâques"},
+    {"en-US":"Labor Day","fr":"Fête du Travail"},
+    {"en-US":"Day after Night of Power","fr":"Lendemain de la nuit Lailatoul Qadr"},
+    {"en-US":"Eid al-Fitr","fr":"Jour de l'Aïd el-Fitr"},
+    {"en-US":"Africa Day","fr":"Anniversaire de l'Union Africaine"},
+    {"en-US":"Eid al-Adha","fr":"Jour de la Tabaski"},
+    {"en-US":"Assumption Day","fr":"Assomption"},
+    {"en-US":"Independence Day","fr":"Fête anniversaire de l'indépendance de la Guinée"},
+    {"en-US":"Day after Prophet's Birthday","fr":"Lendemain de la nuit du Maoloud"},
+    {"en-US":"All Saints' Day","fr":"Toussaint"},
+    {"en-US":"Christmas Day","fr":"Fête de Noël"},
+    {"en-US":"Day after the New Year's Day","fr":"Lendemain de la Fête du Nouvel an"},
+    {"en-US":"Day after Eid al-Adha","fr":"Lendemain de la Tabaski"},
+    {"en-US":"Day after Night of Power (estimated)","fr":"Lendemain de la nuit Lailatoul Qadr (estimé)"},
+    {"en-US":"Eid al-Fitr (estimated)","fr":"Jour de l'Aïd el-Fitr (estimé)"},
+    {"en-US":"Eid al-Adha (estimated)","fr":"Jour de la Tabaski (estimé)"},
+    {"en-US":"Day after Eid al-Adha (estimated)","fr":"Lendemain de la Tabaski (estimé)"},
+    {"en-US":"Day after Prophet's Birthday (estimated)","fr":"Lendemain de la nuit du Maoloud (estimé)"},
+    {"en-US":"Day after the Eid al-Fitr (estimated)","fr":"Lendemain de la Jour de l'Aïd el-Fitr (estimé)"},
+    {"en-US":"Day after the Independence Day","fr":"Lendemain de la Fête anniversaire de l'indépendance de la Guinée"}
+  ],
+  "region": "GN",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

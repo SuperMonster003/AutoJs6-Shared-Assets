@@ -1,0 +1,13 @@
+{
+  "catalogVersion": 1,
+  "format": 1,
+  "generatedAt": "2026-11-12T00:00:00Z",
+  "previousCatalogVersion": null,
+  "regions": 250,
+  "releaseAssetBytes": 1886102,
+  "releaseAssetCount": 250,
+  "repository": "SuperMonster003/AutoJs6-Shared-Assets",
+  "source": "python-holidays 0.108",
+  "subdivisions": 629,
+  "unsigned": true
+}

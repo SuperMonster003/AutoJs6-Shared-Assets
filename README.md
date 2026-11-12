@@ -22,6 +22,7 @@
 - [`ace-fonts/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/ace-fonts/README.md): AutoJs6 Ace 编辑器的可选 WOFF2 字体. 常规 Iosevka 仍随 AutoJs6 内置, 不在此分发.
 - [`codegen-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/codegen-models/README.md): 独立版本管理的本地布局代码生成排序模型, 使用各自的签名目录与发行标签.
 - [`speech-models/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md): 3-Macaw Speech 插件按需下载的 sherpa-onnx 语音模型 (识别, 唤醒词与合成). 仓库只保存来源清单与许可文本, 模型归档由固定的上游发行资源复现, 使用独立的签名目录与发行标签.
+- [`holiday-calendars/`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md): 3-Chime Alarm 插件使用的公共节假日日历, 每个地区一个 JSON 文件, 覆盖 2020 - 2035 年, 包含中国大陆等地区的调休补班日. 数据由锁定版本的 python-holidays (MIT) 在构建期生成并纳入版本控制, 可以复现, 使用独立的签名目录与发行标签.
 - 新增资源类别必须使用独立的目录, 清单, 发行标签前缀, 工作流, 完整性策略, 并在需要时使用独立签名密钥.
 
 构建或显示已安装应用所需的资源 (如主要标志或内置 CSS) 通常保留在 AutoJs6 源码仓库. 本共享仓库用于独立发行/下载或跨项目资源. 远程 CSS 是活动内容, 不得加入 `ace-fonts`; 应为其分配独立命名空间及更严格的签名/审核策略.
@@ -42,6 +43,7 @@ V4 条目带有明确的 `mono`, `nerd`, `variable`, `cn`, `jp` 特性元数据�
 .github/workflows/publish-ace-fonts.yml
 .github/workflows/publish-codegen-models.yml
 .github/workflows/publish-speech-models.yml
+.github/workflows/publish-holiday-calendars.yml
 ace-fonts/
   sources/                         # reviewed WOFF2/license source inputs
     retired/                       # historical bytes excluded from current catalog
@@ -69,6 +71,15 @@ speech-models/
   keys/catalog-signing-public.pem  # public key only
   schemas/                         # catalog, signature and model-source schemas
 tools/speech-model-distribution/
+holiday-calendars/
+  data/<CC>.json                   # generated calendar per region, plus generation.json
+  sources/                         # generator pin and known-date spot checks
+  catalogs/history/vN/             # exact earlier catalogs and signatures
+  catalogs/pending/vN/             # reviewed candidates awaiting offline signing
+  keys/catalog-signing-public.pem  # public key only
+  schemas/                         # calendar, catalog and signature schemas
+  *-python-holidays.txt            # upstream MIT license and contributors
+tools/holiday-calendar-distribution/
 ```
 
 生成的包保存在已忽略的 `build/` 下. 标准来源 WOFF2 与声明文件直接纳入版本控制, 因此全新克隆无需 AutoJs6 的 `build/` 目录或旧的 `tools/.../sources` 快照即可复现发行. 本项目有意不使用 Git LFS.
@@ -87,7 +98,15 @@ tools/speech-model-distribution/
 
 语音模型的签名与发布步骤见 [`speech-models/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/speech-models/README.md), 工具说明见 [`tools/speech-model-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/speech-model-distribution/README.md). 模型二进制不纳入版本控制; 发布工作流从固定的 sherpa-onnx 上游资源校验并复现每个归档. 每个模型的许可与可否商用记录在许可审核文件中.
 
+节假日日历的格式规范, 签名与发布步骤见 [`holiday-calendars/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/README.md), 工具说明见 [`tools/holiday-calendar-distribution/README.md`](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/tools/holiday-calendar-distribution/README.md). 发布工作流用锁定的 python-holidays 重新生成全部数据并逐字节比对, 只上传内容有变化的地区文件. python-holidays 的 MIT 许可全文与贡献者名单与数据放在一起.
+
 ## 更新日志
+
+### 2026-11-12
+
+###### 2026/11/12
+
+* `新增` 新增公共节假日日历类别 holiday-calendars 的数据, 生成与校验工具和发布工作流, 供 3-Chime Alarm 插件判断 2020 - 2035 年的节假日与调休补班日
 
 ### 2026-10-16
 

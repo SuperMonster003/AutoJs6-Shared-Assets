@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `Función` Se añaden los datos, las herramientas de generación y verificación y el flujo de publicación de la nueva familia holiday-calendars, los calendarios de días festivos de los que el plugin 3-Chime Alarm obtiene los festivos y los días laborables de recuperación de 2020 a 2035
+
 # 2026-10-16
 
 ###### 2026/10/16

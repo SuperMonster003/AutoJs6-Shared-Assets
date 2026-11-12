@@ -1,0 +1,78 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-03":[1],"03-08":[2],"03-09":[3],"04-13":[4],"05-01":[5],"05-21":[6],"05-24":[7],"07-31":[8],"08-05":[9],"08-15":[10],"10-29":[11],"10-31":[12],"11-01":[13],"11-02":[14],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"01-03":[1],"01-04":[17],"03-08":[2],"04-05":[4],"05-01":[5],"05-13":[6,7],"07-20":[8],"08-05":[9],"08-15":[10],"08-16":[18],"10-19":[11],"10-31":[12],"11-01":[19,20],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-03":[1],"03-08":[2],"04-18":[4],"05-01":[5],"05-02":[21,22],"05-26":[6],"07-09":[8],"08-05":[9],"08-15":[10],"10-09":[11],"10-31":[12],"11-01":[13],"12-11":[15],"12-12":[23],"12-25":[16],"12-26":[24]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[25],"01-03":[1],"03-08":[2],"04-10":[4],"04-21":[7],"05-01":[5],"05-18":[6],"06-28":[8],"08-05":[9],"08-15":[10],"09-27":[26],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"01-03":[1],"03-08":[2],"04-01":[4],"04-10":[7],"05-01":[5],"05-09":[6],"06-16":[27],"08-05":[9],"08-15":[10],"09-15":[26],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-03":[1],"03-08":[2],"03-30":[28],"04-21":[4],"05-01":[5],"05-29":[6],"06-06":[27],"08-05":[9],"08-15":[10],"09-04":[26],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-03":[1],"03-08":[2],"03-09":[3],"03-20":[28],"04-06":[4],"05-01":[5],"05-14":[6],"05-27":[27],"08-05":[9],"08-15":[10],"08-25":[26],"10-31":[12],"11-01":[13],"11-02":[14],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"01-03":[1],"01-04":[17],"03-08":[2],"03-09":[28],"03-29":[4],"05-01":[5],"05-06":[6],"05-16":[27],"08-05":[9],"08-14":[26],"08-15":[10],"08-16":[18],"10-31":[12],"11-01":[19,20],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-03":[1],"02-26":[28],"03-08":[2],"04-17":[4],"05-01":[5],"05-05":[27],"05-25":[6],"08-03":[26],"08-05":[9],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"01-03":[1],"02-14":[28],"03-08":[2],"04-02":[4],"04-24":[27],"05-01":[5],"05-10":[6],"07-24":[26],"08-05":[9],"08-06":[29],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-03":[1],"02-04":[28],"03-08":[2],"04-13":[27],"04-22":[4],"05-01":[5],"05-30":[6],"07-13":[26],"08-05":[9],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-03":[1],"01-24":[28],"03-08":[2],"04-02":[27],"04-14":[4],"05-01":[5],"05-22":[6],"07-02":[26],"08-05":[9],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-03":[1],"01-14":[28],"03-08":[2],"03-22":[27],"03-29":[4],"05-01":[5],"05-06":[6],"06-20":[26],"08-05":[9],"08-15":[10],"08-16":[18],"10-31":[12],"11-01":[19,20],"12-11":[15],"12-25":[16]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[28],"01-03":[1],"03-08":[2],"03-11":[27],"04-18":[4],"05-01":[5],"05-02":[30],"05-26":[6],"06-09":[26],"08-05":[9],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-12":[23],"12-23":[28],"12-25":[16],"12-26":[24]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[25],"01-03":[1],"03-01":[27],"03-08":[2],"04-10":[4],"05-01":[5],"05-18":[6],"05-30":[26],"08-05":[9],"08-15":[10],"10-31":[12],"11-01":[13],"12-11":[15],"12-12":[28],"12-25":[16]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"01-03":[1],"02-18":[27],"03-08":[2],"03-26":[4],"05-01":[5],"05-03":[6],"05-20":[26],"08-05":[9],"08-06":[29],"08-15":[10],"10-31":[12],"11-01":[13],"12-01":[28],"12-11":[15],"12-25":[16]},"workdays":[]}
+  },
+  "defaultLanguage": "en-BF",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-BF",
+    "en-US",
+    "fr"
+  ],
+  "name": "Burkina Faso",
+  "names": [
+    {"en-BF":"New Year's Day","en-US":"New Year's Day","fr":"Jour de l'An"},
+    {"en-BF":"Revolution Day","en-US":"Revolution Day","fr":"Soulèvement populaire"},
+    {"en-BF":"International Women's Day","en-US":"International Women's Day","fr":"Journée internationale de la femme"},
+    {"en-BF":"International Women's Day (observed)","en-US":"International Women's Day (observed)","fr":"Journée internationale de la femme (observé)"},
+    {"en-BF":"Easter Monday","en-US":"Easter Monday","fr":"Lundi de Pâques"},
+    {"en-BF":"Labour Day","en-US":"Labor Day","fr":"Fête du travail"},
+    {"en-BF":"Ascension Day","en-US":"Ascension Day","fr":"Ascension"},
+    {"en-BF":"Eid al-Fitr","en-US":"Eid al-Fitr","fr":"Jour de Ramadan"},
+    {"en-BF":"Eid al-Adha","en-US":"Eid al-Adha","fr":"Jour de Tabaski"},
+    {"en-BF":"Independence Day","en-US":"Independence Day","fr":"Fête nationale"},
+    {"en-BF":"Assumption Day","en-US":"Assumption Day","fr":"Assomption"},
+    {"en-BF":"Mawlid","en-US":"Prophet's Birthday","fr":"Mouloud"},
+    {"en-BF":"Martyrs' Day","en-US":"Martyrs' Day","fr":"Journée nationale des martyrs"},
+    {"en-BF":"All Saints' Day","en-US":"All Saints' Day","fr":"Toussaint"},
+    {"en-BF":"All Saints' Day (observed)","en-US":"All Saints' Day (observed)","fr":"Toussaint (observé)"},
+    {"en-BF":"Proclamation of Independence Day","en-US":"Proclamation of Independence Day","fr":"Proclamation de l'Indépendance"},
+    {"en-BF":"Christmas Day","en-US":"Christmas Day","fr":"Jour de Noël"},
+    {"en-BF":"Revolution Day (observed)","en-US":"Revolution Day (observed)","fr":"Soulèvement populaire (observé)"},
+    {"en-BF":"Assumption Day (observed)","en-US":"Assumption Day (observed)","fr":"Assomption (observé)"},
+    {"en-BF":"All Saints' Day","en-US":"All Saints' Day","fr":"Journée nationale des martyrs (observé)"},
+    {"en-BF":"Martyrs' Day (observed)","en-US":"Martyrs' Day (observed)","fr":"Toussaint"},
+    {"en-BF":"Eid al-Fitr","en-US":"Eid al-Fitr","fr":"Fête du travail (observé)"},
+    {"en-BF":"Labour Day (observed)","en-US":"Labor Day (observed)","fr":"Jour de Ramadan"},
+    {"en-BF":"Proclamation of Independence Day (observed)","en-US":"Proclamation of Independence Day (observed)","fr":"Proclamation de l'Indépendance (observé)"},
+    {"en-BF":"Christmas Day (observed)","en-US":"Christmas Day (observed)","fr":"Jour de Noël (observé)"},
+    {"en-BF":"New Year's Day (observed)","en-US":"New Year's Day (observed)","fr":"Jour de l'An (observé)"},
+    {"en-BF":"Mawlid (estimated)","en-US":"Prophet's Birthday (estimated)","fr":"Mouloud (estimé)"},
+    {"en-BF":"Eid al-Adha (estimated)","en-US":"Eid al-Adha (estimated)","fr":"Jour de Tabaski (estimé)"},
+    {"en-BF":"Eid al-Fitr (estimated)","en-US":"Eid al-Fitr (estimated)","fr":"Jour de Ramadan (estimé)"},
+    {"en-BF":"Independence Day (observed)","en-US":"Independence Day (observed)","fr":"Fête nationale (observé)"},
+    {"en-BF":"Labour Day (observed)","en-US":"Labor Day (observed)","fr":"Fête du travail (observé)"}
+  ],
+  "region": "BF",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-25":[1],"01-26":[2],"01-27":[3],"04-04":[4],"05-01":[5],"10-01":[6],"10-02":[7],"10-25":[8],"12-20":[9]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"02-12":[1],"02-13":[2],"02-14":[3],"04-04":[4],"05-01":[5],"09-22":[7],"10-01":[6],"10-14":[8],"12-20":[9]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"02-01":[1],"02-02":[2],"02-03":[3],"04-05":[4],"05-01":[5],"09-11":[7],"10-01":[6],"10-04":[8],"12-20":[9]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-22":[1],"01-23":[2],"01-24":[3],"04-05":[4],"05-01":[5],"09-30":[7],"10-01":[6],"10-23":[8],"12-20":[9]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-10":[1],"02-11":[2],"02-12":[3],"04-04":[4],"05-01":[5],"09-18":[7],"10-01":[6],"10-11":[8],"12-20":[9]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-29":[1],"01-30":[2],"01-31":[3],"04-04":[4],"05-01":[5],"10-01":[6],"10-07":[7],"10-29":[8],"12-20":[9]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"02-17":[1],"02-18":[2],"02-19":[3],"04-05":[4],"05-01":[5],"09-26":[7],"10-01":[6],"10-18":[8],"12-20":[9]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"02-06":[1],"02-07":[2],"02-08":[3],"04-05":[4],"05-01":[5],"09-16":[7],"10-01":[6],"10-08":[8],"12-20":[9]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-26":[1],"01-27":[2],"01-28":[3],"04-04":[4],"05-01":[5],"10-01":[6],"10-04":[7],"10-26":[8],"12-20":[9]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-13":[1],"02-14":[2],"02-15":[3],"04-04":[4],"05-01":[5],"09-23":[7],"10-01":[6],"10-16":[8],"12-20":[9]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-03":[1],"02-04":[2],"02-05":[3],"04-05":[4],"05-01":[5],"09-13":[7],"10-01":[6],"10-05":[8],"12-20":[9]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-23":[1],"01-24":[2],"01-25":[3],"04-05":[4],"05-01":[5],"10-01":[6],"10-02":[7],"10-24":[8],"12-20":[9]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"02-11":[1],"02-12":[2],"02-13":[3],"04-04":[4],"05-01":[5],"09-20":[7],"10-01":[6],"10-12":[8],"12-20":[9]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-31":[1],"02-01":[2],"02-02":[3],"04-04":[4],"05-01":[5],"09-09":[7],"10-01":[10,11],"12-20":[9]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"02-19":[1],"02-20":[2],"02-21":[3],"04-05":[4],"05-01":[5],"09-28":[7],"10-01":[6],"10-20":[8],"12-20":[9]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-08":[1],"02-09":[2],"02-10":[3],"04-05":[4],"05-01":[5],"09-17":[7],"10-01":[6],"10-09":[8],"12-20":[9]},"workdays":[]}
+  },
+  "defaultLanguage": "zh-MO",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-MO",
+    "en-US",
+    "zh-CN",
+    "zh-MO"
+  ],
+  "name": "Macau",
+  "names": [
+    {"en-MO":"New Year's Day","en-US":"New Year's Day","zh-CN":"元旦","zh-MO":"元旦"},
+    {"en-MO":"Lunar New Year's Day","en-US":"Chinese New Year's Day","zh-CN":"农历正月初一","zh-MO":"農曆正月初一"},
+    {"en-MO":"The second day of Lunar New Year","en-US":"The second day of Chinese New Year","zh-CN":"农历正月初二","zh-MO":"農曆正月初二"},
+    {"en-MO":"The third day of Lunar New Year","en-US":"The third day of Chinese New Year","zh-CN":"农历正月初三","zh-MO":"農曆正月初三"},
+    {"en-MO":"Ching Ming Festival","en-US":"Tomb-Sweeping Day","zh-CN":"清明节","zh-MO":"清明節"},
+    {"en-MO":"Labour Day","en-US":"Labor Day","zh-CN":"劳动节","zh-MO":"勞動節"},
+    {"en-MO":"National Day of the People's Republic of China","en-US":"National Day of the People's Republic of China","zh-CN":"中华人民共和国国庆日","zh-MO":"中華人民共和國國慶日"},
+    {"en-MO":"The Day following Chong Chao (Mid-Autumn) Festival","en-US":"The Day following Mid-Autumn Festival","zh-CN":"中秋节翌日","zh-MO":"中秋節翌日"},
+    {"en-MO":"Chung Yeung Festival (Festival of Ancestors)","en-US":"Double Ninth Festival","zh-CN":"重阳节","zh-MO":"重陽節"},
+    {"en-MO":"Macao S.A.R. Establishment Day","en-US":"Macao S.A.R. Establishment Day","zh-CN":"澳门特别行政区成立纪念日","zh-MO":"澳門特別行政區成立紀念日"},
+    {"en-MO":"Chung Yeung Festival (Festival of Ancestors)","en-US":"Double Ninth Festival","zh-CN":"中华人民共和国国庆日","zh-MO":"中華人民共和國國慶日"},
+    {"en-MO":"National Day of the People's Republic of China","en-US":"National Day of the People's Republic of China","zh-CN":"重阳节","zh-MO":"重陽節"}
+  ],
+  "region": "MO",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {
+    "I": {"calendar":{},"name":"Concelho das Ilhas"},
+    "M": {"calendar":{},"name":"Concelho de Macau"}
+  },
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

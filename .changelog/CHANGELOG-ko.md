@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `기능` 새 공휴일 달력 계열 holiday-calendars의 데이터, 생성 및 검증 도구와 게시 워크플로를 추가했습니다. 3-Chime Alarm 플러그인은 여기에서 2020 - 2035년의 공휴일과 대체 근무일을 가져옵니다
+
 # 2026-10-16
 
 ###### 2026/10/16

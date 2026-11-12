@@ -1,0 +1,81 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-03":[3],"04-07":[4],"04-10":[5],"04-13":[6],"05-01":[7],"05-24":[8],"05-25":[9],"07-01":[10],"07-04":[11],"07-06":[12],"07-31":[13],"08-07":[14],"08-15":[15],"08-17":[16],"12-25":[17],"12-26":[18],"12-28":[19]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"01-02":[1],"01-04":[20],"02-01":[2],"04-02":[5],"04-05":[6],"04-07":[4],"05-01":[7],"05-03":[21],"05-13":[8],"07-01":[10],"07-04":[11],"07-05":[12],"07-20":[13],"08-06":[14],"08-15":[15],"08-16":[16],"12-25":[17],"12-26":[18],"12-27":[22]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"01-02":[1],"01-03":[23],"02-01":[2],"04-07":[4],"04-15":[5],"04-18":[6],"05-01":[7],"05-02":[8],"05-03":[21],"07-01":[10],"07-04":[11],"07-11":[13],"08-05":[14],"08-15":[15],"12-25":[17],"12-26":[18],"12-27":[22]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[1],"01-03":[23],"02-01":[2],"04-07":[24,25],"04-10":[6],"04-21":[8],"05-01":[7],"06-28":[13],"07-01":[10],"07-03":[26],"07-04":[11],"08-04":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"03-29":[5],"04-01":[6],"04-07":[4],"04-10":[8],"05-01":[7],"06-16":[13],"06-17":[27],"07-01":[10],"07-04":[11],"08-02":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-03":[3],"03-31":[8],"04-07":[4],"04-18":[5],"04-21":[6],"05-01":[7],"06-06":[13],"07-01":[10],"07-04":[11],"08-01":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-02":[3],"03-20":[28],"04-03":[5],"04-06":[6],"04-07":[4],"05-01":[7],"05-27":[29],"07-01":[10],"07-04":[11],"07-06":[12],"08-07":[14],"08-15":[15],"08-17":[16],"12-25":[17],"12-26":[18],"12-28":[19]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"01-02":[1],"01-04":[20],"02-01":[2],"03-09":[28],"03-26":[5],"03-29":[6],"04-07":[4],"05-01":[7],"05-03":[21],"05-16":[29],"05-17":[30],"07-01":[10],"07-04":[11],"07-05":[12],"08-06":[14],"08-15":[15],"08-16":[16],"12-25":[17],"12-26":[18],"12-27":[22]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"01-02":[1],"01-03":[23],"02-01":[2],"02-26":[28],"02-28":[31],"04-07":[4],"04-14":[5],"04-17":[6],"05-01":[7],"05-05":[29],"07-01":[10],"07-03":[26],"07-04":[11],"08-04":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-14":[28],"03-30":[5],"04-02":[6],"04-07":[4],"04-24":[29],"05-01":[7],"07-01":[10],"07-02":[26],"07-04":[11],"08-03":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-04":[28],"04-07":[4],"04-13":[29],"04-15":[30],"04-19":[5],"04-22":[6],"05-01":[7],"07-01":[10],"07-04":[11],"08-02":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"01-02":[1],"01-24":[28],"02-01":[2],"02-03":[3],"04-02":[29],"04-07":[4],"04-11":[5],"04-14":[6],"05-01":[7],"07-01":[10],"07-04":[11],"08-01":[14],"08-15":[15],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-02":[1],"01-14":[28],"02-01":[2],"02-02":[3],"03-22":[29],"03-26":[5],"03-29":[6],"04-07":[4],"05-01":[7],"05-03":[21],"07-01":[10],"07-04":[11],"07-05":[12],"08-06":[14],"08-15":[15],"08-16":[16],"12-25":[17],"12-26":[18],"12-27":[22]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"01-02":[32,33],"01-03":[23],"01-04":[31],"02-01":[2],"03-11":[29],"04-07":[4],"04-15":[5],"04-18":[6],"05-01":[7],"05-02":[21],"07-01":[10],"07-04":[11],"08-05":[14],"08-15":[15],"12-23":[28],"12-25":[17],"12-26":[18],"12-27":[22]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[1],"01-03":[23],"02-01":[2],"03-01":[29],"04-07":[24,25],"04-10":[6],"05-01":[7],"07-01":[10],"07-03":[26],"07-04":[11],"08-04":[14],"08-15":[15],"12-12":[28],"12-25":[17],"12-26":[18]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"01-02":[1],"02-01":[2],"02-18":[29],"02-19":[30],"03-23":[5],"03-26":[6],"04-07":[4],"05-01":[7],"07-01":[10],"07-02":[26],"07-04":[11],"08-03":[14],"08-15":[15],"12-01":[28],"12-03":[31],"12-25":[17],"12-26":[18]},"workdays":[]}
+  },
+  "defaultLanguage": "rw",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "fr",
+    "rw"
+  ],
+  "name": "Rwanda",
+  "names": [
+    {"en-US":"New Year's Day","fr":"Nouvel An","rw":"Ubunani"},
+    {"en-US":"Day after New Year's Day","fr":"Le lendemain du Nouvel An","rw":"Umunsi ukurikira Ubunani"},
+    {"en-US":"National Heroes' Day","fr":"Journée Nationale des Héros","rw":"Umunsi w'Intwari"},
+    {"en-US":"National Heroes' Day (observed)","fr":"Journée Nationale des Héros (observé)","rw":"Umunsi w'Intwari (yizihijwe)"},
+    {"en-US":"Memorial Day of Genocide perpetrated against the Tutsi in 1994","fr":"Journée commémorative du Génocide perpétré contre les Tutsi en 1994","rw":"Umunsi wo Kwibuka Jenoside yakorewe Abatutsi mu 1994"},
+    {"en-US":"Good Friday","fr":"Vendredi Saint","rw":"Umunsi wa Gatanu Mutagatifu"},
+    {"en-US":"Easter Monday","fr":"Lundi de Pâques","rw":"Ku wa mbere wa Pasika"},
+    {"en-US":"Labor Day","fr":"Journée du Travail","rw":"Umunsi Mukuru w'Umurimo"},
+    {"en-US":"Eid al-Fitr","fr":"Aïd el-Fitr","rw":"Eid El Fitr"},
+    {"en-US":"Eid al-Fitr (observed)","fr":"Aïd el-Fitr (observé)","rw":"Eid El Fitr (yizihijwe)"},
+    {"en-US":"Independence Day","fr":"Journée de l'Indépendance","rw":"Umunsi w'Ubwigenge"},
+    {"en-US":"Liberation Day","fr":"Journée de la Libération","rw":"Umunsi wo Kwibohora"},
+    {"en-US":"Liberation Day (observed)","fr":"Journée de la Libération (observé)","rw":"Umunsi wo Kwibohora (yizihijwe)"},
+    {"en-US":"Eid al-Adha","fr":"Aïd al-Adha","rw":"Eid al-Adha"},
+    {"en-US":"Umuganura Day","fr":"Journée d'Umuganura","rw":"Umunsi w'Umuganura"},
+    {"en-US":"Assumption Day","fr":"Assomption","rw":"Ijyanwa mu Ijuru rya Bikiramariya"},
+    {"en-US":"Assumption Day (observed)","fr":"Assomption (observé)","rw":"Ijyanwa mu Ijuru rya Bikiramariya (yizihijwe)"},
+    {"en-US":"Christmas Day","fr":"Noël","rw":"Noheli"},
+    {"en-US":"Boxing Day","fr":"Le lendemain de Noël","rw":"Umunsi ukurikira Noheli"},
+    {"en-US":"Boxing Day (observed)","fr":"Le lendemain de Noël (observé)","rw":"Umunsi ukurikira Noheli (yizihijwe)"},
+    {"en-US":"Day after New Year's Day (observed)","fr":"Le lendemain du Nouvel An (observé)","rw":"Umunsi ukurikira Ubunani (yizihijwe)"},
+    {"en-US":"Labor Day (observed)","fr":"Journée du Travail (observé)","rw":"Umunsi Mukuru w'Umurimo (yizihijwe)"},
+    {"en-US":"Christmas Day (observed)","fr":"Noël (observé)","rw":"Noheli (yizihijwe)"},
+    {"en-US":"New Year's Day (observed)","fr":"Nouvel An (observé)","rw":"Ubunani (yizihijwe)"},
+    {"en-US":"Good Friday","fr":"Journée commémorative du Génocide perpétré contre les Tutsi en 1994","rw":"Umunsi wa Gatanu Mutagatifu"},
+    {"en-US":"Memorial Day of Genocide perpetrated against the Tutsi in 1994","fr":"Vendredi Saint","rw":"Umunsi wo Kwibuka Jenoside yakorewe Abatutsi mu 1994"},
+    {"en-US":"Independence Day (observed)","fr":"Journée de l'Indépendance (observé)","rw":"Umunsi w'Ubwigenge (yizihijwe)"},
+    {"en-US":"Eid al-Adha (observed)","fr":"Aïd al-Adha (observé)","rw":"Eid al-Adha (yizihijwe)"},
+    {"en-US":"Eid al-Fitr (estimated)","fr":"Aïd el-Fitr (estimé)","rw":"Eid El Fitr (yagereranijwe)"},
+    {"en-US":"Eid al-Adha (estimated)","fr":"Aïd al-Adha (estimé)","rw":"Eid al-Adha (yagereranijwe)"},
+    {"en-US":"Eid al-Adha (observed, estimated)","fr":"Aïd al-Adha (observé, estimé)","rw":"Eid al-Adha (yizihijwe, yagereranijwe)"},
+    {"en-US":"Eid al-Fitr (observed, estimated)","fr":"Aïd el-Fitr (observé, estimé)","rw":"Eid El Fitr (yizihijwe, yagereranijwe)"},
+    {"en-US":"Day after New Year's Day","fr":"Aïd el-Fitr (estimé)","rw":"Eid El Fitr (yagereranijwe)"},
+    {"en-US":"Eid al-Fitr (estimated)","fr":"Le lendemain du Nouvel An","rw":"Umunsi ukurikira Ubunani"}
+  ],
+  "region": "RW",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

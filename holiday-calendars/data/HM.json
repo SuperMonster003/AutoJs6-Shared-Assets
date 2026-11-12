@@ -1,0 +1,44 @@
+{
+  "calendar": {
+    "2020": {"holidays":{},"workdays":[]},
+    "2021": {"holidays":{},"workdays":[]},
+    "2022": {"holidays":{},"workdays":[]},
+    "2023": {"holidays":{},"workdays":[]},
+    "2024": {"holidays":{},"workdays":[]},
+    "2025": {"holidays":{},"workdays":[]},
+    "2026": {"holidays":{},"workdays":[]},
+    "2027": {"holidays":{},"workdays":[]},
+    "2028": {"holidays":{},"workdays":[]},
+    "2029": {"holidays":{},"workdays":[]},
+    "2030": {"holidays":{},"workdays":[]},
+    "2031": {"holidays":{},"workdays":[]},
+    "2032": {"holidays":{},"workdays":[]},
+    "2033": {"holidays":{},"workdays":[]},
+    "2034": {"holidays":{},"workdays":[]},
+    "2035": {"holidays":{},"workdays":[]}
+  },
+  "defaultLanguage": "en",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en"
+  ],
+  "name": "Heard Island and McDonald Islands",
+  "names": [],
+  "region": "HM",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

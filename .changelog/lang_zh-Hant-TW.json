@@ -18,6 +18,15 @@
     "adjustment": "調整"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新增國定假日日曆類別 holiday-calendars 的資料, 產生與驗證工具和釋出工作流, 供 3-Chime Alarm 外掛程式判斷 2020 - 2035 年的國定假日與補班日"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [

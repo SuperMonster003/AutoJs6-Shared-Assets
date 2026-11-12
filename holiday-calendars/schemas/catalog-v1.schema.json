@@ -1,0 +1,197 @@
+{
+  "$comment": "Cross-field rules are enforced by tools/holiday-calendar-distribution/calendar_format.py: releaseTag is holiday-calendars-v<catalogVersion>; regions are sorted by unique code, subdivisions by unique code; region years lie inside the catalog years and estimatedFrom inside the region years; file.name is holiday-calendar-<code>-<first 8 hex of sha256>.json, file.url is https://github.com/<repository>/releases/download/<file.releaseTag>/<file.name> and file.releaseTag is not newer than the catalog; history rules (version + 1, unchanged entries copied verbatim, no reused asset names) are in check_catalog_history.",
+  "$defs": {
+    "releaseTag": {
+      "pattern": "^holiday-calendars-v[1-9][0-9]*$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "pattern": "^\\S(?:[\\s\\S]*\\S)?$",
+      "type": "string"
+    },
+    "year": {
+      "maximum": 2200,
+      "minimum": 1900,
+      "type": "integer"
+    },
+    "yearRange": {
+      "description": "[firstYear, lastYear], both inclusive",
+      "items": false,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/year"
+        },
+        {
+          "$ref": "#/$defs/year"
+        }
+      ],
+      "type": "array"
+    }
+  },
+  "$id": "https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/holiday-calendars/schemas/catalog-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "catalogVersion": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "family": {
+      "const": "holiday-calendars"
+    },
+    "generatedAt": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "type": "string"
+    },
+    "regions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "pattern": "^[A-Z]{2}$",
+            "type": "string"
+          },
+          "estimatedFrom": {
+            "description": "first year computed by rule only; null when every year is confirmed",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "file": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "pattern": "^holiday-calendar-[A-Z]{2}-[0-9a-f]{8}\\.json$",
+                "type": "string"
+              },
+              "releaseTag": {
+                "$ref": "#/$defs/releaseTag"
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              },
+              "size": {
+                "maximum": 4194304,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "url": {
+                "pattern": "^https://github\\.com/[^/]+/[^/]+/releases/download/",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "releaseTag",
+              "sha256",
+              "size",
+              "url"
+            ],
+            "type": "object"
+          },
+          "hasMakeupWorkdays": {
+            "type": "boolean"
+          },
+          "name": {
+            "$ref": "#/$defs/text"
+          },
+          "subdivisions": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "$ref": "#/$defs/text"
+                },
+                "name": {
+                  "$ref": "#/$defs/text"
+                }
+              },
+              "required": [
+                "code",
+                "name"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "years": {
+            "$ref": "#/$defs/yearRange"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "years",
+          "estimatedFrom",
+          "hasMakeupWorkdays",
+          "subdivisions",
+          "file"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "releaseTag": {
+      "$ref": "#/$defs/releaseTag"
+    },
+    "repository": {
+      "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "homepage": {
+          "$ref": "#/$defs/text"
+        },
+        "license": {
+          "$ref": "#/$defs/text"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "package": {
+          "$ref": "#/$defs/text"
+        },
+        "version": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "homepage",
+        "license",
+        "name",
+        "package",
+        "version"
+      ],
+      "type": "object"
+    },
+    "years": {
+      "$ref": "#/$defs/yearRange"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "family",
+    "catalogVersion",
+    "generatedAt",
+    "repository",
+    "releaseTag",
+    "source",
+    "years",
+    "regions"
+  ],
+  "title": "AutoJs6 holiday calendar catalog v1",
+  "type": "object"
+}

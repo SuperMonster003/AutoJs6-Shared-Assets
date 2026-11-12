@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `新增` 新增公共节假日日历类别 holiday-calendars 的数据, 生成与校验工具和发布工作流, 供 3-Chime Alarm 插件判断 2020 - 2035 年的节假日与调休补班日
+
 # 2026-10-16
 
 ###### 2026/10/16

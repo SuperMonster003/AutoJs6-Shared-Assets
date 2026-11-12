@@ -1,0 +1,71 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"02-03":[1],"02-04":[2],"02-24":[3],"02-25":[4],"03-08":[5],"03-23":[6],"04-04":[7],"04-10":[8],"05-01":[9],"09-17":[10],"09-18":[11],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"02-04":[2],"02-05":[1],"02-15":[3],"02-16":[4],"03-08":[5],"03-22":[15],"03-23":[6],"04-02":[8],"04-04":[7],"05-01":[9],"09-17":[10],"11-01":[16],"11-02":[12],"11-11":[13],"11-12":[17],"12-25":[14]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"02-04":[2],"02-28":[3],"03-01":[4],"03-07":[18],"03-08":[5],"03-23":[6],"04-04":[7],"04-15":[8],"05-01":[9],"09-17":[10],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"02-04":[2],"02-20":[3],"02-21":[4],"03-08":[5],"03-23":[6],"03-24":[15],"04-03":[19],"04-04":[7],"04-07":[8],"05-01":[9],"09-17":[10],"11-02":[12],"11-03":[16],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-04":[2],"02-12":[3],"02-13":[4],"03-08":[5],"03-23":[6],"03-29":[8],"04-04":[7],"04-05":[19],"05-01":[9],"09-16":[11],"09-17":[10],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"02-03":[1],"02-04":[2],"03-03":[3],"03-04":[4],"03-08":[5],"03-23":[6],"04-04":[7],"04-18":[8],"05-01":[9],"05-02":[20],"09-17":[10],"11-02":[12],"11-10":[17],"11-11":[13],"12-25":[14],"12-26":[21]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"01-02":[22],"02-04":[2],"02-16":[3],"02-17":[4],"03-08":[5],"03-23":[6],"04-03":[8],"04-04":[7],"05-01":[9],"09-17":[10],"09-18":[11],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"02-04":[2],"02-05":[1],"02-08":[3],"02-09":[4],"03-08":[5],"03-22":[15],"03-23":[6],"03-26":[8],"04-04":[7],"05-01":[9],"09-17":[10],"11-01":[16],"11-02":[12],"11-11":[13],"11-12":[17],"12-25":[14]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"02-04":[2],"02-28":[3],"02-29":[4],"03-08":[5],"03-23":[6],"03-24":[15],"04-03":[19],"04-04":[7],"04-14":[8],"05-01":[9],"09-17":[10],"11-02":[12],"11-03":[16],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"02-04":[2],"02-12":[3],"02-13":[4],"03-08":[5],"03-09":[18],"03-23":[6],"03-30":[8],"04-04":[7],"04-30":[20],"05-01":[9],"09-17":[10],"11-02":[12],"11-11":[13],"12-24":[21],"12-25":[14],"12-31":[22]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"02-04":[2],"03-04":[3],"03-05":[4],"03-08":[5],"03-23":[6],"04-04":[7],"04-05":[19],"04-19":[8],"05-01":[9],"09-16":[11],"09-17":[10],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"02-03":[1],"02-04":[2],"02-24":[3],"02-25":[4],"03-08":[5],"03-23":[6],"04-04":[7],"04-11":[8],"05-01":[9],"05-02":[20],"09-17":[10],"11-02":[12],"11-10":[17],"11-11":[13],"12-25":[14],"12-26":[21]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"01-02":[22],"02-04":[2],"02-09":[3],"02-10":[4],"03-08":[5],"03-22":[15],"03-23":[6],"03-26":[8],"04-04":[7],"05-01":[9],"09-17":[10],"11-01":[16],"11-02":[12],"11-11":[13],"11-12":[17],"12-25":[14]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"02-04":[2],"02-28":[3],"03-01":[4],"03-07":[18],"03-08":[5],"03-23":[6],"04-04":[7],"04-15":[8],"05-01":[9],"09-17":[10],"11-02":[12],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"02-04":[2],"02-20":[3],"02-21":[4],"03-08":[5],"03-23":[6],"03-24":[15],"04-03":[19],"04-04":[7],"04-07":[8],"05-01":[9],"09-17":[10],"11-02":[12],"11-03":[16],"11-11":[13],"12-25":[14]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"02-04":[2],"02-05":[3],"02-06":[4],"03-08":[5],"03-09":[18],"03-23":[23,24],"04-04":[7],"04-30":[20],"05-01":[9],"09-17":[10],"11-02":[12],"11-11":[13],"12-24":[21],"12-25":[14],"12-31":[22]},"workdays":[]}
+  },
+  "defaultLanguage": "pt-AO",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-US",
+    "pt-AO"
+  ],
+  "name": "Angola",
+  "names": [
+    {"en-US":"New Year's Day","pt-AO":"Dia do Ano Novo"},
+    {"en-US":"Day off for Liberation Movement Day","pt-AO":"Dia do Início da Luta Armada de Libertação Nacional (ponte)"},
+    {"en-US":"Liberation Movement Day","pt-AO":"Dia do Início da Luta Armada de Libertação Nacional"},
+    {"en-US":"Day off for Carnival Day","pt-AO":"Dia do Carnaval (ponte)"},
+    {"en-US":"Carnival Day","pt-AO":"Dia do Carnaval"},
+    {"en-US":"International Women's Day","pt-AO":"Dia Internacional da Mulher"},
+    {"en-US":"Southern Africa Liberation Day","pt-AO":"Dia da Libertação da África Austral"},
+    {"en-US":"Peace and National Reconciliation Day","pt-AO":"Dia da Paz e Reconciliação Nacional"},
+    {"en-US":"Good Friday","pt-AO":"Sexta-Feira Santa"},
+    {"en-US":"International Worker's Day","pt-AO":"Dia Internacional do Trabalhador"},
+    {"en-US":"National Heroes' Day","pt-AO":"Dia do Fundador da Nação e do Herói Nacional"},
+    {"en-US":"Day off for National Heroes' Day","pt-AO":"Dia do Fundador da Nação e do Herói Nacional (ponte)"},
+    {"en-US":"All Souls' Day","pt-AO":"Dia dos Finados"},
+    {"en-US":"National Independence Day","pt-AO":"Dia da Independência Nacional"},
+    {"en-US":"Christmas and Family Day","pt-AO":"Dia de Natal e da Família"},
+    {"en-US":"Day off for Southern Africa Liberation Day","pt-AO":"Dia da Libertação da África Austral (ponte)"},
+    {"en-US":"Day off for All Souls' Day","pt-AO":"Dia dos Finados (ponte)"},
+    {"en-US":"Day off for National Independence Day","pt-AO":"Dia da Independência Nacional (ponte)"},
+    {"en-US":"Day off for International Women's Day","pt-AO":"Dia Internacional da Mulher (ponte)"},
+    {"en-US":"Day off for Peace and National Reconciliation Day","pt-AO":"Dia da Paz e Reconciliação Nacional (ponte)"},
+    {"en-US":"Day off for International Worker's Day","pt-AO":"Dia Internacional do Trabalhador (ponte)"},
+    {"en-US":"Day off for Christmas and Family Day","pt-AO":"Dia de Natal e da Família (ponte)"},
+    {"en-US":"Day off for New Year's Day","pt-AO":"Dia do Ano Novo (ponte)"},
+    {"en-US":"Good Friday","pt-AO":"Dia da Libertação da África Austral"},
+    {"en-US":"Southern Africa Liberation Day","pt-AO":"Sexta-Feira Santa"}
+  ],
+  "region": "AO",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

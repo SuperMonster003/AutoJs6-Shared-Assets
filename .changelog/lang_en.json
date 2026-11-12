@@ -18,6 +18,15 @@
     "adjustment": "Adjustment"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "Added data, generation and verification tools and a release workflow for the new holiday-calendars family, the public holiday calendars from which the 3-Chime Alarm plugin learns the holidays and makeup workdays of 2020 - 2035"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [

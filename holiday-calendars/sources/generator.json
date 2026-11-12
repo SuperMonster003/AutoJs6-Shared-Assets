@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "public"
+  ],
+  "confirmedThrough": 2026,
+  "languages": {
+    "include": "default-and-primary",
+    "primaryLanguages": [
+      "ar",
+      "en",
+      "es",
+      "fr",
+      "ja",
+      "ko",
+      "ru",
+      "zh"
+    ]
+  },
+  "schemaVersion": 1,
+  "source": {
+    "homepage": "https://github.com/vacanza/holidays",
+    "license": "MIT",
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108",
+    "wheel": "holidays-0.108-py3-none-any.whl",
+    "wheelSha256": "5a08fdccd0b8737093d483ba0d0d9696560396d99d3fa6ef9264fd2ac48749c7"
+  },
+  "years": [
+    2020,
+    2035
+  ]
+}

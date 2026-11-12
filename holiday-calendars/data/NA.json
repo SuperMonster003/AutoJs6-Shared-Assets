@@ -1,0 +1,71 @@
+{
+  "calendar": {
+    "2020": {"holidays":{"01-01":[0],"03-21":[1],"04-10":[2],"04-13":[3],"05-01":[4],"05-04":[5],"05-21":[6],"05-25":[7],"08-26":[8],"09-10":[9],"11-25":[10],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2021": {"holidays":{"01-01":[0],"03-21":[1],"03-22":[13],"04-02":[2],"04-05":[3],"05-01":[4],"05-04":[5],"05-13":[6],"05-25":[7],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12],"12-27":[14]},"workdays":[]},
+    "2022": {"holidays":{"01-01":[0],"03-21":[1],"04-15":[2],"04-18":[3],"05-01":[4],"05-02":[15],"05-04":[5],"05-25":[7],"05-26":[6],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2023": {"holidays":{"01-01":[0],"01-02":[16],"03-21":[1],"04-07":[2],"04-10":[3],"05-01":[4],"05-04":[5],"05-18":[6],"05-25":[7],"08-26":[8],"09-10":[9],"09-11":[17],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2024": {"holidays":{"01-01":[0],"02-25":[18],"03-21":[1],"03-29":[2],"04-01":[3],"05-01":[4],"05-04":[5],"05-09":[6],"05-25":[7],"08-26":[8],"09-10":[9],"11-27":[19],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2025": {"holidays":{"01-01":[0],"03-01":[20],"03-21":[1],"04-18":[2],"04-21":[3],"05-01":[4],"05-04":[5],"05-05":[21],"05-25":[7],"05-26":[22],"05-28":[23],"05-29":[6],"08-26":[8],"09-10":[9],"11-26":[10],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2026": {"holidays":{"01-01":[0],"03-21":[1],"04-03":[2],"04-06":[3],"05-01":[4],"05-04":[5],"05-14":[6],"05-25":[7],"05-28":[23],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2027": {"holidays":{"01-01":[0],"03-21":[1],"03-22":[13],"03-26":[2],"03-29":[3],"05-01":[4],"05-04":[5],"05-06":[6],"05-25":[7],"05-28":[23],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12],"12-27":[14]},"workdays":[]},
+    "2028": {"holidays":{"01-01":[0],"03-21":[1],"04-14":[2],"04-17":[3],"05-01":[4],"05-04":[5],"05-25":[7,6],"05-28":[23],"08-26":[8],"09-10":[9],"09-11":[17],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2029": {"holidays":{"01-01":[0],"03-21":[1],"03-30":[2],"04-02":[3],"05-01":[4],"05-04":[5],"05-10":[6],"05-25":[7],"05-28":[23],"08-26":[8],"08-27":[24],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2030": {"holidays":{"01-01":[0],"03-21":[1],"04-19":[2],"04-22":[3],"05-01":[4],"05-04":[5],"05-25":[7],"05-28":[23],"05-30":[6],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2031": {"holidays":{"01-01":[0],"03-21":[1],"04-11":[2],"04-14":[3],"05-01":[4],"05-04":[5],"05-05":[21],"05-22":[6],"05-25":[7],"05-26":[22],"05-28":[23],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2032": {"holidays":{"01-01":[0],"03-21":[1],"03-22":[13],"03-26":[2],"03-29":[3],"05-01":[4],"05-04":[5],"05-06":[6],"05-25":[7],"05-28":[23],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12],"12-27":[14]},"workdays":[]},
+    "2033": {"holidays":{"01-01":[0],"03-21":[1],"04-15":[2],"04-18":[3],"05-01":[4],"05-02":[15],"05-04":[5],"05-25":[7],"05-26":[6],"05-28":[23],"08-26":[8],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2034": {"holidays":{"01-01":[0],"01-02":[16],"03-21":[1],"04-07":[2],"04-10":[3],"05-01":[4],"05-04":[5],"05-18":[6],"05-25":[7],"05-28":[23],"08-26":[8],"09-10":[9],"09-11":[17],"12-25":[11],"12-26":[12]},"workdays":[]},
+    "2035": {"holidays":{"01-01":[0],"03-21":[1],"03-23":[2],"03-26":[3],"05-01":[4],"05-03":[6],"05-04":[5],"05-25":[7],"05-28":[23],"08-26":[8],"08-27":[24],"09-10":[9],"12-25":[11],"12-26":[12]},"workdays":[]}
+  },
+  "defaultLanguage": "en-NA",
+  "estimatedFrom": null,
+  "hasMakeupWorkdays": false,
+  "languages": [
+    "en-NA",
+    "en-US"
+  ],
+  "name": "Namibia",
+  "names": [
+    {"en-NA":"New Year's Day","en-US":"New Year's Day"},
+    {"en-NA":"Independence Day","en-US":"Independence Day"},
+    {"en-NA":"Good Friday","en-US":"Good Friday"},
+    {"en-NA":"Easter Monday","en-US":"Easter Monday"},
+    {"en-NA":"Workers' Day","en-US":"Workers' Day"},
+    {"en-NA":"Cassinga Day","en-US":"Cassinga Day"},
+    {"en-NA":"Ascension Day","en-US":"Ascension Day"},
+    {"en-NA":"Africa Day","en-US":"Africa Day"},
+    {"en-NA":"Heroes' Day","en-US":"Heroes' Day"},
+    {"en-NA":"Day of the Namibian Women and International Human Rights Day","en-US":"Day of the Namibian Women and International Human Rights Day"},
+    {"en-NA":"Regional Election Day","en-US":"Regional Election Day"},
+    {"en-NA":"Christmas Day","en-US":"Christmas Day"},
+    {"en-NA":"Family Day","en-US":"Family Day"},
+    {"en-NA":"Independence Day (observed)","en-US":"Independence Day (observed)"},
+    {"en-NA":"Family Day (observed)","en-US":"Family Day (observed)"},
+    {"en-NA":"Workers' Day (observed)","en-US":"Workers' Day (observed)"},
+    {"en-NA":"New Year's Day (observed)","en-US":"New Year's Day (observed)"},
+    {"en-NA":"Day of the Namibian Women and International Human Rights Day (observed)","en-US":"Day of the Namibian Women and International Human Rights Day (observed)"},
+    {"en-NA":"Burial ceremony of Dr. Hage Gottfried Geingob","en-US":"Burial ceremony of Dr. Hage Gottfried Geingob"},
+    {"en-NA":"General Election Day","en-US":"General Election Day"},
+    {"en-NA":"Burial ceremony of Dr. Sam Shafiishuna Nujoma","en-US":"Burial ceremony of Dr. Sam Shafiishuna Nujoma"},
+    {"en-NA":"Cassinga Day (observed)","en-US":"Cassinga Day (observed)"},
+    {"en-NA":"Africa Day (observed)","en-US":"Africa Day (observed)"},
+    {"en-NA":"Genocide Remembrance Day","en-US":"Genocide Remembrance Day"},
+    {"en-NA":"Heroes' Day (observed)","en-US":"Heroes' Day (observed)"}
+  ],
+  "region": "NA",
+  "schemaVersion": 1,
+  "source": {
+    "name": "python-holidays",
+    "package": "holidays",
+    "version": "0.108"
+  },
+  "subdivisions": {},
+  "weekend": [
+    6,
+    7
+  ],
+  "years": [
+    2020,
+    2035
+  ]
+}

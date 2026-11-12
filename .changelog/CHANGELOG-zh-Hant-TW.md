@@ -13,6 +13,12 @@
 - [Русский [ru]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ru.md)
 - [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Shared-Assets/blob/main/.changelog/CHANGELOG-ar.md)
 
+# 2026-11-12
+
+###### 2026/11/12
+
+* `新增` 新增國定假日日曆類別 holiday-calendars 的資料, 產生與驗證工具和釋出工作流, 供 3-Chime Alarm 外掛程式判斷 2020 - 2035 年的國定假日與補班日
+
 # 2026-10-16
 
 ###### 2026/10/16

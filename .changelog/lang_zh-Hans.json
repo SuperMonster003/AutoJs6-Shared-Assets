@@ -18,6 +18,15 @@
     "adjustment": "调整"
   },
   "$data": {
+    "2026-11-12": {
+      "released_date": "2026/11/12",
+      "entries": [
+        {
+          "category": "feature",
+          "text": "新增公共节假日日历类别 holiday-calendars 的数据, 生成与校验工具和发布工作流, 供 3-Chime Alarm 插件判断 2020 - 2035 年的节假日与调休补班日"
+        }
+      ]
+    },
     "2026-10-16": {
       "released_date": "2026/10/16",
       "entries": [
